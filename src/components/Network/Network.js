@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {initializeDom} from './d3/network_functions.js'
 import Filter from './Filter'
+import Tooltip from './Tooltip'
+import UserProfile from './UserProfile'
 
 class Network extends Component {
   componentDidMount() {
@@ -15,14 +17,14 @@ class Network extends Component {
     // return <div key='network' id='network'></div>
     return [
       <svg key='svg'></svg>,
-      <Filter key='filter'/>
+      <Filter key='filter'/>,
+      <Tooltip key='tooltip'/>,
+      <UserProfile key='userprofile'/>
     ]
   }
 }
 
 export default connect(state => ({
-  links: state.data.links,
-  nodes: state.data.nodes,
   people: state.data.people,
   skills: state.data.skills
 }))(Network)

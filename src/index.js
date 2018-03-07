@@ -9,7 +9,6 @@ import {Provider} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
 
 const history = createBrowserHistory()
-
 render(
   <Provider store={store}>
     <ConnectedRouter history={history}>

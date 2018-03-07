@@ -1,12 +1,14 @@
 import * as d3 from "d3";
 import $ from "jquery";
+import store from '../../../store'
+import {clickNode} from '../../../store/modules/actions'
 
 let width, height, svg, simulation, link, node, charge
 let dataNodes, dataLinks
 let resizeId
+const {dispatch} = store
 
 export function initializeDom(people, skills) {
-
   // construct nodesArray
   const skillsNodes = skills.map((nodeps) => {
     return {
@@ -18,8 +20,6 @@ export function initializeDom(people, skills) {
   })
   console.log("skillsNodes",skillsNodes)
   console.log("peopleNodes",people)
-
-
   const nodesArray = [].concat(people, skillsNodes)
 
   // construct linksArray
@@ -37,15 +37,8 @@ export function initializeDom(people, skills) {
 
   dataNodes = nodesArray
   dataLinks = linksArray
-
   render()
 }
-
-
-
-
-
-
 
 
 $(window).resize(function() {
@@ -96,6 +89,9 @@ function render() {
     .enter().append("circle")
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
+    .on("click",clicked)
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
     .call(d3.drag()
     .on("start", dragstarted)
     .on("drag", dragged)
@@ -114,13 +110,13 @@ function render() {
 
 function nodeColor(type) {
   if(type === 'person') return '#dd1338'
-  else if(type === 'skill') return '#072ef4'
+  else if(type === 'skill') return '#0e42d1'
   else return '#ff00d0'
 }
 
 function linkColor(type) {
-  if(type === 'current') return '#2bba00'
-  else if(type === 'desired') return '#ffd326'
+  if(type === 'current') return '#dce5dc'
+  else if(type === 'desired') return '#49c67b'
   else return '#ff00d0'
 }
 
@@ -143,6 +139,37 @@ function ticked() {
   node
     .attr("cx", d => d.x)
     .attr("cy", d => d.y)
+}
+
+function clicked(d) {
+  console.log("d",d)
+  dispatch(clickNode(d))
+  d3.selectAll("circle").classed("selected", false)
+  d3.select(this)
+    .classed("selected", true)
+}
+
+function mouseover(d) {
+  var xPosition = parseFloat(d3.select(this).attr("cx")) + 5
+	var yPosition = parseFloat(d3.select(this).attr("cy"))
+
+  d3.select(this)
+    .attr("stroke-width", 1)
+    .attr("stroke", '#f2f2f2')
+
+	d3.select("#tooltip")
+		.style("left", xPosition + "px")
+		.style("top", yPosition + "px")
+		.select("#value")
+		.text(d.name);
+	d3.select("#tooltip").classed("hidden", false);
+}
+
+function mouseout(d) {
+  d3.select("#tooltip").classed("hidden", true);
+  d3.select(this)
+    .attr("stroke-width", 0)
+    .attr("stroke", '#f2f2f2')
 }
 
 function dragstarted(d) {

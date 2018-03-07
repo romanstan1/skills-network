@@ -14,7 +14,11 @@ export default class Filter extends Component {
       <div key='filter'
         className={this.state.open? 'filter-panel open': 'filter-panel closed'}
         onClick={this.toggleOpen}>
-        {/* filter panel */}
+        <p>
+          Filter panel
+          <br/><br/>
+          Profile
+        </p>
       </div>
     ]
   }

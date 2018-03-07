@@ -3,10 +3,13 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './modules'
+import * as d3 from "d3";
 
 export const history = createHistory()
 
 const enhancers = []
+
+console.log("d3",d3)
 
 const logger = store => next => action => {
   let result = next(action)

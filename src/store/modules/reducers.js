@@ -6,6 +6,11 @@
 
 
 const initialState = {
+  profile: {
+    open: false,
+    name: "",
+    skills: []
+  },
   people: [
     {"id": "001", type:"person", "name": "David Buckshaw", "location": "London", "skills":['11', '13', '14', '20'], "desired_skills":['12', '13'] },
     {"id": "002", type:"person", "name": "Sebastian Hoolson", "location": "Chichester", "skills":['11', '15', '16'], "desired_skills":['19'] },
@@ -13,7 +18,7 @@ const initialState = {
     {"id": "004", type:"person", "name": "Edward Magloire", "location": "Mauritius", "skills":['12', '13', '15'], "desired_skills":['14', '13'] },
     {"id": "005", type:"person", "name": "Frank Countessdelo", "location": "Chichester", "skills":['12', '13', '17'], "desired_skills":['14', '19'] },
     {"id": "006", type:"person", "name": "Evan Geborand", "location": "London", "skills":['16', '17', '18'], "desired_skills":['14', '19'] },
-    {"id": "007", type:"person", "name": "Robert Champtercier", "location": "Sydney", "skills":['16', '17', '18'], "desired_skills":['14', '19'] },
+    {"id": "007", type:"person", "name": "Roberto Champtercier", "location": "Sydney", "skills":['16', '17', '18'], "desired_skills":['14', '19'] },
     {"id": "008", type:"person", "name": "Dylan Cravatte", "location": "Sydney", "skills":['14', '17', '18'], "desired_skills":['11', '12'] },
     {"id": "009", type:"person", "name": "Jeremy Maguello", "location": "London", "skills":['15', '16', '17', '18', '19'], "desired_skills":['12', '18'] },
   ],
@@ -79,10 +84,25 @@ const initialState = {
 }
 
 export default (state=initialState, action)=>{
+  console.log("action: ",action)
   switch(action.type){
-    case 'SELECT_CHAPTER': return {
+    case 'CLICK_NODE': return {
       ...state,
-      selectedChapter: action.payload
+      profile: {
+        ...state.profile,
+        open:true,
+        name: action.payload.name,
+        skills: action.payload.skills.join(' '),
+        desired_skills: action.payload.desired_skills.join(' '),
+        location: action.payload.location
+      }
+    }
+    case 'CLOSE_USER_PROFILE': return {
+      ...state,
+      profile: {
+        ...state.profile,
+        open:false
+      }
     }
     default: return state
   }
