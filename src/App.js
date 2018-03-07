@@ -5,12 +5,12 @@ import Main from './components/Main'
 class App extends Component {
   render() {
     return (
-      <span>
+      <div>
         <Switch>
           <Route exact path="/" component={Main}/>
           <Route component={Main}/>
         </Switch>
-      </span>
+      </div>
     )
   }
 }
