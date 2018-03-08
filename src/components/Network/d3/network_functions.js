@@ -18,8 +18,6 @@ export function initializeDom(people, skills) {
       people_desired:[]
     }
   })
-  console.log("skillsNodes",skillsNodes)
-  console.log("peopleNodes",people)
   const nodesArray = [].concat(people, skillsNodes)
 
   // construct linksArray
@@ -127,8 +125,6 @@ function nodeSize(d) {
   else return 10
 }
 
-
-
 function ticked() {
   link
     .attr("x1", d => d.source.x)
@@ -141,7 +137,7 @@ function ticked() {
     .attr("cy", d => d.y)
 }
 
-function clicked(d) {  
+function clicked(d) {
   if(d.type === 'person') dispatch(clickPerson(d))
   else if(d.type === 'skill') dispatch(clickSkill(d))
 
@@ -171,6 +167,15 @@ function mouseout(d) {
     .attr("stroke-width", 0)
     .attr("stroke", '#f2f2f2')
 }
+
+export function toggleFilter(para) {
+  console.log("toggleFilter", para)
+  d3.selectAll("line")
+  .attr("stroke", (d) => linkColor(para))
+}
+
+
+
 
 function dragstarted(d) {
   if (!d3.event.active) simulation.alphaTarget(0.3).restart();

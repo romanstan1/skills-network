@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import {toggleFilter} from './d3/network_functions.js'
 
 export default class SideNavigation extends Component {
   state = {
@@ -12,6 +13,10 @@ export default class SideNavigation extends Component {
   selectNav = (e) => {
     e.stopPropagation()
     this.setState({selectedNav: e.target.innerHTML})
+  }
+  handleFilterClick = (e) => {
+    console.log("eee",  e.target.value)
+    toggleFilter(e.target.value)
   }
 
   render() {
@@ -34,7 +39,7 @@ export default class SideNavigation extends Component {
 
           {
             selectedNav === "Filter"?
-            <Filter/> :
+            <Filter handleFilterClick={this.handleFilterClick}/> :
             <EditUserProfile/>
           }
 
@@ -44,16 +49,31 @@ export default class SideNavigation extends Component {
   }
 }
 
+const Checkbox = ({handleFilterClick, id, filterName}) =>
+<span className="checkbox">
+  <input onClick={handleFilterClick} type="checkbox" value={filterName} id={id}/>
+  <label htmlFor={id}></label>
+</span>
+
+
+const Filter = ({handleFilterClick}) =>
+  <section className='filters'>
+
+    <div className='single-filter'>
+      <span>Desired Skills</span>
+      <Checkbox filterName='desired' id='one' handleFilterClick={handleFilterClick}/>
+    </div>
+
+    <div className='single-filter'>
+      <span>Current Skills</span>
+      <Checkbox filterName='current' id='two' handleFilterClick={handleFilterClick}/>
+    </div>
+
+  </section>
+
 const EditUserProfile = () =>
   <section>
     <p>
 
-    </p>
-  </section>
-
-const Filter = () =>
-  <section>
-    <p>
-      Filter Here
     </p>
   </section>

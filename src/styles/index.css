@@ -102,9 +102,18 @@ div.side-navigation-inner {
         color: #f2f2f2; }
       div.side-navigation-inner nav span:hover {
         color: #f2f2f2; }
-  div.side-navigation-inner section {
+  div.side-navigation-inner section.filters {
     text-align: right;
     padding-top: 30px; }
+    div.side-navigation-inner section.filters div.single-filter {
+      padding: 10px 0px;
+      text-align: right; }
+      div.side-navigation-inner section.filters div.single-filter span {
+        text-align: right;
+        cursor: default;
+        color: #f2f2f2;
+        padding: 0px 10px;
+        display: inline-block; }
 
 #tooltip {
   position: absolute;
@@ -187,3 +196,26 @@ div.side-navigation-inner {
       margin: 0;
       font-size: 12px;
       padding-bottom: 20px; }
+
+span.checkbox {
+  width: 16px;
+  height: 16px;
+  position: relative;
+  position: relative; }
+  span.checkbox input[type=checkbox] {
+    visibility: hidden; }
+  span.checkbox label {
+    border-radius: 100%;
+    display: block;
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    z-index: 1;
+    background: #121214;
+    border: 1px solid #f2f2f2; }
+  span.checkbox input[type=checkbox]:checked + label {
+    background: #ffffff;
+    border: 1px solid #ffffff; }
