@@ -66,14 +66,6 @@ div.filter-panel {
   div.filter-panel:hover div.chevron::before {
     border-color: white;
     opacity: 1; }
-  div.filter-panel p {
-    padding-top: 50px;
-    text-transform: uppercase;
-    font-size: 13px;
-    color: #121214;
-    text-align: right;
-    display: block;
-    transition: 0.05s 0.1s linear; }
   div.filter-panel.open {
     transform: translateX(0%); }
     div.filter-panel.open div.chevron {
@@ -82,6 +74,24 @@ div.filter-panel {
         transform: rotate(-135deg); }
     div.filter-panel.open p {
       color: #ffffff; }
+
+div.filter-inner {
+  text-transform: uppercase;
+  font-size: 13px; }
+  div.filter-inner nav {
+    padding-top: 50px;
+    padding-bottom: 5px;
+    display: flex;
+    justify-content: space-between; }
+    div.filter-inner nav span {
+      color: rgba(242, 242, 242, 0.6);
+      padding: 10px 15px;
+      display: inline-block;
+      cursor: default; }
+      div.filter-inner nav span.selected {
+        color: #f2f2f2; }
+      div.filter-inner nav span:hover {
+        color: #f2f2f2; }
 
 #tooltip {
   position: absolute;

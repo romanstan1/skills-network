@@ -3,7 +3,8 @@
 $darkestBlack:#121214;
 $lighterBlack:#212123;
 
-$grey: #f2f2f2;
+$grey: rgb(242, 242, 242);
+$grey06: rgba(242, 242, 242, 0.6);
 $white: #ffffff;
 
 html {
@@ -70,9 +71,7 @@ div.filter-panel {
   top: 0px;
   left: 0px;
   background: $darkestBlack;
-  // border-right: 1px solid $grey;
   width: 240px;
-  // cursor: pointer;
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 0.9;
@@ -84,7 +83,6 @@ div.filter-panel {
     right: 11px;
     width: 24px;
     &::before {
-      // background: green;
       border-style: solid;
       border-color:$white;
       opacity: 0.6;
@@ -105,18 +103,6 @@ div.filter-panel {
       }
     }
   }
-  p {
-    padding-top: 50px;
-    // padding-left: 30px;
-    text-transform: uppercase;
-    font-size: 13px;
-    color: $darkestBlack;
-    // background: red;
-    // color: $white;
-    text-align: right;
-    display: block;
-    transition: 0.05s 0.1s linear;
-  }
   &.open {
     transform: translateX(0%);
     div.chevron {
@@ -128,6 +114,35 @@ div.filter-panel {
     p {
       color: $white;
     }
+  }
+}
+
+div.filter-inner {
+  text-transform: uppercase;
+  font-size: 13px;
+  nav {
+    padding-top: 50px;
+    padding-bottom: 5px;
+    // background: green;
+    display: flex;
+    justify-content: space-between;
+    // border-bottom: 1px solid $grey06;
+    // opacity: 0.6;
+    span {
+      color: $grey06;
+      padding: 10px 15px;
+      display: inline-block;
+      cursor:default;
+      &.selected {
+        color: $grey;
+      }
+      &:hover {
+        color: $grey;
+      }
+    }
+  }
+  section {
+
   }
 }
 
