@@ -45,32 +45,37 @@ div.side-navigation {
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 0.9;
-  transform: translateX(calc(-100% + 35px));
-  padding: 20px; }
-  div.side-navigation div.chevron {
-    position: absolute;
-    top: 18px;
-    right: 11px;
-    width: 24px; }
-    div.side-navigation div.chevron::before {
-      border-style: solid;
-      border-color: #ffffff;
-      opacity: 0.6;
-      border-width: 1px 1px 0 0;
-      content: '';
-      display: inline-block;
-      height: 16px;
-      transform: rotate(45deg);
-      width: 16px;
-      transition: 0.2s ease; }
-  div.side-navigation:hover div.chevron::before {
-    border-color: white;
-    opacity: 1; }
+  transform: translateX(calc(-100% + 35px)); }
+  div.side-navigation div.openNavTab {
+    position: relative;
+    width: 100%;
+    height: 55px; }
+    div.side-navigation div.openNavTab div.chevron {
+      position: absolute;
+      top: 18px;
+      right: 11px;
+      width: 24px; }
+      div.side-navigation div.openNavTab div.chevron::before {
+        border-style: solid;
+        border-color: #ffffff;
+        opacity: 0.6;
+        border-width: 1px 1px 0 0;
+        content: '';
+        display: inline-block;
+        height: 16px;
+        transform: rotate(45deg);
+        width: 16px;
+        transition: 0.2s ease; }
+    div.side-navigation div.openNavTab:hover {
+      background: #19191c; }
+      div.side-navigation div.openNavTab:hover div.chevron::before {
+        border-color: white;
+        opacity: 1; }
   div.side-navigation.open {
     transform: translateX(0%); }
-    div.side-navigation.open div.chevron {
+    div.side-navigation.open div.openNavTab div.chevron {
       transform: translate(4px, 0px); }
-      div.side-navigation.open div.chevron::before {
+      div.side-navigation.open div.openNavTab div.chevron::before {
         transform: rotate(-135deg); }
     div.side-navigation.open section, div.side-navigation.open nav {
       transform: translate(0, 0); }
@@ -78,9 +83,9 @@ div.side-navigation {
     transform: translate(-20px, 0); }
 
 div.side-navigation-inner {
+  padding: 20px;
   font-size: 13px; }
   div.side-navigation-inner nav {
-    padding-top: 50px;
     padding-bottom: 5px;
     display: flex;
     justify-content: space-between;
@@ -128,7 +133,6 @@ div.side-navigation-inner {
   max-width: 350px;
   width: 35%;
   height: auto;
-  padding: 10px 10px;
   background: #121214;
   color: ghostwhite;
   opacity: 0.98;
@@ -140,38 +144,46 @@ div.side-navigation-inner {
   z-index: 100; }
   #profile.open {
     transform: translateX(0%); }
-  #profile div.close-button {
-    position: absolute;
-    right: 10px;
-    top: 10px;
-    width: 32px;
-    height: 32px;
-    opacity: 0.6; }
-    #profile div.close-button:before, #profile div.close-button:after {
+  #profile div.closeProfileTab {
+    position: relative;
+    width: 100%;
+    height: 55px; }
+    #profile div.closeProfileTab div.close-button {
       position: absolute;
-      left: 15px;
-      content: ' ';
-      height: 33px;
-      width: 1px;
-      background: #ffffff; }
-    #profile div.close-button:hover {
-      opacity: 1; }
-      #profile div.close-button:hover:before, #profile div.close-button:hover:after {
-        background: white; }
-    #profile div.close-button:before {
-      transform: rotate(45deg); }
-    #profile div.close-button:after {
-      transform: rotate(-45deg); }
-  #profile h2 {
-    text-transform: uppercase;
-    font-weight: 400;
-    padding-bottom: 20px;
-    padding-top: 60px; }
-  #profile h3 {
-    padding: 5px 0;
-    text-transform: uppercase;
-    font-weight: 300; }
-  #profile p {
-    margin: 0;
-    font-size: 12px;
-    padding-bottom: 20px; }
+      right: 10px;
+      top: 10px;
+      width: 32px;
+      height: 32px;
+      opacity: 0.6; }
+      #profile div.closeProfileTab div.close-button:before, #profile div.closeProfileTab div.close-button:after {
+        position: absolute;
+        left: 15px;
+        content: ' ';
+        height: 33px;
+        width: 1px;
+        background: #ffffff; }
+      #profile div.closeProfileTab div.close-button:before {
+        transform: rotate(45deg); }
+      #profile div.closeProfileTab div.close-button:after {
+        transform: rotate(-45deg); }
+    #profile div.closeProfileTab:hover {
+      background: #19191c; }
+      #profile div.closeProfileTab:hover div.close-button {
+        opacity: 1; }
+        #profile div.closeProfileTab:hover div.close-button:before, #profile div.closeProfileTab:hover div.close-button:after {
+          background: white; }
+  #profile div.profileInner {
+    padding: 10px; }
+    #profile div.profileInner h2 {
+      text-transform: uppercase;
+      font-weight: 400;
+      padding-bottom: 20px;
+      padding-top: 10px; }
+    #profile div.profileInner h3 {
+      padding: 5px 0;
+      text-transform: uppercase;
+      font-weight: 300; }
+    #profile div.profileInner p {
+      margin: 0;
+      font-size: 12px;
+      padding-bottom: 20px; }

@@ -18,9 +18,11 @@ export default class SideNavigation extends Component {
     const {open, selectedNav} = this.state
     return [
       <div key='sidenavigation'
-        className={open? 'side-navigation open': 'side-navigation closed'}
-        onClick={this.toggleOpen}>
-        <div className='chevron'/>
+        className={open? 'side-navigation open': 'side-navigation closed'}>
+
+        <div onClick={this.toggleOpen} className='openNavTab'>
+          <div className='chevron'/>
+        </div>
 
         <div className='side-navigation-inner'>
           <nav>
@@ -45,7 +47,7 @@ export default class SideNavigation extends Component {
 const EditUserProfile = () =>
   <section>
     <p>
-      
+
     </p>
   </section>
 

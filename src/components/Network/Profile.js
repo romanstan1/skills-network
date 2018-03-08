@@ -16,10 +16,14 @@ class Profile extends Component {
     console.log("profile",profile)
     return (
       <div id="profile" className={open? "open": ""}>
-        <div onClick={this.closeProfile} className="close-button"/>
-        <h2 id="name">{name}</h2>
-        {type === 'person'? <UserDetails profile={profile}/> : null }
-        {type === 'skill'? <SkillDetails profile={profile}/> : null }
+        <div onClick={this.closeProfile} className='closeProfileTab'>
+          <div className="close-button"/>
+        </div>
+        <div className='profileInner'>
+          <h2 id="name">{name}</h2>
+          {type === 'person'? <UserDetails profile={profile}/> : null }
+          {type === 'skill'? <SkillDetails profile={profile}/> : null }
+        </div>
       </div>
     )
   }
