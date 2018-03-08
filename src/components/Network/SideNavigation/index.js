@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import {toggleFilter} from './d3/network_functions.js'
+import {toggleFilter} from '../d3/network_functions.js'
+import './style.css'
 
 export default class SideNavigation extends Component {
   state = {
@@ -58,14 +59,15 @@ const Checkbox = ({handleFilterClick, id, filterName}) =>
 
 const Filter = ({handleFilterClick}) =>
   <section className='filters'>
-
+    <h3>Links</h3>
+    
     <div className='single-filter'>
-      <span>Desired Skills</span>
+      <h4>Desired Skills</h4>
       <Checkbox filterName='desired' id='one' handleFilterClick={handleFilterClick}/>
     </div>
 
     <div className='single-filter'>
-      <span>Current Skills</span>
+      <h4>Current Skills</h4>
       <Checkbox filterName='current' id='two' handleFilterClick={handleFilterClick}/>
     </div>
 

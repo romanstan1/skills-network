@@ -4,15 +4,17 @@ import store from '../../../store'
 import {clickPerson, clickSkill} from '../../../store/modules/actions'
 
 let width, height, svg, simulation, link, node, charge
-let dataNodes, dataLinks
+let dataNodes, dataLinks, originalNodes, originalLinks
+let workingNodes, workingLinks
 let resizeId
 const {dispatch} = store
+const {people, skills} = store.getState().data
 
-export function initializeDom(people, skills) {
+export function initializeDom() {
   // construct nodesArray
-  const skillsNodes = skills.map((nodeps) => {
+  const skillsNodes = skills.map((skill) => {
     return {
-      ...nodeps,
+      ...skill,
       person_count: 20,
       people_current:[],
       people_desired:[]
@@ -33,8 +35,11 @@ export function initializeDom(people, skills) {
     })
   })
 
-  dataNodes = nodesArray
-  dataLinks = linksArray
+  originalNodes = nodesArray
+  originalLinks = linksArray
+
+  workingNodes = nodesArray
+  workingLinks = linksArray
   render()
 }
 
@@ -75,7 +80,7 @@ function render() {
   link = svg.append("g")
     .attr("class", "links")
     .selectAll("line")
-    .data(dataLinks)
+    .data(workingLinks)
     .enter().append("line")
     .attr("stroke", (d) => linkColor(d.type))
     .attr("stroke-width", (d) => 2);
@@ -83,7 +88,7 @@ function render() {
   node = svg.append("g")
     .attr("class", "nodes")
     .selectAll("circle")
-    .data(dataNodes)
+    .data(workingNodes)
     .enter().append("circle")
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
@@ -95,15 +100,11 @@ function render() {
     .on("drag", dragged)
     .on("end", dragended));
 
-  // node
-  //   .append("title")
-  //   .text(d => d.id);
-
   simulation
-    .nodes(dataNodes)
+    .nodes(workingNodes)
     .on("tick", ticked)
     .force("link")
-    .links(dataLinks)
+    .links(workingLinks)
 }
 
 function nodeColor(type) {
@@ -168,10 +169,25 @@ function mouseout(d) {
     .attr("stroke", '#f2f2f2')
 }
 
-export function toggleFilter(para) {
-  console.log("toggleFilter", para)
-  d3.selectAll("line")
-  .attr("stroke", (d) => linkColor(para))
+export function toggleFilter(type) {
+  console.log("toggleFilter", type)
+  // .attr("stroke", (d) => linkColor(para))
+  workingLinks = originalLinks.filter((dLink) => dLink.type === type)
+
+  link = link.data(workingLinks)
+  link.exit().remove()
+  link = link.enter().append("line")
+    .merge(link)
+    .attr("stroke", (d) => linkColor(d.type))
+    .attr("stroke-width", (d) => 2);
+
+  simulation.nodes(workingNodes);
+  simulation.force("link").links(workingLinks);
+  simulation.alpha(1).restart();
+
+  // runSimulation()
+  console.log("workingLinks",workingLinks)
+  // render()
 }
 
 

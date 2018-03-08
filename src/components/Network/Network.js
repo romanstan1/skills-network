@@ -3,12 +3,12 @@ import {connect} from 'react-redux'
 import {initializeDom} from './d3/network_functions.js'
 import SideNavigation from './SideNavigation'
 import Tooltip from './Tooltip'
-import Profile from './Profile'
+import FullDetails from './FullDetails'
 
 class Network extends Component {
   componentDidMount() {
     const {people, skills} = this.props
-    initializeDom(people, skills)
+    initializeDom()
   }
   shouldComponentUpdate(nextProps) {
     return false;
@@ -18,7 +18,7 @@ class Network extends Component {
       <svg key='svg'></svg>,
       <SideNavigation key='sidenavigation'/>,
       <Tooltip key='tooltip'/>,
-      <Profile key='profile'/>
+      <FullDetails key='fulldetails'/>
     ]
   }
 }

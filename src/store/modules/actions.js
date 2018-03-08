@@ -13,8 +13,8 @@ export const clickSkill = (node) => {
   })
 }
 
-export const closeProfile = () => {
+export const closeFullDetails = () => {
   return dispatch => dispatch({
-    type: 'CLOSE_PROFILE'
+    type: 'CLOSE_FULL_DETAILS'
   })
 }

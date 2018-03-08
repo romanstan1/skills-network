@@ -23,97 +23,16 @@ div#root {
 
 div#main {
   height: 100%;
-  color: white; }
-
-div#network {
-  height: 100%; }
-
-svg.svg {
+  color: white;
   background: -webkit-linear-gradient(#212123, #121214);
   background: -o-linear-gradient(#212123, #121214);
   background: linear-gradient(#212123, #121214); }
 
+div#network {
+  height: 100%; }
+
 .nodes circle.selected {
   fill: turquoise; }
-
-div.side-navigation {
-  position: absolute;
-  top: 0px;
-  left: 0px;
-  background: #121214;
-  width: 240px;
-  height: 100%;
-  transition: 0.2s ease-out;
-  opacity: 0.9;
-  transform: translateX(calc(-100% + 35px)); }
-  div.side-navigation div.openNavTab {
-    position: relative;
-    width: 100%;
-    height: 55px; }
-    div.side-navigation div.openNavTab div.chevron {
-      position: absolute;
-      top: 18px;
-      right: 11px;
-      width: 24px; }
-      div.side-navigation div.openNavTab div.chevron::before {
-        border-style: solid;
-        border-color: #ffffff;
-        opacity: 0.6;
-        border-width: 1px 1px 0 0;
-        content: '';
-        display: inline-block;
-        height: 16px;
-        transform: rotate(45deg);
-        width: 16px;
-        transition: 0.2s ease; }
-    div.side-navigation div.openNavTab:hover {
-      background: #19191c; }
-      div.side-navigation div.openNavTab:hover div.chevron::before {
-        border-color: white;
-        opacity: 1; }
-  div.side-navigation.open {
-    transform: translateX(0%); }
-    div.side-navigation.open div.openNavTab div.chevron {
-      transform: translate(4px, 0px); }
-      div.side-navigation.open div.openNavTab div.chevron::before {
-        transform: rotate(-135deg); }
-    div.side-navigation.open section, div.side-navigation.open nav {
-      transform: translate(0, 0); }
-  div.side-navigation section, div.side-navigation nav {
-    transform: translate(-20px, 0); }
-
-div.side-navigation-inner {
-  padding: 20px;
-  font-size: 13px; }
-  div.side-navigation-inner nav {
-    padding-bottom: 5px;
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(242, 242, 242, 0.1); }
-    div.side-navigation-inner nav span {
-      text-transform: uppercase;
-      color: rgba(242, 242, 242, 0.6);
-      padding: 3px 0px;
-      margin-bottom: 5px;
-      display: inline-block;
-      cursor: default;
-      border-bottom: 1px solid #121214; }
-      div.side-navigation-inner nav span.selected {
-        color: #f2f2f2; }
-      div.side-navigation-inner nav span:hover {
-        color: #f2f2f2; }
-  div.side-navigation-inner section.filters {
-    text-align: right;
-    padding-top: 30px; }
-    div.side-navigation-inner section.filters div.single-filter {
-      padding: 10px 0px;
-      text-align: right; }
-      div.side-navigation-inner section.filters div.single-filter span {
-        text-align: right;
-        cursor: default;
-        color: #f2f2f2;
-        padding: 0px 10px;
-        display: inline-block; }
 
 #tooltip {
   position: absolute;
@@ -144,7 +63,7 @@ div.side-navigation-inner {
   height: auto;
   background: #121214;
   color: ghostwhite;
-  opacity: 0.98;
+  opacity: 0.95;
   font-weight: 400;
   text-align: left;
   height: 100%;
@@ -182,7 +101,7 @@ div.side-navigation-inner {
         #profile div.closeProfileTab:hover div.close-button:before, #profile div.closeProfileTab:hover div.close-button:after {
           background: white; }
   #profile div.profileInner {
-    padding: 10px; }
+    padding: 20px; }
     #profile div.profileInner h2 {
       text-transform: uppercase;
       font-weight: 400;
@@ -196,26 +115,3 @@ div.side-navigation-inner {
       margin: 0;
       font-size: 12px;
       padding-bottom: 20px; }
-
-span.checkbox {
-  width: 16px;
-  height: 16px;
-  position: relative;
-  position: relative; }
-  span.checkbox input[type=checkbox] {
-    visibility: hidden; }
-  span.checkbox label {
-    border-radius: 100%;
-    display: block;
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    position: absolute;
-    top: 0px;
-    left: 0px;
-    z-index: 1;
-    background: #121214;
-    border: 1px solid #f2f2f2; }
-  span.checkbox input[type=checkbox]:checked + label {
-    background: #ffffff;
-    border: 1px solid #ffffff; }
