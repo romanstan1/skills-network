@@ -33,37 +33,55 @@ svg.svg {
   background: -o-linear-gradient(#212123, #121214);
   background: linear-gradient(#212123, #121214); }
 
-.nodes circle {
-  cursor: pointer; }
-  .nodes circle.selected {
-    fill: turquoise; }
+.nodes circle.selected {
+  fill: turquoise; }
 
 div.filter-panel {
   position: absolute;
   top: 0px;
   left: 0px;
   background: #121214;
-  width: 30px;
-  cursor: pointer;
+  width: 240px;
   height: 100%;
   transition: 0.2s ease-out;
-  opacity: 0.9; }
+  opacity: 0.9;
+  transform: translateX(calc(-100% + 35px));
+  padding: 20px; }
+  div.filter-panel div.chevron {
+    position: absolute;
+    top: 18px;
+    right: 11px;
+    width: 24px; }
+    div.filter-panel div.chevron::before {
+      border-style: solid;
+      border-color: #ffffff;
+      opacity: 0.6;
+      border-width: 1px 1px 0 0;
+      content: '';
+      display: inline-block;
+      height: 16px;
+      transform: rotate(45deg);
+      width: 16px;
+      transition: 0.2s ease; }
+  div.filter-panel:hover div.chevron::before {
+    border-color: white;
+    opacity: 1; }
   div.filter-panel p {
+    padding-top: 50px;
+    text-transform: uppercase;
+    font-size: 13px;
     color: #121214;
-    transform: translateX(-100%);
-    transition: 0 linear 0.9s; }
+    text-align: right;
+    display: block;
+    transition: 0.05s 0.1s linear; }
   div.filter-panel.open {
-    width: 240px; }
+    transform: translateX(0%); }
+    div.filter-panel.open div.chevron {
+      transform: translate(4px, 0px); }
+      div.filter-panel.open div.chevron::before {
+        transform: rotate(-135deg); }
     div.filter-panel.open p {
-      transform: translateX(0%);
-      padding-top: 50px;
-      padding-left: 30px;
-      text-transform: uppercase;
-      font-size: 12px;
-      color: #ffffff;
-      text-align: left;
-      width: 210px;
-      display: block; }
+      color: #ffffff; }
 
 #tooltip {
   position: absolute;
@@ -85,7 +103,7 @@ div.filter-panel {
     font-size: 12px;
     text-transform: uppercase; }
 
-#user-profile {
+#profile {
   position: absolute;
   top: 0;
   right: 0;
@@ -102,39 +120,40 @@ div.filter-panel {
   transform: translateX(100%);
   transition: 0.2s ease-out;
   z-index: 100; }
-  #user-profile.open {
+  #profile.open {
     transform: translateX(0%); }
-  #user-profile div.close-button {
+  #profile div.close-button {
     position: absolute;
     right: 10px;
     top: 10px;
     width: 32px;
     height: 32px;
-    opacity: 0.7;
-    cursor: pointer; }
-    #user-profile div.close-button:before, #user-profile div.close-button:after {
+    opacity: 0.6; }
+    #profile div.close-button:before, #profile div.close-button:after {
       position: absolute;
       left: 15px;
       content: ' ';
       height: 33px;
       width: 1px;
       background: #ffffff; }
-    #user-profile div.close-button:hover {
+    #profile div.close-button:hover {
       opacity: 1; }
-    #user-profile div.close-button:before {
+      #profile div.close-button:hover:before, #profile div.close-button:hover:after {
+        background: white; }
+    #profile div.close-button:before {
       transform: rotate(45deg); }
-    #user-profile div.close-button:after {
+    #profile div.close-button:after {
       transform: rotate(-45deg); }
-  #user-profile h2 {
+  #profile h2 {
     text-transform: uppercase;
     font-weight: 400;
     padding-bottom: 20px;
     padding-top: 60px; }
-  #user-profile h3 {
+  #profile h3 {
     padding: 5px 0;
     text-transform: uppercase;
     font-weight: 300; }
-  #user-profile p {
+  #profile p {
     margin: 0;
     font-size: 12px;
     padding-bottom: 20px; }

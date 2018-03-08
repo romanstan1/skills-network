@@ -1,7 +1,7 @@
 import * as d3 from "d3";
 import $ from "jquery";
 import store from '../../../store'
-import {clickNode} from '../../../store/modules/actions'
+import {clickPerson, clickSkill} from '../../../store/modules/actions'
 
 let width, height, svg, simulation, link, node, charge
 let dataNodes, dataLinks
@@ -141,12 +141,12 @@ function ticked() {
     .attr("cy", d => d.y)
 }
 
-function clicked(d) {
-  console.log("d",d)
-  dispatch(clickNode(d))
+function clicked(d) {  
+  if(d.type === 'person') dispatch(clickPerson(d))
+  else if(d.type === 'skill') dispatch(clickSkill(d))
+
   d3.selectAll("circle").classed("selected", false)
-  d3.select(this)
-    .classed("selected", true)
+  d3.select(this).classed("selected", true)
 }
 
 function mouseover(d) {

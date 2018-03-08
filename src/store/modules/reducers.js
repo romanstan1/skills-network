@@ -86,18 +86,30 @@ const initialState = {
 export default (state=initialState, action)=>{
   console.log("action: ",action)
   switch(action.type){
-    case 'CLICK_NODE': return {
+    case 'OPEN_PERSON': return {
       ...state,
       profile: {
         ...state.profile,
-        open:true,
+        open: true,
+        type:'person',
         name: action.payload.name,
-        skills: action.payload.skills.join(' '),
-        desired_skills: action.payload.desired_skills.join(' '),
+        skills: action.payload.skills.join(', '),
+        desired_skills: action.payload.desired_skills.join(', '),
         location: action.payload.location
       }
     }
-    case 'CLOSE_USER_PROFILE': return {
+    case 'OPEN_SKILL': return {
+      ...state,
+      profile: {
+        ...state.profile,
+        open: true,
+        type:'skill',
+        people_current: action.payload.people_current.join(', '),
+        people_desired: action.payload.people_desired.join(', '),
+        name: action.payload.name,
+      }
+    }
+    case 'CLOSE_PROFILE': return {
       ...state,
       profile: {
         ...state.profile,

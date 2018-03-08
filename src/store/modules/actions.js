@@ -1,13 +1,20 @@
 
-export const clickNode = (node) => {
+export const clickPerson = (node) => {
   return dispatch => dispatch({
-    type: 'CLICK_NODE',
+    type: 'OPEN_PERSON',
     payload: node
   })
 }
 
-export const closeUserProfile = () => {
+export const clickSkill = (node) => {
   return dispatch => dispatch({
-    type: 'CLOSE_USER_PROFILE'
+    type: 'OPEN_SKILL',
+    payload: node
+  })
+}
+
+export const closeProfile = () => {
+  return dispatch => dispatch({
+    type: 'CLOSE_PROFILE'
   })
 }
