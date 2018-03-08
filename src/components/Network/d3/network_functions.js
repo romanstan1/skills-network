@@ -170,8 +170,6 @@ function mouseout(d) {
 }
 
 export function toggleFilter(type) {
-  console.log("toggleFilter", type)
-  // .attr("stroke", (d) => linkColor(para))
   workingLinks = originalLinks.filter((dLink) => dLink.type === type)
 
   link = link.data(workingLinks)
@@ -185,9 +183,6 @@ export function toggleFilter(type) {
   simulation.force("link").links(workingLinks);
   simulation.alpha(1).restart();
 
-  // runSimulation()
-  console.log("workingLinks",workingLinks)
-  // render()
 }
 
 

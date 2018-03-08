@@ -16,7 +16,6 @@ export default class SideNavigation extends Component {
     this.setState({selectedNav: e.target.innerHTML})
   }
   handleFilterClick = (e) => {
-    console.log("eee",  e.target.value)
     toggleFilter(e.target.value)
   }
 
@@ -60,7 +59,7 @@ const Checkbox = ({handleFilterClick, id, filterName}) =>
 const Filter = ({handleFilterClick}) =>
   <section className='filters'>
     <h3>Links</h3>
-    
+
     <div className='single-filter'>
       <h4>Desired Skills</h4>
       <Checkbox filterName='desired' id='one' handleFilterClick={handleFilterClick}/>
