@@ -36,7 +36,7 @@ svg.svg {
 .nodes circle.selected {
   fill: turquoise; }
 
-div.filter-panel {
+div.side-navigation {
   position: absolute;
   top: 0px;
   left: 0px;
@@ -47,12 +47,12 @@ div.filter-panel {
   opacity: 0.9;
   transform: translateX(calc(-100% + 35px));
   padding: 20px; }
-  div.filter-panel div.chevron {
+  div.side-navigation div.chevron {
     position: absolute;
     top: 18px;
     right: 11px;
     width: 24px; }
-    div.filter-panel div.chevron::before {
+    div.side-navigation div.chevron::before {
       border-style: solid;
       border-color: #ffffff;
       opacity: 0.6;
@@ -63,35 +63,43 @@ div.filter-panel {
       transform: rotate(45deg);
       width: 16px;
       transition: 0.2s ease; }
-  div.filter-panel:hover div.chevron::before {
+  div.side-navigation:hover div.chevron::before {
     border-color: white;
     opacity: 1; }
-  div.filter-panel.open {
+  div.side-navigation.open {
     transform: translateX(0%); }
-    div.filter-panel.open div.chevron {
+    div.side-navigation.open div.chevron {
       transform: translate(4px, 0px); }
-      div.filter-panel.open div.chevron::before {
+      div.side-navigation.open div.chevron::before {
         transform: rotate(-135deg); }
-    div.filter-panel.open p {
-      color: #ffffff; }
+    div.side-navigation.open section, div.side-navigation.open nav {
+      transform: translate(0, 0); }
+  div.side-navigation section, div.side-navigation nav {
+    transform: translate(-20px, 0); }
 
-div.filter-inner {
-  text-transform: uppercase;
+div.side-navigation-inner {
   font-size: 13px; }
-  div.filter-inner nav {
+  div.side-navigation-inner nav {
     padding-top: 50px;
     padding-bottom: 5px;
     display: flex;
-    justify-content: space-between; }
-    div.filter-inner nav span {
+    justify-content: space-between;
+    border-bottom: 1px solid rgba(242, 242, 242, 0.1); }
+    div.side-navigation-inner nav span {
+      text-transform: uppercase;
       color: rgba(242, 242, 242, 0.6);
-      padding: 10px 15px;
+      padding: 3px 0px;
+      margin-bottom: 5px;
       display: inline-block;
-      cursor: default; }
-      div.filter-inner nav span.selected {
+      cursor: default;
+      border-bottom: 1px solid #121214; }
+      div.side-navigation-inner nav span.selected {
         color: #f2f2f2; }
-      div.filter-inner nav span:hover {
+      div.side-navigation-inner nav span:hover {
         color: #f2f2f2; }
+  div.side-navigation-inner section {
+    text-align: right;
+    padding-top: 30px; }
 
 #tooltip {
   position: absolute;

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import {initializeDom} from './d3/network_functions.js'
-import Filter from './Filter'
+import SideNavigation from './SideNavigation'
 import Tooltip from './Tooltip'
 import Profile from './Profile'
 
@@ -16,7 +16,7 @@ class Network extends Component {
   render() {
     return [
       <svg key='svg'></svg>,
-      <Filter key='filter'/>,
+      <SideNavigation key='sidenavigation'/>,
       <Tooltip key='tooltip'/>,
       <Profile key='profile'/>
     ]
