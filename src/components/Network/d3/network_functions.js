@@ -175,19 +175,16 @@ export function applyFilter() {
   // console.log("store allFilters: ",store.getState().data.allFilters)
   const {allFilters} = store.getState().data
 
+
   // filter links
-  const linkFilters = allFilters.filter(parent => parent.parentName === 'skillTypes')
-  console.log("linkFilters",linkFilters)
 
-  workingLinks = originalLinks
+  const linkFilters = allFilters
+    .filter(parent => parent.parentName === 'skillTypes')[0].filters
+    .filter(skillType => skillType.active)
+    .map(skillType => skillType.name)
 
-  linkFilters.forEach(parent =>
-    parent.filters.forEach(filter => {
-      if(filter.active) {
-        workingLinks = workingLinks.filter(originalLink => originalLink.type === filter.name)
-      }
-    })
-  )
+   workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
+
 
   update()
   // filter nodes
