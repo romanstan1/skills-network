@@ -7,7 +7,6 @@ import FullDetails from './FullDetails'
 
 class Network extends Component {
   componentDidMount() {
-    const {people, skills} = this.props
     initializeDom()
   }
   shouldComponentUpdate(nextProps) {

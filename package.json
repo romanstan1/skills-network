@@ -16,7 +16,8 @@
     "react-router-redux": "^5.0.0-alpha.6",
     "react-scripts": "1.1.1",
     "redux": "^3.7.2",
-    "redux-thunk": "^2.2.0"
+    "redux-thunk": "^2.2.0",
+    "string-humanize": "^1.0.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar src/ -o src/",

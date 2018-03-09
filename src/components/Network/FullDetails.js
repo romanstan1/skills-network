@@ -27,9 +27,9 @@ class FullDetails extends Component {
 const UserProfile = ({fullDetails}) =>
   <div>
     <h3>Skills</h3>
-    <p>{fullDetails.skills}</p>
+    <p>{fullDetails.currentSkills}</p>
     <h3>Desired Skills</h3>
-    <p>{fullDetails.desired_skills}</p>
+    <p>{fullDetails.desiredSkills}</p>
     <h3>Contact</h3>
     <p>
       LinkedIn <br/>
@@ -44,9 +44,9 @@ const UserProfile = ({fullDetails}) =>
 const SkillDetails = ({fullDetails}) =>
   <div>
     <h3>People</h3>
-    <p>{fullDetails.people_current}</p>
+    <p>{fullDetails.peopleCurrent}</p>
     <h3>Desired By</h3>
-    <p>{fullDetails.people_desired}</p>
+    <p>{fullDetails.peopleDesired}</p>
   </div>
 
 

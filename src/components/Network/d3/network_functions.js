@@ -4,7 +4,7 @@ import store from '../../../store'
 import {clickPerson, clickSkill} from '../../../store/modules/actions'
 
 let width, height, svg, simulation, link, node, charge
-let dataNodes, dataLinks, originalNodes, originalLinks
+let originalNodes, originalLinks
 let workingNodes, workingLinks
 let resizeId
 const {dispatch} = store
@@ -15,9 +15,9 @@ export function initializeDom() {
   const skillsNodes = skills.map((skill) => {
     return {
       ...skill,
-      person_count: 20,
-      people_current:[],
-      people_desired:[]
+      personCount: 20,
+      peopleCurrent:[],
+      peopleDesired:[]
     }
   })
   const nodesArray = [].concat(people, skillsNodes)
@@ -25,13 +25,13 @@ export function initializeDom() {
   // construct linksArray
   let linksArray = []
   people.forEach((person, ind) => {
-    person.skills.forEach((skill, i) => {
-      linksArray.push({"source": person.id, "target": skill, "type": "current"})
-      skillsNodes.filter(skillNode => skillNode.id === skill)[0].people_current.push(person.name)
+    person.currentSkills.forEach((skill, i) => {
+      linksArray.push({"source": person.id, "target": skill, "type": "currentSkills"})
+      skillsNodes.filter(skillNode => skillNode.id === skill)[0].peopleCurrent.push(person.name)
     })
-    person.desired_skills.forEach((skill, i) => {
-      linksArray.push({"source": person.id, "target": skill, "type": "desired"})
-      skillsNodes.filter(skillNode => skillNode.id === skill)[0].people_desired.push(person.name)
+    person.desiredSkills.forEach((skill, i) => {
+      linksArray.push({"source": person.id, "target": skill, "type": "desiredSkills"})
+      skillsNodes.filter(skillNode => skillNode.id === skill)[0].peopleDesired.push(person.name)
     })
   })
 
@@ -114,14 +114,14 @@ function nodeColor(type) {
 }
 
 function linkColor(type) {
-  if(type === 'current') return '#dce5dc'
-  else if(type === 'desired') return '#49c67b'
+  if(type === 'currentSkills') return '#dce5dc'
+  else if(type === 'desiredSkills') return '#49c67b'
   else return '#ff00d0'
 }
 
 function nodeSize(d) {
-  if(d.person_count) {
-    return Math.pow((d.people_current.length + d.people_desired.length), 1.2) + 9
+  if(d.personCount) { // effectively checks if its a skill node
+    return Math.pow((d.peopleCurrent.length + d.peopleDesired.length), 1.2) + 9
   }
   else return 10
 }
@@ -169,8 +169,12 @@ function mouseout(d) {
     .attr("stroke", '#f2f2f2')
 }
 
-export function toggleFilter(type) {
-  workingLinks = originalLinks.filter((dLink) => dLink.type === type)
+export function applyFilter(type) {
+  workingLinks = originalLinks.filter(originalLink => originalLink.type === type)
+
+  console.log("originalLinks",originalLinks)
+  console.log("workingLinks",workingLinks)
+  console.log("type",type)
 
   link = link.data(workingLinks)
   link.exit().remove()
@@ -182,7 +186,6 @@ export function toggleFilter(type) {
   simulation.nodes(workingNodes);
   simulation.force("link").links(workingLinks);
   simulation.alpha(1).restart();
-
 }
 
 

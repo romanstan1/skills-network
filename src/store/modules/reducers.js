@@ -2,12 +2,41 @@ import seedData from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
 const initialState = {
-  filters: {
-  },
+  allFilters: [
+    {
+      parentName: 'people',
+      filters: []
+    },
+    {
+      parentName: 'skills',
+      filters: []
+    },
+    {
+      parentName: 'locations',
+      filters: []
+    },
+    {
+      parentName: 'roles',
+      filters: []
+    },
+    {
+      parentName: 'skillTypes',
+      filters: [
+       {
+         name: 'currentSkills',
+         active: true
+       },
+       {
+         name: 'desiredSkills',
+         active: true
+       }
+     ]
+    }
+  ],
   fullDetails: {
     open: false,
     name: "",
-    skills: []
+    currentSkills: []
   },
   people: seedData.people,
   skills: seedData.skills
@@ -18,7 +47,7 @@ function lookUpSkill(id) {
 }
 
 export default (state=initialState, action)=>{
-  console.log("action: ",action)
+  // console.log("action: ",action)
   switch(action.type){
     case 'OPEN_PERSON': return {
       ...state,
@@ -27,9 +56,9 @@ export default (state=initialState, action)=>{
         open: true,
         type:'person',
         name: action.payload.name,
-        skills: action.payload.skills.map(skillId =>
+        currentSkills: action.payload.currentSkills.map(skillId =>
           lookUpSkill(skillId).name).join(', '),
-        desired_skills: action.payload.desired_skills.map(skillId =>
+        desiredSkills: action.payload.desiredSkills.map(skillId =>
           lookUpSkill(skillId).name).join(', '),
         location: action.payload.location
       }
@@ -40,8 +69,8 @@ export default (state=initialState, action)=>{
         ...state.fullDetails,
         open: true,
         type:'skill',
-        people_current: action.payload.people_current.join(', '),
-        people_desired: action.payload.people_desired.join(', '),
+        peopleCurrent: action.payload.peopleCurrent.join(', '),
+        peopleDesired: action.payload.peopleDesired.join(', '),
         name: action.payload.name,
       }
     }
@@ -52,6 +81,23 @@ export default (state=initialState, action)=>{
         open:false
       }
     }
+    case 'TOGGLE_FILTER': return {
+      ...state,
+      allFilters: state.allFilters.map(parent =>
+        parent.parentName === action.payload.parentName?
+          { ...parent,
+            filters: parent.filters.map(filter =>
+              filter.name === action.payload.filterName?
+              {
+                ...filter,
+                active: !filter.active
+              } : filter
+            )
+          }
+        :parent
+      )
+    }
+
     default: return state
   }
 }

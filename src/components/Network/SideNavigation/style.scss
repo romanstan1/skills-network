@@ -4,8 +4,10 @@ $darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
 $lighterBlack:#212123;
 
+$green: #00ed8e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
+$grey08: rgba(242, 242, 242, 0.8);
 $grey01: rgba(242, 242, 242, 0.1);
 $white: #ffffff;
 
@@ -17,7 +19,7 @@ div.side-navigation {
   width: 240px;
   height: 100%;
   transition: 0.2s ease-out;
-  opacity: 0.95;
+  opacity: 1;
   transform: translateX(calc(-100% + 35px));
   div.openNavTab {
     position: relative;
@@ -103,35 +105,51 @@ div.side-navigation-inner {
     // background: red;
     h3 {
       display: inline-block;
-      font-weight: 700;
-      padding: 0 0 12px 20px;
-      font-size: 16px;
+      font-weight: 300;
+      padding: 0 0 10px 20px;
+      font-size: 14px;
       width: calc(100%);
       text-align: left;
       color: $white;
+      text-transform: uppercase;
     }
     div.single-filter {
       text-align: left;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      padding: 11px 20px;
+      padding: 9px 20px;
+      cursor: pointer;
       h4, span {
-        // background: red;
-        font-size: 13px;
-        font-weight: 300;
-        text-align: left;
-        cursor: default;
-        color: $grey;
-        padding: 0px;
         display: inline-block;
-        width: 15px;
       }
       h4 {
+        color: $grey08;
+        cursor: inherit;
         width: 60%;
+        font-size: 13px;
+        font-weight: 300;
+        text-transform: capitalize;
+        text-indent: 15px;
+      }
+      span {
+        margin-top: 1px;
+        width: 13px;
+        height: 13px;
+        border: 1px solid $grey08;
+        border-radius: 100%;
       }
       &:hover {
         background: $hoverDarkBlack;
+        span {border: 1px solid $white; }
+        h4 {color: $white;}
+      }
+      &.active {
+        span {
+          border: 1px solid $green;
+          background: $green;
+        }
+        h4 {color: $white;}
       }
 
 

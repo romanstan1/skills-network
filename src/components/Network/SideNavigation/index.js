@@ -1,8 +1,11 @@
 import React, { Component } from 'react';
-import {toggleFilter} from '../d3/network_functions.js'
+import {applyFilter} from '../d3/network_functions.js'
 import './style.css'
+import {connect} from 'react-redux'
+import {toggleFilter} from '../../../store/modules/actions'
+import humanize from 'string-humanize'
 
-export default class SideNavigation extends Component {
+class SideNavigation extends Component {
   state = {
     open: false,
     selectedNav: 'Filter'
@@ -15,8 +18,9 @@ export default class SideNavigation extends Component {
     e.stopPropagation()
     this.setState({selectedNav: e.target.innerHTML})
   }
-  handleFilterClick = (e) => {
-    toggleFilter(e.target.value)
+  handleFilterClick = (filterName, parentName) => {
+    applyFilter(filterName)
+    this.props.dispatch(toggleFilter(filterName, parentName))
   }
 
   render() {
@@ -39,7 +43,7 @@ export default class SideNavigation extends Component {
 
           {
             selectedNav === "Filter"?
-            <Filter handleFilterClick={this.handleFilterClick}/> :
+            <Filters allFilters={this.props.allFilters} handleFilterClick={this.handleFilterClick}/> :
             <EditUserProfile/>
           }
 
@@ -49,28 +53,32 @@ export default class SideNavigation extends Component {
   }
 }
 
-const Checkbox = ({handleFilterClick, id, filterName}) =>
-<span className="checkbox">
-  <input onClick={handleFilterClick} type="checkbox" value={filterName} id={id}/>
-  <label htmlFor={id}></label>
-</span>
+export default connect(state => ({
+  allFilters: state.data.allFilters
+}))(SideNavigation)
 
 
-const Filter = ({handleFilterClick}) =>
-  <section className='filters'>
-    <h3>Links</h3>
-
-    <div className='single-filter'>
-      <h4>Desired Skills</h4>
-      <Checkbox filterName='desired' id='one' handleFilterClick={handleFilterClick}/>
-    </div>
-
-    <div className='single-filter'>
-      <h4>Current Skills</h4>
-      <Checkbox filterName='current' id='two' handleFilterClick={handleFilterClick}/>
-    </div>
-
-  </section>
+const Filters = ({allFilters, handleFilterClick}) =>
+<section className='filters'>
+  {
+    allFilters.map((parent =>
+      <span key={parent.parentName}>
+        <h3>{humanize(parent.parentName)}</h3>
+        {
+          parent.filters.map(filter =>
+            <div
+              key={filter.name}
+              className={filter.active ? 'single-filter active':'single-filter'}
+              onClick={()=>handleFilterClick(filter.name, parent.parentName)} >
+              <h4>{humanize(filter.name)}</h4>
+              <span></span>
+            </div>
+          )
+        }
+      </span>
+    ))
+  }
+</section>
 
 const EditUserProfile = () =>
   <section>

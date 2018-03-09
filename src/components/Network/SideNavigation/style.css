@@ -7,7 +7,7 @@ div.side-navigation {
   width: 240px;
   height: 100%;
   transition: 0.2s ease-out;
-  opacity: 0.95;
+  opacity: 1;
   transform: translateX(calc(-100% + 35px)); }
   div.side-navigation div.openNavTab {
     position: relative;
@@ -71,31 +71,47 @@ div.side-navigation-inner {
     padding-top: 30px; }
     div.side-navigation-inner section.filters h3 {
       display: inline-block;
-      font-weight: 700;
-      padding: 0 0 12px 20px;
-      font-size: 16px;
+      font-weight: 300;
+      padding: 0 0 10px 20px;
+      font-size: 14px;
       width: calc(100%);
       text-align: left;
-      color: #ffffff; }
+      color: #ffffff;
+      text-transform: uppercase; }
     div.side-navigation-inner section.filters div.single-filter {
       text-align: left;
       display: flex;
       flex-direction: row;
       justify-content: space-between;
-      padding: 11px 20px; }
+      padding: 9px 20px;
+      cursor: pointer; }
       div.side-navigation-inner section.filters div.single-filter h4, div.side-navigation-inner section.filters div.single-filter span {
+        display: inline-block; }
+      div.side-navigation-inner section.filters div.single-filter h4 {
+        color: rgba(242, 242, 242, 0.8);
+        cursor: inherit;
+        width: 60%;
         font-size: 13px;
         font-weight: 300;
-        text-align: left;
-        cursor: default;
-        color: #f2f2f2;
-        padding: 0px;
-        display: inline-block;
-        width: 15px; }
-      div.side-navigation-inner section.filters div.single-filter h4 {
-        width: 60%; }
+        text-transform: capitalize;
+        text-indent: 15px; }
+      div.side-navigation-inner section.filters div.single-filter span {
+        margin-top: 1px;
+        width: 13px;
+        height: 13px;
+        border: 1px solid rgba(242, 242, 242, 0.8);
+        border-radius: 100%; }
       div.side-navigation-inner section.filters div.single-filter:hover {
         background: #19191c; }
+        div.side-navigation-inner section.filters div.single-filter:hover span {
+          border: 1px solid #ffffff; }
+        div.side-navigation-inner section.filters div.single-filter:hover h4 {
+          color: #ffffff; }
+      div.side-navigation-inner section.filters div.single-filter.active span {
+        border: 1px solid #00ed8e;
+        background: #00ed8e; }
+      div.side-navigation-inner section.filters div.single-filter.active h4 {
+        color: #ffffff; }
 
 span.checkbox {
   margin-top: 1px;
