@@ -170,24 +170,19 @@ function mouseout(d) {
 }
 
 export function applyFilter() {
-  // workingLinks = originalLinks.filter(originalLink => originalLink.type === type)
-  // update()
   // console.log("store allFilters: ",store.getState().data.allFilters)
   const {allFilters} = store.getState().data
 
-
   // filter links
-
   const linkFilters = allFilters
-    .filter(parent => parent.parentName === 'skillTypes')[0].filters
-    .filter(skillType => skillType.active)
-    .map(skillType => skillType.name)
+    .filter(parent => parent.parentName === 'skillProficiency')[0].filters
+    .filter(skillProficiency => skillProficiency.active)
+    .map(skillProficiency => skillProficiency.name)
 
-   workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
+  workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
 
-
-  update()
   // filter nodes
+  update()
 }
 
 function update() {

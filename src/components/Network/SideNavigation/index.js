@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {applyFilter} from '../d3/network_functions.js'
 import './style.css'
 import {connect} from 'react-redux'
-import {toggleFilter} from '../../../store/modules/actions'
+import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/actions'
 import humanize from 'string-humanize'
 
 class SideNavigation extends Component {
@@ -21,6 +21,10 @@ class SideNavigation extends Component {
   handleFilterClick = (filterName, parentName) => {
     this.props.dispatch(toggleFilter(filterName, parentName))
     applyFilter()
+  }
+  handleSelectAllClick = (parentName) => {
+    this.props.dispatch(toggleSelectAllFilter(parentName))
+    // applyFilter()
   }
 
   render() {
@@ -43,7 +47,10 @@ class SideNavigation extends Component {
 
           {
             selectedNav === "Filter"?
-            <Filters allFilters={this.props.allFilters} handleFilterClick={this.handleFilterClick}/> :
+            <Filters
+              allFilters={this.props.allFilters}
+              handleFilterClick={this.handleFilterClick}
+              handleSelectAllClick={this.handleSelectAllClick}/> :
             <EditUserProfile/>
           }
 
@@ -58,12 +65,17 @@ export default connect(state => ({
 }))(SideNavigation)
 
 
-const Filters = ({allFilters, handleFilterClick}) =>
+const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
 <section className='filters'>
   {
     allFilters.map((parent =>
       <span key={parent.parentName}>
-        <h3>{humanize(parent.parentName)}</h3>
+        <div
+          className='parent-name'
+          onClick={()=>handleSelectAllClick(parent.parentName)}>
+          <h3>{humanize(parent.parentName)}</h3>
+          <div className='active'><span></span></div>
+        </div>
         {
           parent.filters.map(filter =>
             <div

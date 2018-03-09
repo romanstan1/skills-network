@@ -4,23 +4,8 @@ import seedData from './seed.js'
 const initialState = {
   allFilters: [
     {
-      parentName: 'people',
-      filters: []
-    },
-    {
-      parentName: 'skills',
-      filters: []
-    },
-    {
-      parentName: 'locations',
-      filters: []
-    },
-    {
-      parentName: 'roles',
-      filters: []
-    },
-    {
-      parentName: 'skillTypes',
+      parentName: 'skillProficiency',
+      active: true,
       filters: [
        {
          name: 'currentSkills',
@@ -31,6 +16,16 @@ const initialState = {
          active: true
        }
      ]
+    },
+    {
+      parentName: 'people',
+      active: false,
+      filters: seedData.people
+    },
+    {
+      parentName: 'skills',
+      active: false,
+      filters: seedData.skills
     }
   ],
   fullDetails: {
@@ -80,6 +75,22 @@ export default (state=initialState, action)=>{
         ...state.fullDetails,
         open:false
       }
+    }
+    case 'TOGGLE_SELECT_ALL_FILTER': return {
+      ...state,
+      allFilters: state.allFilters.map(parent =>
+        parent.parentName === action.payload?
+          { ...parent,
+            active: !parent.active,
+            filters: parent.filters.map(filter => {
+              return {
+                ...filter,
+                active: !parent.active
+              }}
+            )
+          }
+        :parent
+      )
     }
     case 'TOGGLE_FILTER': return {
       ...state,

@@ -5,11 +5,14 @@ $hoverDarkBlack:#19191c;
 $lighterBlack:#212123;
 
 $green: #00ed8e;
+$green: #28af4e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
 $grey08: rgba(242, 242, 242, 0.8);
+$grey08: #adadad;
 $grey01: rgba(242, 242, 242, 0.1);
 $white: #ffffff;
+$offWhite: #d6d6d6;
 
 div.side-navigation {
   position: absolute;
@@ -21,6 +24,7 @@ div.side-navigation {
   transition: 0.2s ease-out;
   opacity: 1;
   transform: translateX(calc(-100% + 35px));
+  height: 100%;
   div.openNavTab {
     position: relative;
     // background: red;
@@ -74,11 +78,12 @@ div.side-navigation {
 }
 
 div.side-navigation-inner {
-  padding: 20px 0;
+  padding: 5px 0;
   font-size: 13px;
+  height: calc(100% - 120px);
+  // overflow: hidden;
   nav {
-    padding-bottom: 5px;
-    margin: 0 20px;
+    padding: 0 20px 5px 20px;
     display: flex;
     justify-content: space-between;
     border-bottom: 1px solid $grey01;
@@ -101,17 +106,60 @@ div.side-navigation-inner {
   }
   section.filters {
     text-align: right;
-    padding-top: 30px;
+    padding: 30px 0;
     // background: red;
-    h3 {
-      display: inline-block;
-      font-weight: 300;
-      padding: 0 0 10px 20px;
-      font-size: 14px;
-      width: calc(100%);
-      text-align: left;
-      color: $white;
-      text-transform: uppercase;
+    height: 100%;
+    overflow-y: scroll;
+    border-bottom: 1px solid $grey01;
+    div.parent-name {
+      position: relative;
+      h3 {
+        display: inline-block;
+        font-weight: 300;
+        padding: 0 0 10px 20px;
+        font-size: 14px;
+        width: calc(100%);
+        text-align: left;
+        color: $white;
+        text-transform: uppercase;
+      }
+      div {
+        position: absolute;
+        display: inline-block;
+        top:2px;
+        right: 17px;
+        width: 31px;
+        height: 14px;
+        border: 1px solid $grey08;
+        border-radius: 25px;
+        span {
+          margin-top: -3px;
+          margin-right: -1px;
+          display: inline-block;
+          width: 18px;
+          height: 18px;
+          background: $grey08;
+          border-radius: 100%;
+          transform: translateX(-14px);
+        }
+        &.active {
+          border: 1px solid $green;
+          background: $green;
+          span {
+            background: $offWhite;
+            transform: translateX(0px);
+          }
+        }
+        &:hover {
+          // border: 1px solid $white;
+          // // background: $grey08;
+           // background: $grey01;
+          span {
+            background: $white;
+            // transform: translateX(0px);
+          }
+        }
+      }
     }
     div.single-filter {
       text-align: left;
@@ -120,17 +168,22 @@ div.side-navigation-inner {
       justify-content: space-between;
       padding: 9px 20px;
       cursor: pointer;
+      &:last-of-type {
+        margin-bottom: 30px;
+      }
       h4, span {
         display: inline-block;
       }
       h4 {
         color: $grey08;
         cursor: inherit;
-        width: 60%;
+        width: 90%;
         font-size: 13px;
         font-weight: 300;
         text-transform: capitalize;
         text-indent: 15px;
+        overflow-x: scroll;
+        white-space: nowrap;
       }
       span {
         margin-top: 1px;
@@ -152,34 +205,6 @@ div.side-navigation-inner {
         h4 {color: $white;}
       }
 
-
     }
-  }
-}
-
-span.checkbox {
-  margin-top: 1px;
-	width: 13px;
-	height: 13px;
-	position: relative;
-  input[type=checkbox] {
-  	visibility: hidden;
-  }
-  label {
-    border-radius: 100%;
-  	display: block;
-  	width: 13px;
-  	height: 13px;
-  	cursor: pointer;
-  	position: absolute;
-  	top: 0px;
-  	left: 0px;
-  	z-index: 1;
-  	background: $darkestBlack;
-    border: 1px solid $grey;
-  }
-  input[type=checkbox]:checked + label {
-  	background: $white;
-    border: 1px solid $white;
   }
 }

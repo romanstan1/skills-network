@@ -31,6 +31,12 @@ div#main {
 div#network {
   height: 100%; }
 
+::selection {
+  background: none; }
+
+::-moz-selection {
+  background: none; }
+
 .nodes circle.selected {
   fill: turquoise; }
 

@@ -22,6 +22,12 @@ export const closeFullDetails = () => {
 export const toggleFilter = (filterName, parentName) => {
   return dispatch => dispatch({
     type: 'TOGGLE_FILTER',
-    payload: {filterName, parentName} 
+    payload: {filterName, parentName}
+  })
+}
+export const toggleSelectAllFilter = (parentName) => {
+  return dispatch => dispatch({
+    type: 'TOGGLE_SELECT_ALL_FILTER',
+    payload: parentName
   })
 }
