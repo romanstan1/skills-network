@@ -8,7 +8,7 @@ let originalNodes, originalLinks
 let workingNodes, workingLinks
 let resizeId
 const {dispatch} = store
-const {people, skills} = store.getState().data
+const {people, skills, allFilters} = store.getState().data
 
 export function initializeDom() {
   // construct nodesArray
@@ -169,13 +169,31 @@ function mouseout(d) {
     .attr("stroke", '#f2f2f2')
 }
 
-export function applyFilter(type) {
-  workingLinks = originalLinks.filter(originalLink => originalLink.type === type)
+export function applyFilter() {
+  // workingLinks = originalLinks.filter(originalLink => originalLink.type === type)
+  // update()
+  // console.log("store allFilters: ",store.getState().data.allFilters)
+  const {allFilters} = store.getState().data
 
-  console.log("originalLinks",originalLinks)
-  console.log("workingLinks",workingLinks)
-  console.log("type",type)
+  // filter links
+  const linkFilters = allFilters.filter(parent => parent.parentName === 'skillTypes')
+  console.log("linkFilters",linkFilters)
 
+  workingLinks = originalLinks
+
+  linkFilters.forEach(parent =>
+    parent.filters.forEach(filter => {
+      if(filter.active) {
+        workingLinks = workingLinks.filter(originalLink => originalLink.type === filter.name)
+      }
+    })
+  )
+
+  update()
+  // filter nodes
+}
+
+function update() {
   link = link.data(workingLinks)
   link.exit().remove()
   link = link.enter().append("line")

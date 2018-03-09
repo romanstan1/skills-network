@@ -14,7 +14,7 @@ const seedData = {
     {"id": "012", type:"person", "name": "James Wiltshire", "location": "London", "currentSkills":['14', '15', '13', '18'], "desiredSkills":['17', '20'] },
     {"id": "013", type:"person", "name": "Nickolas Wilson", "location": "Chichester", "currentSkills":['11', '12', '17', '18'], "desiredSkills":['19', '20'] },
     {"id": "014", type:"person", "name": "Timothy Tresuguet", "location": "Chichester", "currentSkills":['11', '18'], "desiredSkills":['17', '16', '13'] },
-    {"id": "015", type:"person", "name": "Richard Grayson", "location": "Chichester", "currentSkills":['13','14', '18'], "desiredSkills":['17', '19'] },
+    {"id": "015", type:"person", "name": "Richard Grayson", "location": "Chichester", "currentSkills":['13','14', '18'], "desiredSkills":['17', '19', '12'] },
     {"id": "016", type:"person", "name": "Neil Young", "location": "London", "currentSkills":['11','12', '16'], "desiredSkills":['13'] },
     {"id": "017", type:"person", "name": "Elvis Iglesias", "location": "Chichester", "currentSkills":['14','11', '20'], "desiredSkills":['13'] },
     {"id": "018", type:"person", "name": "Jimmy Black", "location": "London", "currentSkills":['15', '19'], "desiredSkills":['14'] }

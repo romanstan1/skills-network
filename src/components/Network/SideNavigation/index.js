@@ -19,8 +19,8 @@ class SideNavigation extends Component {
     this.setState({selectedNav: e.target.innerHTML})
   }
   handleFilterClick = (filterName, parentName) => {
-    applyFilter(filterName)
     this.props.dispatch(toggleFilter(filterName, parentName))
+    applyFilter()
   }
 
   render() {
