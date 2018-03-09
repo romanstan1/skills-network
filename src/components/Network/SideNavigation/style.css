@@ -92,7 +92,9 @@ div.side-navigation-inner {
         width: 31px;
         height: 14px;
         border: 1px solid #adadad;
-        border-radius: 25px; }
+        border-radius: 25px;
+        cursor: pointer;
+        transition: 0.1s ease; }
         div.side-navigation-inner section.filters div.parent-name div span {
           margin-top: -3px;
           margin-right: -1px;
@@ -101,7 +103,8 @@ div.side-navigation-inner {
           height: 18px;
           background: #adadad;
           border-radius: 100%;
-          transform: translateX(-14px); }
+          transform: translateX(-14px);
+          transition: 0.1s ease; }
         div.side-navigation-inner section.filters div.parent-name div.active {
           border: 1px solid #28af4e;
           background: #28af4e; }

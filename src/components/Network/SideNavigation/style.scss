@@ -4,11 +4,10 @@ $darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
 $lighterBlack:#212123;
 
-$green: #00ed8e;
 $green: #28af4e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
-$grey08: rgba(242, 242, 242, 0.8);
+// $grey08: rgba(242, 242, 242, 0.8);
 $grey08: #adadad;
 $grey01: rgba(242, 242, 242, 0.1);
 $white: #ffffff;
@@ -132,6 +131,8 @@ div.side-navigation-inner {
         height: 14px;
         border: 1px solid $grey08;
         border-radius: 25px;
+        cursor: pointer;
+        transition: 0.1s ease;
         span {
           margin-top: -3px;
           margin-right: -1px;
@@ -141,6 +142,7 @@ div.side-navigation-inner {
           background: $grey08;
           border-radius: 100%;
           transform: translateX(-14px);
+          transition: 0.1s ease;
         }
         &.active {
           border: 1px solid $green;
@@ -151,12 +153,8 @@ div.side-navigation-inner {
           }
         }
         &:hover {
-          // border: 1px solid $white;
-          // // background: $grey08;
-           // background: $grey01;
           span {
             background: $white;
-            // transform: translateX(0px);
           }
         }
       }

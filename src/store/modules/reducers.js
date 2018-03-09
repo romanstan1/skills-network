@@ -97,13 +97,9 @@ export default (state=initialState, action)=>{
       allFilters: state.allFilters.map(parent =>
         parent.parentName === action.payload.parentName?
           { ...parent,
-            filters: parent.filters.map(filter =>
-              filter.name === action.payload.filterName?
-              {
-                ...filter,
-                active: !filter.active
-              } : filter
-            )
+            active: mapNewFilters(parent.filters, action.payload.filterName)
+              .reduce((accumulator, filter) => filter.active? accumulator: filter.active, true),
+            filters: mapNewFilters(parent.filters, action.payload.filterName),
           }
         :parent
       )
@@ -111,4 +107,13 @@ export default (state=initialState, action)=>{
 
     default: return state
   }
+}
+
+function mapNewFilters(filters, filterName) {
+  return filters.map(filter =>
+    filter.name === filterName?
+    {...filter,
+      active: !filter.active
+    }
+  : filter)
 }

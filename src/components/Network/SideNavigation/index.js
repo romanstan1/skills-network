@@ -4,6 +4,7 @@ import './style.css'
 import {connect} from 'react-redux'
 import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/actions'
 import humanize from 'string-humanize'
+import Filters from './Filters'
 
 class SideNavigation extends Component {
   state = {
@@ -25,6 +26,7 @@ class SideNavigation extends Component {
   handleSelectAllClick = (parentName) => {
     this.props.dispatch(toggleSelectAllFilter(parentName))
     // applyFilter()
+    applyFilter()
   }
 
   render() {
@@ -64,33 +66,6 @@ export default connect(state => ({
   allFilters: state.data.allFilters
 }))(SideNavigation)
 
-
-const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
-<section className='filters'>
-  {
-    allFilters.map((parent =>
-      <span key={parent.parentName}>
-        <div
-          className='parent-name'
-          onClick={()=>handleSelectAllClick(parent.parentName)}>
-          <h3>{humanize(parent.parentName)}</h3>
-          <div className='active'><span></span></div>
-        </div>
-        {
-          parent.filters.map(filter =>
-            <div
-              key={filter.name}
-              className={filter.active ? 'single-filter active':'single-filter'}
-              onClick={()=>handleFilterClick(filter.name, parent.parentName)} >
-              <h4>{humanize(filter.name)}</h4>
-              <span></span>
-            </div>
-          )
-        }
-      </span>
-    ))
-  }
-</section>
 
 const EditUserProfile = () =>
   <section>
