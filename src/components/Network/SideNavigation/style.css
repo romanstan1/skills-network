@@ -44,7 +44,7 @@ div.side-navigation {
     div.side-navigation.open section, div.side-navigation.open nav {
       transform: translate(0, 0); }
   div.side-navigation section, div.side-navigation nav {
-    transform: translate(-20px, 0); }
+    transform: translate(-40px, 0); }
 
 div.side-navigation-inner {
   padding: 5px 0;

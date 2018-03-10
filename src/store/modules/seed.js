@@ -32,4 +32,16 @@ const seedData = {
     {"id": "20",  type:"skill", "name": "Digital Marketing" }
   ]
 }
-export default seedData
+export const peopleData = seedData.people.map(node => {
+  return {
+    ...node,
+    active:true
+  }
+})
+
+export const skillsData =seedData.skills.map(node => {
+  return {
+    ...node,
+    active:true
+  }
+})

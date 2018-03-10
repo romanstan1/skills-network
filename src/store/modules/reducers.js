@@ -1,10 +1,10 @@
-import seedData from './seed.js'
+import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
 const initialState = {
   allFilters: [
     {
-      parentName: 'skillProficiency',
+      parentName: 'connections',
       active: true,
       filters: [
        {
@@ -19,13 +19,13 @@ const initialState = {
     },
     {
       parentName: 'people',
-      active: false,
-      filters: seedData.people
+      active: true,
+      filters: peopleData
     },
     {
       parentName: 'skills',
-      active: false,
-      filters: seedData.skills
+      active: true,
+      filters: skillsData
     }
   ],
   fullDetails: {
@@ -33,8 +33,8 @@ const initialState = {
     name: "",
     currentSkills: []
   },
-  people: seedData.people,
-  skills: seedData.skills
+  people: peopleData,
+  skills: skillsData
 }
 
 function lookUpSkill(id) {

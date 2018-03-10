@@ -175,13 +175,31 @@ export function applyFilter() {
 
   // filter links
   const linkFilters = allFilters
-    .filter(parent => parent.parentName === 'skillProficiency')[0].filters
-    .filter(skillProficiency => skillProficiency.active)
-    .map(skillProficiency => skillProficiency.name)
-
-  workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
+    .filter(parent => parent.parentName === 'connections')[0].filters
+    .filter(connections => connections.active)
+    .map(connections => connections.name)
 
   // filter nodes
+  const peopleFilters = allFilters
+    .filter(parent => parent.parentName === 'people')[0].filters
+    .filter(person => person.active)
+    .map(person => person.name)
+
+
+  const skillFilters = allFilters
+    .filter(parent => parent.parentName === 'skills')[0].filters
+    .filter(skill => skill.active)
+    .map(skill => skill.name)
+
+  const allNodeFilters = [].concat(skillFilters, peopleFilters)
+
+  workingLinks = originalLinks
+    .filter(originalLink => linkFilters.includes(originalLink.type))
+    .filter(workingLink => peopleFilters.includes(workingLink.source.name)
+      && skillFilters.includes(workingLink.target.name))
+
+  workingNodes = originalNodes.filter(originalNode => allNodeFilters.includes(originalNode.name))
+
   update()
 }
 
@@ -193,13 +211,24 @@ function update() {
     .attr("stroke", (d) => linkColor(d.type))
     .attr("stroke-width", (d) => 2);
 
+  node = node.data(workingNodes)
+  node.exit().remove()
+  node = node.enter().append("circle")
+    .merge(node)
+    .attr("r", (d) => nodeSize(d))
+    .attr("fill", (d) => nodeColor(d.type))
+    .on("click",clicked)
+    .on("mouseover", mouseover)
+    .on("mouseout", mouseout)
+    .call(d3.drag()
+    .on("start", dragstarted)
+    .on("drag", dragged)
+    .on("end", dragended));
+
   simulation.nodes(workingNodes);
   simulation.force("link").links(workingLinks);
   simulation.alpha(1).restart();
 }
-
-
-
 
 function dragstarted(d) {
   if (!d3.event.active) simulation.alphaTarget(0.3).restart();

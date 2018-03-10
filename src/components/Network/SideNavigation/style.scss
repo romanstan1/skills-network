@@ -72,7 +72,7 @@ div.side-navigation {
     }
   }
   section,nav {
-    transform: translate(-20px, 0);
+    transform: translate(-40px, 0);
   }
 }
 
@@ -80,7 +80,6 @@ div.side-navigation-inner {
   padding: 5px 0;
   font-size: 13px;
   height: calc(100% - 120px);
-  // overflow: hidden;
   nav {
     padding: 0 20px 5px 20px;
     display: flex;
@@ -99,7 +98,6 @@ div.side-navigation-inner {
       }
       &:hover {
         color: $grey;
-        // border-bottom: 1px solid $grey;
       }
     }
   }
