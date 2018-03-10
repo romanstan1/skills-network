@@ -7,6 +7,7 @@ let width, height, svg, simulation, link, node, charge
 let originalNodes, originalLinks
 let workingNodes, workingLinks
 let resizeId
+let lastD3Event
 const {dispatch} = store
 const {people, skills, allFilters} = store.getState().data
 
@@ -68,14 +69,22 @@ function render() {
   svg = d3.select("svg")
     .attr("class", "svg")
     .attr("width", width)
-    .attr("height", height);
+    .attr("height", height)
+    .call(d3.zoom()
+      .scaleExtent([1 / 2, 4])
+      .on("zoom", zoomed))
 
-  charge = d3.forceManyBody().strength(-500)
+  const forceX = d3.forceX(width / 2).strength(0.030)
+  const forceY = d3.forceY(height / 2).strength(0.030)
 
   simulation = d3.forceSimulation()
-    .force("link", d3.forceLink().id((d) => d.id))
-    .force("charge", charge)
-    .force("center", d3.forceCenter(width / 2, height / 2));
+    .force("link", d3.forceLink().id((d) => d.id).strength(0.01))
+    .force("charge", d3.forceManyBody().strength(-200))
+    .force("center", d3.forceCenter(width / 2, height / 2))
+    .force('x', forceX)
+    .force('y',  forceY)
+
+  // simulation.force("link").strength(10);
 
   link = svg.append("g")
     .attr("class", "links")
@@ -185,7 +194,6 @@ export function applyFilter() {
     .filter(person => person.active)
     .map(person => person.name)
 
-
   const skillFilters = allFilters
     .filter(parent => parent.parentName === 'skills')[0].filters
     .filter(skill => skill.active)
@@ -201,6 +209,7 @@ export function applyFilter() {
   workingNodes = originalNodes.filter(originalNode => allNodeFilters.includes(originalNode.name))
 
   update()
+  zoomed()
 }
 
 function update() {
@@ -228,6 +237,15 @@ function update() {
   simulation.nodes(workingNodes);
   simulation.force("link").links(workingLinks);
   simulation.alpha(1).restart();
+}
+
+function zoomed() {
+  if(d3.event) { // last zoom event saved to variable
+    lastD3Event = d3.event.transform
+  }
+
+  node.attr("transform", lastD3Event);
+  link.attr("transform", lastD3Event);
 }
 
 function dragstarted(d) {
