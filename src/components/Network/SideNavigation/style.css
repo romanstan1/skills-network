@@ -4,7 +4,7 @@ div.side-navigation {
   top: 0px;
   left: 0px;
   background: #121214;
-  width: 240px;
+  width: 260px;
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 1;
@@ -53,8 +53,7 @@ div.side-navigation-inner {
   div.side-navigation-inner nav {
     padding: 0 20px 5px 20px;
     display: flex;
-    justify-content: space-between;
-    border-bottom: 1px solid rgba(242, 242, 242, 0.1); }
+    justify-content: space-between; }
     div.side-navigation-inner nav span {
       text-transform: uppercase;
       color: rgba(242, 242, 242, 0.6);
@@ -73,23 +72,53 @@ div.side-navigation-inner {
     height: 100%;
     overflow-y: scroll;
     border-bottom: 1px solid rgba(242, 242, 242, 0.1); }
-    div.side-navigation-inner section.filters div.parent-name {
-      padding-top: 15px;
+    div.side-navigation-inner section.filters div.Collapsible {
+      padding: 15px 0 15px 0;
       position: relative;
       border-top: 1px solid rgba(242, 242, 242, 0.1); }
-      div.side-navigation-inner section.filters div.parent-name h3 {
+      div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger {
+        position: relative;
         display: inline-block;
         font-weight: 300;
-        padding: 0 0 10px 20px;
+        padding: 5px 0 5px 20px;
         font-size: 14px;
-        width: calc(100%);
+        width: calc(70%);
+        margin-right: 30%;
         text-align: left;
-        color: #ffffff;
-        text-transform: uppercase; }
-      div.side-navigation-inner section.filters div.parent-name div {
+        color: #d6d6d6;
+        text-transform: uppercase;
+        cursor: default;
+        transition: 0.1s ease; }
+        div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger.is-open {
+          padding-bottom: 15px; }
+          div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger.is-open:after {
+            transform: rotate(90deg); }
+        div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger:hover {
+          color: #ffffff; }
+          div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger:hover:after, div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger:hover:before {
+            background: #ffffff; }
+        div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger:after {
+          transition: 0.1s ease;
+          content: '';
+          position: absolute;
+          background: #d6d6d6;
+          width: 1px;
+          right: 18px;
+          top: 5px;
+          height: 15px; }
+        div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger:before {
+          transition: 0.1s ease;
+          content: '';
+          position: absolute;
+          background: #d6d6d6;
+          width: 15px;
+          right: 11px;
+          top: 12px;
+          height: 1px; }
+      div.side-navigation-inner section.filters div.Collapsible div.select-all {
         position: absolute;
         display: inline-block;
-        top: 2px;
+        top: 20px;
         right: 17px;
         width: 31px;
         height: 14px;
@@ -97,7 +126,7 @@ div.side-navigation-inner {
         border-radius: 25px;
         cursor: pointer;
         transition: 0.1s ease; }
-        div.side-navigation-inner section.filters div.parent-name div span {
+        div.side-navigation-inner section.filters div.Collapsible div.select-all span {
           margin-top: -3px;
           margin-right: -1px;
           display: inline-block;
@@ -107,13 +136,13 @@ div.side-navigation-inner {
           border-radius: 100%;
           transform: translateX(-14px);
           transition: 0.1s ease; }
-        div.side-navigation-inner section.filters div.parent-name div.active {
+        div.side-navigation-inner section.filters div.Collapsible div.select-all.active {
           border: 1px solid #28af4e;
           background: #28af4e; }
-          div.side-navigation-inner section.filters div.parent-name div.active span {
+          div.side-navigation-inner section.filters div.Collapsible div.select-all.active span {
             background: #d6d6d6;
             transform: translateX(0px); }
-        div.side-navigation-inner section.filters div.parent-name div:hover span {
+        div.side-navigation-inner section.filters div.Collapsible div.select-all:hover span {
           background: #ffffff; }
     div.side-navigation-inner section.filters div.single-filter {
       text-align: left;
@@ -123,7 +152,7 @@ div.side-navigation-inner {
       padding: 9px 20px;
       cursor: pointer; }
       div.side-navigation-inner section.filters div.single-filter:last-of-type {
-        margin-bottom: 30px; }
+        margin-bottom: 15px; }
       div.side-navigation-inner section.filters div.single-filter h4, div.side-navigation-inner section.filters div.single-filter span {
         display: inline-block; }
       div.side-navigation-inner section.filters div.single-filter h4 {

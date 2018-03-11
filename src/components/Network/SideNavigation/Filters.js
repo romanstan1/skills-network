@@ -11,22 +11,22 @@ class CollapsibleParent extends Component {
   }
   onOpen = () => {
     this.setState({open: !this.state.open})
-    console.log("onOpen")
   }
   render () {
+    const {handleSelectAllClick, parent, trigger, children} = this.props
     const {open} = this.state
     return (
       <Collapsible
-        // open={open}
-        onOpen={this.onOpen}
-        // triggerSibling={ () =>
-        //   <div className='titleCollapse'> CLICK </div>
-        // }
-        transitionTime={100} trigger=" click to trigter ">
-
-        Collapse <br/>
-        content
-
+        // onOpen={this.onOpen}
+        triggerSibling={() =>
+          <div
+            onClick={()=>handleSelectAllClick(parent.parentName)}
+            className={parent.active?'select-all active':'select-all'}>
+            <span></span>
+          </div>
+        }
+        transitionTime={100} trigger={trigger}>
+        {children}
       </Collapsible>
     )
   }
@@ -39,30 +39,34 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
     allFilters.map((parent =>
       <span key={parent.parentName}>
 
-        {/* <CollapsibleParent/> */}
 
-        <div className='parent-name'>
-          <h3>{humanize(parent.parentName)}</h3>
-          <div
-            onClick={()=>handleSelectAllClick(parent.parentName)}
-            className={parent.active?'active':null}>
-            <span></span>
-          </div>
-        </div>
-
-
-
-        {
-          parent.filters.map(filter =>
-            <div
-              key={filter.name}
-              className={filter.active ? 'single-filter active':'single-filter'}
-              onClick={()=>handleFilterClick(filter.name, parent.parentName)} >
-              <h4>{humanize(filter.name)}</h4>
+          <CollapsibleParent
+            parent={parent}
+            handleSelectAllClick={handleSelectAllClick}
+            trigger={humanize(parent.parentName)}>
+          <div className='parent-name'>
+            {/* <h3>{humanize(parent.parentName)}</h3> */}
+            {/* <div
+              onClick={()=>handleSelectAllClick(parent.parentName)}
+              className={parent.active?'active':null}>
               <span></span>
-            </div>
-          )
-        }
+            </div> */}
+          </div>
+            {
+              parent.filters.map(filter =>
+                <div
+                  key={filter.name}
+                  className={filter.active ? 'single-filter active':'single-filter'}
+                  onClick={()=>handleFilterClick(filter.name, parent.parentName)} >
+                  <h4>{humanize(filter.name)}</h4>
+                  <span></span>
+                </div>
+              )
+            }
+          </CollapsibleParent>
+
+
+
       </span>
     ))
   }

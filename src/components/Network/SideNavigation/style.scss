@@ -18,7 +18,7 @@ div.side-navigation {
   top: 0px;
   left: 0px;
   background: $darkestBlack;
-  width: 240px;
+  width: 260px;
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 1;
@@ -84,7 +84,7 @@ div.side-navigation-inner {
     padding: 0 20px 5px 20px;
     display: flex;
     justify-content: space-between;
-    border-bottom: 1px solid $grey01;
+    // border-bottom: 1px solid $grey01;
     span {
       text-transform: uppercase;
       color: $grey06;
@@ -108,25 +108,62 @@ div.side-navigation-inner {
     height: 100%;
     overflow-y: scroll;
     border-bottom: 1px solid $grey01;
-    div.parent-name {
-      // padding: 20px 0;
-      padding-top: 15px;
+    div.Collapsible {
+      padding: 15px 0 15px 0;
       position: relative;
       border-top: 1px solid $grey01;
-      h3 {
+
+      span.Collapsible__trigger {
+        position: relative;
         display: inline-block;
         font-weight: 300;
-        padding: 0 0 10px 20px;
+        padding: 5px 0 5px 20px;
         font-size: 14px;
-        width: calc(100%);
+        width: calc(70%);
+        margin-right: 30%;
         text-align: left;
-        color: $white;
+        color: $offWhite;
         text-transform: uppercase;
+        // background: grey;
+        cursor: default;
+        transition: 0.1s ease;
+        &.is-open {
+          padding-bottom: 15px;
+          &:after {
+            transform: rotate(90deg);
+          }
+        }
+        &:hover {
+          color: $white;
+          &:after, &:before  {
+            background:$white;
+          }
+        }
+        &:after {
+          transition: 0.1s ease;
+          content: '';
+          position: absolute;
+          background:$offWhite;
+          width: 1px;
+          right: 18px;
+          top: 5px;
+          height: 15px;
+        }
+        &:before {
+          transition: 0.1s ease;
+          content: '';
+          position: absolute;
+          background:$offWhite;
+          width: 15px;
+          right: 11px;
+          top: 12px;
+          height: 1px;
+        }
       }
-      div {
+      div.select-all {
         position: absolute;
         display: inline-block;
-        top:2px;
+        top:20px;
         right: 17px;
         width: 31px;
         height: 14px;
@@ -159,7 +196,9 @@ div.side-navigation-inner {
           }
         }
       }
+
     }
+
     div.single-filter {
       text-align: left;
       display: flex;
@@ -168,7 +207,7 @@ div.side-navigation-inner {
       padding: 9px 20px;
       cursor: pointer;
       &:last-of-type {
-        margin-bottom: 30px;
+        margin-bottom: 15px;
       }
       h4, span {
         display: inline-block;
