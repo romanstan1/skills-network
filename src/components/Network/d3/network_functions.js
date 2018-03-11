@@ -11,6 +11,18 @@ let lastD3Event
 const {dispatch} = store
 const {people, skills, allFilters} = store.getState().data
 
+
+document.addEventListener("keydown", function(e) {
+  if (e.keyCode == 70) toggleFullScreen()
+}, false)
+
+function toggleFullScreen() {
+  if (!document.fullscreenElement) document.documentElement.webkitRequestFullscreen()
+  else {
+    if (document.exitFullscreen) document.exitFullscreen()
+  }
+}
+
 export function initializeDom() {
   // construct nodesArray
   const skillsNodes = skills.map((skill) => {
