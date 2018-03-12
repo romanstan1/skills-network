@@ -40,22 +40,23 @@ svg.svg {
 ::-moz-selection {
   background: none; }
 
+.links line.not-selected {
+  stroke: grey; }
+
 .nodes circle {
   cursor: default; }
   .nodes circle.selected {
     fill: turquoise; }
+  .nodes circle.not-selected {
+    fill: grey; }
 
 #tooltip {
   position: absolute;
   height: auto;
-  padding: 5px 10px;
-  color: #121214;
-  background: ghostwhite;
+  padding: 10px 20px;
+  color: #ffffff;
   opacity: 0.98;
   font-weight: 400;
-  -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   pointer-events: none;
   text-align: left; }
   #tooltip.hidden {
@@ -82,40 +83,49 @@ svg.svg {
   z-index: 100; }
   #full-details.open {
     transform: translateX(0%); }
+    #full-details.open div.details-inner {
+      transform: translateX(0px) !important; }
   #full-details.hidden {
-    transform: translateX(90%); }
+    transform: translateX(calc(100% - 50px)); }
     #full-details.hidden div.details-inner {
-      transform: translateX(50px); }
+      transform: translateX(50px) !important; }
+    #full-details.hidden div.chevron {
+      left: 20px !important; }
+      #full-details.hidden div.chevron::before {
+        transform: rotate(-135deg) !important;
+        opacity: 1;
+        border-color: red; }
   #full-details div.hide-details-tab {
     position: relative;
     width: 100%;
     height: 55px; }
-    #full-details div.hide-details-tab div.close-button {
+    #full-details div.hide-details-tab div.chevron {
       position: absolute;
-      right: 10px;
-      top: 10px;
-      width: 32px;
-      height: 32px;
-      opacity: 0.6; }
-      #full-details div.hide-details-tab div.close-button:before, #full-details div.hide-details-tab div.close-button:after {
-        position: absolute;
-        left: 15px;
-        content: ' ';
-        height: 33px;
-        width: 1px;
-        background: #ffffff; }
-      #full-details div.hide-details-tab div.close-button:before {
-        transform: rotate(45deg); }
-      #full-details div.hide-details-tab div.close-button:after {
-        transform: rotate(-45deg); }
+      top: 19px;
+      left: 12px;
+      width: 24px;
+      transition: 0.2s ease; }
+      #full-details div.hide-details-tab div.chevron::before {
+        border-style: solid;
+        border-color: #ffffff;
+        opacity: 0.6;
+        border-width: 1px 1px 0 0;
+        content: '';
+        display: inline-block;
+        height: 16px;
+        transform: rotate(45deg);
+        width: 16px;
+        transition: 0.2s ease;
+        opacity: 0.6; }
     #full-details div.hide-details-tab:hover {
       background: #19191c; }
-      #full-details div.hide-details-tab:hover div.close-button {
-        opacity: 1; }
-        #full-details div.hide-details-tab:hover div.close-button:before, #full-details div.hide-details-tab:hover div.close-button:after {
-          background: white; }
+      #full-details div.hide-details-tab:hover div.chevron::before {
+        opacity: 1;
+        border-color: white; }
   #full-details div.details-inner {
-    padding: 20px; }
+    padding: 20px;
+    transition: 0.2s ease;
+    transform: translateX(50px); }
     #full-details div.details-inner h2 {
       text-transform: uppercase;
       font-weight: 400;

@@ -36,7 +36,10 @@ const initialState = {
     currentSkills: []
   },
   people: peopleData,
-  skills: skillsData
+  skills: skillsData,
+  groupBy: ['all', 'location', 'clients'],
+  uniqueLocations: [...new Set(peopleData.map(filter => filter.location))],
+  uniqueClients: [...new Set(peopleData.map(filter => filter.client))]
 }
 
 export function lookUpSkill(id) {

@@ -5,7 +5,6 @@ import 'rc-slider/assets/index.css';
 import {changeMinConnections} from '../../../store/modules/actions'
 import {applyFilter} from '../d3/network_functions.js'
 
-
 class SliderWrap extends Component {
   handleChange = (value) => {
     this.props.dispatch(changeMinConnections(value))

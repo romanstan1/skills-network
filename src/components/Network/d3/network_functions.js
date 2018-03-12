@@ -146,25 +146,29 @@ function clicked(d) {
 
   if(thisNode.classed("selected")) {
     thisNode.classed("selected", false)
+    d3.selectAll("circle").classed("not-selected", false)
+    d3.selectAll("line").classed("not-selected", false)
+
     dispatch(closeFullDetails())
   }
   else {
-    d3.selectAll("circle").classed("selected", false)
-    thisNode.classed("selected", true)
+    d3.selectAll("circle").classed("selected", false).classed("not-selected", true)
+    d3.selectAll("line").classed("not-selected", true)
+    thisNode.classed("not-selected", false).classed("selected", true)
   }
 }
 
 function mouseover(d) {
-  var xPosition = parseFloat(d3.select(this).attr("cx")) + 5
-	var yPosition = parseFloat(d3.select(this).attr("cy"))
 
   d3.select(this)
     .attr("stroke-width", 1)
     .attr("stroke", '#f2f2f2')
 
+  const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
+
 	d3.select("#tooltip")
-		.style("left", xPosition + "px")
-		.style("top", yPosition + "px")
+		.style("right", (width - fullDetailsXPosition.x) + 15 + "px")
+		.style("top", "15px")
 		.select("#value")
 		.text(d.name);
 	d3.select("#tooltip").classed("hidden", false);

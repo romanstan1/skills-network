@@ -13,7 +13,8 @@ class FullDetails extends Component {
       <div id="full-details"
         className={open? hidden? "open hidden" : "open": ""}>
         <div onClick={this.hideFullDetails} className='hide-details-tab'>
-          <div className="close-button"/>
+          {/* <div className="close-button"/> */}
+          <div className='chevron'/>
         </div>
         <div className='details-inner'>
           <h2 id="name">{name}</h2>
