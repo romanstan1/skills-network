@@ -183,8 +183,11 @@ div.side-navigation-inner {
         color: #ffffff; }
 
 div.slider-wrap {
-  padding: 10px 20px 35px 20px; }
-  div.slider-wrap h4 {
+  padding: 23px 25px 25px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between; }
+  div.slider-wrap > span.title {
     color: #adadad;
     cursor: inherit;
     font-size: 13px;
@@ -193,18 +196,23 @@ div.slider-wrap {
     text-indent: 15px;
     overflow-x: scroll;
     white-space: nowrap;
-    text-align: left; }
+    text-align: left;
+    opacity: 0.999;
+    z-index: 100; }
+    div.slider-wrap > span.title.active {
+      font-weight: 300;
+      color: #c10d34;
+      opacity: 0.999; }
   div.slider-wrap div.rc-slider {
     height: 0px;
-    margin: 20px 0px;
-    position: relative; }
+    width: 45%; }
     div.slider-wrap div.rc-slider div.rc-slider-handle {
       cursor: pointer;
       border-width: 0px;
       background: #d6d6d6;
       outline: none;
-      box-shadow: 0px 0px #888888;
-      transition: 0.1s ease; }
+      transition: 0.1s ease-out;
+      box-shadow: 0px 0px #888888; }
     div.slider-wrap div.rc-slider div.rc-slider-track {
       cursor: pointer;
       background: #28af4e;

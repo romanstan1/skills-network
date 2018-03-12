@@ -248,8 +248,11 @@ div.side-navigation-inner {
 }
 
 div.slider-wrap {
-  padding: 10px 20px 35px 20px;
-  h4 {
+  padding: 23px 25px 25px 20px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  > span.title {
     color: $grey08;
     cursor: inherit;
     font-size: 13px;
@@ -258,21 +261,25 @@ div.slider-wrap {
     text-indent: 15px;
     overflow-x: scroll;
     white-space: nowrap;
-    // background: red;
     text-align: left;
+    opacity: 0.999;
+    z-index: 100;
+    &.active {
+      font-weight: 300;
+      color: $red;
+      opacity:0.999;
+    }
   }
   div.rc-slider {
     height: 0px;
-    margin: 20px 0px;
-
-    position: relative;
+    width: 45%;
     div.rc-slider-handle {
       cursor: pointer;
       border-width: 0px;
       background: $offWhite;
       outline: none;
+      transition: 0.1s ease-out;
       box-shadow: 0px 0px #888888;
-      transition: 0.1s ease;
     }
     div.rc-slider-track {
       cursor: pointer;

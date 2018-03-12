@@ -1,8 +1,8 @@
 const seedData = {
   people: [
-    {"id": "001", type:"person", "name": "David Buckshaw", "location": "London", "currentSkills":['11', '13', '14', '20'], "desiredSkills":['12', '13'] },
+    {"id": "001", type:"person", "name": "David Buckshaw", "location": "London", "currentSkills":['11', '13', '14', '20'], "desiredSkills":['12'] },
     {"id": "002", type:"person", "name": "Sebastian Hoolson", "location": "Chichester", "currentSkills":['11', '15', '16'], "desiredSkills":['19'] },
-    {"id": "003", type:"person", "name": "Miles Preston", "location": "London", "currentSkills":['12', '13', '14'], "desiredSkills":['12', '13'] },
+    {"id": "003", type:"person", "name": "Miles Preston", "location": "London", "currentSkills":['12', '13', '14'], "desiredSkills":['15', '17'] },
     {"id": "004", type:"person", "name": "Edward Magloire", "location": "Mauritius", "currentSkills":['12', '13', '15'], "desiredSkills":['14', '13'] },
     {"id": "005", type:"person", "name": "Frank Countessdelo", "location": "Chichester", "currentSkills":['12', '13', '17'], "desiredSkills":['14', '19'] },
     {"id": "006", type:"person", "name": "Evan Geborand", "location": "London", "currentSkills":['16', '17', '18'], "desiredSkills":['14', '19'] },
@@ -35,13 +35,15 @@ const seedData = {
 export const peopleData = seedData.people.map(node => {
   return {
     ...node,
-    active:true
+    active:true,
+    workingConnections:0
   }
 })
 
 export const skillsData =seedData.skills.map(node => {
   return {
     ...node,
-    active:true
+    active:true,
+    workingConnections:3
   }
 })

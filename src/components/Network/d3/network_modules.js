@@ -5,7 +5,6 @@ import {reset} from './network_functions'
 let resizeId
 
 export function toggleFullScreen() {
-  console.log("toggleFullScreen")
   if (!document.fullscreenElement) document.documentElement.webkitRequestFullscreen()
   else {
     if (document.exitFullscreen) document.exitFullscreen()

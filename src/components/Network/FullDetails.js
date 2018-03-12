@@ -51,10 +51,6 @@ const SkillDetails = ({fullDetails}) =>
   </div>
 
 
-
-
-
-
 export default connect(state => ({
   fullDetails: state.data.fullDetails
 }))(FullDetails)

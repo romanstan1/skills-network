@@ -1,6 +1,7 @@
 import * as d3 from "d3";
 import store from '../../../store'
 import {clickPerson, clickSkill,closeFullDetails} from '../../../store/modules/actions'
+import {lookUpSkill} from '../../../store/modules/reducers'
 import './network_modules'
 
 let width, height, svg, simulation, link, node
@@ -180,6 +181,8 @@ export function applyFilter() {
   // console.log("store allFilters: ",store.getState().data.allFilters)
   const {allFilters} = store.getState().data
 
+  const minConnections = allFilters[0].minConnections
+
   // filter links
   const linkFilters = allFilters
     .filter(parent => parent.parentName === 'connections')[0].filters
@@ -199,20 +202,38 @@ export function applyFilter() {
 
   const allNodeFilters = [].concat(skillFilters, peopleFilters)
 
-  workingLinks = originalLinks
-    .filter(originalLink => linkFilters.includes(originalLink.type))
-    .filter(workingLink => peopleFilters.includes(workingLink.source.name)
-      && skillFilters.includes(workingLink.target.name))
+  workingNodes = originalNodes.filter(originalNode =>
+    minConnections <= noOfOccurences(originalNode, skillFilters, peopleFilters)
+    && allNodeFilters.includes(originalNode.name)
+  )
 
-  workingNodes = originalNodes.filter(originalNode => allNodeFilters.includes(originalNode.name))
+  const currentNodesArray = workingNodes.map(node => node.name)
+
+  workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
+  .filter(workingLink => {
+    return currentNodesArray.includes(workingLink.source.name) && currentNodesArray.includes(workingLink.target.name)
+    // return peopleFilters.includes(workingLink.source.name) && skillFilters.includes(workingLink.target.name)
+  })
 
   update()
   zoomed()
 }
 
-export function applyOutliersFilter() {
-
+function noOfOccurences(originalNode, skillFilters, peopleFilters) {
+  if(originalNode.type === 'person') {
+    originalNode.workingConnections = 0
+    originalNode.currentSkills.forEach(skillId => {
+      if(skillFilters.includes(lookUpSkill(skillId).name)) originalNode.workingConnections++
+    })
+  }
+  // else if (originalNode.type === 'skill' ) {
+  //   originalNode.peopleCurrent.forEach(personName => {
+  //     if(peopleFilters.includes(personName)) originalNode.workingConnections++
+  //   })
+  // }
+  return originalNode.workingConnections
 }
+
 
 function update() {
   link = link.data(workingLinks)

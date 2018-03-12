@@ -18,6 +18,7 @@ export const closeFullDetails = () => {
     type: 'CLOSE_FULL_DETAILS'
   })
 }
+
 export const toggleFullDetails = () => {
   return dispatch => dispatch({
     type: 'TOGGLE_FULL_DETAILS'
@@ -30,9 +31,17 @@ export const toggleFilter = (filterName, parentName) => {
     payload: {filterName, parentName}
   })
 }
+
 export const toggleSelectAllFilter = (parentName) => {
   return dispatch => dispatch({
     type: 'TOGGLE_SELECT_ALL_FILTER',
     payload: parentName
+  })
+}
+
+export const changeMinConnections = (value) => {
+  return dispatch => dispatch({
+    type: 'CHANGE_MIN_CONNECTIONS',
+    payload: value
   })
 }

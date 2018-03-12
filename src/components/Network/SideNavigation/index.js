@@ -6,12 +6,12 @@ import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/action
 import Filters from './Filters'
 
 class SideNavigation extends Component {
+
   state = {
     open: false,
     selectedNav: 'Filter'
   }
-
-  toggleOpen = () => {
+  toggleOpen = (e) => {
     this.setState({open: !this.state.open})
   }
   selectNav = (e) => {
@@ -67,7 +67,5 @@ export default connect(state => ({
 
 const EditUserProfile = () =>
   <section>
-    <p>
-
-    </p>
+    <p></p>
   </section>

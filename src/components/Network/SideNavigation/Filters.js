@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
-import Slider, { Range } from 'rc-slider';
-import 'rc-slider/assets/index.css';
-
+import SliderWrap from './SliderWrap'
 
 class CollapsibleParent extends Component {
+
   state = {
     open: true
   }
@@ -32,31 +31,6 @@ class CollapsibleParent extends Component {
   }
 }
 
-class SliderWrap extends Component {
-  state = {
-    value: 1
-  }
-  handleChange = (value) => {
-    this.setState({value})
-  }
-  render () {
-    return (
-      <div className='slider-wrap'>
-
-        <h4> Minimum</h4>
-
-        <Slider
-          step={1}
-          marks={{0: '0',1: '1',2: '2',3: '3',4: '4'}}
-          min={0}
-          max={4}
-        />
-      </div>
-    )
-  }
-}
-
-
 const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
 <section className='filters'>
   {
@@ -78,7 +52,7 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
               </div>
             )
           }
-          {/* <SliderWrap/> */}
+          {parent.parentName === 'connections'? <SliderWrap/> : null}
         </CollapsibleParent>
       </span>
     ))

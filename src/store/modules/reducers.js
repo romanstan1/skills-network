@@ -6,6 +6,7 @@ const initialState = {
     {
       parentName: 'connections',
       active: true,
+      minConnections: 0,
       filters: [
        {
          name: 'currentSkills',
@@ -38,7 +39,7 @@ const initialState = {
   skills: skillsData
 }
 
-function lookUpSkill(id) {
+export function lookUpSkill(id) {
   return initialState.skills.filter(skill => skill.id === id)[0]
 }
 
@@ -113,6 +114,14 @@ export default (state=initialState, action)=>{
           }
         :parent
       )
+    }
+    case 'CHANGE_MIN_CONNECTIONS': return {
+      ...state,
+      allFilters: state.allFilters.map((parent,index) =>
+        index === 0? {
+          ...parent,
+          minConnections: action.payload
+        } : parent)
     }
 
     default: return state
