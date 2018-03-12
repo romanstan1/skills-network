@@ -1,20 +1,21 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {closeFullDetails} from '../../store/modules/actions'
+import {toggleFullDetails} from '../../store/modules/actions'
 
 class FullDetails extends Component {
-  closeFullDetails = () => {
-    this.props.dispatch(closeFullDetails())
+  hideFullDetails = () => {
+    this.props.dispatch(toggleFullDetails())
   }
   render() {
     const {fullDetails} = this.props
-    const {open, name, type} = fullDetails
+    const {open, name, type, hidden} = fullDetails
     return (
-      <div id="profile" className={open? "open": ""}>
-        <div onClick={this.closeFullDetails} className='closeProfileTab'>
+      <div id="full-details"
+        className={open? hidden? "open hidden" : "open": ""}>
+        <div onClick={this.hideFullDetails} className='hide-details-tab'>
           <div className="close-button"/>
         </div>
-        <div className='profileInner'>
+        <div className='details-inner'>
           <h2 id="name">{name}</h2>
           {type === 'person'? <UserProfile fullDetails={fullDetails}/> : null }
           {type === 'skill'? <SkillDetails fullDetails={fullDetails}/> : null }

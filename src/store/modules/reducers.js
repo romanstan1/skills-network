@@ -30,6 +30,7 @@ const initialState = {
   ],
   fullDetails: {
     open: false,
+    hidden: false,
     name: "",
     currentSkills: []
   },
@@ -49,6 +50,7 @@ export default (state=initialState, action)=>{
       fullDetails: {
         ...state.fullDetails,
         open: true,
+        // hidden:true,
         type:'person',
         name: action.payload.name,
         currentSkills: action.payload.currentSkills.map(skillId =>
@@ -63,6 +65,7 @@ export default (state=initialState, action)=>{
       fullDetails: {
         ...state.fullDetails,
         open: true,
+        // hidden:true,
         type:'skill',
         peopleCurrent: action.payload.peopleCurrent.join(', '),
         peopleDesired: action.payload.peopleDesired.join(', '),
@@ -74,6 +77,13 @@ export default (state=initialState, action)=>{
       fullDetails: {
         ...state.fullDetails,
         open:false
+      }
+    }
+    case 'TOGGLE_FULL_DETAILS': return {
+      ...state,
+      fullDetails: {
+        ...state.fullDetails,
+        hidden:!state.fullDetails.hidden
       }
     }
     case 'TOGGLE_SELECT_ALL_FILTER': return {

@@ -3,7 +3,6 @@ import {applyFilter} from '../d3/network_functions.js'
 import './style.css'
 import {connect} from 'react-redux'
 import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/actions'
-import humanize from 'string-humanize'
 import Filters from './Filters'
 
 class SideNavigation extends Component {
@@ -25,7 +24,6 @@ class SideNavigation extends Component {
   }
   handleSelectAllClick = (parentName) => {
     this.props.dispatch(toggleSelectAllFilter(parentName))
-    // applyFilter()
     applyFilter()
   }
 

@@ -1,13 +1,21 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500');
+// @import "react-toolbox/lib/slider/theme";
+
 
 $darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
 $lighterBlack:#212123;
 
+$green: #28af4e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
+$grey06: #939393;
+// $grey08: rgba(242, 242, 242, 0.8);
+$grey08: #adadad;
 $grey01: rgba(242, 242, 242, 0.1);
 $white: #ffffff;
+$red: #c10d34;
+$offWhite: #d6d6d6;
 
 html {
   overflow: hidden;
@@ -56,6 +64,7 @@ svg.svg {
   // background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
   // background: -o-linear-gradient($lighterBlack, $darkestBlack);
   // background: linear-gradient($lighterBlack, $darkestBlack);
+  cursor: grab;
 }
 
 ::selection {
@@ -71,6 +80,7 @@ svg.svg {
 }
 
 .nodes circle {
+  cursor: default;
   // stroke: #fff;
   // stroke-width: 0px;
   &.selected {
@@ -102,12 +112,11 @@ svg.svg {
   }
 }
 
-#profile {
+#full-details {
   position: absolute;
   top: 0;
   right: 0;
-  max-width: 350px;
-  width: 35%;
+  width: 350px;
   height: auto;
   // padding: 10px 10px;
   background: $darkestBlack;
@@ -123,7 +132,14 @@ svg.svg {
     // display: none;
     transform: translateX(0%);
   }
-  div.closeProfileTab {
+  &.hidden {
+    // display: none;
+    transform: translateX(90%);
+    div.details-inner {
+      transform: translateX(50px);
+    }
+  }
+  div.hide-details-tab {
     position: relative;
     width: 100%;
     height: 55px;
@@ -160,7 +176,7 @@ svg.svg {
       }
     }
   }
-  div.profileInner {
+  div.details-inner {
     padding: 20px;
     h2 {
       text-transform: uppercase;
@@ -180,4 +196,49 @@ svg.svg {
       // text-transform: uppercase;
     }
   }
+}
+
+
+div.full-screen-icon {
+  position: absolute;
+  top: 15px;
+  left: 275px;
+  width: 18px;
+  height: 18px;
+  justify-content: space-between;
+  // background: green;
+  cursor: pointer;
+  &:hover {
+    span {
+      border: 1px solid $white;
+    }
+  }
+  span {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid $grey08;
+    &:nth-of-type(1) {
+      top: 0;
+      left: 0;
+      border-width: 1px 0px 0px 1px;
+    }
+    &:nth-of-type(2) {
+      top: 0;
+      right: 0;
+      border-width: 1px 1px 0px 0px;
+    }
+    &:nth-of-type(3) {
+      bottom: 0;
+      left: 0;
+      border-width: 0px 0px 1px 1px;
+    }
+    &:nth-of-type(4) {
+      bottom: 0;
+      right: 0;
+      border-width: 0px 1px 1px 0px;
+    }
+  }
+
 }

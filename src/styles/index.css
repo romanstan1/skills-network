@@ -31,14 +31,19 @@ div#main {
 div#network {
   height: 100%; }
 
+svg.svg {
+  cursor: grab; }
+
 ::selection {
   background: none; }
 
 ::-moz-selection {
   background: none; }
 
-.nodes circle.selected {
-  fill: turquoise; }
+.nodes circle {
+  cursor: default; }
+  .nodes circle.selected {
+    fill: turquoise; }
 
 #tooltip {
   position: absolute;
@@ -60,12 +65,11 @@ div#network {
     font-size: 12px;
     text-transform: uppercase; }
 
-#profile {
+#full-details {
   position: absolute;
   top: 0;
   right: 0;
-  max-width: 350px;
-  width: 35%;
+  width: 350px;
   height: auto;
   background: #121214;
   color: ghostwhite;
@@ -76,48 +80,85 @@ div#network {
   transform: translateX(100%);
   transition: 0.2s ease-out;
   z-index: 100; }
-  #profile.open {
+  #full-details.open {
     transform: translateX(0%); }
-  #profile div.closeProfileTab {
+  #full-details.hidden {
+    transform: translateX(90%); }
+    #full-details.hidden div.details-inner {
+      transform: translateX(50px); }
+  #full-details div.hide-details-tab {
     position: relative;
     width: 100%;
     height: 55px; }
-    #profile div.closeProfileTab div.close-button {
+    #full-details div.hide-details-tab div.close-button {
       position: absolute;
       right: 10px;
       top: 10px;
       width: 32px;
       height: 32px;
       opacity: 0.6; }
-      #profile div.closeProfileTab div.close-button:before, #profile div.closeProfileTab div.close-button:after {
+      #full-details div.hide-details-tab div.close-button:before, #full-details div.hide-details-tab div.close-button:after {
         position: absolute;
         left: 15px;
         content: ' ';
         height: 33px;
         width: 1px;
         background: #ffffff; }
-      #profile div.closeProfileTab div.close-button:before {
+      #full-details div.hide-details-tab div.close-button:before {
         transform: rotate(45deg); }
-      #profile div.closeProfileTab div.close-button:after {
+      #full-details div.hide-details-tab div.close-button:after {
         transform: rotate(-45deg); }
-    #profile div.closeProfileTab:hover {
+    #full-details div.hide-details-tab:hover {
       background: #19191c; }
-      #profile div.closeProfileTab:hover div.close-button {
+      #full-details div.hide-details-tab:hover div.close-button {
         opacity: 1; }
-        #profile div.closeProfileTab:hover div.close-button:before, #profile div.closeProfileTab:hover div.close-button:after {
+        #full-details div.hide-details-tab:hover div.close-button:before, #full-details div.hide-details-tab:hover div.close-button:after {
           background: white; }
-  #profile div.profileInner {
+  #full-details div.details-inner {
     padding: 20px; }
-    #profile div.profileInner h2 {
+    #full-details div.details-inner h2 {
       text-transform: uppercase;
       font-weight: 400;
       padding-bottom: 20px;
       padding-top: 10px; }
-    #profile div.profileInner h3 {
+    #full-details div.details-inner h3 {
       padding: 5px 0;
       text-transform: uppercase;
       font-weight: 300; }
-    #profile div.profileInner p {
+    #full-details div.details-inner p {
       margin: 0;
       font-size: 12px;
       padding-bottom: 20px; }
+
+div.full-screen-icon {
+  position: absolute;
+  top: 15px;
+  left: 275px;
+  width: 18px;
+  height: 18px;
+  justify-content: space-between;
+  cursor: pointer; }
+  div.full-screen-icon:hover span {
+    border: 1px solid #ffffff; }
+  div.full-screen-icon span {
+    width: 7px;
+    height: 7px;
+    display: inline-block;
+    position: absolute;
+    border: 1px solid #adadad; }
+    div.full-screen-icon span:nth-of-type(1) {
+      top: 0;
+      left: 0;
+      border-width: 1px 0px 0px 1px; }
+    div.full-screen-icon span:nth-of-type(2) {
+      top: 0;
+      right: 0;
+      border-width: 1px 1px 0px 0px; }
+    div.full-screen-icon span:nth-of-type(3) {
+      bottom: 0;
+      left: 0;
+      border-width: 0px 0px 1px 1px; }
+    div.full-screen-icon span:nth-of-type(4) {
+      bottom: 0;
+      right: 0;
+      border-width: 0px 1px 1px 0px; }

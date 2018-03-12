@@ -18,6 +18,11 @@ export const closeFullDetails = () => {
     type: 'CLOSE_FULL_DETAILS'
   })
 }
+export const toggleFullDetails = () => {
+  return dispatch => dispatch({
+    type: 'TOGGLE_FULL_DETAILS'
+  })
+}
 
 export const toggleFilter = (filterName, parentName) => {
   return dispatch => dispatch({

@@ -1,4 +1,6 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500');
+// @import "react-toolbox/lib/slider/theme";
+
 
 $darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
@@ -7,11 +9,15 @@ $lighterBlack:#212123;
 $green: #28af4e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
+$grey06: #939393;
 // $grey08: rgba(242, 242, 242, 0.8);
 $grey08: #adadad;
 $grey01: rgba(242, 242, 242, 0.1);
 $white: #ffffff;
+$red: #c10d34;
 $offWhite: #d6d6d6;
+
+
 
 div.side-navigation {
   position: absolute;
@@ -104,15 +110,12 @@ div.side-navigation-inner {
   section.filters {
     text-align: right;
     padding: 0px 0;
-    // background: red;
     height: 100%;
     overflow-y: scroll;
-    border-bottom: 1px solid $grey01;
     div.Collapsible {
       padding: 15px 0 15px 0;
       position: relative;
       border-top: 1px solid $grey01;
-
       span.Collapsible__trigger {
         position: relative;
         display: inline-block;
@@ -124,7 +127,6 @@ div.side-navigation-inner {
         text-align: left;
         color: $offWhite;
         text-transform: uppercase;
-        // background: grey;
         cursor: default;
         transition: 0.1s ease;
         &.is-open {
@@ -196,7 +198,6 @@ div.side-navigation-inner {
           }
         }
       }
-
     }
 
     div.single-filter {
@@ -242,7 +243,74 @@ div.side-navigation-inner {
         }
         h4 {color: $white;}
       }
-
     }
+  }
+}
+
+div.slider-wrap {
+  padding: 10px 20px 35px 20px;
+  h4 {
+    color: $grey08;
+    cursor: inherit;
+    font-size: 13px;
+    font-weight: 300;
+    text-transform: capitalize;
+    text-indent: 15px;
+    overflow-x: scroll;
+    white-space: nowrap;
+    // background: red;
+    text-align: left;
+  }
+  div.rc-slider {
+    height: 0px;
+    margin: 20px 0px;
+
+    position: relative;
+    div.rc-slider-handle {
+      cursor: pointer;
+      border-width: 0px;
+      background: $offWhite;
+      outline: none;
+      box-shadow: 0px 0px #888888;
+      transition: 0.1s ease;
+    }
+    div.rc-slider-track {
+      cursor: pointer;
+      background: $green;
+      background: $offWhite;
+      background: $red;
+    }
+    div.rc-slider-rail {
+      cursor: pointer;
+      background: $grey06;
+    }
+    div.rc-slider-step {
+      cursor: pointer;
+      // background: $offWhite;
+      span.rc-slider-dot{
+        border-width: 0px;
+        transform: scale(1.2, 1.2);
+        background: $grey06;
+      }
+      span.rc-slider-dot-active {
+        background: $green;
+        background: $red;
+      }
+    }
+    div.rc-slider-mark {
+      top: 15px;
+    }
+    &:hover {
+      div.rc-slider-handle {
+        transform: scale(1.3, 1.3);
+        background: $white;
+      }
+    }
+  }
+  span.rc-slider-mark-text {
+    color: $grey01;
+  }
+  span.rc-slider-mark-text-active {
+    color: $offWhite;
   }
 }

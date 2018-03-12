@@ -1,27 +1,14 @@
 import * as d3 from "d3";
-import $ from "jquery";
 import store from '../../../store'
-import {clickPerson, clickSkill} from '../../../store/modules/actions'
+import {clickPerson, clickSkill,closeFullDetails} from '../../../store/modules/actions'
+import './network_modules'
 
-let width, height, svg, simulation, link, node, charge
+let width, height, svg, simulation, link, node
 let originalNodes, originalLinks
 let workingNodes, workingLinks
-let resizeId
 let lastD3Event
 const {dispatch} = store
 const {people, skills, allFilters} = store.getState().data
-
-
-document.addEventListener("keydown", function(e) {
-  if (e.keyCode == 70) toggleFullScreen()
-}, false)
-
-function toggleFullScreen() {
-  if (!document.fullscreenElement) document.documentElement.webkitRequestFullscreen()
-  else {
-    if (document.exitFullscreen) document.exitFullscreen()
-  }
-}
 
 export function initializeDom() {
   // construct nodesArray
@@ -56,13 +43,7 @@ export function initializeDom() {
   render()
 }
 
-
-$(window).resize(function() {
-  clearTimeout(resizeId);
-  resizeId = setTimeout(reset, 500);
-});
-
-function reset(){
+export function reset(){
   svg.selectAll("*").remove();
   width = null
   height  = null
@@ -70,7 +51,6 @@ function reset(){
   simulation  = null
   link = null
   node = null
-  charge = null
   render()
 }
 
@@ -95,8 +75,6 @@ function render() {
     .force("center", d3.forceCenter(width / 2, height / 2))
     .force('x', forceX)
     .force('y',  forceY)
-
-  // simulation.force("link").strength(10);
 
   link = svg.append("g")
     .attr("class", "links")
@@ -163,8 +141,16 @@ function clicked(d) {
   if(d.type === 'person') dispatch(clickPerson(d))
   else if(d.type === 'skill') dispatch(clickSkill(d))
 
-  d3.selectAll("circle").classed("selected", false)
-  d3.select(this).classed("selected", true)
+  const thisNode = d3.select(this)
+
+  if(thisNode.classed("selected")) {
+    thisNode.classed("selected", false)
+    dispatch(closeFullDetails())
+  }
+  else {
+    d3.selectAll("circle").classed("selected", false)
+    thisNode.classed("selected", true)
+  }
 }
 
 function mouseover(d) {
@@ -222,6 +208,10 @@ export function applyFilter() {
 
   update()
   zoomed()
+}
+
+export function applyOutliersFilter() {
+
 }
 
 function update() {
