@@ -203,7 +203,7 @@ export function applyFilter() {
   const allNodeFilters = [].concat(skillFilters, peopleFilters)
 
   workingNodes = originalNodes.filter(originalNode =>
-    minConnections <= noOfOccurences(originalNode, skillFilters, peopleFilters)
+    minConnections <= noOfOccurences(originalNode, skillFilters)
     && allNodeFilters.includes(originalNode.name)
   )
 
@@ -219,18 +219,13 @@ export function applyFilter() {
   zoomed()
 }
 
-function noOfOccurences(originalNode, skillFilters, peopleFilters) {
+function noOfOccurences(originalNode, skillFilters) {
   if(originalNode.type === 'person') {
     originalNode.workingConnections = 0
     originalNode.currentSkills.forEach(skillId => {
       if(skillFilters.includes(lookUpSkill(skillId).name)) originalNode.workingConnections++
     })
   }
-  // else if (originalNode.type === 'skill' ) {
-  //   originalNode.peopleCurrent.forEach(personName => {
-  //     if(peopleFilters.includes(personName)) originalNode.workingConnections++
-  //   })
-  // }
   return originalNode.workingConnections
 }
 

@@ -15,7 +15,7 @@ class SliderWrap extends Component {
     const {minConnections} = this.props
     return (
       <div className='slider-wrap'>
-        <span className={minConnections > 0?'title active': 'title'}>Minimum No.</span>
+        <span className={minConnections > 0?'title active': 'title'}>Min. No.</span>
         <Slider
           onChange={this.handleChange}
           step={1}

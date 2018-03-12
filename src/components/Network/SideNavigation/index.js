@@ -8,7 +8,7 @@ import Filters from './Filters'
 class SideNavigation extends Component {
 
   state = {
-    open: false,
+    open: true,
     selectedNav: 'Filter'
   }
   toggleOpen = (e) => {

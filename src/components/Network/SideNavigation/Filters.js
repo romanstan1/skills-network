@@ -31,6 +31,22 @@ class CollapsibleParent extends Component {
   }
 }
 
+const Connections = ({parent, handleFilterClick}) => <span>
+  <div
+    className={parent.filters[0].active ? 'single-filter active':'single-filter'}
+    onClick={()=>handleFilterClick(parent.filters[0].name, parent.parentName)} >
+    <h4>{humanize('current_skills')}</h4>
+    <span></span>
+  </div>
+  <SliderWrap/>
+  <div
+    className={parent.filters[1].active ? 'single-filter active':'single-filter'}
+    onClick={()=>handleFilterClick(parent.filters[1].name, parent.parentName)} >
+    <h4>{humanize('desired_skills')}</h4>
+    <span></span>
+  </div>
+</span>
+
 const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
 <section className='filters'>
   {
@@ -42,6 +58,7 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
           handleSelectAllClick={handleSelectAllClick}
           trigger={humanize(parent.parentName)}>
           {
+            parent.parentName !== 'connections'?
             parent.filters.map(filter =>
               <div
                 key={filter.name}
@@ -50,9 +67,10 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
                 <h4>{humanize(filter.name)}</h4>
                 <span></span>
               </div>
-            )
+            ) :
+            <Connections handleFilterClick={handleFilterClick} parent={parent}/>
           }
-          {parent.parentName === 'connections'? <SliderWrap/> : null}
+
         </CollapsibleParent>
       </span>
     ))
