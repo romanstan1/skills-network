@@ -54,7 +54,6 @@ export default (state=initialState, action)=>{
       fullDetails: {
         ...state.fullDetails,
         open: true,
-        // hidden:true,
         type:'person',
         name: action.payload.name,
         currentSkills: action.payload.currentSkills.map(skillId =>
@@ -69,7 +68,6 @@ export default (state=initialState, action)=>{
       fullDetails: {
         ...state.fullDetails,
         open: true,
-        // hidden:true,
         type:'skill',
         peopleCurrent: action.payload.peopleCurrent.join(', '),
         peopleDesired: action.payload.peopleDesired.join(', '),

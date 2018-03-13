@@ -6,7 +6,6 @@ import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/action
 import Filters from './Filters'
 
 class SideNavigation extends Component {
-
   state = {
     open: true,
     selectedNav: 'Filter'
