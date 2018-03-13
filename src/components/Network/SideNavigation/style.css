@@ -71,9 +71,9 @@ div.side-navigation-inner {
       position: relative;
       border-top: 1px solid #262626; }
       div.side-navigation-inner section.filters div.Collapsible.sub-group {
-        padding: 5px 0 5px 0;
-        margin: 0 10px;
-        border-top: 0px solid #262626; }
+        padding: 5px 0 5px 0 !important;
+        margin: 0px 0px 0px 0px !important;
+        border-top: 0px solid #262626 !important; }
       div.side-navigation-inner section.filters div.Collapsible span.Collapsible__trigger {
         position: relative;
         display: inline-block;
@@ -124,6 +124,8 @@ div.side-navigation-inner {
         border-radius: 25px;
         cursor: pointer;
         transition: 0.1s ease; }
+        div.side-navigation-inner section.filters div.Collapsible div.select-all.sub-group {
+          top: 11px; }
         div.side-navigation-inner section.filters div.Collapsible div.select-all span {
           margin-top: -3px;
           margin-right: -1px;
@@ -246,35 +248,35 @@ div.dd-menu {
   padding-bottom: 10px;
   transition: 0.2s ease; }
   div.dd-menu div.group-by-button {
-    height: 40px;
-    line-height: 40px;
+    height: 43px;
+    line-height: 43px;
     margin: 0 15px 0 15px;
     cursor: default;
     text-indent: 20px;
-    text-transform: capitalize;
-    text-transform: uppercase;
+    text-transform: none;
+    font-weight: 300;
     color: #d6d6d6;
     text-align: left;
     border: 1px solid #262626;
-    transition: 0.2s ease; }
+    transition: 0.2s ease;
+    z-index: 11; }
     div.dd-menu div.group-by-button:hover {
       background: #19191c;
       color: #ffffff; }
   div.dd-menu div.dd-menu-items {
     position: absolute;
     cursor: default;
-    line-height: 40px;
+    line-height: 43px;
     left: 15px;
     width: 230px;
-    top: 39px;
-    z-index: 1000;
-    background: #212123;
+    top: 42px;
+    z-index: 10;
     background: #121214;
-    border: 1px solid #262626;
     -webkit-box-shadow: 0px 8px 36px -4px black;
     -moz-box-shadow: 0px 8px 36px -4px black;
     box-shadow: 0px 8px 36px -4px black; }
     div.dd-menu div.dd-menu-items ul {
+      border: 1px solid #262626;
       padding: 0px 0px;
       z-index: 1000; }
       div.dd-menu div.dd-menu-items ul div {

@@ -12,21 +12,19 @@ class PeopleFilters extends Component {
     isGroupByOpen: false,
   }
   handleFilterClick = (filterName) => {
-    console.log("handleFilterClick")
     this.props.dispatch(toggleFilter(filterName, this.props.peopleFilter.parentName))
     applyFilter()
   }
 
   handleSubGroupSelect = (subGroup) => {
     this.props.dispatch(subGroupSelect(subGroup))
+    applyFilter()
   }
 
   handleGroupBySelect = (e) => {
-    console.log("handleGroupBySelect")
     this.setState({groupBy: e.target.dataset.value, isGroupByOpen: false})
   }
   handleGroupByToggle = () => {
-    console.log("handleGroupByToggle")
     this.setState({isGroupByOpen: !this.state.isGroupByOpen})
   }
 
@@ -39,9 +37,6 @@ class PeopleFilters extends Component {
       filters} = this.props.peopleFilter
 
     const {groupBy, isGroupByOpen} = this.state
-
-    console.log("groupBy",groupBy)
-
     const menuOptions = {
       isOpen: isGroupByOpen,
       close: ()=>{},
@@ -49,7 +44,7 @@ class PeopleFilters extends Component {
                 className="group-by-button"
                 onClick={this.handleGroupByToggle}
                 onBlur={this.handleGroupByToggle}
-                >Group - {groupBy}
+                >Group by - {humanize(groupBy)}
               </div>
     }
     return (
@@ -106,18 +101,16 @@ const LocationFilter = ({filters, handleFilterClick, uniqueLocations, handleSubG
       people: filters.filter(person => person.location === uniqueLocation)}
   })
 
-  console.log("LocationFilter",LocationFilter)
-
   return locationFilters.map(locationFilter =>
   <span key={locationFilter.location}>
     <Collapsible
-      className='sub-group'
+      className='sub-group' openedClassName='sub-group'
       triggerSibling={() =>
         <div
           onClick={()=>handleSubGroupSelect(locationFilter.location)}
           className={
             !locationFilter.people.map(filter => filter.active).includes(false)?
-            'select-all active':'select-all' }>
+            'select-all sub-group active':'select-all sub-group' }>
           <span></span>
         </div>}
       transitionTime={100}
@@ -144,17 +137,16 @@ const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleSubGroup
       people: filters.filter(person => person.client === client)}
   })
 
-  console.log("clientFilters",clientFilters)
   return clientFilters.map(clientFilter =>
   <span key={clientFilter.client}>
     <Collapsible
-      className='sub-group'
+      className='sub-group' openedClassName='sub-group'
       triggerSibling={() =>
         <div
           onClick={()=>handleSubGroupSelect(clientFilter.client)}
           className={
             !clientFilter.people.map(filter => filter.active).includes(false)?
-            'select-all active':'select-all' }>
+            'select-all sub-group active':'select-all sub-group' }>
           <span></span>
         </div>}
       transitionTime={100}

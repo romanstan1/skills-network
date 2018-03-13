@@ -118,10 +118,9 @@ div.side-navigation-inner {
       position: relative;
       border-top: 1px solid $grey01;
       &.sub-group {
-        // background: red;
-        padding: 5px 0 5px 0;
-        margin: 0 10px;
-        border-top: 0px solid $grey01;
+        padding: 5px 0 5px 0 !important;
+        margin: 0px 0px 0px 0px !important;
+        border-top: 0px solid $grey01 !important;
       }
       span.Collapsible__trigger {
         position: relative;
@@ -180,6 +179,9 @@ div.side-navigation-inner {
         border-radius: 25px;
         cursor: pointer;
         transition: 0.1s ease;
+        &.sub-group {
+          top:11px;
+        }
         span {
           margin-top: -3px;
           margin-right: -1px;
@@ -333,57 +335,40 @@ div.dd-menu {
   position: relative;
   text-transform: capitalize;
   text-align: left;
-  // cursor: pointer;
-  // background: teal;
   padding-bottom: 10px;
   transition: 0.2s ease;
-  // -webkit-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
-  // -moz-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
-  // box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
   div.group-by-button {
-    // -webkit-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
-    // -moz-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
-    // box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
-    height: 40px;
-    line-height: 40px;
+    height: 43px;
+    line-height: 43px;
     margin: 0 15px 0 15px;
-    // background: grey;
     cursor: default;
     text-indent: 20px;
-    text-transform: capitalize;
-    text-transform: uppercase;
-    // font-weight: 700;
+    text-transform:none;
+    font-weight: 300;
     color: $offWhite;
-    // font-size: 14px;
     text-align: left;
-    // background: $lighterBlack;
     border: 1px solid $grey01;
     transition: 0.2s ease;
+    z-index: 11;
     &:hover {
       background: $hoverDarkBlack;
       color: $white;
     }
   }
   div.dd-menu-items {
-    // padding: 10px;
-    // border-radius: 4px;
     position: absolute;
     cursor: default;
-    // height: auto;
-    line-height: 40px;
+    line-height: 43px;
     left: 15px;
     width: 230px;
-    top: 39px;
-    z-index: 1000;
-    background: $lighterBlack;
+    top: 42px;
+    z-index: 10;
     background: $darkestBlack;
-    border: 1px solid $grey01;
-    // background: red;
-    // box-shadow: 0px 10px black;
     -webkit-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
     -moz-box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
     box-shadow: 0px 8px 36px -4px rgba(0,0,0,1);
     ul {
+      border: 1px solid $grey01;
       padding: 0px 0px;
       z-index: 1000;
       div {
