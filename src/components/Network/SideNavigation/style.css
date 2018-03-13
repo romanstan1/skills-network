@@ -30,11 +30,6 @@ div.side-navigation {
         transform: rotate(45deg);
         width: 16px;
         transition: 0.2s ease; }
-    div.side-navigation div.openNavTab:hover {
-      background: #19191c; }
-      div.side-navigation div.openNavTab:hover div.chevron::before {
-        border-color: white;
-        opacity: 1; }
   div.side-navigation.open {
     transform: translateX(0%); }
     div.side-navigation.open div.openNavTab div.chevron {

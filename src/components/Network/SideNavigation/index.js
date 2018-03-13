@@ -33,8 +33,10 @@ class SideNavigation extends Component {
       <div key='sidenavigation'
         className={open? 'side-navigation open': 'side-navigation closed'}>
 
-        <div onClick={this.toggleOpen} className='openNavTab'>
-          <div className='chevron'/>
+        <div
+          // onClick={this.toggleOpen}
+          className='openNavTab'>
+          {/* <div className='chevron'/> */}
         </div>
 
         <div className='side-navigation-inner'>

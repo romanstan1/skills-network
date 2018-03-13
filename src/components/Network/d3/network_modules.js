@@ -3,11 +3,16 @@ import $ from "jquery";
 import {reset} from './network_functions'
 
 let resizeId
+let fullscreen = false
 
 export function toggleFullScreen() {
-  if (!document.fullscreenElement) document.documentElement.webkitRequestFullscreen()
-  else {
-    if (document.exitFullscreen) document.exitFullscreen()
+  if (document.documentElement.webkitRequestFullscreen && !fullscreen) {
+    document.documentElement.webkitRequestFullscreen()
+    fullscreen = true
+  }
+  else if(document.webkitExitFullscreen) {
+    document.webkitExitFullscreen()
+    fullscreen = false
   }
 }
 
