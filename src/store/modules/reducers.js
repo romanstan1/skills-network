@@ -1,6 +1,9 @@
 import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
+const uniqueLocations = [...new Set(peopleData.map(filter => filter.location))]
+const uniqueClients = [...new Set(peopleData.map(filter => filter.client))]
+
 const initialState = {
   allFilters: [
     {
@@ -21,7 +24,22 @@ const initialState = {
     {
       parentName: 'people',
       active: true,
-      filters: peopleData
+      filters: peopleData,
+      groupBy: ['all', 'location', 'clients'],
+      uniqueLocations,
+      uniqueClients,
+      locationFilters: uniqueLocations.map(location => {
+        return {
+          location,
+          people: peopleData.filter(person => person.location === location)
+        }
+      }),
+      clientFilters: uniqueClients.map(client => {
+        return {
+          client,
+          people: peopleData.filter(person => person.client === client)
+        }
+      }),
     },
     {
       parentName: 'skills',
@@ -36,11 +54,9 @@ const initialState = {
     currentSkills: []
   },
   people: peopleData,
-  skills: skillsData,
-  groupBy: ['all', 'location', 'clients'],
-  uniqueLocations: [...new Set(peopleData.map(filter => filter.location))],
-  uniqueClients: [...new Set(peopleData.map(filter => filter.client))]
+  skills: skillsData
 }
+console.log("peopleData",peopleData)
 
 export function lookUpSkill(id) {
   return initialState.skills.filter(skill => skill.id === id)[0]
@@ -124,7 +140,6 @@ export default (state=initialState, action)=>{
           minConnections: action.payload
         } : parent)
     }
-
     default: return state
   }
 }
