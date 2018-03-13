@@ -25,21 +25,15 @@ const initialState = {
       parentName: 'people',
       active: true,
       filters: peopleData,
-      groupBy: ['all', 'location', 'clients'],
+      groupByList: ['all', 'location', 'clients'],
       uniqueLocations,
       uniqueClients,
-      locationFilters: uniqueLocations.map(location => {
-        return {
-          location,
-          people: peopleData.filter(person => person.location === location)
-        }
-      }),
-      clientFilters: uniqueClients.map(client => {
-        return {
-          client,
-          people: peopleData.filter(person => person.client === client)
-        }
-      }),
+      // clientFilters: uniqueClients.map(client => {
+      //   return {
+      //     client,
+      //     people: peopleData.filter(person => person.client === client)
+      //   }
+      // }),
     },
     {
       parentName: 'skills',
@@ -104,7 +98,9 @@ export default (state=initialState, action)=>{
         hidden:!state.fullDetails.hidden
       }
     }
-    case 'TOGGLE_SELECT_ALL_FILTER': return {
+    case 'TOGGLE_SELECT_ALL_FILTER':
+    console.log("TOGGLE_SELECT_ALL_FILTER",action)
+    return {
       ...state,
       allFilters: state.allFilters.map(parent =>
         parent.parentName === action.payload?
@@ -120,7 +116,9 @@ export default (state=initialState, action)=>{
         :parent
       )
     }
-    case 'TOGGLE_FILTER': return {
+    case 'TOGGLE_FILTER':
+    console.log("TOGGLE_FILTER",action)
+    return {
       ...state,
       allFilters: state.allFilters.map(parent =>
         parent.parentName === action.payload.parentName?
@@ -140,13 +138,36 @@ export default (state=initialState, action)=>{
           minConnections: action.payload
         } : parent)
     }
+    case 'SUB_GROUP_SELECT':
+    console.log("SUB_GROUP_SELECT",action)
+    return {
+      ...state,
+      allFilters: state.allFilters.map(parent =>
+        parent.parentName === 'people'?
+          { ...parent,
+            active: mapNewFiltersSubGroup(parent.filters, action.payload)
+              .reduce((accumulator, filter) => filter.active? accumulator: filter.active, true),
+            filters: mapNewFiltersSubGroup(parent.filters, action.payload),
+          }
+        :parent
+      )
+    }
     default: return state
   }
 }
 
-function mapNewFilters(filters, filterName) {
+function mapNewFilters(filters, filterName) { // returns array of all nodes in parent ie people or skill or connection
   return filters.map(filter =>
     filter.name === filterName?
+    {...filter,
+      active: !filter.active
+    }
+  : filter)
+}
+
+function mapNewFiltersSubGroup(filters, subGroup) {
+  return filters.map(filter =>
+    filter.location === subGroup || filter.client === subGroup?
     {...filter,
       active: !filter.active
     }

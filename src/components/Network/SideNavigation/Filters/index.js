@@ -20,7 +20,8 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
               <span></span>
             </div>
           }
-          transitionTime={100} trigger={humanize(parent.parentName)}>
+          transitionTime={100}
+          trigger={humanize(parent.parentName)}>
           { parent.parentName === 'connections'?
             <ConnectionFilters handleFilterClick={handleFilterClick} parent={parent}/> :null
           }

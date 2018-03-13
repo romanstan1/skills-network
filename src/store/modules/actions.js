@@ -45,3 +45,10 @@ export const changeMinConnections = (value) => {
     payload: value
   })
 }
+
+export const subGroupSelect = (subGroup) => {
+  return dispatch => dispatch({
+    type: 'SUB_GROUP_SELECT',
+    payload: subGroup
+  })
+}
