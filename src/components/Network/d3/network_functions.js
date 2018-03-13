@@ -56,7 +56,7 @@ export function reset(){
 }
 
 function render() {
-  width = window.innerWidth
+  width = window.innerWidth - 260
   height = window.innerHeight
 
   svg = d3.select("svg")
@@ -64,7 +64,7 @@ function render() {
     .attr("width", width)
     .attr("height", height)
     .call(d3.zoom()
-      .scaleExtent([1 / 2, 4])
+      .scaleExtent([0.6 , 1.3])
       .on("zoom", zoomed))
 
   const forceX = d3.forceX(width / 2).strength(0.030)
@@ -167,7 +167,7 @@ function mouseover(d) {
   const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
 
 	d3.select("#tooltip")
-		.style("right", (width - fullDetailsXPosition.x) + 15 + "px")
+		.style("right", (width - fullDetailsXPosition.x + 260) + 15 + "px")
 		.style("top", "15px")
 		.select("#value")
 		.text(d.name);
