@@ -6,6 +6,8 @@ import {applyFilter} from '../../d3/network_functions.js'
 import {toggleFilter, subGroupSelect} from '../../../../store/modules/actions'
 import DropdownMenu from 'react-dd-menu';
 
+import {AllFilter, ClientFilter, LocationFilter} from './filterModules'
+
 class PeopleFilters extends Component {
   state = {
     groupBy: 'all',
@@ -15,27 +17,18 @@ class PeopleFilters extends Component {
     this.props.dispatch(toggleFilter(filterName, this.props.peopleFilter.parentName))
     applyFilter()
   }
-
   handleSubGroupSelect = (subGroup) => {
     this.props.dispatch(subGroupSelect(subGroup))
     applyFilter()
   }
-
   handleGroupBySelect = (e) => {
     this.setState({groupBy: e.target.dataset.value, isGroupByOpen: false})
   }
   handleGroupByToggle = () => {
     this.setState({isGroupByOpen: !this.state.isGroupByOpen})
   }
-
-
   render() {
-    const {
-      groupByList,
-      uniqueLocations,
-      uniqueClients,
-      filters} = this.props.peopleFilter
-
+    const {groupByList,uniqueLocations,uniqueClients,filters} = this.props.peopleFilter
     const {groupBy, isGroupByOpen} = this.state
     const menuOptions = {
       isOpen: isGroupByOpen,
@@ -81,88 +74,6 @@ class PeopleFilters extends Component {
     </span>
     )
   }
-}
-
-const AllFilter = ({filters, handleFilterClick}) => {
-  return filters.map(filter =>
-  <div
-    key={filter.name}
-    className={filter.active ? 'single-filter active':'single-filter'}
-    onClick={()=>handleFilterClick(filter.name)} >
-    <h4>{humanize(filter.name)}</h4>
-    <span></span>
-  </div>)
-}
-
-const LocationFilter = ({filters, handleFilterClick, uniqueLocations, handleSubGroupSelect}) => {
-
-  const locationFilters =  uniqueLocations.map(uniqueLocation => {
-    return {location: uniqueLocation,
-      people: filters.filter(person => person.location === uniqueLocation)}
-  })
-
-  return locationFilters.map(locationFilter =>
-  <span key={locationFilter.location}>
-    <Collapsible
-      className='sub-group' openedClassName='sub-group'
-      triggerSibling={() =>
-        <div
-          onClick={()=>handleSubGroupSelect(locationFilter.location)}
-          className={
-            !locationFilter.people.map(filter => filter.active).includes(false)?
-            'select-all sub-group active':'select-all sub-group' }>
-          <span></span>
-        </div>}
-      transitionTime={100}
-      trigger={humanize(locationFilter.location)}>
-      {
-        locationFilter.people.map(filter =>
-        <div
-          key={filter.name}
-          className={filter.active ? 'single-filter active':'single-filter'}
-          onClick={()=>handleFilterClick(filter.name)} >
-          <h4>{humanize(filter.name)}</h4>
-          <span></span>
-        </div>)
-      }
-    </Collapsible>
-  </span>)
-}
-
-
-
-const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleSubGroupSelect}) => {
-  const clientFilters =  uniqueClients.map(client => {
-    return {client,
-      people: filters.filter(person => person.client === client)}
-  })
-
-  return clientFilters.map(clientFilter =>
-  <span key={clientFilter.client}>
-    <Collapsible
-      className='sub-group' openedClassName='sub-group'
-      triggerSibling={() =>
-        <div
-          onClick={()=>handleSubGroupSelect(clientFilter.client)}
-          className={
-            !clientFilter.people.map(filter => filter.active).includes(false)?
-            'select-all sub-group active':'select-all sub-group' }>
-          <span></span>
-        </div>}
-      transitionTime={100}
-      trigger={humanize(clientFilter.client)}>
-      {
-        clientFilter.people.map(filter =>
-        <div
-          key={filter.name}
-          className={filter.active ? 'single-filter active':'single-filter'}
-          onClick={()=>handleFilterClick(filter.name)} >
-          <h4>{humanize(filter.name)}</h4>
-          <span></span>
-        </div>)
-      }
-    </Collapsible>
-  </span>)
 }
 
 export default connect(state => ({

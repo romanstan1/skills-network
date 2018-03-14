@@ -36,6 +36,7 @@ export const peopleData = seedData.people.map(node => {
   return {
     ...node,
     active:true,
+    conFilterActive: false,
     workingConnections:0
   }
 })

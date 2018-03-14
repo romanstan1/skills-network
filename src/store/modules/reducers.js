@@ -146,7 +146,7 @@ function mapNewFilters(filters, filterName) { // returns array of all nodes in p
   return filters.map(filter =>
     filter.name === filterName?
     {...filter,
-      active: !filter.active
+      active: !filter.active // finds the individual filter, and reverses its state.
     }
   : filter)
 }
