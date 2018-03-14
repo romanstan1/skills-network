@@ -165,7 +165,16 @@ function clicked(d) {
 
   const thisNode = d3.select(`[data-node='${lastClick.id}']`)
 
-  if(thisNode.classed("selected")) { // if the node thats clicked on is reclicked
+
+  if(thisNode.empty()) { // edge case, if node is no longer on the DOM, remove select state and unselect all nodes
+    nodeSelectedState = false
+
+    d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
+    d3.selectAll("line").classed("not-selected", false).classed("connected", false)
+
+    dispatch(closeFullDetails())
+
+  } else if(thisNode.classed("selected")) { // if the node thats clicked on is reclicked
     thisNode.classed("selected", false)
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
     d3.selectAll("line").classed("not-selected", false).classed("connected", false)
