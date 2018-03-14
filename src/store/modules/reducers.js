@@ -27,13 +27,7 @@ const initialState = {
       filters: peopleData,
       groupByList: ['all', 'location', 'clients'],
       uniqueLocations,
-      uniqueClients,
-      // clientFilters: uniqueClients.map(client => {
-      //   return {
-      //     client,
-      //     people: peopleData.filter(person => person.client === client)
-      //   }
-      // }),
+      uniqueClients
     },
     {
       parentName: 'skills',
@@ -50,14 +44,12 @@ const initialState = {
   people: peopleData,
   skills: skillsData
 }
-console.log("peopleData",peopleData)
 
 export function lookUpSkill(id) {
   return initialState.skills.filter(skill => skill.id === id)[0]
 }
 
 export default (state=initialState, action)=>{
-  // console.log("action: ",action)
   switch(action.type){
     case 'OPEN_PERSON': return {
       ...state,
@@ -98,9 +90,7 @@ export default (state=initialState, action)=>{
         hidden:!state.fullDetails.hidden
       }
     }
-    case 'TOGGLE_SELECT_ALL_FILTER':
-    console.log("TOGGLE_SELECT_ALL_FILTER",action)
-    return {
+    case 'TOGGLE_SELECT_ALL_FILTER': return {
       ...state,
       allFilters: state.allFilters.map(parent =>
         parent.parentName === action.payload?
@@ -116,9 +106,7 @@ export default (state=initialState, action)=>{
         :parent
       )
     }
-    case 'TOGGLE_FILTER':
-    console.log("TOGGLE_FILTER",action)
-    return {
+    case 'TOGGLE_FILTER': return {
       ...state,
       allFilters: state.allFilters.map(parent =>
         parent.parentName === action.payload.parentName?
@@ -138,9 +126,7 @@ export default (state=initialState, action)=>{
           minConnections: action.payload
         } : parent)
     }
-    case 'SUB_GROUP_SELECT':
-    console.log("SUB_GROUP_SELECT",action)
-    return {
+    case 'SUB_GROUP_SELECT': return {
       ...state,
       allFilters: state.allFilters.map(parent =>
         parent.parentName === 'people'?
@@ -166,10 +152,12 @@ function mapNewFilters(filters, filterName) { // returns array of all nodes in p
 }
 
 function mapNewFiltersSubGroup(filters, subGroup) {
+  const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)
+  const subGroupFiltersAllOpen = subGroupFilters.map(filter => filter.active).includes(false)
   return filters.map(filter =>
     filter.location === subGroup || filter.client === subGroup?
     {...filter,
-      active: !filter.active
+      active: subGroupFiltersAllOpen // Are ALL of the filters within a subgroup selected? Boolean
     }
   : filter)
 }
