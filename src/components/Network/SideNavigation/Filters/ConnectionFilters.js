@@ -4,14 +4,14 @@ import SliderWrap from './SliderWrap'
 
 const ConnectionFilters = ({parent, handleFilterClick}) => <span>
   <div
-    className={parent.filters[0].active ? 'single-filter active':'single-filter'}
+    className={parent.filters[0].active ? 'single-filter active connections':'single-filter connections'}
     onClick={()=>handleFilterClick(parent.filters[0].name, parent.parentName)} >
     <h4>{humanize('current_skills')}</h4>
     <span></span>
   </div>
   <SliderWrap/>
   <div
-    className={parent.filters[1].active ? 'single-filter active':'single-filter'}
+    className={parent.filters[1].active ? 'single-filter active connections':'single-filter connections'}
     onClick={()=>handleFilterClick(parent.filters[1].name, parent.parentName)} >
     <h4>{humanize('desired_skills')}</h4>
     <span></span>

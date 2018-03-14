@@ -3,7 +3,9 @@
 
 
 $darkestBlack:#121214;
+$darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
+// 21211f
 $lighterBlack:#212123;
 
 $green: #28af4e;
@@ -80,10 +82,16 @@ svg.svg {
 }
 
 .links line {
-  // stroke: #999;
+  // stroke: #a3dfe0;
   // stroke-opacity: 0.6;
+  opacity: 0.8;
   &.not-selected {
-    stroke: grey;
+    stroke: #353b44;
+    opacity: 0.4;
+  }
+
+  &.connected {
+    stroke: red;
   }
 }
 
@@ -92,11 +100,15 @@ svg.svg {
   // stroke: #fff;
   // stroke-width: 0px;
   &.selected {
-    fill: turquoise
+    // fill: white;
   }
   &.not-selected {
-    fill: grey;
+    fill: #353b44;
+    // opacity: 0.4;
   }
+  // &.connected {
+  //   fill:default;
+  // }
 }
 
 

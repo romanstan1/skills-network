@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import humanize from 'string-humanize'
-import Collapsible from 'react-collapsible';
 import {connect} from 'react-redux'
 import {applyFilter} from '../../d3/network_functions.js'
 import {toggleFilter, subGroupSelect} from '../../../../store/modules/actions'

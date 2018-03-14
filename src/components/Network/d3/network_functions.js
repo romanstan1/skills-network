@@ -1,5 +1,6 @@
 import * as d3 from "d3";
 import store from '../../../store'
+import {peopleColour, skillsColour, connectionsColour} from '../../../styles/theme'
 import {clickPerson, clickSkill,closeFullDetails} from '../../../store/modules/actions'
 import {lookUpSkill} from '../../../store/modules/reducers'
 import './network_modules'
@@ -7,7 +8,8 @@ import './network_modules'
 let width, height, svg, simulation, link, node
 let originalNodes, originalLinks
 let workingNodes, workingLinks
-let lastD3Event
+let lastD3Event, lastClick
+let nodeSelectedState = false
 const {dispatch} = store
 const {people, skills, allFilters} = store.getState().data
 
@@ -82,8 +84,9 @@ function render() {
     .selectAll("line")
     .data(workingLinks)
     .enter().append("line")
-    .attr("stroke", (d) => linkColor(d.type))
-    .attr("stroke-width", (d) => 2);
+    .attr("stroke", (d) => linkColor())
+    .attr("stroke-dasharray", (d) => dashLine(d.type))
+    .attr("stroke-width", (d) => 2)
 
   node = svg.append("g")
     .attr("class", "nodes")
@@ -92,6 +95,7 @@ function render() {
     .enter().append("circle")
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
+    .attr("data-node", (d) => d.id)
     .on("click",clicked)
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)
@@ -105,18 +109,29 @@ function render() {
     .on("tick", ticked)
     .force("link")
     .links(workingLinks)
+
+  link
+    .attr("data-target", (d) => d.target.id)
+    .attr("data-source", (d) => d.source.id)
+    // .attr("data-type", (d) => d.type)
 }
 
 function nodeColor(type) {
-  if(type === 'person') return '#dd1338'
-  else if(type === 'skill') return '#0e42d1'
+  if(type === 'person') return peopleColour
+  else if(type === 'skill') return skillsColour
   else return '#ff00d0'
 }
 
 function linkColor(type) {
   if(type === 'currentSkills') return '#dce5dc'
   else if(type === 'desiredSkills') return '#49c67b'
-  else return '#ff00d0'
+  else return connectionsColour
+}
+
+function dashLine(type) {
+  if(type === 'currentSkills') return false
+  else if(type === 'desiredSkills') return "4, 10"
+  else return false
 }
 
 function nodeSize(d) {
@@ -139,29 +154,72 @@ function ticked() {
 }
 
 function clicked(d) {
-  if(d.type === 'person') dispatch(clickPerson(d))
-  else if(d.type === 'skill') dispatch(clickSkill(d))
 
-  const thisNode = d3.select(this)
+  if(d) {
+    lastClick = d   // last clicked node data saved to variable
+    nodeSelectedState = !nodeSelectedState // nodeSelectedState reversed only on actual click
+  }
 
-  if(thisNode.classed("selected")) {
+  if(lastClick.type === 'person') dispatch(clickPerson(lastClick))
+  else if(lastClick.type === 'skill') dispatch(clickSkill(lastClick))
+
+  const thisNode = d3.select(`[data-node='${lastClick.id}']`)
+
+  if(thisNode.classed("selected")) { // if the node thats clicked on is reclicked
     thisNode.classed("selected", false)
-    d3.selectAll("circle").classed("not-selected", false)
-    d3.selectAll("line").classed("not-selected", false)
+    d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
+    d3.selectAll("line").classed("not-selected", false).classed("connected", false)
 
     dispatch(closeFullDetails())
   }
-  else {
-    d3.selectAll("circle").classed("selected", false).classed("not-selected", true)
-    d3.selectAll("line").classed("not-selected", true)
+  else { // first time click on a node
+    d3.selectAll("circle").classed("selected", false).classed("not-selected", true).classed("connected", false)
+    d3.selectAll("line").classed("not-selected", true).classed("connected", false)
     thisNode.classed("not-selected", false).classed("selected", true)
+
+
+    const {allFilters} = store.getState().data
+
+    const linkFilters = allFilters
+      .filter(parent => parent.parentName === 'connections')[0].filters
+      .filter(connections => connections.active)
+      .map(connections => connections.name) // get array of active connection types
+
+
+    if(lastClick.type === 'person') { // if node clicked on is person node
+
+      d3.selectAll(`[data-source='${lastClick.id}']`).classed("not-selected", false)
+
+      // turn skills nodes on that are connected to the people node
+      if(linkFilters.includes('currentSkills')) {
+        lastClick.currentSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
+      }
+
+      if(linkFilters.includes('desiredSkills')) {
+        lastClick.desiredSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
+      }
+
+    } else if (lastClick.type === 'skill') { // if node clicked on is skill node
+
+      d3.selectAll(`[data-target='${lastClick.id}']`).classed("not-selected", false) // make all links connected to the skill node active
+
+      // turn people nodes on that are connected to the skill node
+      if(linkFilters.includes('currentSkills')) {
+        lastClick.hadBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
+      }
+
+      if(linkFilters.includes('desiredSkills')) {
+        lastClick.wantedBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
+      }
+
+    }
   }
 }
 
 function mouseover(d) {
 
   d3.select(this)
-    .attr("stroke-width", 1)
+    .attr("stroke-width", 2)
     .attr("stroke", '#f2f2f2')
 
   const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
@@ -178,7 +236,6 @@ function mouseout(d) {
   d3.select("#tooltip").classed("hidden", true);
   d3.select(this)
     .attr("stroke-width", 0)
-    .attr("stroke", '#f2f2f2')
 }
 
 export function applyFilter() {
@@ -221,6 +278,7 @@ export function applyFilter() {
 
   update()
   zoomed()
+  if(nodeSelectedState) clicked()
 }
 
 function noOfOccurences(originalNode, skillFilters) {
@@ -239,7 +297,11 @@ function update() {
   link.exit().remove()
   link = link.enter().append("line")
     .merge(link)
-    .attr("stroke", (d) => linkColor(d.type))
+    .attr("data-target", (d) => d.target.id)
+    .attr("data-source", (d) => d.source.id)
+    // .attr("data-type", (d) => d.type)
+    .attr("stroke", (d) => linkColor())
+    .attr("stroke-dasharray", (d) => dashLine(d.type))
     .attr("stroke-width", (d) => 2);
 
   node = node.data(workingNodes)
@@ -248,6 +310,7 @@ function update() {
     .merge(node)
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
+    .attr("data-node", (d) => d.id)
     .on("click",clicked)
     .on("mouseover", mouseover)
     .on("mouseout", mouseout)

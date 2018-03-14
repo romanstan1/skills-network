@@ -32,6 +32,7 @@ const seedData = {
     {"id": "20",  type:"skill", "name": "Digital Marketing" }
   ]
 }
+
 export const peopleData = seedData.people.map(node => {
   return {
     ...node,
@@ -41,10 +42,18 @@ export const peopleData = seedData.people.map(node => {
   }
 })
 
-export const skillsData =seedData.skills.map(node => {
+export const skillsData = seedData.skills.map(node => {
   return {
     ...node,
     active:true,
-    workingConnections:3
+    workingConnections:10,
+    hadBy: peopleData.reduce((acc, person,index) => {
+      if(person.currentSkills.includes(node.id)) acc.push(peopleData[index].id)
+      return acc
+    }, []),
+    wantedBy: peopleData.reduce((acc, person,index) => {
+      if(person.desiredSkills.includes(node.id)) acc.push(peopleData[index].id)
+      return acc
+    }, [])
   }
 })

@@ -4,13 +4,13 @@ import Collapsible from 'react-collapsible';
 
 
 export const AllFilter = ({filters, handleFilterClick}) => filters.map(filter =>
-  <IndividualPersonFilter filter={filter} handleFilterClick={handleFilterClick}/>
+  <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
 )
 
 export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
 <div
   key={filter.name}
-  className={filter.active ? 'single-filter active':'single-filter'}
+  className={filter.active ? 'single-filter active people':'single-filter people'}
   onClick={()=>handleFilterClick(filter.name)} >
   <h4>{humanize(filter.name)}</h4>
   <span></span>
@@ -22,7 +22,7 @@ export const TriggerSibling = ({groupFilter, subGroup, handleSubGroupSelect}) =>
   onClick={()=>handleSubGroupSelect(subGroup)}
   className={
     !groupFilter.people.map(filter => filter.active).includes(false)?
-    'select-all sub-group active':'select-all sub-group'}>
+    'select-all sub-group active people':'select-all sub-group people'}>
   <span></span>
 </div>
 
@@ -44,8 +44,8 @@ export const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleS
       transitionTime={100}
       trigger={humanize(clientFilter.client)}>
       {
-        clientFilter.people.map(filter =>
-        <IndividualPersonFilter filter={filter} handleFilterClick={handleFilterClick}/>)
+        clientFilter.people.map((filter,i) =>
+        <IndividualPersonFilter key={i} filter={filter} handleFilterClick={handleFilterClick}/>)
       }
     </Collapsible>
   </span>)
@@ -69,8 +69,8 @@ export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, han
       transitionTime={100}
       trigger={humanize(locationFilter.location)}>
       {
-        locationFilter.people.map(filter =>
-        <IndividualPersonFilter filter={filter} handleFilterClick={handleFilterClick}/>)
+        locationFilter.people.map((filter,i) =>
+        <IndividualPersonFilter key={i} filter={filter} handleFilterClick={handleFilterClick}/>)
       }
     </Collapsible>
   </span>)

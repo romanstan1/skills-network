@@ -183,6 +183,30 @@ div.side-navigation-inner {
       div.side-navigation-inner section.filters div.single-filter.active h4 {
         color: #ffffff; }
 
+div.single-filter.active.connections span {
+  border: 1px solid #ce740e !important;
+  background: #ce740e !important; }
+
+div.single-filter.active.people span {
+  border: 1px solid #08a8a8 !important;
+  background: #08a8a8 !important; }
+
+div.single-filter.active.skills span {
+  border: 1px solid #2b23c4 !important;
+  background: #2b23c4 !important; }
+
+div.select-all.active.connections {
+  border: 1px solid #ce740e !important;
+  background: #ce740e !important; }
+
+div.select-all.active.people {
+  border: 1px solid #08a8a8 !important;
+  background: #08a8a8 !important; }
+
+div.select-all.active.skills {
+  border: 1px solid #2b23c4 !important;
+  background: #2b23c4 !important; }
+
 div.slider-wrap {
   padding: 10px 25px 18px 20px;
   display: flex;
@@ -216,8 +240,6 @@ div.slider-wrap {
       box-shadow: 0px 0px #888888; }
     div.slider-wrap div.rc-slider div.rc-slider-track {
       cursor: pointer;
-      background: #28af4e;
-      background: #d6d6d6;
       background: #c10d34; }
     div.slider-wrap div.rc-slider div.rc-slider-rail {
       cursor: pointer;

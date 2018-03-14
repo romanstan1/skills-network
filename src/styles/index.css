@@ -43,15 +43,18 @@ svg.svg {
 ::-moz-selection {
   background: none; }
 
-.links line.not-selected {
-  stroke: grey; }
+.links line {
+  opacity: 0.8; }
+  .links line.not-selected {
+    stroke: #353b44;
+    opacity: 0.4; }
+  .links line.connected {
+    stroke: red; }
 
 .nodes circle {
   cursor: default; }
-  .nodes circle.selected {
-    fill: turquoise; }
   .nodes circle.not-selected {
-    fill: grey; }
+    fill: #353b44; }
 
 #tooltip {
   position: absolute;

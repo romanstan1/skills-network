@@ -15,7 +15,8 @@ const Filters = ({allFilters, handleFilterClick, handleSelectAllClick}) =>
           triggerSibling={() =>
             <div
               onClick={()=>handleSelectAllClick(parent.parentName)}
-              className={parent.active?'select-all active':'select-all'}>
+              className={parent.active?`select-all active ${parent.parentName}`:`select-all ${parent.parentName}`}
+              >
               <span></span>
             </div>
           }

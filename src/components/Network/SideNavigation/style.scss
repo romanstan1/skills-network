@@ -18,6 +18,10 @@ $white: #ffffff;
 $red: #c10d34;
 $offWhite: #d6d6d6;
 
+$connections: #ce740e;
+$people: #08a8a8;
+$skills: #2b23c4;
+
 
 
 div.side-navigation {
@@ -256,6 +260,39 @@ div.side-navigation-inner {
   }
 }
 
+
+div.single-filter { // change colours for different visual elements here
+  &.active.connections span {
+    border: 1px solid $connections !important;
+    background: $connections !important;
+  }
+  &.active.people span {
+    border: 1px solid $people !important;
+    background: $people !important;
+  }
+  &.active.skills span {
+    border: 1px solid $skills !important;
+    background: $skills !important;
+  }
+}
+
+div.select-all { // change colours for different visual elements here
+  &.active.connections {
+    border: 1px solid $connections !important;
+    background: $connections !important;
+  }
+  &.active.people {
+    border: 1px solid $people !important;
+    background: $people !important;
+  }
+  &.active.skills {
+    border: 1px solid $skills !important;
+    background: $skills !important;
+  }
+}
+
+
+
 div.slider-wrap {
   padding: 10px 25px 18px 20px;
   display: flex;
@@ -292,8 +329,6 @@ div.slider-wrap {
     }
     div.rc-slider-track {
       cursor: pointer;
-      background: $green;
-      background: $offWhite;
       background: $red;
     }
     div.rc-slider-rail {
