@@ -165,8 +165,7 @@ function clicked(d) {
 
   const thisNode = d3.select(`[data-node='${lastClick.id}']`)
 
-
-  if(thisNode.empty()) { // edge case, if node is no longer on the DOM, remove select state and unselect all nodes
+  if(!d) { // if clicked is called from a filter
     nodeSelectedState = false
 
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
@@ -185,7 +184,6 @@ function clicked(d) {
     d3.selectAll("circle").classed("selected", false).classed("not-selected", true).classed("connected", false)
     d3.selectAll("line").classed("not-selected", true).classed("connected", false)
     thisNode.classed("not-selected", false).classed("selected", true)
-
 
     const {allFilters} = store.getState().data
 
@@ -282,12 +280,11 @@ export function applyFilter() {
   workingLinks = originalLinks.filter(originalLink => linkFilters.includes(originalLink.type))
   .filter(workingLink => {
     return currentNodesArray.includes(workingLink.source.name) && currentNodesArray.includes(workingLink.target.name)
-    // return peopleFilters.includes(workingLink.source.name) && skillFilters.includes(workingLink.target.name)
   })
 
   update()
   zoomed()
-  if(nodeSelectedState) clicked()
+  clicked()
 }
 
 function noOfOccurences(originalNode, skillFilters) {

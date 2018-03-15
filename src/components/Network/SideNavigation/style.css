@@ -185,7 +185,8 @@ div.side-navigation-inner {
       div.side-navigation-inner section.filters div.single-filter.connectionFilterActive span {
         position: relative;
         border: 1px solid #c10d34 !important;
-        background: #121214 !important; }
+        background: #121214 !important;
+        background: #c10d34 !important; }
         div.side-navigation-inner section.filters div.single-filter.connectionFilterActive span:after {
           position: absolute;
           content: '';
