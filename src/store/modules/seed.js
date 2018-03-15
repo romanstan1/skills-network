@@ -18,7 +18,8 @@ const seedData = {
     {"id": "016", type:"person", "name": "Neil Young", "location": "London", "currentSkills":['11','12', '16'], "desiredSkills":['13'], "client": 'Ladbrokes' },
     {"id": "017", type:"person", "name": "Elvis Iglesias", "location": "Chichester", "currentSkills":['14','11', '20'], "desiredSkills":['13'], "client": 'N/A' },
     {"id": "018", type:"person", "name": "Jimmy Black", "location": "London", "currentSkills":['15', '19'], "desiredSkills":['14'], "client": 'N/A' }
-  ],
+  ]
+  ,
   skills: [
     {"id": "11",  type:"skill", "name": "Python"},
     {"id": "12",  type:"skill", "name": "AngularJS" },

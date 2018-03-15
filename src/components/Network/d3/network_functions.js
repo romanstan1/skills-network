@@ -2,7 +2,6 @@ import * as d3 from "d3";
 import store from '../../../store'
 import {peopleColour, skillsColour, connectionsColour} from '../../../styles/theme'
 import {clickPerson, clickSkill,closeFullDetails} from '../../../store/modules/actions'
-import {lookUpSkill} from '../../../store/modules/reducers'
 import './network_modules'
 
 let width, height, svg, simulation, link, node
@@ -11,10 +10,14 @@ let workingNodes, workingLinks
 let lastD3Event, lastClick
 let nodeSelectedState = false
 const {dispatch} = store
-const {people, skills, allFilters} = store.getState().data
+let people, skills, allFilters
 
 export function initializeDom() {
   // construct nodesArray
+  allFilters = store.getState().data.allFilters
+  people = store.getState().data.people
+  skills = store.getState().data.skills
+
   const skillsNodes = skills.map((skill) => {
     return {
       ...skill,
@@ -155,15 +158,12 @@ function ticked() {
 
 function clicked(d) {
 
+  if(d && d.type === 'person') dispatch(clickPerson(d))
+  else if(d && d.type === 'skill') dispatch(clickSkill(d))
+
   if(d) {
-    lastClick = d   // last clicked node data saved to variable
-    nodeSelectedState = !nodeSelectedState // nodeSelectedState reversed only on actual click
+    var thisNode = d3.select(`[data-node='${d.id}']`)
   }
-
-  if(lastClick.type === 'person') dispatch(clickPerson(lastClick))
-  else if(lastClick.type === 'skill') dispatch(clickSkill(lastClick))
-
-  const thisNode = d3.select(`[data-node='${lastClick.id}']`)
 
   if(!d) { // if clicked is called from a filter
     nodeSelectedState = false
@@ -193,30 +193,30 @@ function clicked(d) {
       .map(connections => connections.name) // get array of active connection types
 
 
-    if(lastClick.type === 'person') { // if node clicked on is person node
+    if(d.type === 'person') { // if node clicked on is person node
 
-      d3.selectAll(`[data-source='${lastClick.id}']`).classed("not-selected", false)
+      d3.selectAll(`[data-source='${d.id}']`).classed("not-selected", false)
 
       // turn skills nodes on that are connected to the people node
       if(linkFilters.includes('currentSkills')) {
-        lastClick.currentSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
+        d.currentSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
       }
 
       if(linkFilters.includes('desiredSkills')) {
-        lastClick.desiredSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
+        d.desiredSkills.forEach(skill => {d3.select(`[data-node='${skill}']`).classed("not-selected", false)})
       }
 
-    } else if (lastClick.type === 'skill') { // if node clicked on is skill node
+    } else if (d.type === 'skill') { // if node clicked on is skill node
 
-      d3.selectAll(`[data-target='${lastClick.id}']`).classed("not-selected", false) // make all links connected to the skill node active
+      d3.selectAll(`[data-target='${d.id}']`).classed("not-selected", false) // make all links connected to the skill node active
 
       // turn people nodes on that are connected to the skill node
       if(linkFilters.includes('currentSkills')) {
-        lastClick.hadBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
+        d.hadBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
       }
 
       if(linkFilters.includes('desiredSkills')) {
-        lastClick.wantedBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
+        d.wantedBy.forEach(person => {d3.select(`[data-node='${person}']`).classed("not-selected", false)})
       }
 
     }
@@ -285,6 +285,10 @@ export function applyFilter() {
   update()
   zoomed()
   clicked()
+}
+
+export function lookUpSkill(id) {
+  return skills.filter(skill => skill.id === id)[0]
 }
 
 function noOfOccurences(originalNode, skillFilters) {

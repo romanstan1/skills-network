@@ -8,22 +8,22 @@ const initialState = {
   allFilters: [
     {
       parentName: 'connections',
-      active: true,
+      active: false,
       // minConnections: 0,
       filters: [
        {
          name: 'currentSkills',
-         active: true
+         active: false
        },
        {
          name: 'desiredSkills',
-         active: true
+         active: false
        }
      ]
     },
     {
       parentName: 'people',
-      active: true,
+      active: false,
       minConnections: 0, // swap with
       filters: peopleData,
       groupByList: ['all', 'location', 'clients'],
@@ -32,7 +32,7 @@ const initialState = {
     },
     {
       parentName: 'skills',
-      active: true,
+      active: false,
       filters: skillsData
     }
   ],
@@ -44,6 +44,8 @@ const initialState = {
   },
   people: peopleData,
   skills: skillsData
+  // people: [],
+  // skills: []
 }
 
 export function lookUpSkill(id) {
@@ -159,6 +161,20 @@ export default (state=initialState, action)=>{
           }
         :parent
       )
+    }
+    case 'FETCH_SKILL_NETWORK_DATA':
+    console.log("action: ",action.payload)
+    return {
+      ...state,
+      people: peopleData,
+      skills: skillsData,
+      allFilters: state.allFilters.map(parent => {
+        return {
+          ...parent,
+          active: true,
+          filters: parent.filters.map(filter => filter.active === true)
+        }
+      })
     }
     default: return state
   }

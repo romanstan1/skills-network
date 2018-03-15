@@ -52,3 +52,33 @@ export const subGroupSelect = (subGroup) => {
     payload: subGroup
   })
 }
+
+export function fetchSkillNetworkData(params) {
+  return async dispatch => {
+    try {
+      // const success = await fetch(`https://serene-ocean-70888.herokuapp.com/appointments`)
+      const success = await sleep()
+      // const data = await success.json()
+      // console.log("success: ",success)
+      const data = [{ data: ''}]
+      return dispatch({ type: 'FETCH_SKILL_NETWORK_DATA', payload: data });
+    } catch (error) {
+      console.log("error",error)
+      return error
+    }
+  }
+}
+
+
+function sleep () {
+  return new Promise((resolve) => {
+    // wait 3s before calling fn(par)
+    setTimeout(() => resolve(), 3000)
+  })
+}
+
+function resolve() {
+  return 10 + 18
+}
+
+// var fileList = await sleep(listFiles, nextPageToken)
