@@ -10,7 +10,12 @@ export const AllFilter = ({filters, handleFilterClick}) => filters.map(filter =>
 export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
 <div
   key={filter.name}
-  className={filter.active ? 'single-filter active people':'single-filter people'}
+  className={
+    filter.active ?
+      filter.connectionFilterActive ?
+      'single-filter active people connectionFilterActive' : 'single-filter active people'
+    :'single-filter people'
+    }
   onClick={()=>handleFilterClick(filter.name)} >
   <h4>{humanize(filter.name)}</h4>
   <span></span>

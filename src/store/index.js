@@ -9,8 +9,7 @@ export const history = createHistory()
 const enhancers = []
 const logger = store => next => action => {
   let result = next(action)
-  // console.log('STORE STATE:', store.getState(), action)
-  // if(action.type !== 'LOAD_BLOG_POSTS') window.scrollTo(0, 0)
+  if(action.type !== 'CHECK_CONNECTION_FILTER') store.dispatch({type: 'CHECK_CONNECTION_FILTER'})
   return result
 }
 

@@ -251,7 +251,7 @@ export function applyFilter() {
   // console.log("store allFilters: ",store.getState().data.allFilters)
   const {allFilters} = store.getState().data
 
-  const minConnections = allFilters[0].minConnections
+  const minConnections = allFilters[1].minConnections
 
   // filter links
   const linkFilters = allFilters

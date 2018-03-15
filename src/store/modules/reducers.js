@@ -9,7 +9,7 @@ const initialState = {
     {
       parentName: 'connections',
       active: true,
-      minConnections: 0,
+      // minConnections: 0,
       filters: [
        {
          name: 'currentSkills',
@@ -24,6 +24,7 @@ const initialState = {
     {
       parentName: 'people',
       active: true,
+      minConnections: 0, // swap with
       filters: peopleData,
       groupByList: ['all', 'location', 'clients'],
       uniqueLocations,
@@ -116,14 +117,35 @@ export default (state=initialState, action)=>{
             filters: mapNewFilters(parent.filters, action.payload.filterName),
           }
         :parent
+        // :parent.parentName === action.payload.parentName?
       )
     }
     case 'CHANGE_MIN_CONNECTIONS': return {
       ...state,
-      allFilters: state.allFilters.map((parent,index) =>
-        index === 0? {
+      allFilters: state.allFilters.map(parent =>
+        parent.parentName === 'people'? {
           ...parent,
           minConnections: action.payload
+        } : parent)
+    }
+    case 'CHECK_CONNECTION_FILTER':
+
+    const skillFilters = state.allFilters
+      .filter(parent => parent.parentName === 'skills')[0].filters
+      .filter(skill => skill.active)
+      .map(skill => skill.id)
+
+    return {
+      ...state,
+      allFilters: state.allFilters.map((parent,index) =>
+        parent.parentName === 'people'? {
+          ...parent,
+          filters: parent.filters.map(filter => {
+            return {...filter,
+              workingConnections:noOfOccurences(filter, skillFilters),
+              connectionFilterActive: noOfOccurences(filter, skillFilters) < parent.minConnections
+            }
+          })
         } : parent)
     }
     case 'SUB_GROUP_SELECT': return {
@@ -150,6 +172,15 @@ function mapNewFilters(filters, filterName) { // returns array of all nodes in p
     }
   : filter)
 }
+
+function noOfOccurences(personNode, skillFilters) {
+  let workingConnections = 0
+  personNode.currentSkills.forEach(skillId => {
+    if(skillFilters.includes(skillId)) workingConnections++
+  })
+  return workingConnections
+}
+
 
 function mapNewFiltersSubGroup(filters, subGroup) {
   const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)

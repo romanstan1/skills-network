@@ -28,5 +28,5 @@ class SliderWrap extends Component {
 }
 
 export default connect(state => ({
-  minConnections: state.data.allFilters[0].minConnections
+  minConnections: state.data.allFilters[1].minConnections
 }))(SliderWrap)

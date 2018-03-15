@@ -182,6 +182,21 @@ div.side-navigation-inner {
         background: #28af4e; }
       div.side-navigation-inner section.filters div.single-filter.active h4 {
         color: #ffffff; }
+      div.side-navigation-inner section.filters div.single-filter.connectionFilterActive span {
+        position: relative;
+        border: 1px solid #c10d34 !important;
+        background: #121214 !important; }
+        div.side-navigation-inner section.filters div.single-filter.connectionFilterActive span:after {
+          position: absolute;
+          content: '';
+          top: 3px;
+          right: 3px;
+          width: 5px;
+          height: 5px;
+          background: #c10d34;
+          border-radius: 100%; }
+      div.side-navigation-inner section.filters div.single-filter.connectionFilterActive h4 {
+        color: #ffffff; }
 
 div.single-filter.active.connections span {
   border: 1px solid #ce740e !important;
