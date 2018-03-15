@@ -10,7 +10,7 @@ const seedData = {
     {"id": "008", type:"person", "name": "Dylan Cravatte", "location": "Sydney", "currentSkills":['14', '17', '18'], "desiredSkills":['11', '12'], "client": 'Pfizer' },
     {"id": "009", type:"person", "name": "Jeremy Maguello", "location": "London", "currentSkills":['15', '16', '17', '18', '19'], "desiredSkills":['26','12', '18'], "client": 'Specsavers' },
     {"id": "010", type:"person", "name": "Sydney Hitchcock", "location": "London", "currentSkills":['26','25','15', '16', '11', '18'], "desiredSkills":['23','12', '18', '17'], "client": 'Specsavers' },
-    {"id": "011", type:"person", "name": "William Stevenson", "location": "London", "currentSkills":['12', '16', '13', '18'], "desiredSkills":['23','14'], "client": 'Ladbrokes' },
+    {"id": "011", type:"person", "name": "Billy Stevenson", "location": "London", "currentSkills":['12', '16', '13', '18'], "desiredSkills":['23','14'], "client": 'Ladbrokes' },
     {"id": "012", type:"person", "name": "James Wiltshire", "location": "London", "currentSkills":['23','14', '15', '13', '18'], "desiredSkills":['17', '20'], "client": 'N/A' },
     {"id": "013", type:"person", "name": "Nickolas Wilson", "location": "Chichester", "currentSkills":['11', '12', '17', '18'], "desiredSkills":['19', '20'], "client": 'Pfizer' },
     {"id": "014", type:"person", "name": "Timothy Tresuguet", "location": "Chichester", "currentSkills":['11', '18'], "desiredSkills":['17', '16', '13'], "client": 'N/A' },

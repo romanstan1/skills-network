@@ -1,11 +1,54 @@
 import React, { Component } from 'react';
 import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
+import {TextFilter} from 'react-text-filter';
 
 
-export const AllFilter = ({filters, handleFilterClick}) => filters.map(filter =>
-  <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
-)
+const fruits = [
+  'apple',
+  'orange',
+  'banana',
+  'kiwi',
+  'pineapple',
+  'golden kiwi',
+  'green apple'
+];
+
+const personFilter = filter => person => person.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
+
+export class AllFilter extends Component {
+  state = {
+    filter: ''
+  }
+  updateSearch = (e) => {
+    this.setState({filter: e.target.value})
+  }
+  render() {
+    let {filters, handleFilterClick} = this.props
+    filters = this.state.filter ? filters.filter(personFilter(this.state.filter)) : filters.slice(0)
+
+    return (<span>
+      <TextFilter
+        minLength={0}
+        debounceTimeout={0}
+        placeholder="Search"
+        className="search-box"
+        onFilter={this.updateSearch}>
+      </TextFilter>
+
+      {
+        filters.map(filter =>
+            <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
+        )
+      }
+    </span>)
+  }
+}
+
+
+// export const AllFilter = ({filters, handleFilterClick}) => filters.map(filter =>
+//   <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
+// )
 
 export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
 <div

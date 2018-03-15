@@ -8,11 +8,9 @@ $lighterBlack:#212123;
 
 $green: #28af4e;
 $grey: rgb(242, 242, 242);
-$grey06: rgba(242, 242, 242, 0.6);
 $grey06: #939393;
 // $grey08: rgba(242, 242, 242, 0.8);
 $grey08: #adadad;
-$grey01: rgba(242, 242, 242, 0.1);
 $grey01: #262626;
 $white: #ffffff;
 $red: #c10d34;
@@ -21,8 +19,6 @@ $offWhite: #d6d6d6;
 $connections: #ce740e;
 $people: #08a8a8;
 $skills: #2b23c4;
-
-
 
 div.side-navigation {
   position: absolute;
@@ -395,6 +391,31 @@ div.slider-wrap {
   }
   span.rc-slider-mark-text-active {
     color: $offWhite;
+  }
+}
+
+input.search-box {
+  line-height: 38px;
+  height: 38px;
+  display: inline-block;
+  background: $hoverDarkBlack;
+  outline: none;
+  border: none;
+  font-family: 'Raleway', sans-serif;
+  color: $offWhite;
+  border: 1px solid $hoverDarkBlack;
+  // border-bottom: 1px solid $grey01;
+  width: 230px;
+  font-size: 13px;
+  // margin-right: 15px;
+  margin: 5px 15px 10px 15px;
+  text-indent: 20px;
+  &:focus{
+    border: 1px solid $grey01;
+    background: #1c1c1e;
+  }
+  &::placeholder{
+    color: $grey08;
   }
 }
 
