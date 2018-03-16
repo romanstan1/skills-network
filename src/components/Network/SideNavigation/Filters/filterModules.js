@@ -3,17 +3,6 @@ import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
 import {TextFilter} from 'react-text-filter';
 
-
-const fruits = [
-  'apple',
-  'orange',
-  'banana',
-  'kiwi',
-  'pineapple',
-  'golden kiwi',
-  'green apple'
-];
-
 const personFilter = filter => person => person.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
 
 export class AllFilter extends Component {
@@ -44,11 +33,6 @@ export class AllFilter extends Component {
     </span>)
   }
 }
-
-
-// export const AllFilter = ({filters, handleFilterClick}) => filters.map(filter =>
-//   <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
-// )
 
 export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
 <div

@@ -53,15 +53,11 @@ export const subGroupSelect = (subGroup) => {
   })
 }
 
-export function fetchSkillNetworkData(params) {
+export function fetchSkillNetworkData() {
   return async dispatch => {
     try {
-      // const success = await fetch(`https://serene-ocean-70888.herokuapp.com/appointments`)
-      const success = await sleep()
-      // const data = await success.json()
-      // console.log("success: ",success)
-      const data = [{ data: ''}]
-      return dispatch({ type: 'FETCH_SKILL_NETWORK_DATA', payload: data });
+      const success = await fetch(`https://nameless-beyond-88288.herokuapp.com`)
+      return dispatch({ type: 'FETCH_SKILL_NETWORK_DATA', payload: success });
     } catch (error) {
       console.log("error",error)
       return error
@@ -80,5 +76,3 @@ function sleep () {
 function resolve() {
   return 10 + 18
 }
-
-// var fileList = await sleep(listFiles, nextPageToken)

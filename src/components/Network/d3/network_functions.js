@@ -7,14 +7,12 @@ import './network_modules'
 let width, height, svg, simulation, link, node
 let originalNodes, originalLinks
 let workingNodes, workingLinks
-let lastD3Event, lastClick
-let nodeSelectedState = false
+let lastD3Event
 const {dispatch} = store
-let people, skills, allFilters
+let people, skills
 
 export function initializeDom() {
   // construct nodesArray
-  allFilters = store.getState().data.allFilters
   people = store.getState().data.people
   skills = store.getState().data.skills
 
@@ -63,7 +61,6 @@ export function reset(){
 function chargeStrength(d) {
   if(d.type === 'skill') {
     const char = Math.pow((d.peopleCurrent.length + d.peopleDesired.length), 1.7) + 130
-    console.log('car', char)
     return - char
   } else return -100
 }
@@ -174,7 +171,6 @@ function clicked(d) {
   }
 
   if(!d) { // if clicked is called from a filter
-    nodeSelectedState = false
 
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
     d3.selectAll("line").classed("not-selected", false).classed("connected", false)

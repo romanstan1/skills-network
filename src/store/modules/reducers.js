@@ -166,15 +166,15 @@ export default (state=initialState, action)=>{
     console.log("action: ",action.payload)
     return {
       ...state,
-      people: peopleData,
-      skills: skillsData,
-      allFilters: state.allFilters.map(parent => {
-        return {
-          ...parent,
-          active: true,
-          filters: parent.filters.map(filter => filter.active === true)
-        }
-      })
+      // people: peopleData,
+      // skills: skillsData,
+      // allFilters: state.allFilters.map(parent => {
+      //   return {
+      //     ...parent,
+      //     active: true,
+      //     filters: parent.filters.map(filter => filter.active === true)
+      //   }
+      // })
     }
     default: return state
   }

@@ -7,14 +7,14 @@ import FullDetails from './FullDetails'
 import FullScreenIcon from './FullScreenIcon'
 import {fetchSkillNetworkData} from '../../store/modules/actions'
 
-class Svg extends Component {
-  shouldComponentUpdate(nextProps) {
-    return false;
-  }
-  render() {
-    return <svg/>
-  }
-}
+// class Svg extends Component {
+//   shouldComponentUpdate(nextProps) {
+//     return false;
+//   }
+//   render() {
+//     return <svg/>
+//   }
+// }
 
 class Network extends Component {
   componentDidMount() {
@@ -23,7 +23,7 @@ class Network extends Component {
   }
 
   render() {
-    console.log("Network")
+    // console.log("Network")
     return [
       <svg key='svg'></svg>,
       <FullScreenIcon key='fullscreenicon'/>,

@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React from 'react';
 import humanize from 'string-humanize'
 import PeopleFilters from './PeopleFilters'
 import SkillsFilters from './SkillsFilters'

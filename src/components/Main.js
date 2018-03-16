@@ -19,15 +19,15 @@ const Loader = () =>
 class Main extends Component {
   componentDidMount() {
     // initializeDom()
-    // this.props.dispatch(fetchSkillNetworkData())
+    console.log("didmount",this)
+    this.props.dispatch(fetchSkillNetworkData())
   }
   render() {
     const {people, skills} = this.props
     return (
       <div id='main'>
         <SideNavigation key='sidenavigation'/>
-        <Network/>
-        {!people.length && !skills.length? <Loader/> : null}
+        {!people.length && !skills.length? <Loader/> : <Network/>}
         {/* {!people.length && !skills.length? <Loader/> : <Network/>} */}
       </div>
     )

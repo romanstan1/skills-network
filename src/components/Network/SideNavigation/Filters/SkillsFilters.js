@@ -1,6 +1,5 @@
 import React from 'react';
 import humanize from 'string-humanize'
-import {IndividualPersonFilter} from './filterModules'
 
 const SkillsFilters = ({parent, handleFilterClick}) => {
   return parent.filters.map(filter =>
