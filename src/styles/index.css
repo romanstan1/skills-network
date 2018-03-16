@@ -44,7 +44,7 @@ svg.svg {
   background: none; }
 
 .links line {
-  opacity: 0.8; }
+  opacity: 0.6; }
   .links line.not-selected {
     stroke: #353b44;
     opacity: 0.4; }

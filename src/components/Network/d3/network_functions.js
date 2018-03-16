@@ -60,6 +60,14 @@ export function reset(){
   render()
 }
 
+function chargeStrength(d) {
+  if(d.type === 'skill') {
+    const char = Math.pow((d.peopleCurrent.length + d.peopleDesired.length), 1.7) + 130
+    console.log('car', char)
+    return - char
+  } else return -100
+}
+
 function render() {
   width = window.innerWidth - 260
   height = window.innerHeight
@@ -69,7 +77,7 @@ function render() {
     .attr("width", width)
     .attr("height", height)
     .call(d3.zoom()
-      .scaleExtent([0.7 , 2.4])
+      .scaleExtent([0.7 , 20.0])
       .on("zoom", zoomed))
 
   const forceX = d3.forceX(width / 2).strength(0.030)
@@ -77,7 +85,7 @@ function render() {
 
   simulation = d3.forceSimulation()
     .force("link", d3.forceLink().id((d) => d.id).strength(0.01))
-    .force("charge", d3.forceManyBody().strength(-200))
+    .force("charge", d3.forceManyBody().strength(chargeStrength))
     .force("center", d3.forceCenter(width / 2, height / 2))
     .force('x', forceX)
     .force('y',  forceY)
@@ -139,9 +147,9 @@ function dashLine(type) {
 
 function nodeSize(d) {
   if(d.personCount) { // effectively checks if its a skill node
-    return Math.pow((d.peopleCurrent.length + d.peopleDesired.length), 1.2) + 9
+    return Math.pow((d.peopleCurrent.length + d.peopleDesired.length), 1.1) + 6
   }
-  else return 10
+  else return 7
 }
 
 function ticked() {
