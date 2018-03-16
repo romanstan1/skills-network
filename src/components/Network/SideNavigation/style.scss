@@ -410,9 +410,15 @@ input.search-box {
   // margin-right: 15px;
   margin: 5px 15px 10px 15px;
   text-indent: 20px;
+  font-weight: 400;
   &:focus{
-    border: 1px solid $grey01;
-    background: #1c1c1e;
+    border: 1px solid $lighterBlack;
+    background: #dbdbdb;
+    // background: $offWhite;
+    color: $darkestBlack;
+    &::placeholder{
+      color: $darkestBlack;
+    }
   }
   &::placeholder{
     color: $grey08;

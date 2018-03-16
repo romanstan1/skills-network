@@ -69,7 +69,7 @@ function render() {
     .attr("width", width)
     .attr("height", height)
     .call(d3.zoom()
-      .scaleExtent([0.6 , 1.3])
+      .scaleExtent([0.7 , 2.4])
       .on("zoom", zoomed))
 
   const forceX = d3.forceX(width / 2).strength(0.030)

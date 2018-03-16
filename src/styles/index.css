@@ -79,7 +79,7 @@ svg.svg {
   width: 350px;
   height: auto;
   background: #121214;
-  color: ghostwhite;
+  color: #d6d6d6;
   opacity: 0.95;
   font-weight: 400;
   text-align: left;
@@ -129,15 +129,17 @@ svg.svg {
         opacity: 1;
         border-color: white; }
   #full-details div.details-inner {
-    padding: 20px;
+    padding: 5px 20px;
     transition: 0.2s ease;
     transform: translateX(50px); }
     #full-details div.details-inner h2 {
       text-transform: uppercase;
       font-weight: 400;
       padding-bottom: 20px;
-      padding-top: 10px; }
+      padding-top: 10px;
+      color: #ffffff; }
     #full-details div.details-inner h3 {
+      color: #ffffff;
       padding: 5px 0;
       text-transform: uppercase;
       font-weight: 300; }

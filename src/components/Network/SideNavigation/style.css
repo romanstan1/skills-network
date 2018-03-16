@@ -292,10 +292,14 @@ input.search-box {
   width: 230px;
   font-size: 13px;
   margin: 5px 15px 10px 15px;
-  text-indent: 20px; }
+  text-indent: 20px;
+  font-weight: 400; }
   input.search-box:focus {
-    border: 1px solid #262626;
-    background: #1c1c1e; }
+    border: 1px solid #212123;
+    background: #dbdbdb;
+    color: #121214; }
+    input.search-box:focus::placeholder {
+      color: #121214; }
   input.search-box::placeholder {
     color: #adadad; }
 

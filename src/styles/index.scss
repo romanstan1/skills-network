@@ -145,7 +145,7 @@ svg.svg {
   height: auto;
   // padding: 10px 10px;
   background: $darkestBlack;
-  color: ghostwhite;
+  color: $offWhite;
   opacity: 0.95;
   font-weight: 400;
   text-align: left;
@@ -211,7 +211,7 @@ svg.svg {
     }
   }
   div.details-inner {
-    padding: 20px;
+    padding: 5px 20px;
     transition: 0.2s ease;
     transform: translateX(50px);
     h2 {
@@ -219,8 +219,10 @@ svg.svg {
       font-weight: 400;
       padding-bottom: 20px;
       padding-top: 10px;
+      color: $white;
     }
     h3{
+      color: $white;
       padding: 5px 0;
       text-transform: uppercase;
       font-weight: 300;
