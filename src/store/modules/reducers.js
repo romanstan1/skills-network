@@ -1,8 +1,8 @@
-import {peopleData, skillsData} from './seed.js'
+// import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
-const uniqueLocations = [...new Set(peopleData.map(filter => filter.location))]
-const uniqueClients = [...new Set(peopleData.map(filter => filter.client))]
+// const uniqueLocations = [...new Set(peopleData.map(filter => filter.location))]
+// const uniqueClients = [...new Set(peopleData.map(filter => filter.client))]
 
 const initialState = {
   allFilters: [
@@ -25,15 +25,17 @@ const initialState = {
       parentName: 'people',
       active: false,
       minConnections: 0, // swap with
-      filters: peopleData,
+      // filters: peopleData,
+      filters: [],
       groupByList: ['all', 'location', 'clients'],
-      uniqueLocations,
-      uniqueClients
+      uniqueLocations: [],
+      uniqueClients: []
     },
     {
       parentName: 'skills',
       active: false,
-      filters: skillsData
+      filters: []
+      // filters: skillsData
     }
   ],
   fullDetails: {
@@ -42,10 +44,10 @@ const initialState = {
     name: "",
     currentSkills: []
   },
-  people: peopleData,
-  skills: skillsData
-  // people: [],
-  // skills: []
+  // people: peopleData,
+  // skills: skillsData
+  people: [],
+  skills: []
 }
 
 export function lookUpSkill(id) {
@@ -119,7 +121,6 @@ export default (state=initialState, action)=>{
             filters: mapNewFilters(parent.filters, action.payload.filterName),
           }
         :parent
-        // :parent.parentName === action.payload.parentName?
       )
     }
     case 'CHANGE_MIN_CONNECTIONS': return {

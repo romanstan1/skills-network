@@ -1,11 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {initializeDom} from './d3/network_functions.js'
+// import {initializeDom} from './d3/network_functions.js'
 // import SideNavigation from './SideNavigation'
 import Tooltip from './Tooltip'
 import FullDetails from './FullDetails'
 import FullScreenIcon from './FullScreenIcon'
-import {fetchSkillNetworkData} from '../../store/modules/actions'
 
 // class Svg extends Component {
 //   shouldComponentUpdate(nextProps) {
@@ -18,7 +17,7 @@ import {fetchSkillNetworkData} from '../../store/modules/actions'
 
 class Network extends Component {
   componentDidMount() {
-    initializeDom()
+    // initializeDom()
     // this.props.dispatch(fetchSkillNetworkData())
   }
 

@@ -4,7 +4,7 @@ import Network from './Network/Network.js'
 import SideNavigation from './Network/SideNavigation'
 import './loader.css'
 import {fetchSkillNetworkData} from '../store/modules/actions'
-import {initializeDom} from './Network/d3/network_functions.js'
+// import {initializeDom} from './Network/d3/network_functions.js'
 
 
 

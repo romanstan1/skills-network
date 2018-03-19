@@ -229,7 +229,8 @@ div.side-navigation-inner {
         font-size: 13px;
         font-weight: 300;
         text-transform: capitalize;
-        text-indent: 15px;
+        // text-indent: 15px;
+        padding-left: 15px;
         overflow-x: scroll;
         white-space: nowrap;
       }
