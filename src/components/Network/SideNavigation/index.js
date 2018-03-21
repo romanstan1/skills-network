@@ -13,41 +13,23 @@ class SideNavigation extends Component {
     e.stopPropagation()
     this.setState({selectedNav: e.target.innerHTML})
   }
-  // handleFilterClick = (filterName, parentName) => {
-  //   this.props.dispatch(toggleFilter(filterName, parentName))
-  //   applyFilter()
-  // }
-  // handleSelectAllClick = (parentName) => {
-  //   this.props.dispatch(toggleSelectAllFilter(parentName))
-  //   applyFilter()
-  // }
-
   render() {
     const {selectedNav} = this.state
     return [
       <div key='sidenavigation' className='side-navigation open'>
-
         <div className='openNavTab'/>
-
         <div className='side-navigation-inner'>
           <nav>
-            <span className={selectedNav === "Filter"? "selected": null}
-              onClick={this.selectNav}>Filter</span>
-            <span className={selectedNav === "Edit Profile"? "selected": null}
-              onClick={this.selectNav}>Edit Profile</span>
+            <span
+              className={selectedNav === "Filter"? "selected": null}
+              onClick={this.selectNav}>Filter
+            </span>
+            <span
+              className={selectedNav === "Edit Profile"? "selected": null}
+              onClick={this.selectNav}>Edit Profile
+            </span>
           </nav>
-
-          {
-            selectedNav === "Filter"?
-            <Filters
-              // allFilters={this.props.allFilters}
-              // handleFilterClick={this.handleFilterClick}
-              // handleSelectAllClick={this.handleSelectAllClick}
-            />
-              :
-            <EditUserProfile/>
-          }
-
+          { selectedNav === "Filter"? <Filters/> : <EditUserProfile/> }
         </div>
       </div>
     ]
@@ -55,14 +37,13 @@ class SideNavigation extends Component {
 }
 
 export default connect(state => ({
-  // allFilters: state.data.allFilters
   people: state.data.people,
   skills: state.data.skills,
   connections: state.data.connections
 }))(SideNavigation)
 
-
 const EditUserProfile = () =>
   <section>
-    <p></p>
+    <br/>
+    <p>[ Edit profile here ]</p>
   </section>

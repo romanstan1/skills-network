@@ -27,7 +27,7 @@ export class AllFilter extends Component {
 
       {
         filters.map(filter =>
-            <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
+          <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
         )
       }
     </span>)
@@ -49,7 +49,7 @@ export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
 </div>
 
 
-export const TriggerSibling = ({groupFilter, subGroup, handleSubGroupSelect}) =>
+export const PeopleTriggerSibling = ({groupFilter, subGroup, handleSubGroupSelect}) =>
 <div
   onClick={()=>handleSubGroupSelect(subGroup)}
   className={
@@ -68,7 +68,7 @@ export const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleS
     <Collapsible
       className='sub-group' openedClassName='sub-group'
       triggerSibling={() =>
-        <TriggerSibling
+        <PeopleTriggerSibling
           groupFilter={clientFilter}
           subGroup={clientFilter.client}
           handleSubGroupSelect={handleSubGroupSelect}/>
@@ -93,7 +93,7 @@ export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, han
     <Collapsible
       className='sub-group' openedClassName='sub-group'
       triggerSibling={() =>
-        <TriggerSibling
+        <PeopleTriggerSibling
           groupFilter={locationFilter}
           subGroup={locationFilter.location}
           handleSubGroupSelect={handleSubGroupSelect}/>
@@ -107,3 +107,12 @@ export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, han
     </Collapsible>
   </span>)
 }
+
+
+export const SingleFilter = ({filter, handleFilterClick, parentName}) =>
+  <div
+    className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
+    onClick={()=>handleFilterClick(filter.name, parentName)} >
+    <h4>{humanize(filter.name)}</h4>
+    <span></span>
+  </div>

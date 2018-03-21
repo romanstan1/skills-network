@@ -1,26 +1,21 @@
 import React from 'react';
 import humanize from 'string-humanize'
 import SliderWrap from './SliderWrap'
+import {SingleFilter} from './filterModules'
 
 const ConnectionFilters = ({connections, handleFilterClick}) =>
   <span>
-    <SingleConnectionFilter
+    <SingleFilter
       filter={connections.filters[0]}
       handleFilterClick={handleFilterClick}
+      parentName='connections'
     />
     <SliderWrap/>
-    <SingleConnectionFilter
+    <SingleFilter
       filter={connections.filters[1]}
       handleFilterClick={handleFilterClick}
+      parentName='connections'
     />
   </span>
-
-const SingleConnectionFilter = ({filter, handleFilterClick}) =>
-  <div
-    className={filter.active ? 'single-filter active connections':'single-filter connections'}
-    onClick={()=>handleFilterClick(filter.name, 'connections')} >
-    <h4>{humanize(filter.name)}</h4>
-    <span></span>
-  </div>
 
 export default ConnectionFilters

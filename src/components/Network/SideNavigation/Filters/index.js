@@ -4,7 +4,6 @@ import PeopleFilters from './PeopleFilters'
 import SkillsFilters from './SkillsFilters'
 import ConnectionFilters from './ConnectionFilters'
 import Collapsible from 'react-collapsible'
-
 import {toggleFilter, toggleSelectAllFilter} from '../../../../store/modules/actions'
 import {connect} from 'react-redux'
 
@@ -12,7 +11,8 @@ import {connect} from 'react-redux'
 class Filters extends Component {
 
   handleFilterClick = (filterName, parentName) => {
-    this.props.dispatch(toggleFilter(filterName, parentName))
+    console.log("filterName, parentName",filterName, parentName)
+    // this.props.dispatch(toggleFilter(filterName, parentName))
     // applyFilter()
   }
   handleSelectAllClick = (parentName) => {
@@ -35,18 +35,28 @@ class Filters extends Component {
           <ConnectionFilters handleFilterClick={this.handleFilterClick} connections={connections}/>
         </Collapsible>
 
+        <Collapsible
+          triggerSibling={() =>
+            <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
+              parentName='people' parentActive={people.active}/>
+            }
+          transitionTime={100} trigger='People'>
+           {/* <PeopleFilters /> */}
+        </Collapsible>
+
+        <Collapsible
+          triggerSibling={() =>
+            <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
+              parentName='skills' parentActive={skills.active}/>
+            }
+          transitionTime={100} trigger='Skills'>
+           {/* <SkillsFilters handleFilterClick={handleFilterClick} parent={parent}/> */}
+        </Collapsible>
 
       </section>
     )
   }
 }
-
-// {/* { parent.parentName === 'people'?
-// <PeopleFilters /> :null
-// }
-// { parent.parentName === 'skills'?
-// <SkillsFilters handleFilterClick={handleFilterClick} parent={parent}/> :null
-// } */}
 
 const TriggerSibling = ({parentName, parentActive, handleSelectAllClick}) =>
 <div
@@ -58,7 +68,6 @@ const TriggerSibling = ({parentName, parentActive, handleSelectAllClick}) =>
 
 
 export default connect(state => ({
-  // allFilters: state.data.allFilters
   people: state.data.people,
   skills: state.data.skills,
   connections: state.data.connections
