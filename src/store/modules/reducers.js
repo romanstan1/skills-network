@@ -1,53 +1,79 @@
 // import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
-// const uniqueLocations = [...new Set(peopleData.map(filter => filter.location))]
-// const uniqueClients = [...new Set(peopleData.map(filter => filter.client))]
+import {cleanPeopleData, cleanSkillData,
+  mapNewFilters, noOfOccurences, mapNewFiltersSubGroup} from './reducer_modules.js'
 
 const initialState = {
-  allFilters: [
-    {
-      parentName: 'connections',
-      active: false,
-      // minConnections: 0,
-      filters: [
-       {
-         name: 'currentSkills',
-         active: false
-       },
-       {
-         name: 'desiredSkills',
-         active: false
-       }
-     ]
-    },
-    {
-      parentName: 'people',
-      active: false,
-      minConnections: 0, // swap with
-      // filters: peopleData,
-      filters: [],
-      groupByList: ['all', 'location', 'clients'],
-      uniqueLocations: [],
-      uniqueClients: []
-    },
-    {
-      parentName: 'skills',
-      active: false,
-      filters: []
-      // filters: skillsData
-    }
-  ],
+  connections: {
+    active: false,
+    filters: [
+     {
+       name: 'currentSkills',
+       active: false
+     },
+     {
+       name: 'desiredSkills',
+       active: false
+     }
+   ]
+  },
+  people: {
+    active: false,
+    minConnections: 0,
+    filters: [],
+    groupByList: ['all', 'location', 'clients'],
+    uniqueLocations: [],
+    uniqueClients: []
+  },
+  skills: {
+    active: false,
+    filters: []
+  },
+
+
+  //  [
+  //   {
+  //     parentName: 'connections',
+  //     active: false,
+  //     // minConnections: 0,
+  //     filters: [
+  //      {
+  //        name: 'currentSkills',
+  //        active: false
+  //      },
+  //      {
+  //        name: 'desiredSkills',
+  //        active: false
+  //      }
+  //    ]
+  //   },
+  //   {
+  //     parentName: 'people',
+  //     active: false,
+  //     minConnections: 0, // swap with
+  //     // filters: peopleData,
+  //     filters: [],
+  //     groupByList: ['all', 'location', 'clients'],
+  //     uniqueLocations: [],
+  //     uniqueClients: []
+  //   },
+  //   {
+  //     parentName: 'skills',
+  //     active: false,
+  //     filters: []
+  //     // filters: skillsData
+  //   }
+  // ]
+
   fullDetails: {
     open: false,
     hidden: false,
     name: "",
     currentSkills: []
-  },
-  // people: peopleData,
-  // skills: skillsData
-  people: [],
-  skills: []
+  }
+  // people: [],
+  // skills: []
 }
 
 export function lookUpSkill(id) {
@@ -164,48 +190,66 @@ export default (state=initialState, action)=>{
       )
     }
     case 'FETCH_SKILL_NETWORK_DATA':
-    console.log("action: ",action.payload)
+    // console.log("action: ",action.payload)
+    const peopleData = cleanPeopleData(action.payload.people)
+    const skillsData = cleanSkillData(action.payload.skills, peopleData)
     return {
       ...state,
-      // people: peopleData,
-      // skills: skillsData,
-      // allFilters: state.allFilters.map(parent => {
-      //   return {
-      //     ...parent,
-      //     active: true,
-      //     filters: parent.filters.map(filter => filter.active === true)
-      //   }
-      // })
+      people: {
+        ...state.people,
+        active: true,
+        filters: peopleData,
+        uniqueLocations: [...new Set(peopleData.map(filter => filter.location))],
+        uniqueClients: [...new Set(peopleData.map(filter => filter.client))]
+      },
+      skills: {
+        ...state.skills,
+        active: true,
+        filters: skillsData,
+      },
+      connections: {
+        ...state.connections,
+        active: true,
+        filters: state.connections.filters.map(filter => {
+          return {...filter,active: true }
+        })
+      }
     }
     default: return state
   }
 }
 
-function mapNewFilters(filters, filterName) { // returns array of all nodes in parent ie people or skill or connection
-  return filters.map(filter =>
-    filter.name === filterName?
-    {...filter,
-      active: !filter.active // finds the individual filter, and reverses its state.
-    }
-  : filter)
-}
-
-function noOfOccurences(personNode, skillFilters) {
-  let workingConnections = 0
-  personNode.currentSkills.forEach(skillId => {
-    if(skillFilters.includes(skillId)) workingConnections++
-  })
-  return workingConnections
-}
 
 
-function mapNewFiltersSubGroup(filters, subGroup) {
-  const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)
-  const subGroupFiltersAllOpen = subGroupFilters.map(filter => filter.active).includes(false)
-  return filters.map(filter =>
-    filter.location === subGroup || filter.client === subGroup?
-    {...filter,
-      active: subGroupFiltersAllOpen // Are ALL of the filters within a subgroup selected? Boolean
-    }
-  : filter)
-}
+
+
+
+//
+// function mapNewFilters(filters, filterName) { // returns array of all nodes in parent ie people or skill or connection
+//   return filters.map(filter =>
+//     filter.name === filterName?
+//     {...filter,
+//       active: !filter.active // finds the individual filter, and reverses its state.
+//     }
+//   : filter)
+// }
+//
+// function noOfOccurences(personNode, skillFilters) {
+//   let workingConnections = 0
+//   personNode.currentSkills.forEach(skillId => {
+//     if(skillFilters.includes(skillId)) workingConnections++
+//   })
+//   return workingConnections
+// }
+//
+//
+// function mapNewFiltersSubGroup(filters, subGroup) {
+//   const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)
+//   const subGroupFiltersAllOpen = subGroupFilters.map(filter => filter.active).includes(false)
+//   return filters.map(filter =>
+//     filter.location === subGroup || filter.client === subGroup?
+//     {...filter,
+//       active: subGroupFiltersAllOpen // Are ALL of the filters within a subgroup selected? Boolean
+//     }
+//   : filter)
+// }

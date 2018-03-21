@@ -11,7 +11,7 @@ let lastD3Event
 const {dispatch} = store
 let people, skills
 
-console.log("INIT HERE")
+// console.log("INIT HERE")
 export function initializeDom() {
   // construct nodesArray
   people = store.getState().data.people

@@ -58,10 +58,11 @@ export function fetchSkillNetworkData() {
     try {
       // const success = await fetch(`http://localhost:3000/skillsMatrix`)
       // const success = await fetch(`https://damp-sands-22859.herokuapp.com`)
-      const success = await fetch(`https://infinite-mountain-98644.herokuapp.com`)
-      const payload = await success.json()
-      console.log("payload: ",payload)
-      return dispatch({ type: 'FETCH_SKILL_NETWORK_DATA', payload });
+      const success = await fetch(`http://localhost:3000/skillsMatrix`)
+      // const success = await fetch(`https://infinite-mountain-98644.herokuapp.com`)
+      const data = await success.json()
+      // console.log("data",data)
+      return dispatch({ type: 'FETCH_SKILL_NETWORK_DATA', payload: {people: data[0], skills:data[1] } });
     } catch (error) {
       console.log("error",error)
       return error

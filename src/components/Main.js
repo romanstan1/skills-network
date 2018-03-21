@@ -19,14 +19,13 @@ const Loader = () =>
 class Main extends Component {
   componentDidMount() {
     // initializeDom()
-    console.log("didmount",this)
     this.props.dispatch(fetchSkillNetworkData())
   }
   render() {
     const {people, skills} = this.props
     return (
       <div id='main'>
-        <SideNavigation key='sidenavigation'/>
+        {/* <SideNavigation key='sidenavigation'/> */}
         {!people.length && !skills.length? <Loader/> : <Network/>}
         {/* {!people.length && !skills.length? <Loader/> : <Network/>} */}
       </div>
@@ -35,6 +34,6 @@ class Main extends Component {
 }
 
 export default connect(state => ({
-  people: state.data.people,
-  skills: state.data.skills
+  people: state.data.people.filters,
+  skills: state.data.skills.filters,
 }))(Main)

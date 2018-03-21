@@ -34,6 +34,6 @@ class Network extends Component {
 }
 
 export default connect(state => ({
-  people: state.data.people,
-  skills: state.data.skills
+  people: state.data.people.filters,
+  skills: state.data.skills.filters,
 }))(Network)

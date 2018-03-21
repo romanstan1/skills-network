@@ -16,7 +16,7 @@ export function toggleFullScreen() {
   }
 }
 
-$(window).resize(function() {
-  clearTimeout(resizeId);
-  resizeId = setTimeout(reset, 500);
-});
+// $(window).resize(function() {
+//   clearTimeout(resizeId);
+//   resizeId = setTimeout(reset, 500);
+// });

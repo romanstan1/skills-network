@@ -22,6 +22,7 @@
     "react-text-filter": "^3.0.1",
     "react-transition-group": "^2.2.1",
     "redux": "^3.7.2",
+    "redux-saga": "^0.16.0",
     "redux-thunk": "^2.2.0",
     "string-humanize": "^1.0.0",
     "three": "^0.90.0"
