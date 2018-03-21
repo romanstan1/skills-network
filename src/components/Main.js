@@ -25,7 +25,7 @@ class Main extends Component {
     const {people, skills} = this.props
     return (
       <div id='main'>
-        {/* <SideNavigation key='sidenavigation'/> */}
+        <SideNavigation key='sidenavigation'/>
         {!people.length && !skills.length? <Loader/> : <Network/>}
         {/* {!people.length && !skills.length? <Loader/> : <Network/>} */}
       </div>

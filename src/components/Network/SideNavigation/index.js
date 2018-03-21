@@ -7,36 +7,27 @@ import Filters from './Filters'
 
 class SideNavigation extends Component {
   state = {
-    open: true,
     selectedNav: 'Filter'
-  }
-  toggleOpen = (e) => {
-    this.setState({open: !this.state.open})
   }
   selectNav = (e) => {
     e.stopPropagation()
     this.setState({selectedNav: e.target.innerHTML})
   }
-  handleFilterClick = (filterName, parentName) => {
-    this.props.dispatch(toggleFilter(filterName, parentName))
-    applyFilter()
-  }
-  handleSelectAllClick = (parentName) => {
-    this.props.dispatch(toggleSelectAllFilter(parentName))
-    applyFilter()
-  }
+  // handleFilterClick = (filterName, parentName) => {
+  //   this.props.dispatch(toggleFilter(filterName, parentName))
+  //   applyFilter()
+  // }
+  // handleSelectAllClick = (parentName) => {
+  //   this.props.dispatch(toggleSelectAllFilter(parentName))
+  //   applyFilter()
+  // }
 
   render() {
-    const {open, selectedNav} = this.state
+    const {selectedNav} = this.state
     return [
-      <div key='sidenavigation'
-        className={open? 'side-navigation open': 'side-navigation closed'}>
+      <div key='sidenavigation' className='side-navigation open'>
 
-        <div
-          // onClick={this.toggleOpen}
-          className='openNavTab'>
-          {/* <div className='chevron'/> */}
-        </div>
+        <div className='openNavTab'/>
 
         <div className='side-navigation-inner'>
           <nav>
@@ -49,9 +40,11 @@ class SideNavigation extends Component {
           {
             selectedNav === "Filter"?
             <Filters
-              allFilters={this.props.allFilters}
-              handleFilterClick={this.handleFilterClick}
-              handleSelectAllClick={this.handleSelectAllClick}/> :
+              // allFilters={this.props.allFilters}
+              // handleFilterClick={this.handleFilterClick}
+              // handleSelectAllClick={this.handleSelectAllClick}
+            />
+              :
             <EditUserProfile/>
           }
 
@@ -62,7 +55,10 @@ class SideNavigation extends Component {
 }
 
 export default connect(state => ({
-  allFilters: state.data.allFilters
+  // allFilters: state.data.allFilters
+  people: state.data.people,
+  skills: state.data.skills,
+  connections: state.data.connections
 }))(SideNavigation)
 
 

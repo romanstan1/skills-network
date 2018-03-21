@@ -163,7 +163,6 @@ div.side-navigation-inner {
         font-weight: 300;
         text-transform: capitalize;
         padding-left: 15px;
-        overflow-x: scroll;
         white-space: nowrap; }
       div.side-navigation-inner section.filters div.single-filter span {
         margin-top: 1px;
