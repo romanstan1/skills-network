@@ -41,7 +41,7 @@ class Filters extends Component {
               parentName='people' parentActive={people.active}/>
             }
           transitionTime={100} trigger='People'>
-           {/* <PeopleFilters /> */}
+           <PeopleFilters />
         </Collapsible>
 
         <Collapsible
@@ -50,7 +50,7 @@ class Filters extends Component {
               parentName='skills' parentActive={skills.active}/>
             }
           transitionTime={100} trigger='Skills'>
-           {/* <SkillsFilters handleFilterClick={handleFilterClick} parent={parent}/> */}
+           <SkillsFilters handleFilterClick={this.handleFilterClick} skillsFilters={skills.filters}/>
         </Collapsible>
 
       </section>

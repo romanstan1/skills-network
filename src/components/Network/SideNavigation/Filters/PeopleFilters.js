@@ -27,7 +27,7 @@ class PeopleFilters extends Component {
     this.setState({isGroupByOpen: !this.state.isGroupByOpen})
   }
   render() {
-    const {groupByList,uniqueLocations,uniqueClients,filters} = this.props.peopleFilter
+    const {groupByList,uniqueLocations,uniqueClients,filters} = this.props.people
     const {groupBy, isGroupByOpen} = this.state
     const menuOptions = {
       isOpen: isGroupByOpen,
@@ -76,5 +76,5 @@ class PeopleFilters extends Component {
 }
 
 export default connect(state => ({
-  peopleFilter: state.data.allFilters.filter(filter => filter.parentName === 'people')[0]
+  people: state.data.people
 }))(PeopleFilters)

@@ -1,9 +1,8 @@
 
-
-
-
 export function cleanPeopleData(peopleData) {
-  return peopleData.map(node => {
+  return peopleData
+    .sort((a,b) => a.name.localeCompare(b.name))
+    .map(node => {
     return {
       ...node,
       active:true,
@@ -14,10 +13,13 @@ export function cleanPeopleData(peopleData) {
 }
 
 export function cleanSkillData(skillData, peopleData) {
-  return skillData.map(node => {
+  return skillData
+    .sort((a,b) => a.name.localeCompare(b.name))
+    .map(node => {
     return {
       ...node,
       active:true,
+      name: node.id === '1005'? 'Node.js' : node.id === '1068'? 'Firebase': node.name,
       // workingConnections:10,
       hadBy: peopleData.reduce((acc, person,index) => {
         if(person.currentSkills.includes(node.id)) acc.push(peopleData[index].id)
@@ -48,7 +50,6 @@ export function noOfOccurences(personNode, skillFilters) {
   })
   return workingConnections
 }
-
 
 export function mapNewFiltersSubGroup(filters, subGroup) {
   const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)
