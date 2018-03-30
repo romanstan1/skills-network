@@ -12,6 +12,14 @@ export function cleanPeopleData(peopleData) {
   })
 }
 
+export function getParentState(parentName, state) {
+  switch(parentName) {
+    case 'people': return state.people
+    case 'skills': return state.skills
+    case 'connections': return state.connections
+  }
+}
+
 export function cleanSkillData(skillData, peopleData) {
   return skillData
     .sort((a,b) => a.name.localeCompare(b.name))

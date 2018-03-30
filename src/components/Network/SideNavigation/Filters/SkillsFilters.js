@@ -7,7 +7,7 @@ import searchHOC from './searchHOC'
 const SkillsFilters = ({filters}) =>
   <span>
     { filters.map(filter =>
-        <SingleFilter key={filter.name} filter={filter} parentName='skills'/>)
+      <SingleFilter key={filter.name} filter={filter} parentName='skills'/>)
     }
   </span>
 

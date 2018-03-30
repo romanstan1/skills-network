@@ -21,15 +21,13 @@ export const PeopleTriggerSibling = ({groupFilter, subGroup, handleSubGroupSelec
   </div>
 
 export const GroupFilters = ({filters, uniques, handleSubGroupSelect, groupBy}) => {
-
   const groups = uniques.map(unique => (
      {
        unique, people: filters.filter(person =>
-       groupBy === 'client'? person.client === unique :
+       groupBy === 'clients'? person.client === unique :
        person.location === unique
      )}
   ))
-
   return groups.map(group =>
     <span key={group.unique}>
       <Collapsible

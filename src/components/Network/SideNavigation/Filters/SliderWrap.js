@@ -16,7 +16,7 @@ const SliderWrap = ({minConnections, dispatch}) => {
       <Slider
         onChange={handleChange}
         step={1}
-        marks={{0: '0',1: '1',2: '2',3: '3', 4: '4', 5: '5'}}
+        marks={{0: '0', 1: '1',2: '2',3: '3', 4: '4', 5: '5'}}
         min={0}
         max={5}
       />

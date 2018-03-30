@@ -2,7 +2,7 @@
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 
 import {cleanPeopleData, cleanSkillData,
-  mapNewFilters, noOfOccurences, mapNewFiltersSubGroup} from './reducer_modules.js'
+  mapNewFilters, noOfOccurences, mapNewFiltersSubGroup, getParentState} from './reducer_modules.js'
 
 const initialState = {
   connections: {
@@ -121,42 +121,43 @@ export default (state=initialState, action)=>{
         hidden:!state.fullDetails.hidden
       }
     }
-    case 'TOGGLE_SELECT_ALL_FILTER': return {
-      ...state,
-      allFilters: state.allFilters.map(parent =>
-        parent.parentName === action.payload?
-          { ...parent,
-            active: !parent.active,
-            filters: parent.filters.map(filter => {
-              return {
-                ...filter,
-                active: !parent.active
-              }}
-            )
-          }
-        :parent
-      )
+    case 'TOGGLE_SELECT_ALL_FILTER': {
+      const parentState = getParentState(action.payload, state)
+      return {
+        ...state,
+        [action.payload]: {
+          ...parentState,
+          active: !parentState.active,
+          filters: parentState.filters.map(filter => (
+            { ...filter,
+              active: !parentState.active
+            })
+          )
+        }
+      }
     }
-    case 'TOGGLE_FILTER': return {
-      ...state,
-      allFilters: state.allFilters.map(parent =>
-        parent.parentName === action.payload.parentName?
-          { ...parent,
-            active: mapNewFilters(parent.filters, action.payload.filterName)
-              .reduce((accumulator, filter) => filter.active? accumulator: filter.active, true),
-            filters: mapNewFilters(parent.filters, action.payload.filterName),
-          }
-        :parent
-      )
+    case 'TOGGLE_FILTER': {
+      const {parentName, filterName} = action.payload
+      const parentState = getParentState(parentName, state)
+      const mappedNewFilters = mapNewFilters(parentState.filters, filterName)
+      return {
+        ...state,
+        [parentName]: {
+          ...parentState,
+          active: mappedNewFilters.reduce((accumulator, filter) =>
+          filter.active? accumulator: filter.active, true),
+          filters: mappedNewFilters,
+        }
+      }
     }
     case 'CHANGE_MIN_CONNECTIONS': return {
       ...state,
-      allFilters: state.allFilters.map(parent =>
-        parent.parentName === 'people'? {
-          ...parent,
-          minConnections: action.payload
-        } : parent)
+      people: {
+        ...state.people,
+        minConnections: action.payload
+      }
     }
+
     case 'CHECK_CONNECTION_FILTER':
 
     const skillFilters = state.allFilters
@@ -177,20 +178,18 @@ export default (state=initialState, action)=>{
           })
         } : parent)
     }
-    case 'SUB_GROUP_SELECT': return {
+    case 'SUB_GROUP_SELECT':
+    const mappedNewFiltersSubGroup = mapNewFiltersSubGroup(state.people.filters, action.payload)
+    return {
       ...state,
-      allFilters: state.allFilters.map(parent =>
-        parent.parentName === 'people'?
-          { ...parent,
-            active: mapNewFiltersSubGroup(parent.filters, action.payload)
-              .reduce((accumulator, filter) => filter.active? accumulator: filter.active, true),
-            filters: mapNewFiltersSubGroup(parent.filters, action.payload),
-          }
-        :parent
-      )
+      people: {
+        ...state.people,
+        active: mappedNewFiltersSubGroup.reduce((accumulator, filter) =>
+          filter.active? accumulator: filter.active, true),
+        filters: mappedNewFiltersSubGroup
+      }
     }
     case 'FETCH_SKILL_NETWORK_DATA':
-    // console.log("action: ",action.payload)
     const peopleData = cleanPeopleData(action.payload.people)
     const skillsData = cleanSkillData(action.payload.skills, peopleData)
     return {

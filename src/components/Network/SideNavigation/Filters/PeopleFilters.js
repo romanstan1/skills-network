@@ -19,7 +19,7 @@ class PeopleFilters extends Component {
   }
   handleSubGroupSelect = (subGroup) => {
     this.props.dispatch(subGroupSelect(subGroup))
-    applyFilter()
+    // applyFilter()
   }
   handleGroupBySelect = (e) => {
     this.setState({groupBy: e.target.dataset.value, isGroupByOpen: false})
