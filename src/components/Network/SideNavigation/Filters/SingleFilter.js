@@ -5,13 +5,36 @@ import {toggleFilter} from '../../../../store/modules/actions'
 
 const SingleFilter = ({filter, parentName, dispatch}) =>
   <div
-    className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
+    className={
+      filter.active ?
+        filter.connectionFilterActive ?
+        `single-filter active ${parentName} connectionFilterActive`
+        : `single-filter active ${parentName}`
+      :`single-filter people`
+      }
     onClick={()=>dispatch(toggleFilter(filter.name, parentName))}
   >
     <h4>{humanize(filter.name)}</h4>
     <span></span>
   </div>
 
-  // onClick={()=>handleFilterClick(filter.name, parentName)}
-
 export default connect()(SingleFilter)
+
+// onClick={()=>handleFilterClick(filter.name, parentName)}
+
+// className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
+
+
+// export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
+// <div
+//   // key={filter.name}
+//   className={
+//     filter.active ?
+//       filter.connectionFilterActive ?
+//       'single-filter active people connectionFilterActive' : 'single-filter active people'
+//     :'single-filter people'
+//     }
+//   onClick={()=>handleFilterClick(filter.name)} >
+//   <h4>{humanize(filter.name)}</h4>
+//   <span></span>
+// </div>

@@ -3,6 +3,7 @@ import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
 import {TextFilter} from 'react-text-filter';
 import Filters from '../index'
+import SingleFilter from './SingleFilter'
 
 const personFilter = filter => person => person.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
 
@@ -28,26 +29,13 @@ export class AllFilter extends Component {
 
       {
         filters.map(filter =>
-          <IndividualPersonFilter filter={filter} key={filter.name} handleFilterClick={handleFilterClick}/>
+          <SingleFilter key={filter.name} filter={filter} parentName='people'/>
         )
       }
     </span>)
   }
 }
 
-export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
-<div
-  key={filter.name}
-  className={
-    filter.active ?
-      filter.connectionFilterActive ?
-      'single-filter active people connectionFilterActive' : 'single-filter active people'
-    :'single-filter people'
-    }
-  onClick={()=>handleFilterClick(filter.name)} >
-  <h4>{humanize(filter.name)}</h4>
-  <span></span>
-</div>
 
 
 export const PeopleTriggerSibling = ({groupFilter, subGroup, handleSubGroupSelect}) =>
@@ -77,8 +65,8 @@ export const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleS
       transitionTime={100}
       trigger={humanize(clientFilter.client)}>
       {
-        clientFilter.people.map((filter,i) =>
-        <IndividualPersonFilter key={i} filter={filter} handleFilterClick={handleFilterClick}/>)
+        clientFilter.people.map(filter =>
+          <SingleFilter key={filter.name} filter={filter} parentName='people'/>)
       }
     </Collapsible>
   </span>)
@@ -102,18 +90,23 @@ export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, han
       transitionTime={100}
       trigger={humanize(locationFilter.location)}>
       {
-        locationFilter.people.map((filter,i) =>
-        <IndividualPersonFilter key={i} filter={filter} handleFilterClick={handleFilterClick}/>)
+        locationFilter.people.map(filter =>
+          <SingleFilter key={filter.name} filter={filter} parentName='people'/>)
       }
     </Collapsible>
   </span>)
 }
 
-
-// export const SingleFilter = ({filter, handleFilterClick, parentName}) =>
-//   <div
-//     className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
-//     onClick={()=>handleFilterClick(filter.name, parentName)} >
-//     <h4>{humanize(filter.name)}</h4>
-//     <span></span>
-//   </div>
+// export const IndividualPersonFilter = ({filter, handleFilterClick}) =>
+// <div
+//   key={filter.name}
+//   className={
+//     filter.active ?
+//       filter.connectionFilterActive ?
+//       'single-filter active people connectionFilterActive' : 'single-filter active people'
+//     :'single-filter people'
+//     }
+//   onClick={()=>handleFilterClick(filter.name)} >
+//   <h4>{humanize(filter.name)}</h4>
+//   <span></span>
+// </div>

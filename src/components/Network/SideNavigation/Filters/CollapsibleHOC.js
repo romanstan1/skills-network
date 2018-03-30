@@ -1,35 +1,32 @@
 import React, { Component } from 'react'
 import Collapsible from 'react-collapsible'
 import humanize from 'string-humanize'
+import {connect} from 'react-redux'
+import {toggleSelectAllFilter} from '../../../../store/modules/actions'
 
-const TriggerSibling = ({parentName, active}) =>
+
+// TriggerSibling.handleSelectAllClick = (parentName) => {
+//   console.log('parentName: ', parentName)
+//   // this.props.dispatch(toggleSelectAllFilter(parentName))
+//   // applyFilter()
+// }
+
+
+const Trigger = connect()(({parentName, active, dispatch}) =>
   <div
-    onClick={()=>TriggerSibling.handleSelectAllClick(parentName)}
+    onClick={()=> dispatch(toggleSelectAllFilter(parentName)) }
     className={active?`select-all active ${parentName}`:`select-all ${parentName}`}
     >
       <span></span>
-  </div>
+  </div>)
 
-
-TriggerSibling.handleSelectAllClick = (parentName) => {
-  console.log('parentName: ', parentName)
-  // this.props.dispatch(toggleSelectAllFilter(parentName))
-  // applyFilter()
-}
-
-const CollapsibleHOC = FilterGroup => ({parentName, active, ...props}) => {
-  return <Collapsible
-    transitionTime={100}
-    trigger={humanize(parentName)}
-    triggerSibling={() =>
-      <TriggerSibling
-        parentName={parentName}
-        active={active}
-      />
-      }
+const CollapsibleHOC = FilterGroup => ({parentName, active, ...props}) =>
+  <Collapsible
+    transitionTime={100} trigger={humanize(parentName)}
+    triggerSibling={() => <Trigger parentName={parentName} active={active} /> }
     >
      <FilterGroup {...props}/>
-  </Collapsible>}
+  </Collapsible>
 
 
 export default CollapsibleHOC
