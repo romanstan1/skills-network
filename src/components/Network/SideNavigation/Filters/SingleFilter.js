@@ -14,7 +14,7 @@ const SingleFilter = ({filter, parentName, dispatch}) =>
       }
     onClick={()=>dispatch(toggleFilter(filter.name, parentName))}
   >
-    <h4>{humanize(filter.name)}</h4>
+    <h4>{parentName ==='connections'? humanize(filter.name) : filter.name}</h4>
     <span></span>
   </div>
 

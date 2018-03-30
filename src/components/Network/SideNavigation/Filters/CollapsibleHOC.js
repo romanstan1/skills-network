@@ -20,7 +20,7 @@ const Trigger = connect()(({parentName, active, dispatch}) =>
       <span></span>
   </div>)
 
-const CollapsibleHOC = FilterGroup => ({parentName, active, ...props}) =>
+const collapsibleHOC = FilterGroup => ({parentName, active, ...props}) =>
   <Collapsible
     transitionTime={100} trigger={humanize(parentName)}
     triggerSibling={() => <Trigger parentName={parentName} active={active} /> }
@@ -29,4 +29,4 @@ const CollapsibleHOC = FilterGroup => ({parentName, active, ...props}) =>
   </Collapsible>
 
 
-export default CollapsibleHOC
+export default collapsibleHOC

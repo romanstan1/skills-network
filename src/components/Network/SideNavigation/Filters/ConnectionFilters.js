@@ -2,7 +2,7 @@ import React from 'react';
 import SliderWrap from './SliderWrap'
 import SingleFilter from './SingleFilter'
 import { connect } from 'react-redux'
-import CollapsibleHOC from './CollapsibleHOC'
+import collapsibleHOC from './collapsibleHOC'
 
 const ConnectionFilters = ({connections}) =>
   <span>
@@ -19,4 +19,4 @@ const ConnectionFilters = ({connections}) =>
 
 export default connect(state => ({
   connections: state.data.connections
-}))(CollapsibleHOC(ConnectionFilters))
+}))(collapsibleHOC(ConnectionFilters))

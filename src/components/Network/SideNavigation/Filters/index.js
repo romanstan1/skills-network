@@ -22,7 +22,7 @@ const Filters = ({connections, people, skills}) =>
   <section className='filters'>
     <ConnectionFilters active={connections.active} parentName='connections'/>
     <PeopleFilters active={people.active} parentName='people'/>
-    {/* <SkillsFilters active={skills.active} parentName='skills'/> */}
+    <SkillsFilters active={skills.active} parentName='skills'/>
   </section>
 
 

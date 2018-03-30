@@ -4,7 +4,7 @@ import {connect} from 'react-redux'
 import {applyFilter} from '../../d3/network_functions.js'
 import {toggleFilter, subGroupSelect} from '../../../../store/modules/actions'
 import DropdownMenu from 'react-dd-menu';
-import CollapsibleHOC from './CollapsibleHOC'
+import collapsibleHOC from './collapsibleHOC'
 import {AllFilter, ClientFilter, LocationFilter} from './filterModules'
 
 class PeopleFilters extends Component {
@@ -77,4 +77,4 @@ class PeopleFilters extends Component {
 
 export default connect(state => ({
   people: state.data.people
-}))(CollapsibleHOC(PeopleFilters))
+}))(collapsibleHOC(PeopleFilters))
