@@ -8,24 +8,26 @@ import {toggleFilter, toggleSelectAllFilter} from '../../../../store/modules/act
 import {connect} from 'react-redux'
 
 
-class Filters extends Component {
+// class Filters extends Component {
+//
+//   handleFilterClick = (filterName, parentName) => {
+//     console.log("filterName, parentName",filterName, parentName)
+//     // this.props.dispatch(toggleFilter(filterName, parentName))
+//     // applyFilter()
+//   }
 
-  handleFilterClick = (filterName, parentName) => {
-    console.log("filterName, parentName",filterName, parentName)
-    // this.props.dispatch(toggleFilter(filterName, parentName))
-    // applyFilter()
-  }
-  handleSelectAllClick = (parentName) => {
-    console.log('parentName: ', parentName)
-    // this.props.dispatch(toggleSelectAllFilter(parentName))
-    // applyFilter()
-  }
 
-  render() {
-    const {people, connections, skills} = this.props
-    return (
-      <section className='filters'>
 
+const Filters = ({connections, people, skills}) =>
+  <section className='filters'>
+    <ConnectionFilters active={connections.active} parentName='connections'/>
+    <PeopleFilters active={people.active} parentName='people'/>
+    {/* <SkillsFilters active={skills.active} parentName='skills'/> */}
+  </section>
+
+
+
+        {/*
         <Collapsible
           triggerSibling={() =>
             <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
@@ -33,9 +35,9 @@ class Filters extends Component {
             }
           transitionTime={100} trigger='Connections'>
           <ConnectionFilters handleFilterClick={this.handleFilterClick} connections={connections}/>
-        </Collapsible>
+        </Collapsible> */}
 
-        <Collapsible
+        {/* <Collapsible
           triggerSibling={() =>
             <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
               parentName='people' parentActive={people.active}/>
@@ -51,20 +53,14 @@ class Filters extends Component {
             }
           transitionTime={100} trigger='Skills'>
            <SkillsFilters handleFilterClick={this.handleFilterClick} skillsFilters={skills.filters}/>
-        </Collapsible>
+        </Collapsible> */}
 
-      </section>
+      {/* <Enhanced/> */}
+
+      {/* </section>
     )
   }
-}
-
-const TriggerSibling = ({parentName, parentActive, handleSelectAllClick}) =>
-<div
-  onClick={()=>handleSelectAllClick(parentName)}
-  className={parentActive?`select-all active ${parentName}`:`select-all ${parentName}`}
-  >
-  <span></span>
-</div>
+} */}
 
 
 export default connect(state => ({

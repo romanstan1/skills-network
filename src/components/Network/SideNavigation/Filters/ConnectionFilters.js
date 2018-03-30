@@ -1,21 +1,22 @@
 import React from 'react';
-import humanize from 'string-humanize'
 import SliderWrap from './SliderWrap'
-import {SingleFilter} from './filterModules'
+import SingleFilter from './SingleFilter'
+import { connect } from 'react-redux'
+import CollapsibleHOC from './CollapsibleHOC'
 
-const ConnectionFilters = ({connections, handleFilterClick}) =>
+const ConnectionFilters = ({connections}) =>
   <span>
     <SingleFilter
       filter={connections.filters[0]}
-      handleFilterClick={handleFilterClick}
       parentName='connections'
     />
     <SliderWrap/>
     <SingleFilter
       filter={connections.filters[1]}
-      handleFilterClick={handleFilterClick}
       parentName='connections'
     />
   </span>
 
-export default ConnectionFilters
+export default connect(state => ({
+  connections: state.data.connections
+}))(CollapsibleHOC(ConnectionFilters))

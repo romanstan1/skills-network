@@ -1,4 +1,6 @@
 
+import {getData} from './api.js'
+
 export const clickPerson = (node) => {
   return dispatch => dispatch({
     type: 'OPEN_PERSON',
@@ -55,21 +57,13 @@ export const subGroupSelect = (subGroup) => {
 
 export function fetchSkillNetworkData() {
   return async dispatch => {
-    try {
-      // const success = await fetch(`https://damp-sands-22859.herokuapp.com`)
-      const success = await fetch(`http://localhost:3000/skillsMatrix`)
-      // const success = await fetch(`https://infinite-mountain-98644.herokuapp.com`)
-      const data = await success.json()
-      return dispatch({
-        type: 'FETCH_SKILL_NETWORK_DATA',
-        payload: {
-          people: data[0],
-          skills:data[1]
-        }
-      })
-    } catch (error) {
-      console.log("error",error)
-      return error
-    }
+    const data = await getData()
+    return dispatch({
+      type: 'FETCH_SKILL_NETWORK_DATA',
+      payload: {
+        people: data[0],
+        skills:data[1]
+      }
+    })
   }
 }

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
 import {TextFilter} from 'react-text-filter';
+import Filters from '../index'
 
 const personFilter = filter => person => person.name.toLowerCase().indexOf(filter.toLowerCase()) !== -1
 
@@ -85,7 +86,7 @@ export const ClientFilter = ({filters, handleFilterClick, uniqueClients, handleS
 
 export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, handleSubGroupSelect}) => {
 
-  const locationFilters =  uniqueLocations.map(uniqueLocation => {
+  const locationFilters = uniqueLocations.map(uniqueLocation => {
     return {location: uniqueLocation,people: filters.filter(person => person.location === uniqueLocation)}
   })
   return locationFilters.map(locationFilter =>
@@ -109,10 +110,10 @@ export const LocationFilter = ({filters, handleFilterClick, uniqueLocations, han
 }
 
 
-export const SingleFilter = ({filter, handleFilterClick, parentName}) =>
-  <div
-    className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
-    onClick={()=>handleFilterClick(filter.name, parentName)} >
-    <h4>{humanize(filter.name)}</h4>
-    <span></span>
-  </div>
+// export const SingleFilter = ({filter, handleFilterClick, parentName}) =>
+//   <div
+//     className={filter.active ? `single-filter active ${parentName}`:`single-filter ${parentName}`}
+//     onClick={()=>handleFilterClick(filter.name, parentName)} >
+//     <h4>{humanize(filter.name)}</h4>
+//     <span></span>
+//   </div>
