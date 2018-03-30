@@ -2,19 +2,20 @@ import React, { Component } from 'react';
 import humanize from 'string-humanize'
 import {connect} from 'react-redux'
 import {applyFilter} from '../../d3/network_functions.js'
-import {toggleFilter, subGroupSelect} from '../../../../store/modules/actions'
+import {subGroupSelect} from '../../../../store/modules/actions'
 import DropdownMenu from 'react-dd-menu';
 import collapsibleHOC from './collapsibleHOC'
-import {AllFilter, ClientFilter, LocationFilter} from './filterModules'
+import {AllFilters, GroupFilters} from './filterModules'
+
+// handleFilterClick = (filterName) => {
+//   this.props.dispatch(toggleFilter(filterName, this.props.peopleFilter.parentName))
+//   applyFilter()
+// }
 
 class PeopleFilters extends Component {
   state = {
     groupBy: 'all',
     isGroupByOpen: false,
-  }
-  handleFilterClick = (filterName) => {
-    this.props.dispatch(toggleFilter(filterName, this.props.peopleFilter.parentName))
-    applyFilter()
   }
   handleSubGroupSelect = (subGroup) => {
     this.props.dispatch(subGroupSelect(subGroup))
@@ -40,6 +41,7 @@ class PeopleFilters extends Component {
               </div>
     }
     return (
+
     <span>
       <DropdownMenu {...menuOptions}>
         {
@@ -50,26 +52,16 @@ class PeopleFilters extends Component {
         }
       </DropdownMenu>
 
-      {groupBy === 'all'? <AllFilter filters={filters} handleFilterClick={this.handleFilterClick}/>: null}
       {
-        groupBy === 'location'?
-        <LocationFilter
+        groupBy === 'all'?
+        <AllFilters filters={filters}/> :
+        <GroupFilters
           filters={filters}
-          handleFilterClick={this.handleFilterClick}
-          uniqueLocations={uniqueLocations}
+          uniques={groupBy === 'location'? uniqueLocations : uniqueClients}
           handleSubGroupSelect={this.handleSubGroupSelect}
-        />:null
+          groupBy={groupBy}
+        />
       }
-      {
-        groupBy === 'clients'?
-        <ClientFilter
-          filters={filters}
-          handleFilterClick={this.handleFilterClick}
-          uniqueClients={uniqueClients}
-          handleSubGroupSelect={this.handleSubGroupSelect}
-        />:null
-      }
-
     </span>
     )
   }
@@ -78,3 +70,20 @@ class PeopleFilters extends Component {
 export default connect(state => ({
   people: state.data.people
 }))(collapsibleHOC(PeopleFilters))
+
+// {/* {
+//   groupBy === 'location'?
+//   <LocationFilter
+//   filters={filters}
+//   uniqueLocations={uniqueLocations}
+//   handleSubGroupSelect={this.handleSubGroupSelect}
+// />:null
+// }
+// {
+// groupBy === 'clients'?
+// <ClientFilter
+// filters={filters}
+// uniqueClients={uniqueClients}
+// handleSubGroupSelect={this.handleSubGroupSelect}
+// />:null
+// } */}

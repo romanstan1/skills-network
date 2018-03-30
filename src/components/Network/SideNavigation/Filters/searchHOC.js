@@ -6,7 +6,6 @@ const filterFunc = filterBy => item => item.name.toLowerCase().indexOf(filterBy.
 
 const searchHOC = (PassedComponent) => class SearchHoc extends Component {
   state = { filterBy: '' }
-
   updateSearch = (e) => this.setState({filterBy: e.target.value})
 
   render() {
@@ -21,7 +20,6 @@ const searchHOC = (PassedComponent) => class SearchHoc extends Component {
         className="search-box"
         onFilter={this.updateSearch}>
       </TextFilter>
-
       <PassedComponent filters={filters}/>
     </span>
     )

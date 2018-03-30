@@ -1,10 +1,9 @@
-import React, { Component } from 'react'
-import humanize from 'string-humanize'
+import React from 'react'
 import PeopleFilters from './PeopleFilters'
 import SkillsFilters from './SkillsFilters'
 import ConnectionFilters from './ConnectionFilters'
-import Collapsible from 'react-collapsible'
-import {toggleFilter, toggleSelectAllFilter} from '../../../../store/modules/actions'
+// import Collapsible from 'react-collapsible'
+// import {toggleFilter, toggleSelectAllFilter} from '../../../../store/modules/actions'
 import {connect} from 'react-redux'
 
 
@@ -27,40 +26,40 @@ const Filters = ({connections, people, skills}) =>
 
 
 
-        {/*
-        <Collapsible
-          triggerSibling={() =>
-            <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
-              parentName='connections' parentActive={connections.active}/>
-            }
-          transitionTime={100} trigger='Connections'>
-          <ConnectionFilters handleFilterClick={this.handleFilterClick} connections={connections}/>
-        </Collapsible> */}
-
-        {/* <Collapsible
-          triggerSibling={() =>
-            <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
-              parentName='people' parentActive={people.active}/>
-            }
-          transitionTime={100} trigger='People'>
-           <PeopleFilters />
-        </Collapsible>
-
-        <Collapsible
-          triggerSibling={() =>
-            <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
-              parentName='skills' parentActive={skills.active}/>
-            }
-          transitionTime={100} trigger='Skills'>
-           <SkillsFilters handleFilterClick={this.handleFilterClick} skillsFilters={skills.filters}/>
-        </Collapsible> */}
-
-      {/* <Enhanced/> */}
-
-      {/* </section>
-    )
-  }
-} */}
+//         {/*
+//         <Collapsible
+//           triggerSibling={() =>
+//             <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
+//               parentName='connections' parentActive={connections.active}/>
+//             }
+//           transitionTime={100} trigger='Connections'>
+//           <ConnectionFilters handleFilterClick={this.handleFilterClick} connections={connections}/>
+//         </Collapsible> */}
+//
+//         {/* <Collapsible
+//           triggerSibling={() =>
+//             <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
+//               parentName='people' parentActive={people.active}/>
+//             }
+//           transitionTime={100} trigger='People'>
+//            <PeopleFilters />
+//         </Collapsible>
+//
+//         <Collapsible
+//           triggerSibling={() =>
+//             <TriggerSibling handleSelectAllClick={this.handleSelectAllClick}
+//               parentName='skills' parentActive={skills.active}/>
+//             }
+//           transitionTime={100} trigger='Skills'>
+//            <SkillsFilters handleFilterClick={this.handleFilterClick} skillsFilters={skills.filters}/>
+//         </Collapsible> */}
+//
+//       {/* <Enhanced/> */}
+//
+//       {/* </section>
+//     )
+//   }
+// } */}
 
 
 export default connect(state => ({
