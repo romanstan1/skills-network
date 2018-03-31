@@ -2,8 +2,8 @@ import React from 'react';
 import {connect} from 'react-redux';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import {changeMinConnections} from '../../../../../store/modules/actions'
-import {applyFilter} from '../../../d3/network_functions.js'
+import {changeMinConnections} from 'store/modules/actions'
+// import {applyFilter} from '../../../d3/network_functions.js'
 
 const SliderWrap = ({minConnections, dispatch}) => {
   const handleChange = (value) => {

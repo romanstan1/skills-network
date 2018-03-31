@@ -1,20 +1,10 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
 import Network from './Network'
-import SideNavigation from './Network/SideNavigation'
-import './loader.css'
-import {fetchSkillNetworkData} from '../store/modules/actions'
+import SideNavigation from './SideNavigation'
+import {fetchSkillNetworkData} from 'store/modules/actions'
 // import {initializeDom} from './Network/d3/network_functions.js'
-
-
-
-const Loader = () =>
-<div className="loader">
-  <div className="bubble"></div>
-  <div className="bubble"></div>
-  <div className="bubble"></div>
-  <div className="bubble"></div>
-</div>
+import Loader from './Loader'
 
 class Main extends Component {
   componentDidMount() {
@@ -27,7 +17,6 @@ class Main extends Component {
       <div id='main'>
         <SideNavigation key='sidenavigation'/>
         {!people.length && !skills.length? <Loader/> : <Network/>}
-        {/* {!people.length && !skills.length? <Loader/> : <Network/>} */}
       </div>
     )
   }

@@ -2,7 +2,7 @@ import React from 'react'
 import Collapsible from 'react-collapsible'
 import humanize from 'string-humanize'
 import {connect} from 'react-redux'
-import {toggleSelectAllFilter} from '../../../../store/modules/actions'
+import {toggleSelectAllFilter} from 'store/modules/actions'
 
 const Trigger = connect()(({parentName, active, dispatch}) =>
   <div

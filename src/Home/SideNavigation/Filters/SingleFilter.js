@@ -1,7 +1,7 @@
 import React from 'react'
 import humanize from 'string-humanize'
 import {connect} from 'react-redux'
-import {toggleFilter} from '../../../../store/modules/actions'
+import {toggleFilter} from 'store/modules/actions'
 
 const SingleFilter = ({filter, parentName, dispatch}) => {
   const handleClick = () => {

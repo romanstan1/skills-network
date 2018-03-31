@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import {applyFilter} from '../d3/network_functions.js'
+// import {applyFilter} from '../d3/network_functions.js'
 import './style.css'
 import Filters from './Filters'
 

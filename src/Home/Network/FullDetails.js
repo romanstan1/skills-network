@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import {toggleFullDetails} from '../../store/modules/actions'
+import {toggleFullDetails} from 'store/modules/actions'
 
 class FullDetails extends Component {
   hideFullDetails = () => {

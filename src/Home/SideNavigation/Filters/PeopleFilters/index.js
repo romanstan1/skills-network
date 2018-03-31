@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import humanize from 'string-humanize'
 import {connect} from 'react-redux'
-import {applyFilter} from '../../../d3/network_functions.js'
-import {subGroupSelect} from '../../../../../store/modules/actions'
+// import {applyFilter} from '../../../d3/network_functions.js'
+import {subGroupSelect} from 'store/modules/actions'
 import DropdownMenu from 'react-dd-menu';
 import collapsibleHOC from '../collapsibleHOC'
 import {AllFilters, GroupFilters} from './filterModules'
