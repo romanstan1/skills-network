@@ -2,9 +2,9 @@ import React from 'react';
 import humanize from 'string-humanize'
 import Collapsible from 'react-collapsible';
 import {TextFilter} from 'react-text-filter';
-import Filters from '../index'
-import SingleFilter from './SingleFilter'
-import searchHOC from './searchHOC'
+// import Filters from '../index'
+import SingleFilter from '../SingleFilter'
+import searchHOC from '../searchHOC'
 
 export const AllFilters = searchHOC(({filters}) =>
   <span> { filters.map(filter =>

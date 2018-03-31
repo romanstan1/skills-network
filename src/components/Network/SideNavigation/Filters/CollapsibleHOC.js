@@ -1,14 +1,8 @@
-import React, { Component } from 'react'
+import React from 'react'
 import Collapsible from 'react-collapsible'
 import humanize from 'string-humanize'
 import {connect} from 'react-redux'
 import {toggleSelectAllFilter} from '../../../../store/modules/actions'
-
-// TriggerSibling.handleSelectAllClick = (parentName) => {
-//   console.log('parentName: ', parentName)
-//   // this.props.dispatch(toggleSelectAllFilter(parentName))
-//   // applyFilter()
-// }
 
 const Trigger = connect()(({parentName, active, dispatch}) =>
   <div

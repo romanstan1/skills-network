@@ -1,8 +1,8 @@
 import React from 'react';
 import SliderWrap from './SliderWrap'
-import SingleFilter from './SingleFilter'
+import SingleFilter from '../SingleFilter'
 import { connect } from 'react-redux'
-import collapsibleHOC from './collapsibleHOC'
+import collapsibleHOC from '../collapsibleHOC'
 
 const ConnectionFilters = ({connections}) =>
   <span>

@@ -1,11 +1,9 @@
 import React, { Component } from 'react';
 import {applyFilter} from '../d3/network_functions.js'
 import './style.css'
-import {connect} from 'react-redux'
-import {toggleFilter, toggleSelectAllFilter} from '../../../store/modules/actions'
 import Filters from './Filters'
 
-class SideNavigation extends Component {
+export default class SideNavigation extends Component {
   state = {
     selectedNav: 'Filter'
   }
@@ -35,12 +33,6 @@ class SideNavigation extends Component {
     ]
   }
 }
-
-export default connect(state => ({
-  people: state.data.people,
-  skills: state.data.skills,
-  connections: state.data.connections
-}))(SideNavigation)
 
 const EditUserProfile = () =>
   <section>

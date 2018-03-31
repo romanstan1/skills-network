@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-import Network from './Network/Network.js'
+import Network from './Network'
 import SideNavigation from './Network/SideNavigation'
 import './loader.css'
 import {fetchSkillNetworkData} from '../store/modules/actions'
