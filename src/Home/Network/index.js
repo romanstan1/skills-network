@@ -20,6 +20,14 @@ class Network extends Component {
     // initializeDom()
     // this.props.dispatch(fetchSkillNetworkData())
   }
+  componentWillReceiveProps(nextProps) {
+
+    const people = nextProps.people
+    const skills = nextProps.skills
+
+    console.log("componentDidReceiveProps people", people)
+    console.log("componentDidReceiveProps skills", skills)
+  }
 
   render() {
     // console.log("Network")
@@ -34,6 +42,6 @@ class Network extends Component {
 }
 
 export default connect(state => ({
-  people: state.data.people.filters,
-  skills: state.data.skills.filters,
+  people: state.data.people.filters.filter(person => person.active && !person.connectionFilterActive),
+  skills: state.data.skills.filters.filter(skill => skill.active),
 }))(Network)

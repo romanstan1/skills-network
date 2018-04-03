@@ -160,23 +160,22 @@ export default (state=initialState, action)=>{
 
     case 'CHECK_CONNECTION_FILTER':
 
-    const skillFilters = state.allFilters
-      .filter(parent => parent.parentName === 'skills')[0].filters
+    const activeSkillIds = state.skills.filters
       .filter(skill => skill.active)
       .map(skill => skill.id)
 
     return {
       ...state,
-      allFilters: state.allFilters.map((parent,index) =>
-        parent.parentName === 'people'? {
-          ...parent,
-          filters: parent.filters.map(filter => {
-            return {...filter,
-              workingConnections:noOfOccurences(filter, skillFilters),
-              connectionFilterActive: noOfOccurences(filter, skillFilters) < parent.minConnections
-            }
-          })
-        } : parent)
+      people: {
+        ...state.people,
+        filters: state.people.filters.map(filter => (
+          {
+            ...filter,
+            workingConnections: noOfOccurences(filter, activeSkillIds),
+            connectionFilterActive: noOfOccurences(filter, activeSkillIds) < state.people.minConnections
+          }
+        ))
+      }
     }
     case 'SUB_GROUP_SELECT':
     const mappedNewFiltersSubGroup = mapNewFiltersSubGroup(state.people.filters, action.payload)
