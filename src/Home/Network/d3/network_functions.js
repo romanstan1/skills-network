@@ -66,7 +66,7 @@ function chargeStrength(d) {
   } else return -100
 }
 
-function render() {
+export function render() {
   width = window.innerWidth - 260
   height = window.innerHeight
 
@@ -307,7 +307,7 @@ function noOfOccurences(originalNode, skillFilters) {
 }
 
 
-function update() {
+export function update() {
   link = link.data(workingLinks)
   link.exit().remove()
   link = link.enter().append("line")

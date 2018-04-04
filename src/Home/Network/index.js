@@ -1,61 +1,34 @@
 import React, { Component } from 'react';
 import {connect} from 'react-redux'
-// import {initializeDom} from './d3/network_functions.js'
-// import SideNavigation from './SideNavigation'
+// import {render} from './d3/network_functions.js'
 import Tooltip from './Tooltip'
 import FullDetails from './FullDetails'
 import FullScreenIcon from './FullScreenIcon'
-import * as d3 from "d3";
-import {constructLinks} from './D3_modules'
-
-// class Svg extends Component {
-//   shouldComponentUpdate(nextProps) {
-//     return false;
-//   }
-//   render() {
-//     return <svg/>
-//   }
-// }
-
-
-
-
-
+// import * as d3 from "d3";
+import {constructLinks, render, update} from './D3_modules'
 
 class Network extends Component {
+
   componentDidMount() {
-    // initializeDom()
-    // this.props.dispatch(fetchSkillNetworkData())
+    const {nodes, links} = this.constructForceNetwork(this.props)
+    render(nodes, links)
   }
 
   componentWillReceiveProps(nextProps) {
-
-    const people = nextProps.people
-    const skills = nextProps.skills
-    const connections = nextProps.connections
-    const links = constructLinks(people, skills, connections)
-
-    console.log("links",links)
-    console.log("componentDidReceiveProps people", people)
-    console.log("componentDidReceiveProps skills", skills)
+    const {nodes, links} = this.constructForceNetwork(nextProps)
+    update(nodes, links)
   }
 
-
-
-
-
-
-
+  constructForceNetwork({people, skills, connections}) {
+    const links = constructLinks(people, skills, connections)
+    const nodes = [].concat(people, skills)
+    return {nodes, links}
+  }
 
   render() {
     return [
-      <svg
-        key='svg'
-        ref={node => this.node = node}
-        width={500} height={500}>
-      </svg>,
+      <svg key='svg'></svg>,
       <FullScreenIcon key='fullscreenicon'/>,
-      // <SideNavigation key='sidenavigation'/>,
       <Tooltip key='tooltip'/>,
       <FullDetails key='fulldetails'/>
     ]

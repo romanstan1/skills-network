@@ -9,7 +9,7 @@ export const history = createHistory()
 const enhancers = []
 const logger = store => next => action => {
   let result = next(action)
-  console.log("store: ",action.type)
+  // console.log("store: ",action.type)
 
   if(action.type === 'CLOSE_FULL_DETAILS') {}
   else if(action.type !== 'CHECK_CONNECTION_FILTER'){

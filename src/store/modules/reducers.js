@@ -1,8 +1,12 @@
 // import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
-
-import {cleanPeopleData, cleanSkillData,
-  mapNewFilters, noOfOccurences, mapNewFiltersSubGroup, getParentState} from './reducer_modules.js'
+import {
+  cleanPeopleData,
+  cleanSkillData,
+  mapNewFilters,
+  noOfOccurences,
+  mapNewFiltersSubGroup,
+  getParentState } from './reducer_modules.js'
 
 const initialState = {
   connections: {
@@ -30,50 +34,12 @@ const initialState = {
     active: false,
     filters: []
   },
-
-
-  //  [
-  //   {
-  //     parentName: 'connections',
-  //     active: false,
-  //     // minConnections: 0,
-  //     filters: [
-  //      {
-  //        name: 'currentSkills',
-  //        active: false
-  //      },
-  //      {
-  //        name: 'desiredSkills',
-  //        active: false
-  //      }
-  //    ]
-  //   },
-  //   {
-  //     parentName: 'people',
-  //     active: false,
-  //     minConnections: 0, // swap with
-  //     // filters: peopleData,
-  //     filters: [],
-  //     groupByList: ['all', 'location', 'clients'],
-  //     uniqueLocations: [],
-  //     uniqueClients: []
-  //   },
-  //   {
-  //     parentName: 'skills',
-  //     active: false,
-  //     filters: []
-  //     // filters: skillsData
-  //   }
-  // ]
-
   fullDetails: {
     open: false,
     hidden: false,
     name: "",
     currentSkills: []
   }
-  // people: [],
-  // skills: []
 }
 
 export function lookUpSkill(id) {
@@ -159,11 +125,9 @@ export default (state=initialState, action)=>{
     }
 
     case 'CHECK_CONNECTION_FILTER':
-
     const activeSkillIds = state.skills.filters
       .filter(skill => skill.active)
       .map(skill => skill.id)
-
     return {
       ...state,
       people: {
@@ -216,38 +180,3 @@ export default (state=initialState, action)=>{
     default: return state
   }
 }
-
-
-
-
-
-
-//
-// function mapNewFilters(filters, filterName) { // returns array of all nodes in parent ie people or skill or connection
-//   return filters.map(filter =>
-//     filter.name === filterName?
-//     {...filter,
-//       active: !filter.active // finds the individual filter, and reverses its state.
-//     }
-//   : filter)
-// }
-//
-// function noOfOccurences(personNode, skillFilters) {
-//   let workingConnections = 0
-//   personNode.currentSkills.forEach(skillId => {
-//     if(skillFilters.includes(skillId)) workingConnections++
-//   })
-//   return workingConnections
-// }
-//
-//
-// function mapNewFiltersSubGroup(filters, subGroup) {
-//   const subGroupFilters = filters.filter(filter => filter.location === subGroup || filter.client === subGroup)
-//   const subGroupFiltersAllOpen = subGroupFilters.map(filter => filter.active).includes(false)
-//   return filters.map(filter =>
-//     filter.location === subGroup || filter.client === subGroup?
-//     {...filter,
-//       active: subGroupFiltersAllOpen // Are ALL of the filters within a subgroup selected? Boolean
-//     }
-//   : filter)
-// }
