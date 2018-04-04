@@ -1,5 +1,8 @@
-import * as d3 from "d3";
+import * as d3 from "d3"
+import * as THREE from 'three'
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
+
+// var simulation = d3_force.forceSimulation(nodes);
 
 let node, link, simulation
 

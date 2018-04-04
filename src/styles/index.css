@@ -29,6 +29,13 @@ div#main {
   background: -o-linear-gradient(#212123, #121214);
   background: linear-gradient(#212123, #121214); }
 
+div#threedGraph {
+  position: absolute;
+  right: 0;
+  width: calc(100vw - 260px);
+  top: 0;
+  height: 100%; }
+
 div#network {
   height: 100%; }
 

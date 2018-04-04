@@ -4,19 +4,26 @@ import {connect} from 'react-redux'
 import Tooltip from './Tooltip'
 import FullDetails from './FullDetails'
 import FullScreenIcon from './FullScreenIcon'
-// import * as d3 from "d3";
 import {constructLinks, render, update} from './D3_modules'
+import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 
 class Network extends Component {
 
+  state = {
+    nodes: [],
+    links: []
+  }
+
   componentDidMount() {
     const {nodes, links} = this.constructForceNetwork(this.props)
-    render(nodes, links)
+    this.setState({nodes, links})
+    // render(nodes, links)
   }
 
   componentWillReceiveProps(nextProps) {
     const {nodes, links} = this.constructForceNetwork(nextProps)
-    update(nodes, links)
+    this.setState({nodes, links})
+    // update(nodes, links)
   }
 
   constructForceNetwork({people, skills, connections}) {
@@ -26,11 +33,18 @@ class Network extends Component {
   }
 
   render() {
+    const {nodes, links} = this.state
     return [
-      <svg key='svg'></svg>,
+      // <svg key='svg'></svg>,
       <FullScreenIcon key='fullscreenicon'/>,
       <Tooltip key='tooltip'/>,
-      <FullDetails key='fulldetails'/>
+      <FullDetails key='fulldetails'/>,
+      <div id='threedGraph' key='3d'>
+        <ForceGraph3D
+          showNavInfo={false}
+          width={window.innerWidth - 260}
+          graphData={{nodes, links}} />
+      </div>
     ]
   }
 }
