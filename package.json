@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "3d-force-graph": "^1.29.4",
     "d3": "^4.13.0",
     "d3-zoom": "^1.7.1",
     "jquery": "^3.3.1",

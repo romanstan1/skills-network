@@ -1,48 +1,30 @@
 import * as d3 from "d3"
 import * as THREE from 'three'
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
-
-// var simulation = d3_force.forceSimulation(nodes);
+import ForceGraph3D from '3d-force-graph';
 
 let node, link, simulation
 
-export function constructLinks(people, skills, connections){
 
-  const currentSkills = connections.filters.filter(connection =>
-    connection.name === 'currentSkills' && connection.active).length
-  const desiredSkills = connections.filters.filter(connection =>
-    connection.name === 'desiredSkills' && connection.active).length
+var camera, controls, scene, renderer, interaction, geometry, object_selection;
 
-  let linksArray = []
 
-  people.forEach((person, ind) => {
+// console.log("window",window)
 
-    // Check whether current skills filter is active
-    if(currentSkills) {
-      person.currentSkills.forEach((skillId, i) => {
-        // Check whether the skill node is active
-        if(skills.find(skill => skill.id === skillId)) {
-          linksArray.push({"source": person.id, "target": skillId, "type": "currentSkills"})
-        }
-      })
-    }
+// const forrce
+var myGraph = ForceGraph3D();
 
-    // Check whether desired skills filter is active
-    if(desiredSkills) {
-      person.desiredSkills.forEach((skillId, i) => {
-        // Check whether the skill node is active
-        if(skills.find(skill => skill.id === skillId)) {
-          linksArray.push({"source": person.id, "target": skillId, "type": "desiredSkills"})
-        }
-      })
-    }
+console.log("myGraph",myGraph)
 
-  })
 
-  return linksArray
-  // skills.filter(skillNode => skillNode.id === skill)[0].peopleCurrent.push(person.name)
-  // skills.filter(skillNode => skillNode.id === skill)[0].peopleDesired.push(person.name)
-}
+// const elem = document.getElementById('3d-graph');
+//
+//  const Graph = ForceGraph3D()(elem)
+//    .jsonUrl('../datasets/blocks.json')
+//    .nodeAutoColorBy('user')
+//    .nodeLabel(node => `${node.user}: ${node.description}`)
+//    .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
+//    .onNodeClick(node => window.open(`https://bl.ocks.org/${node.user}/${node.id}`, '_blank'));
 
 
 function chargeStrength(d) {
@@ -75,6 +57,13 @@ export function render(nodes, links) {
     // .call(d3.zoom()
     //   .scaleExtent([0.7 , 20.0])
     //   .on("zoom", zoomed))
+
+
+  // const initialSize = {width: props.width, height: props.height}
+  //   if(!this.graphics){
+  //     this.graphics = new Graphics({...props, canvas: this.refs.canvas, initialSize})
+  //     window.graphics = this.graphics
+  //   }
 
   const forceX = d3.forceX(width / 2).strength(0.030)
   const forceY = d3.forceY(height / 2).strength(0.030)
