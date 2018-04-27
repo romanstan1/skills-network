@@ -4,18 +4,10 @@ import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
 import ForceGraph3D from '3d-force-graph';
 
 let node, link, simulation
-
-
 var camera, controls, scene, renderer, interaction, geometry, object_selection;
 
-
-// console.log("window",window)
-
-// const forrce
-var myGraph = ForceGraph3D();
-
-console.log("myGraph",myGraph)
-
+// var myGraph = ForceGraph3D();
+// console.log("myGraph",myGraph)
 
 // const elem = document.getElementById('3d-graph');
 //
@@ -25,7 +17,6 @@ console.log("myGraph",myGraph)
 //    .nodeLabel(node => `${node.user}: ${node.description}`)
 //    .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
 //    .onNodeClick(node => window.open(`https://bl.ocks.org/${node.user}/${node.id}`, '_blank'));
-
 
 function chargeStrength(d) {
   if(d.type === 'skill') {
