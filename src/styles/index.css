@@ -155,6 +155,9 @@ svg.svg {
       font-size: 12px;
       padding-bottom: 20px; }
 
+div.graph-nav-info {
+  display: none; }
+
 div.full-screen-icon {
   position: absolute;
   top: 16px;
