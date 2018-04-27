@@ -349,3 +349,18 @@ div.dd-menu {
         div.dd-menu div.dd-menu-items ul div:hover {
           background: #19191c;
           color: #ffffff; }
+
+div.dimension {
+  font-family: sans-serif;
+  position: absolute;
+  color: #d6d6d6;
+  font-size: 14px;
+  display: inline-block;
+  top: 19px;
+  left: 310px;
+  width: 45px;
+  height: 22px;
+  cursor: pointer;
+  transition: 0.1s ease; }
+  div.dimension:hover {
+    color: #ffffff; }

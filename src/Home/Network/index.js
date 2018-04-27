@@ -9,7 +9,7 @@ import constructLinks from './constructLinks'
 import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 // import ForceGraph3D from '3d-force-graph';
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
-
+import SelectDimension from './SelectDimension'
 
 
 
@@ -89,7 +89,6 @@ class Network extends Component {
       // <svg key='svg'></svg>,
       // <canvas key='canvas' ref="canvas" style={{width:'100%', height:'100%'}}/>,
 
-      <FullScreenIcon key='fullscreenicon'/>,
       <Tooltip key='tooltip'/>,
       <FullDetails key='fulldetails'/>,
       // <div id='3d-graph' ref="3d-graph" key='3d-graph'
@@ -102,7 +101,7 @@ class Network extends Component {
           graphData={{nodes, links}}
           nodeAutoColorBy='type'
           nodeOpacity={0.97}
-          nodeResolution={20}
+          nodeResolution={50}
           d3Force={'charge', null}
           d3Force={'link', null}
           backgroundColor='rgba(255, 0, 0, 0)'
@@ -116,7 +115,9 @@ class Network extends Component {
           linkResolution={20}
 
         />
-      </div>
+      </div>,
+      <FullScreenIcon key='fullscreenicon'/>,
+      <SelectDimension key='selectdimension'/>
     ]
   }
 }

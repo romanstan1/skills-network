@@ -480,3 +480,24 @@ div.dd-menu {
     }
   }
 }
+
+
+
+
+
+div.dimension {
+  font-family: sans-serif;
+  position: absolute;
+  color: $offWhite;
+  font-size: 14px;
+  display: inline-block;
+  top: 19px;
+  left: 310px;
+  width: 45px;
+  height: 22px;
+  cursor: pointer;
+  transition: 0.1s ease;
+  &:hover {
+    color: $white;
+  }
+}

@@ -54,6 +54,11 @@ export const subGroupSelect = (subGroup) => {
     payload: subGroup
   })
 }
+export const changeDimension = () => {
+  return dispatch => dispatch({
+    type: 'CHANGE_DIMENSION'
+  })
+}
 
 export function fetchSkillNetworkData() {
   return async dispatch => {

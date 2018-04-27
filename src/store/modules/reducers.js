@@ -39,7 +39,8 @@ const initialState = {
     hidden: false,
     name: "",
     currentSkills: []
-  }
+  },
+  dimension: '2D'
 }
 
 export function lookUpSkill(id) {
@@ -124,6 +125,10 @@ export default (state=initialState, action)=>{
       }
     }
 
+    case 'CHANGE_DIMENSION': return {
+      ...state,
+      dimension: state.dimension !== '2D'? '2D' : '3D'
+    }
     case 'CHECK_CONNECTION_FILTER':
     const activeSkillIds = state.skills.filters
       .filter(skill => skill.active)
