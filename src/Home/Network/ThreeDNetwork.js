@@ -1,5 +1,6 @@
 import React from 'react';
 import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
+import {connect} from 'react-redux'
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
 
 const setNodeSize = (d) => {
@@ -23,30 +24,29 @@ const setLinkWidth = (d) => {
   return 100
 }
 
-const ThreeDNetwork = ({props}) => {
-  const {nodes, links, width, height} = props
-  return (
-    <ForceGraph3D
-      showNavInfo={false}
-      width={width - 260}
-      height={height}
-      graphData={{nodes, links}}
-      nodeAutoColorBy='type'
-      nodeOpacity={0.97}
-      nodeResolution={50}
-      d3Force={'charge', null}
-      d3Force={'link', null}
-      backgroundColor='rgba(255, 0, 0, 0)'
-      d3VelocityDecay={0.9}
-      d3AlphaDecay={0.08}
-      nodeVal={setNodeSize}
-      nodeColor={setNodeColor}
-      linkColor={setLinkColor}
-      linkWidth={setLinkWidth}
-      linkOpacity={0.4}
-      linkResolution={20}
-    />
-  )
-}
+const ThreeDNetwork = ({width, height, links, nodes}) =>
+  <ForceGraph3D
+    showNavInfo={false}
+    width={width - 260}
+    height={height}
+    graphData={{nodes, links}}
+    nodeAutoColorBy='type'
+    nodeOpacity={0.97}
+    nodeResolution={50}
+    d3Force={'charge', null}
+    d3Force={'link', null}
+    backgroundColor='rgba(255, 0, 0, 0)'
+    d3VelocityDecay={0.9}
+    d3AlphaDecay={0.08}
+    nodeVal={setNodeSize}
+    nodeColor={setNodeColor}
+    linkColor={setLinkColor}
+    linkWidth={setLinkWidth}
+    linkOpacity={0.4}
+    linkResolution={20}
+  />
 
-export default ThreeDNetwork
+export default connect(state => ({
+  links: state.data.links,
+  nodes: state.data.nodes
+}))(ThreeDNetwork)

@@ -13,16 +13,14 @@ import TwoDNetwork from './TwoDNetwork'
 class Network extends Component {
 
   state = {
-    nodes: [],
-    links: [],
     width: window.innerWidth,
     height: window.innerHeight
   }
 
   componentDidMount() {
     window.addEventListener("resize", this.updateScreenDimensions);
-    const {nodes, links} = this.constructForceNetwork(this.props)
-    this.setState({nodes, links})
+    // const {nodes, links} = this.constructForceNetwork(this.props)
+    // this.setState({nodes, links})
     // render(nodes, links)
   }
 
@@ -30,33 +28,8 @@ class Network extends Component {
     this.setState({width: window.innerWidth, height: window.innerHeight})
   }
 
-  componentWillReceiveProps(nextProps) {
-    const {nodes, links} = this.constructForceNetwork(nextProps)
-    this.setState({nodes, links})
-    // update(nodes, links)
-
-    // const elem = document.getElementById('3d-graph')
-
-
-    const data =  { nodes, links }
-
-    // console.log("nodes",nodes)
-    // console.log("links",links)
-
-    // this.graph = ForceGraph3D()(elem)
-    //   .graphData(data)
-    //   .nodeAutoColorBy('type')
-
-  }
-
-  constructForceNetwork({people, skills, connections}) {
-    const links = constructLinks(people, skills, connections)
-    const nodes = [].concat(people, skills)
-    return {nodes, links}
-  }
-
   render() {
-    const {nodes, links, width, height} = this.state
+    const {width, height} = this.state
     return [
       // <svg key='svg'></svg>,
       // <canvas key='canvas' ref="canvas" style={{width:'100%', height:'100%'}}/>,
@@ -70,7 +43,9 @@ class Network extends Component {
         {
           this.props.dimension === '3D'?
           <ThreeDNetwork
-            props={this.state}
+            width={width}
+            height={height}
+            // props={this.state}
           />
           :
           <TwoDNetwork

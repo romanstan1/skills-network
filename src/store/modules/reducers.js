@@ -1,4 +1,3 @@
-// import {peopleData, skillsData} from './seed.js'
 // const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 import {
   cleanPeopleData,
@@ -6,7 +5,8 @@ import {
   mapNewFilters,
   noOfOccurences,
   mapNewFiltersSubGroup,
-  getParentState } from './reducer_modules.js'
+  getParentState,
+  constructForceNetwork } from './reducer_modules.js'
 
 const initialState = {
   connections: {
@@ -41,7 +41,9 @@ const initialState = {
     currentSkills: []
   },
   dimension: '2D',
-  failedData: false
+  failedData: false,
+  links:[],
+  nodes:[]
 }
 
 export function lookUpSkill(id) {
@@ -134,58 +136,69 @@ export default (state=initialState, action)=>{
       ...state,
       dimension: state.dimension !== '2D'? '2D' : '3D'
     }
-    case 'CHECK_CONNECTION_FILTER':
-    const activeSkillIds = state.skills.filters
+    case 'CHECK_CONNECTION_FILTER': {
+      const activeSkillIds = state.skills.filters
       .filter(skill => skill.active)
       .map(skill => skill.id)
-    return {
-      ...state,
-      people: {
-        ...state.people,
-        filters: state.people.filters.map(filter => (
-          {
-            ...filter,
-            workingConnections: noOfOccurences(filter, activeSkillIds),
-            connectionFilterActive: noOfOccurences(filter, activeSkillIds) < state.people.minConnections
-          }
-        ))
+      return {
+        ...state,
+        people: {
+          ...state.people,
+          filters: state.people.filters.map(filter => (
+            {
+              ...filter,
+              workingConnections: noOfOccurences(filter, activeSkillIds),
+              connectionFilterActive: noOfOccurences(filter, activeSkillIds) < state.people.minConnections
+            }
+          ))
+        }
       }
     }
-    case 'SUB_GROUP_SELECT':
-    const mappedNewFiltersSubGroup = mapNewFiltersSubGroup(state.people.filters, action.payload)
-    return {
-      ...state,
-      people: {
-        ...state.people,
-        active: mappedNewFiltersSubGroup.reduce((accumulator, filter) =>
+    case 'SUB_GROUP_SELECT': {
+      const mappedNewFiltersSubGroup = mapNewFiltersSubGroup(state.people.filters, action.payload)
+      return {
+        ...state,
+        people: {
+          ...state.people,
+          active: mappedNewFiltersSubGroup.reduce((accumulator, filter) =>
           filter.active? accumulator: filter.active, true),
-        filters: mappedNewFiltersSubGroup
+          filters: mappedNewFiltersSubGroup
+        }
       }
     }
-    case 'FETCH_SKILL_NETWORK_DATA':
-    const peopleData = cleanPeopleData(action.payload.people)
-    const skillsData = cleanSkillData(action.payload.skills, peopleData)
-    return {
-      ...state,
-      failedData: false,
-      people: {
-        ...state.people,
-        active: true,
-        filters: peopleData,
-        uniqueLocations: [...new Set(peopleData.map(filter => filter.location))],
-        uniqueClients: [...new Set(peopleData.map(filter => filter.client))]
-      },
-      skills: {
-        ...state.skills,
-        active: true,
-        filters: skillsData,
-      },
-      connections: {
-        ...state.connections,
-        active: true,
-        filters: state.connections.filters.map(filter => {
-          return {...filter,active: true }
-        })
+    case 'FETCH_SKILL_NETWORK_DATA': {
+      const peopleData = cleanPeopleData(action.payload.people)
+      const skillsData = cleanSkillData(action.payload.skills, peopleData)
+      return {
+        ...state,
+        failedData: false,
+        people: {
+          ...state.people,
+          active: true,
+          filters: peopleData,
+          uniqueLocations: [...new Set(peopleData.map(filter => filter.location))],
+          uniqueClients: [...new Set(peopleData.map(filter => filter.client))]
+        },
+        skills: {
+          ...state.skills,
+          active: true,
+          filters: skillsData,
+        },
+        connections: {
+          ...state.connections,
+          active: true,
+          filters: state.connections.filters.map(filter => {
+            return {...filter,active: true }
+          })
+        }
+      }
+    }
+    case 'UPDATE_NODES_AND_LINKS': {
+      const {nodes, links} = constructForceNetwork(state)
+      return {
+        ...state,
+        nodes,
+        links
       }
     }
     default: return state

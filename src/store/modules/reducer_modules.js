@@ -67,3 +67,45 @@ export function mapNewFiltersSubGroup(filters, subGroup) {
     }
   : filter)
 }
+
+export function constructForceNetwork({people, skills, connections}) {
+  people = people.filters.filter(person => person.active && !person.connectionFilterActive)
+  skills = skills.filters.filter(skill => skill.active)
+  const links = constructLinks(people, skills, connections)
+  const nodes = [].concat(people, skills)
+  return {nodes, links}
+}
+
+function constructLinks(people, skills, connections){
+
+  const currentSkills = connections.filters.filter(connection =>
+    connection.name === 'currentSkills' && connection.active).length
+  const desiredSkills = connections.filters.filter(connection =>
+    connection.name === 'desiredSkills' && connection.active).length
+
+  let linksArray = []
+
+  people.forEach((person, ind) => {
+
+    // Check whether current skills filter is active
+    if(currentSkills) {
+      person.currentSkills.forEach((skillId, i) => {
+        // Check whether the skill node is active
+        if(skills.find(skill => skill.id === skillId)) {
+          linksArray.push({"source": person.id, "target": skillId, "type": "currentSkills"})
+        }
+      })
+    }
+
+    // Check whether desired skills filter is active
+    if(desiredSkills) {
+      person.desiredSkills.forEach((skillId, i) => {
+        // Check whether the skill node is active
+        if(skills.find(skill => skill.id === skillId)) {
+          linksArray.push({"source": person.id, "target": skillId, "type": "desiredSkills"})
+        }
+      })
+    }
+  })
+  return linksArray
+}

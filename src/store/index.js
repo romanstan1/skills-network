@@ -12,8 +12,9 @@ const logger = store => next => action => {
   // console.log("store: ",action.type)
 
   if(action.type === 'CLOSE_FULL_DETAILS') {}
-  else if(action.type !== 'CHECK_CONNECTION_FILTER'){
+  else if(action.type !== 'CHECK_CONNECTION_FILTER' && action.type !== 'UPDATE_NODES_AND_LINKS'){
     store.dispatch({type: 'CHECK_CONNECTION_FILTER'})
+    store.dispatch({type: 'UPDATE_NODES_AND_LINKS'})
   }
 
   return result
