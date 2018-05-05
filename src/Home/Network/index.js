@@ -8,6 +8,7 @@ import {render, update} from './D3_modules'
 import constructLinks from './constructLinks'
 import SelectDimension from './SelectDimension'
 import ThreeDNetwork from './ThreeDNetwork'
+import TwoDNetwork from './TwoDNetwork'
 
 class Network extends Component {
 
@@ -67,15 +68,13 @@ class Network extends Component {
       // />,
       <div id='threedGraph' key='3d'>
         {
-          this.props.dimension === '3D' ?
-            <ThreeDNetwork
-              props={this.state}
-            />
+          this.props.dimension === '3D'?
+          <ThreeDNetwork
+            props={this.state}
+          />
           :
-          <div
-            id='3d-graph'
-            ref="3d-graph" key='3d-graph'
-            style={{width, height}}
+          <TwoDNetwork
+            props={this.state}
           />
         }
       </div>,

@@ -63,7 +63,10 @@ export const changeDimension = () => {
 export function fetchSkillNetworkData() {
   return async dispatch => {
     const data = await getData()
-    return dispatch({
+    if(data === 'Error') return dispatch({
+      type: 'FETCH_SKILL_NETWORK_DATA_FAILURE'
+    })
+    else return dispatch({
       type: 'FETCH_SKILL_NETWORK_DATA',
       payload: {
         people: data[0],

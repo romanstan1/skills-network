@@ -9,14 +9,21 @@ import Loader from './Loader'
 class Main extends Component {
   componentDidMount() {
     // initializeDom()
+    this.fetchData()
+  }
+  fetchData = () => {
     this.props.dispatch(fetchSkillNetworkData())
   }
   render() {
-    const {people, skills} = this.props
+    const {people, skills, failedData} = this.props
     return (
       <div id='main'>
         <SideNavigation key='sidenavigation'/>
-        {!people.length && !skills.length? <Loader/> : <Network/>}
+        {!people.length && !skills.length?
+           <Loader
+             failedData={failedData}
+             fetchData={this.fetchData}
+           /> : <Network/>}
       </div>
     )
   }
@@ -25,4 +32,5 @@ class Main extends Component {
 export default connect(state => ({
   people: state.data.people.filters,
   skills: state.data.skills.filters,
+  failedData: state.data.failedData
 }))(Main)

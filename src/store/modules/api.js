@@ -7,7 +7,7 @@ export function getData() {
   return fetch(`http://localhost:3000/skillsMatrix`)
   .then(res => res.json())
   .catch(error => {
-    console.log("error with fetching data: ",error)
-    return error
+    console.log(error)
+    return 'Error'
   })
 }

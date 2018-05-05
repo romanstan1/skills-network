@@ -191,34 +191,33 @@ div.full-screen-icon {
       right: 0;
       border-width: 0px 1px 1px 0px; }
 
-.loader {
+div.loader {
   position: absolute;
-  top: 50%;
+  top: 48%;
   left: 47%; }
-
-.bubble {
-  animation: expand .75s ease-in-out infinite;
-  border-radius: 20px;
-  display: inline-block;
-  transform-origin: center center;
-  margin: 0 8px;
-  width: 20px;
-  height: 20px; }
-
-.bubble:nth-child(1) {
-  background: #353b44; }
-
-.bubble:nth-child(2) {
-  animation-delay: 180ms;
-  background: #353b44; }
-
-.bubble:nth-child(3) {
-  animation-delay: 360ms;
-  background: #353b44; }
-
-.bubble:nth-child(4) {
-  animation-delay: 540ms;
-  background: #353b44; }
+  div.loader div.retry-button {
+    cursor: pointer;
+    font-size: 13px;
+    transform: translateY(30px);
+    padding: 10px 0;
+    color: #d6d6d6; }
+    div.loader div.retry-button:hover {
+      color: white; }
+  div.loader div.bubble {
+    animation: expand .75s ease-in-out infinite;
+    border-radius: 20px;
+    display: inline-block;
+    transform-origin: center center;
+    margin: 0 8px;
+    width: 20px;
+    height: 20px;
+    background: #353b44; }
+    div.loader div.bubble:nth-child(2) {
+      animation-delay: 180ms; }
+    div.loader div.bubble:nth-child(3) {
+      animation-delay: 360ms; }
+    div.loader div.bubble:nth-child(4) {
+      animation-delay: 540ms; }
 
 @keyframes expand {
   0% {

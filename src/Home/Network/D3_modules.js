@@ -1,7 +1,7 @@
 import * as d3 from "d3"
-import * as THREE from 'three'
+// import * as THREE from 'three'
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
-import ForceGraph3D from '3d-force-graph';
+// import ForceGraph3D from '3d-force-graph';
 
 let node, link, simulation
 var camera, controls, scene, renderer, interaction, geometry, object_selection;
@@ -48,7 +48,8 @@ export function render(nodes, links) {
     // .call(d3.zoom()
     //   .scaleExtent([0.7 , 20.0])
     //   .on("zoom", zoomed))
-    
+    console.log("nodes, links",nodes, links)
+
 
 
   // const initialSize = {width: props.width, height: props.height}

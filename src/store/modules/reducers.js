@@ -40,7 +40,8 @@ const initialState = {
     name: "",
     currentSkills: []
   },
-  dimension: '2D'
+  dimension: '2D',
+  failedData: false
 }
 
 export function lookUpSkill(id) {
@@ -87,6 +88,10 @@ export default (state=initialState, action)=>{
         ...state.fullDetails,
         hidden:!state.fullDetails.hidden
       }
+    }
+    case 'FETCH_SKILL_NETWORK_DATA_FAILURE': return {
+      ...state,
+      failedData: true
     }
     case 'TOGGLE_SELECT_ALL_FILTER': {
       const parentState = getParentState(action.payload, state)
@@ -162,6 +167,7 @@ export default (state=initialState, action)=>{
     const skillsData = cleanSkillData(action.payload.skills, peopleData)
     return {
       ...state,
+      failedData: false,
       people: {
         ...state.people,
         active: true,
