@@ -1,28 +1,36 @@
 import React, {Component} from 'react';
 import {render, update} from './D3_modules'
+import {connect} from 'react-redux'
 
 
-export default class TwoDNetwork extends Component {
+class TwoDNetwork extends Component {
 
-  // componentDidMount() {
-  //   // const {nodes, links} = this.props
-  //   const {nodes, links, width, height} = this.props.props
-  //   render(nodes, links)
-  // }
+  componentDidMount() {
+    // const {nodes, links} = this.props
+    const {nodes, links} = this.props
+    console.log("componentDidMount",nodes, links)
+    render(nodes, links)
 
-  // componentWillReceiveProps(nextProps) {
-  //   const {nodes, links} = nextProps.props
-  //   console.log("TwoDNetwork did receive props", nodes, links)
-  //   update(nodes, links)
-  // }
+  }
+
+  componentWillReceiveProps(nextProps) {
+    const {nodes, links} = nextProps
+    // update(nodes, links)
+  }
 
   render() {
     const {width, height} = this.props
     return (
-      <div
-        id='3d-graph' ref="3d-graph" key='3d-graph'
-        style={{width, height}}
-      />
+      // <div
+      //   id='3d-graph' ref="3d-graph" key='3d-graph'
+      //   style={{width, height}}
+      // />
+      <svg style={{width, height}} key='svg'></svg>
     )
   }
 }
+
+export default connect(state => ({
+  links: state.data.links,
+  nodes: state.data.nodes
+}))(TwoDNetwork)

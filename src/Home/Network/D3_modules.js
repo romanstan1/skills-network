@@ -1,22 +1,34 @@
 import * as d3 from "d3"
 // import * as THREE from 'three'
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
+import {init} from './newThreeModules.js'
 // import ForceGraph3D from '3d-force-graph';
 
 let node, link, simulation
-var camera, controls, scene, renderer, interaction, geometry, object_selection;
 
-// var myGraph = ForceGraph3D();
-// console.log("myGraph",myGraph)
-
-// const elem = document.getElementById('3d-graph');
+// var camera, scene, renderer;
 //
-//  const Graph = ForceGraph3D()(elem)
-//    .jsonUrl('../datasets/blocks.json')
-//    .nodeAutoColorBy('user')
-//    .nodeLabel(node => `${node.user}: ${node.description}`)
-//    .onNodeHover(node => elem.style.cursor = node ? 'pointer' : null)
-//    .onNodeClick(node => window.open(`https://bl.ocks.org/${node.user}/${node.id}`, '_blank'));
+//
+// function init() {
+//   scene = new THREE.Scene()
+//   camera = new THREE.PerspectiveCamera(75,width / height,0.1,1000)
+//   renderer = new THREE.WebGLRenderer({ antialias: true })
+//
+//   createLights(scene)
+//   scene.add( new THREE.AxesHelper( 1000 ) );
+//
+//   camera.position.z = 33
+//   renderer.setSize(width, height)
+//
+//   const element = document.getElementById('terrain')
+//   new WindowResize(renderer, camera)
+//   element.appendChild(renderer.domElement)
+//
+// }
+//
+
+
+
 
 function chargeStrength(d) {
   if(d.type === 'skill') {
@@ -41,16 +53,13 @@ export function render(nodes, links) {
   const width = window.innerWidth - 260
   const height = window.innerHeight
 
-  const svg = d3.select("svg")
-    .attr("class", "svg")
-    .attr("width", width)
-    .attr("height", height)
+  // const svg = d3.select("svg")
+  //   .attr("class", "svg")
+  //   .attr("width", width)
+  //   .attr("height", height)
     // .call(d3.zoom()
     //   .scaleExtent([0.7 , 20.0])
     //   .on("zoom", zoomed))
-    console.log("nodes, links",nodes, links)
-
-
 
   // const initialSize = {width: props.width, height: props.height}
   //   if(!this.graphics){
@@ -68,23 +77,23 @@ export function render(nodes, links) {
     .force('x', forceX)
     .force('y',  forceY)
 
-  link = svg.append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(links)
-    .enter().append("line")
-    .attr("stroke", (d) => linkColor())
-    .attr("stroke-dasharray", (d) => dashLine(d.type))
-    .attr("stroke-width", (d) => 2)
+  // link = svg.append("g")
+  //   .attr("class", "links")
+  //   .selectAll("line")
+  //   .data(links)
+  //   .enter().append("line")
+  //   .attr("stroke", (d) => linkColor())
+  //   .attr("stroke-dasharray", (d) => dashLine(d.type))
+  //   .attr("stroke-width", (d) => 2)
 
-  node = svg.append("g")
-    .attr("class", "nodes")
-    .selectAll("circle")
-    .data(nodes)
-    .enter().append("circle")
-    .attr("r", (d) => nodeSize(d))
-    .attr("fill", (d) => nodeColor(d.type))
-    .attr("data-node", (d) => d.id)
+  // node = svg.append("g")
+  //   .attr("class", "nodes")
+  //   .selectAll("circle")
+  //   .data(nodes)
+  //   .enter().append("circle")
+  //   .attr("r", (d) => nodeSize(d))
+  //   .attr("fill", (d) => nodeColor(d.type))
+  //   .attr("data-node", (d) => d.id)
     // .on("click",clicked)
     // .on("mouseover", mouseover)
     // .on("mouseout", mouseout)
@@ -99,22 +108,22 @@ export function render(nodes, links) {
     .force("link")
     .links(links)
 
-  link
-    .attr("data-target", (d) => d.target.id)
-    .attr("data-source", (d) => d.source.id)
+  // link
+  //   .attr("data-target", (d) => d.target.id)
+  //   .attr("data-source", (d) => d.source.id)
     // .attr("data-type", (d) => d.type)
 }
 
 function ticked(node, link) {
-  link
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
-
-  node
-    .attr("cx", d => d.x)
-    .attr("cy", d => d.y)
+  // link
+  //   .attr("x1", d => d.source.x)
+  //   .attr("y1", d => d.source.y)
+  //   .attr("x2", d => d.target.x)
+  //   .attr("y2", d => d.target.y)
+  //
+  // node
+  //   .attr("cx", d => d.x)
+  //   .attr("cy", d => d.y)
 }
 
 function dashLine(type) {

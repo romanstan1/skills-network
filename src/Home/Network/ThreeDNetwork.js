@@ -1,6 +1,6 @@
 import React from 'react';
-import { ForceGraph2D, ForceGraph3D, ForceGraphVR } from 'react-force-graph';
 import {connect} from 'react-redux'
+import { ForceGraph3D } from 'react-force-graph';
 import {peopleColour, skillsColour, connectionsColour} from '../../styles/theme'
 
 const setNodeSize = (d) => {

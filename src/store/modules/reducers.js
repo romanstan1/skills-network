@@ -131,7 +131,6 @@ export default (state=initialState, action)=>{
         minConnections: action.payload
       }
     }
-
     case 'CHANGE_DIMENSION': return {
       ...state,
       dimension: state.dimension !== '2D'? '2D' : '3D'
@@ -187,9 +186,9 @@ export default (state=initialState, action)=>{
         connections: {
           ...state.connections,
           active: true,
-          filters: state.connections.filters.map(filter => {
-            return {...filter,active: true }
-          })
+          filters: state.connections.filters.map(filter => (
+            {...filter,active: true })
+          )
         }
       }
     }
