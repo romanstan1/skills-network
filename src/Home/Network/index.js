@@ -4,8 +4,7 @@ import {connect} from 'react-redux'
 import Tooltip from './Tooltip'
 import FullDetails from './FullDetails'
 import FullScreenIcon from './FullScreenIcon'
-import {render, update} from './D3_modules'
-import constructLinks from './constructLinks'
+import {render, update} from './TwoDNetwork/D3_modules'
 import SelectDimension from './SelectDimension'
 import ThreeDNetwork from './ThreeDNetwork'
 import TwoDNetwork from './TwoDNetwork'
@@ -18,10 +17,7 @@ class Network extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateScreenDimensions);
-    // const {nodes, links} = this.constructForceNetwork(this.props)
-    // this.setState({nodes, links})
-    // render(nodes, links)
+    window.addEventListener("resize", this.updateScreenDimensions)
   }
 
   updateScreenDimensions = () => {
@@ -39,7 +35,7 @@ class Network extends Component {
       // <div id='3d-graph' ref="3d-graph" key='3d-graph'
       //   // style={{width:'100%', height:'100%'}}
       // />,
-      <div id='threedGraph' key='3d'>
+      <div id='graph-wrapper' key='3d'>
         {
           this.props.dimension === '3D'?
           <ThreeDNetwork
@@ -49,19 +45,21 @@ class Network extends Component {
           />
           :
           <TwoDNetwork
-            props={this.state}
+            // props={this.state}
+            width={width}
+            height={height}
           />
         }
       </div>,
-      <FullScreenIcon key='fullscreenicon'/>,
-      <SelectDimension key='selectdimension'/>
+      <FullScreenIcon key='fullscreenicon'/>
+      // <SelectDimension key='selectdimension'/>
     ]
   }
 }
 
 export default connect(state => ({
-  people: state.data.people.filters.filter(person => person.active && !person.connectionFilterActive),
-  skills: state.data.skills.filters.filter(skill => skill.active),
+  // people: state.data.people.filters.filter(person => person.active && !person.connectionFilterActive),
+  // skills: state.data.skills.filters.filter(skill => skill.active),
   connections: state.data.connections,
   dimension: state.data.dimension
 }))(Network)

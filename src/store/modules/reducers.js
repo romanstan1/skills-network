@@ -1,4 +1,3 @@
-// const assets = (ctx => ctx.keys().map(ctx))(require.context('../../assets', true, /.*/))
 import {
   cleanPeopleData,
   cleanSkillData,
@@ -43,7 +42,7 @@ const initialState = {
   dimension: '2D',
   failedData: false,
   links:[],
-  nodes:[]
+  nodes: []
 }
 
 export function lookUpSkill(id) {
@@ -119,7 +118,7 @@ export default (state=initialState, action)=>{
         [parentName]: {
           ...parentState,
           active: mappedNewFilters.reduce((accumulator, filter) =>
-          filter.active? accumulator: filter.active, true),
+            filter.active? accumulator: filter.active, true),
           filters: mappedNewFilters,
         }
       }
@@ -137,8 +136,8 @@ export default (state=initialState, action)=>{
     }
     case 'CHECK_CONNECTION_FILTER': {
       const activeSkillIds = state.skills.filters
-      .filter(skill => skill.active)
-      .map(skill => skill.id)
+        .filter(skill => skill.active)
+        .map(skill => skill.id)
       return {
         ...state,
         people: {
@@ -160,7 +159,7 @@ export default (state=initialState, action)=>{
         people: {
           ...state.people,
           active: mappedNewFiltersSubGroup.reduce((accumulator, filter) =>
-          filter.active? accumulator: filter.active, true),
+            filter.active? accumulator: filter.active, true),
           filters: mappedNewFiltersSubGroup
         }
       }
@@ -193,10 +192,11 @@ export default (state=initialState, action)=>{
       }
     }
     case 'UPDATE_NODES_AND_LINKS': {
-      const {nodes, links} = constructForceNetwork(state)
+      const {nodes,links} = constructForceNetwork(state)
       return {
         ...state,
         nodes,
+        // threednodes,
         links
       }
     }

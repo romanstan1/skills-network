@@ -69,11 +69,23 @@ export function mapNewFiltersSubGroup(filters, subGroup) {
 }
 
 export function constructForceNetwork({people, skills, connections}) {
-  people = people.filters.filter(person => person.active && !person.connectionFilterActive)
-  skills = skills.filters.filter(skill => skill.active)
+  // console.log('skills first', skills.filters)
+  // TODO: remove mesh ids from nodes that are no longer active
+
+  people = people.filters.filter(person => person.active && !person.connectionFilterActive) // the new active people
+  skills = skills.filters.filter(skill => skill.active)  // the new active skills
+
+  // console.log('skills second', skills)
+
   const links = constructLinks(people, skills, connections)
   const nodes = [].concat(people, skills)
-  return {nodes, links}
+  const threednodes = [].concat(people, skills)
+
+  return {
+    nodes,
+    // threednodes: JSON.parse(JSON.stringify(threednodes)),
+    links
+  }
 }
 
 function constructLinks(people, skills, connections){
