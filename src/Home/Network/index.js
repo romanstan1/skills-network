@@ -12,7 +12,7 @@ import TwoDNetwork from './TwoDNetwork'
 class Network extends Component {
 
   state = {
-    width: window.innerWidth,
+    width: window.innerWidth - 260,
     height: window.innerHeight
   }
 
@@ -21,7 +21,7 @@ class Network extends Component {
   }
 
   updateScreenDimensions = () => {
-    this.setState({width: window.innerWidth, height: window.innerHeight})
+    this.setState({width: window.innerWidth - 260, height: window.innerHeight})
   }
 
   render() {
@@ -32,9 +32,6 @@ class Network extends Component {
 
       <Tooltip key='tooltip'/>,
       <FullDetails key='fulldetails'/>,
-      // <div id='3d-graph' ref="3d-graph" key='3d-graph'
-      //   // style={{width:'100%', height:'100%'}}
-      // />,
       <div id='graph-wrapper' key='3d'>
         {
           this.props.dimension === '3D'?

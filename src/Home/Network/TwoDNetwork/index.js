@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, {Component, Fragment} from 'react';
 // import {render2, update2} from './D3_modules'
-import {render2, update2} from './D3_modules_rewrite'
+import {render2, update2} from './D3_core'
 import {connect} from 'react-redux'
 
 class TwoDNetwork extends Component {
@@ -8,22 +8,23 @@ class TwoDNetwork extends Component {
   componentDidMount() {
     const {nodes, links, width, height} = this.props
     // render3(width, height)
-    render2(nodes, links, width, height)
+    console.log("width", width)
+    render2(nodes, links, width , height)
   }
 
   componentWillReceiveProps(nextProps) {
     const {nodes, links, width, height} = nextProps
     // update(nodes, links)
-    update2(nodes, links, width, height)
+    update2(nodes, links, width , height)
   }
 
   render() {
     const {width, height} = this.props
     return (
-      // <div id='twod-graph' ref="twod-graph" key='twod-graph'
-      //   style={{width, height}}
-      // />
-      <svg style={{width: width - 260, height}} key='svg'></svg>
+      <Fragment>
+        <canvas style={{width: width, height}} width={width} height={height}/>
+        <svg style={{width: width, height}}/>
+      </Fragment>
     )
   }
 }

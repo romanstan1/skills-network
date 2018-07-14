@@ -39,9 +39,16 @@ div#graph-wrapper {
 div#network {
   height: 100%; }
 
-svg.svg {
+svg {
   cursor: grab;
   right: 0;
+  top: 0;
+  position: absolute; }
+
+canvas {
+  cursor: grab;
+  right: 0;
+  top: 0;
   position: absolute; }
 
 ::selection {

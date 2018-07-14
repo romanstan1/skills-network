@@ -72,15 +72,22 @@ div#network {
   // background: linear-gradient($lighterBlack, $darkestBlack);
 }
 
-svg.svg {
+svg {
   // background:rgba(0,0,0,0);
   // background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
   // background: -o-linear-gradient($lighterBlack, $darkestBlack);
   // background: linear-gradient($lighterBlack, $darkestBlack);
   cursor: grab;
   right: 0;
+  top: 0;
   position: absolute;
 
+}
+canvas {
+  cursor: grab;
+  right: 0;
+  top: 0;
+  position: absolute;
 }
 
 ::selection {

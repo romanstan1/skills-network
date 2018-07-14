@@ -364,3 +364,22 @@ function dragended(d) {
   d.fx = null;
   d.fy = null;
 }
+
+//
+// function forceTick(){
+//    d3.select('canvas').node()
+//      .getContext('2d')
+//
+//   context.clearRect(0,0,500,500)
+//   context.lineWidth = 1
+//   context.strokeStyle = 'rgba(0, 0, 0, 0.5)';
+//   sampleLinks.forEach( link => {
+//     context.beginPath();
+//     context.moveTo(link.source.x, link.source.y)
+//     context.lineTo(link.target.x, link.target.y)
+//     context.stroke()
+//   })
+//   d3.selectAll('circle')
+//     .attr('cx' d => d.x)
+//     .attr('cy' d => d.y)
+// }
