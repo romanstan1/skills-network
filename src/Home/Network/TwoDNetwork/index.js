@@ -1,6 +1,6 @@
 import React, {Component, Fragment} from 'react';
-// import {render2, update2} from './D3_modules'
-import {render2, update2} from './D3_core'
+import {render2, update2} from './D3_modulesCOPY'
+// import {render2, update2} from './D3_core'
 import {connect} from 'react-redux'
 
 class TwoDNetwork extends Component {
