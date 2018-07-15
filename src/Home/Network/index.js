@@ -27,9 +27,6 @@ class Network extends Component {
   render() {
     const {width, height} = this.state
     return [
-      // <svg key='svg'></svg>,
-      // <canvas key='canvas' ref="canvas" style={{width:'100%', height:'100%'}}/>,
-
       <Tooltip key='tooltip'/>,
       <FullDetails key='fulldetails'/>,
       <div id='graph-wrapper' key='3d'>
@@ -38,11 +35,9 @@ class Network extends Component {
           <ThreeDNetwork
             width={width}
             height={height}
-            // props={this.state}
           />
           :
           <TwoDNetwork
-            // props={this.state}
             width={width}
             height={height}
           />
@@ -55,8 +50,6 @@ class Network extends Component {
 }
 
 export default connect(state => ({
-  // people: state.data.people.filters.filter(person => person.active && !person.connectionFilterActive),
-  // skills: state.data.skills.filters.filter(skill => skill.active),
   connections: state.data.connections,
   dimension: state.data.dimension
 }))(Network)

@@ -53,3 +53,22 @@ export function linkColor(type) {
   else if(type === 'desiredSkills') return '#49c67b'
   else return connectionsColour
 }
+
+export function mouseover(d, width) {
+  d3.select(this)
+    .attr("stroke-width", 2)
+    .attr("stroke", '#f2f2f2')
+  const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
+	d3.select("#tooltip")
+		.style("right", (width - fullDetailsXPosition.x + 260) + 15 + "px")
+		.style("top", "15px")
+		.select("#value")
+		.text(d.name);
+	d3.select("#tooltip").classed("hidden", false);
+}
+
+export function mouseout(d) {
+  d3.select("#tooltip").classed("hidden", true);
+  d3.select(this)
+    .attr("stroke-width", 0)
+}

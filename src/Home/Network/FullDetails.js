@@ -9,6 +9,7 @@ class FullDetails extends Component {
   render() {
     const {fullDetails} = this.props
     const {open, name, type, hidden} = fullDetails
+    // console.log('fullDetails', fullDetails)
     return (
       <div id="full-details"
         className={open? hidden? "open hidden" : "open": ""}>
@@ -50,7 +51,6 @@ const SkillDetails = ({fullDetails}) =>
     <h3>Desired By</h3>
     <p>{fullDetails.peopleDesired}</p>
   </div>
-
 
 export default connect(state => ({
   fullDetails: state.data.fullDetails

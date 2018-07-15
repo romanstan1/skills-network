@@ -9,7 +9,9 @@ import {
   dragended,
   chargeStrength,
   nodeColor,
-  linkColor
+  linkColor,
+  mouseout,
+  mouseover
 } from './D3_modules'
 
 let node,
@@ -70,8 +72,8 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("height", height)
     .call(d3.zoom()
       .scaleExtent([0.3 , 20.0])
-      .on("zoom", () => zoomed(width, height)))
-
+      .on("zoom", zoomed)
+    )
   context = d3.select('canvas')
     .node()
     .getContext('2d')
@@ -94,11 +96,13 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
-    .on("click",clicked)
-    .call(d3.drag()
-    .on("start", dragstarted)
-    .on("drag", dragged)
-    .on("end", dragended));
+    // .on("click",clicked)
+    // .on("mouseover", mouseover)
+    // .on("mouseout", mouseout)
+    // .call(d3.drag()
+    // .on("start", dragstarted)
+    // .on("drag", dragged)
+    // .on("end", dragended));
 
   simulation
     .nodes(nodes)
@@ -122,6 +126,8 @@ export function update2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
     .on("click",clicked)
+    .on("mouseover", (d) => mouseover(d, width))
+    .on("mouseout", mouseout)
     .call(d3.drag()
       .on("start", d => dragstarted(d, simulation))
       .on("drag", dragged)
