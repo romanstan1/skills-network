@@ -18,6 +18,7 @@ let node,
   context,
   globallinks,
   links,
+  nodes,
   width,
   height
 
@@ -26,9 +27,7 @@ function zoomed() {
   if(d3.event) { // last zoom event saved to variable
     lastD3Event = d3.event.transform
   }
-  // console.log('lastD3Event:', lastD3Event)
  if(lastD3Event) {
-   // simulation.stop()
    context.save();
    context.clearRect(0, 0, width, height);
    context.translate(lastD3Event.x, lastD3Event.y);
@@ -39,7 +38,6 @@ function zoomed() {
  }
  else draw()
 }
-
 
 function draw() {
   context.clearRect(0,0, width, height)
@@ -53,41 +51,16 @@ function draw() {
   context.stroke()
 }
 
-
-
-
 function ticked() {
-
-  // context.clearRect(0,0, width, height)
-  // context.save();
-  // // context.lineWidth = 1
-  // context.strokeStyle = 'rgba(255, 255, 255, 0.8)';
-  // context.beginPath()
-  // links.forEach(link => {
-  //   context.moveTo(link.source.x, link.source.y)
-  //   context.lineTo(link.target.x, link.target.y)
-  // })
-  // context.stroke()
-
-  // draw()
   zoomed()
-
-  d3.selectAll('circle')
+  node
     .attr('cx', d => d.x)
     .attr('cy', d => d.y)
 }
 
+export function render2(incomingnodes, incominglinks, incomingwidth, incomingheight) {
 
-
-
-
-
-
-
-
-
-export function render2(nodes, incominglinks, incomingwidth, incomingheight) {
-
+  nodes = incomingnodes
   links = incominglinks
   width = incomingwidth
   height = incomingheight
@@ -134,8 +107,9 @@ export function render2(nodes, incominglinks, incomingwidth, incomingheight) {
     .links(links)
 }
 
-export function update2(nodes, incominglinks, incomingwidth, incomingheight) {
+export function update2(incomingnodes, incominglinks, incomingwidth, incomingheight) {
 
+  nodes = incomingnodes
   links = incominglinks
   width = incomingwidth
   height = incomingheight
@@ -154,9 +128,8 @@ export function update2(nodes, incominglinks, incomingwidth, incomingheight) {
       .on("end",d => dragended(d, simulation))
     )
 
-  simulation.nodes(nodes)
-    .on("tick", ticked)
-    .force("link").links(links)
-
+  simulation.nodes(nodes);
+  simulation.force("link").links(links);
+  simulation.alpha(1).restart();
   zoomed()
 }

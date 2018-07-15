@@ -5,6 +5,7 @@ import store from 'store'
 const {dispatch} = store
 
 let node, link, lastD3Event, simulation
+let links, nodes
 
 function chargeStrength(d) {
   if(d.type === 'skill') {
@@ -30,13 +31,16 @@ function zoomed(width, height) {
     lastD3Event = d3.event.transform
   }
   node.attr("transform", lastD3Event);
-  link.attr("transform", lastD3Event);
+  // link.attr("transform", lastD3Event);
 }
 
 
 
 
-export function render2(nodes, links, width, height) {
+export function render2(incomingnodes, incominglinks, width, height) {
+
+  nodes = incomingnodes
+  links = incominglinks
   const svg = d3.select("svg")
     .attr("width", width)
     .attr("height", height)
@@ -53,15 +57,15 @@ export function render2(nodes, links, width, height) {
     .force("center", d3.forceCenter(width / 2, height / 2))
     .force('x', forceX)
     .force('y',  forceY)
-
-  link = svg.append("g")
-    .attr("class", "links")
-    .selectAll("line")
-    .data(links)
-    .enter().append("line")
-    .attr("stroke", (d) => linkColor())
-    .attr("stroke-dasharray", (d) => dashLine(d.type))
-    .attr("stroke-width", (d) => 2)
+  //
+  // link = svg.append("g")
+  //   .attr("class", "links")
+  //   .selectAll("line")
+  //   .data(links)
+  //   .enter().append("line")
+  //   .attr("stroke", (d) => linkColor())
+  //   .attr("stroke-dasharray", (d) => dashLine(d.type))
+  //   .attr("stroke-width", (d) => 2)
 
   node = svg.append("g")
     .attr("class", "nodes")
@@ -82,24 +86,24 @@ export function render2(nodes, links, width, height) {
   simulation
     .nodes(nodes)
     .on("tick", ticked)
-    .force("link")
-    .links(links)
+    // .force("link")
+    // .links(links)
 
-  link
-    .attr("data-target", (d) => d.target.id)
-    .attr("data-source", (d) => d.source.id)
-    .attr("data-type", (d) => d.type)
+  // link
+  //   .attr("data-target", (d) => d.target.id)
+  //   .attr("data-source", (d) => d.source.id)
+  //   .attr("data-type", (d) => d.type)
 
 }
 
 
 
 function ticked() {
-  link
-    .attr("x1", d => d.source.x)
-    .attr("y1", d => d.source.y)
-    .attr("x2", d => d.target.x)
-    .attr("y2", d => d.target.y)
+  // link
+  //   .attr("x1", d => d.source.x)
+  //   .attr("y1", d => d.source.y)
+  //   .attr("x2", d => d.target.x)
+  //   .attr("y2", d => d.target.y)
 
   node
     .attr("cx", d => d.x)
@@ -122,17 +126,21 @@ function nodeSize(d) {
   else return 7
 }
 
-export function update2(nodes, links, width, height) {
-  link = link.data(links)
-  link.exit().remove()
-  link = link.enter().append("line")
-    .merge(link)
-    .attr("data-target", (d) => d.target.id)
-    .attr("data-source", (d) => d.source.id)
-    .attr("data-type", (d) => d.type)
-    .attr("stroke", (d) => linkColor())
-    .attr("stroke-dasharray", (d) => dashLine(d.type))
-    .attr("stroke-width", (d) => 2);
+export function update2(incomingnodes, incominglinks, width, height) {
+
+  nodes = incomingnodes
+  links = incominglinks
+
+  // link = link.data(links)
+  // link.exit().remove()
+  // link = link.enter().append("line")
+  //   .merge(link)
+  //   .attr("data-target", (d) => d.target.id)
+  //   .attr("data-source", (d) => d.source.id)
+  //   .attr("data-type", (d) => d.type)
+  //   .attr("stroke", (d) => linkColor())
+  //   .attr("stroke-dasharray", (d) => dashLine(d.type))
+  //   .attr("stroke-width", (d) => 2);
 
   node = node.data(nodes)
   node.exit().remove()
@@ -149,8 +157,13 @@ export function update2(nodes, links, width, height) {
       .on("drag", dragged)
       .on("end", dragended));
 
+
+  // simulation.nodes(nodes)
+  //   .on("tick", ticked)
+  //   .force("link").links(links)
+
   simulation.nodes(nodes);
-  simulation.force("link").links(links);
+  // simulation.force("link").links(links);
   simulation.alpha(1).restart();
 
   zoomed()
