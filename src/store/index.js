@@ -9,8 +9,8 @@ export const history = createHistory()
 const enhancers = []
 const logger = store => next => action => {
   let result = next(action)
-  console.log('action.type:', action.type)
-  console.log("store: ",store.getState().data)
+  // console.log('action.type:', action.type)
+  // console.log("store: ",store.getState().data)
   if(action.type === 'CLOSE_FULL_DETAILS' ||
      action.type === 'OPEN_SKILL' ||
      action.type === 'OPEN_PERSON' ||
