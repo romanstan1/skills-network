@@ -328,14 +328,14 @@ div.slider-wrap {
   flex-direction: row;
   justify-content: space-between;
   > span.title {
+    display: inline-block;
     color: $grey08;
     cursor: inherit;
     font-size: 13px;
     font-weight: 300;
     text-transform: capitalize;
-    text-indent: 30px;
-    overflow-x: scroll;
-    white-space: nowrap;
+    padding-left: 30px;
+    // overflow-x: scroll;
     text-align: left;
     opacity: 0.999;
     z-index: 100;

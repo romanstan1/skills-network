@@ -1,20 +1,16 @@
 @import url('https://fonts.googleapis.com/css?family=Raleway:300,400,500');
-// @import "react-toolbox/lib/slider/theme";
 
 $bluegrey: #353b44;
 $darkestBlack:#121214;
 $darkestBlack:#121214;
 $hoverDarkBlack:#19191c;
-// 21211f
 $lighterBlack:#212123;
 
 $green: #28af4e;
 $grey: rgb(242, 242, 242);
 $grey06: rgba(242, 242, 242, 0.6);
 $grey06: #939393;
-// $grey08: rgba(242, 242, 242, 0.8);
 $grey08: #adadad;
-$grey01: rgba(242, 242, 242, 0.1);
 $grey01: #262626;
 $white: #ffffff;
 $red: #c10d34;
@@ -61,22 +57,14 @@ div#graph-wrapper {
   right: 0;
   width: calc(100vw - 260px);
   top:0;
-  // background: red;
   height: 100%;
 }
 
 div#network {
   height: 100%;
-  // background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
-  // background: -o-linear-gradient($lighterBlack, $darkestBlack);
-  // background: linear-gradient($lighterBlack, $darkestBlack);
 }
 
 svg {
-  // background:rgba(0,0,0,0);
-  // background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
-  // background: -o-linear-gradient($lighterBlack, $darkestBlack);
-  // background: linear-gradient($lighterBlack, $darkestBlack);
   cursor: default;
   right: 0;
   top: 0;
@@ -84,7 +72,6 @@ svg {
 
 }
 canvas {
-  // cursor: grab;
   right: 0;
   top: 0;
   position: absolute;
@@ -98,8 +85,6 @@ canvas {
 }
 
 .links line {
-  // stroke: #a3dfe0;
-  // stroke-opacity: 0.6;
   opacity: 0.6;
   &.not-selected {
     stroke: #353b44;
@@ -112,19 +97,9 @@ canvas {
 }
 
 .nodes circle {
-  // cursor: crosshair;
-  // stroke: red;
-  // stroke-width: 0;
-  &.selected {
-    // fill: white;
-  }
   &.not-selected {
     fill: #353b44;
-    // opacity: 0.4;
   }
-  // &.connected {
-  //   fill:default;
-  // }
 }
 
 
@@ -132,15 +107,9 @@ canvas {
   position: absolute;
   height: auto;
   padding: 10px 20px;
-  // color: $darkestBlack;
   color: $white;
-  // background: $white;
   opacity: 0.98;
-  // border: 1px solid $offWhite;
   font-weight: 400;
-  // -webkit-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  // -moz-box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
-  // box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.3);
   pointer-events: none;
   text-align: left;
   &.hidden {
@@ -159,7 +128,6 @@ canvas {
   right: 0;
   width: 350px;
   height: auto;
-  // padding: 10px 10px;
   background: $darkestBlack;
   color: $offWhite;
   opacity: 0.95;
@@ -170,7 +138,6 @@ canvas {
   transition: 0.2s ease-out;
   z-index: 100;
   &.open {
-    // display: none;
     transform: translateX(0%);
     div.details-inner {
       transform: translateX(0px) !important;
@@ -178,7 +145,6 @@ canvas {
 
   }
   &.hidden {
-    // display: none;
     transform: translateX(calc(100% - 50px));
     div.details-inner {
       transform: translateX(50px) !important;

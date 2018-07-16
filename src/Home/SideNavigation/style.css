@@ -228,14 +228,13 @@ div.slider-wrap {
   flex-direction: row;
   justify-content: space-between; }
   div.slider-wrap > span.title {
+    display: inline-block;
     color: #adadad;
     cursor: inherit;
     font-size: 13px;
     font-weight: 300;
     text-transform: capitalize;
-    text-indent: 30px;
-    overflow-x: scroll;
-    white-space: nowrap;
+    padding-left: 30px;
     text-align: left;
     opacity: 0.999;
     z-index: 100; }
