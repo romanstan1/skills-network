@@ -184,9 +184,9 @@ export default (state=initialState, action)=>{
         },
         connections: {
           ...state.connections,
-          active: true,
+          active: false,
           filters: state.connections.filters.map(filter => (
-            {...filter,active: true })
+            {...filter,active: false })
           )
         }
       }

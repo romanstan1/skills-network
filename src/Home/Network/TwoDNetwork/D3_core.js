@@ -16,6 +16,7 @@ import {
 
 let node,
   lastD3Event,
+  // lastD3Event = {k:0.3, x: 199, y: 140},
   simulation,
   context,
   globallinks,
@@ -102,16 +103,23 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
   width = incomingwidth
   height = incomingheight
 
+  // const zoom = d3.zoom().on("zoom", zooming);
+  //
+  // const = d3.zoom().scaleExtent([0.3 , 20.0])
+  //   .on("zoom", zoomed)
+  context = d3.select('canvas')
+  .node()
+  .getContext('2d')
+
+  const zoom = d3.zoom().scaleExtent([0.3 , 20.0]).on("zoom", zoomed);
+  const transform = d3.zoomIdentity.translate(200, 0).scale(1);
+
   const svg = d3.select("svg")
     .attr("width", width)
     .attr("height", height)
-    .call(d3.zoom()
-      .scaleExtent([0.3 , 20.0])
-      .on("zoom", zoomed)
-    )
-  context = d3.select('canvas')
-    .node()
-    .getContext('2d')
+    .call(zoom)
+    // .call(zoom.transform, transform)
+    // .call(zoomed.transform, d3.zoomIdentity.translate(100, 50).scale(0.5))
 
   const forceX = d3.forceX(width / 2).strength(0.030)
   const forceY = d3.forceY(height / 2).strength(0.030)
