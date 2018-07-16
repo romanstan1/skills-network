@@ -125,7 +125,7 @@ export function update2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
-    .on("click",clicked)
+    .on("click",(d) => clicked(d, nodes, links))
     .on("mouseover", (d) => mouseover(d, width))
     .on("mouseout", mouseout)
     .call(d3.drag()
