@@ -14,6 +14,7 @@ const Trigger = connect()(({parentName, active, dispatch}) =>
 
 const collapsibleHOC = FilterGroup => ({parentName, active, ...props}) =>
   <Collapsible
+    open={parentName === 'connections'? true : false}
     transitionTime={100} trigger={humanize(parentName)}
     triggerSibling={() => <Trigger parentName={parentName} active={active} /> }
     >

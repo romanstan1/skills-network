@@ -16,7 +16,6 @@ import {
 
 let node,
   lastD3Event,
-  // lastD3Event = {k:0.3, x: 199, y: 140},
   simulation,
   context,
   globallinks,
@@ -31,6 +30,7 @@ function zoomed() {
   if(d3.event) { // last zoom event saved to variable
     lastD3Event = d3.event.transform
   }
+ // console.log('lastD3Event', lastD3Event)
  if(lastD3Event) {
    context.save();
    context.clearRect(0, 0, width, height);
@@ -38,9 +38,10 @@ function zoomed() {
    context.scale(lastD3Event.k, lastD3Event.k);
    draw();
    context.restore();
-   node.attr("transform", lastD3Event);
- }
- else draw()
+
+   if(node) node.attr("transform", lastD3Event);
+  }
+  else draw()
 }
 
 let currentConnectedLinks = []
@@ -103,23 +104,19 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
   width = incomingwidth
   height = incomingheight
 
-  // const zoom = d3.zoom().on("zoom", zooming);
-  //
-  // const = d3.zoom().scaleExtent([0.3 , 20.0])
-  //   .on("zoom", zoomed)
   context = d3.select('canvas')
   .node()
   .getContext('2d')
 
-  const zoom = d3.zoom().scaleExtent([0.3 , 20.0]).on("zoom", zoomed);
-  const transform = d3.zoomIdentity.translate(200, 0).scale(1);
+  const zoom = d3.zoom().scaleExtent([0.2 , 20.0]).on("zoom", zoomed);
+  const transform = d3.zoomIdentity.translate((width / 2.8), (height / 2.8)).scale(0.3);
+  // const transform = d3.zoomIdentity.translate(width / 2, height / 2).scale(0.2);
 
   const svg = d3.select("svg")
     .attr("width", width)
     .attr("height", height)
     .call(zoom)
-    // .call(zoom.transform, transform)
-    // .call(zoomed.transform, d3.zoomIdentity.translate(100, 50).scale(0.5))
+    .call(zoom.transform, transform)
 
   const forceX = d3.forceX(width / 2).strength(0.030)
   const forceY = d3.forceY(height / 2).strength(0.030)
