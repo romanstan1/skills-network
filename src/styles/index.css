@@ -64,10 +64,8 @@ canvas {
   .links line.connected {
     stroke: red; }
 
-.nodes circle {
-  cursor: crosshair; }
-  .nodes circle.not-selected {
-    fill: #353b44; }
+.nodes circle.not-selected {
+  fill: #353b44; }
 
 #tooltip {
   position: absolute;

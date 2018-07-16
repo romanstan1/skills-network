@@ -199,8 +199,8 @@ div.side-navigation-inner {
         color: #ffffff; }
 
 div.single-filter.active.connections span {
-  border: 1px solid #ce740e !important;
-  background: #ce740e !important; }
+  border: 1px solid #D3AB9E !important;
+  background: #D3AB9E !important; }
 
 div.single-filter.active.people span {
   border: 1px solid #08a8a8 !important;
@@ -211,8 +211,8 @@ div.single-filter.active.skills span {
   background: #2b23c4 !important; }
 
 div.select-all.active.connections {
-  border: 1px solid #ce740e !important;
-  background: #ce740e !important; }
+  border: 1px solid #D3AB9E !important;
+  background: #D3AB9E !important; }
 
 div.select-all.active.people {
   border: 1px solid #08a8a8 !important;

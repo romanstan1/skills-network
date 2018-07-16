@@ -42,15 +42,28 @@ function zoomed() {
 }
 
 function draw() {
+
   context.clearRect(0,0, width, height)
-  context.lineWidth = 1
-  context.strokeStyle = 'rgba(255, 255, 255, 0.6)';
-  context.beginPath()
-  links.forEach(link => {
+
+  const currentLinks = links.filter(link => link.type === 'currentSkills')
+  const desiredLinks = links.filter(link => link.type === 'desiredSkills')
+
+  const drawLink = (link) => {
     context.moveTo(link.source.x, link.source.y)
     context.lineTo(link.target.x, link.target.y)
-  })
-  context.stroke()
+  }
+
+  const configureContext = (linkCategory, gapSize) => {
+    context.lineWidth = 1
+    context.strokeStyle = 'rgba(211, 171, 158, 0.8)';
+    context.beginPath()
+    context.setLineDash([10, gapSize])
+    linkCategory.forEach(link => drawLink(link))
+    context.stroke()
+  }
+
+  configureContext(currentLinks, 0)
+  configureContext(desiredLinks, 6)
 }
 
 function ticked() {
@@ -136,6 +149,7 @@ export function update2(incomingnodes, incominglinks, incomingwidth, incominghei
       .on("end",d => dragended(d, simulation))
     )
 
+  // console.log('links', links)
   simulation.nodes(nodes);
   simulation.force("link").links(links);
   simulation.alpha(1).restart();
