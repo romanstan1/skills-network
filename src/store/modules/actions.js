@@ -1,4 +1,4 @@
-
+import {clicked} from 'Home/Network/TwoDNetwork/D3_modules'
 import {getData} from './api.js'
 
 export const clickPerson = (node) => {
@@ -28,6 +28,7 @@ export const toggleFullDetails = () => {
 }
 
 export const toggleFilter = (filterName, parentName) => {
+  clicked()
   return dispatch => dispatch({
     type: 'TOGGLE_FILTER',
     payload: {filterName, parentName}
@@ -35,6 +36,7 @@ export const toggleFilter = (filterName, parentName) => {
 }
 
 export const toggleSelectAllFilter = (parentName) => {
+  clicked()
   return dispatch => dispatch({
     type: 'TOGGLE_SELECT_ALL_FILTER',
     payload: parentName
@@ -42,6 +44,7 @@ export const toggleSelectAllFilter = (parentName) => {
 }
 
 export const changeMinConnections = (value) => {
+  clicked()
   return dispatch => dispatch({
     type: 'CHANGE_MIN_CONNECTIONS',
     payload: value
@@ -49,6 +52,7 @@ export const changeMinConnections = (value) => {
 }
 
 export const subGroupSelect = (subGroup) => {
+  clicked()
   return dispatch => dispatch({
     type: 'SUB_GROUP_SELECT',
     payload: subGroup

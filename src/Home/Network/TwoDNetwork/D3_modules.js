@@ -28,10 +28,9 @@ export function clicked(d, nodes, links) {
   }
 
   if(!d) { // if clicked is called from a filter
-
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
+    draw(true, false)
     // dispatch(closeFullDetails())
-
   } else if(thisNode.classed("selected")) { // if the node thats clicked on is reclicked
     thisNode.classed("selected", false)
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
