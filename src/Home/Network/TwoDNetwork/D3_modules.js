@@ -2,8 +2,8 @@ import * as d3 from "d3"
 import {peopleColour, skillsColour, connectionsColour} from 'styles/theme'
 import {clickPerson, clickSkill,closeFullDetails} from 'store/modules/actions'
 import store from 'store'
+import {draw} from './D3_core'
 const {dispatch} = store
-
 
 export function dashLine(type) {
   if(type === 'currentSkills') return false
@@ -38,10 +38,12 @@ export function clicked(d, nodes, links) {
     thisNode.classed("selected", false)
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
     // d3.selectAll("line").classed("not-selected", false).classed("connected", false)
-
+    draw(d, false)
     // dispatch(closeFullDetails())
   }
   else { // first time clicked on a node
+    // 'rgba(113, 118, 127, 0.8)'
+    // draw(d)
     firstTimeClickOnNode(d, links, thisNode)
   }
 }
@@ -58,12 +60,14 @@ function firstTimeClickOnNode(d, links, thisNode) {
   if(d.type === 'person') { // if node clicked on is person node
     // d3.selectAll(`[data-source='${d.id}']`).classed("not-selected", false)
     // turn skills nodes on that are connected to the people node
+    draw(d, true)
     if(showCurrentSkills) d.currentSkills.forEach(skill => selectNode(skill))
     if(showDesiredSkills) d.desiredSkills.forEach(skill => selectNode(skill))
 
   } else if (d.type === 'skill') { // if node clicked on is skill node
     // d3.selectAll(`[data-target='${d.id}']`).classed("not-selected", false) // make all links connected to the skill node active
     // turn people nodes on that are connected to the skill node
+    draw(d, true)
     if(showCurrentSkills) d.hadBy.forEach(person => selectNode(person))
     if(showDesiredSkills) d.wantedBy.forEach(person => selectNode(person))
   }
