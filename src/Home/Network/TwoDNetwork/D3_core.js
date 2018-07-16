@@ -125,6 +125,8 @@ export function update2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
+    .attr("stroke-width", '0px')
+    .attr("stroke", '#fff')
     .on("click",(d) => clicked(d, nodes, links))
     .on("mouseover", (d) => mouseover(d, width))
     .on("mouseout", mouseout)

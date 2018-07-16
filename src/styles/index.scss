@@ -77,14 +77,14 @@ svg {
   // background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
   // background: -o-linear-gradient($lighterBlack, $darkestBlack);
   // background: linear-gradient($lighterBlack, $darkestBlack);
-  cursor: grab;
+  cursor: default;
   right: 0;
   top: 0;
   position: absolute;
 
 }
 canvas {
-  cursor: grab;
+  // cursor: grab;
   right: 0;
   top: 0;
   position: absolute;
@@ -112,9 +112,9 @@ canvas {
 }
 
 .nodes circle {
-  cursor: default;
-  // stroke: #fff;
-  // stroke-width: 0px;
+  cursor: crosshair;
+  // stroke: red;
+  // stroke-width: 0;
   &.selected {
     // fill: white;
   }

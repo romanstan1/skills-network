@@ -40,13 +40,12 @@ div#network {
   height: 100%; }
 
 svg {
-  cursor: grab;
+  cursor: default;
   right: 0;
   top: 0;
   position: absolute; }
 
 canvas {
-  cursor: grab;
   right: 0;
   top: 0;
   position: absolute; }
@@ -66,7 +65,7 @@ canvas {
     stroke: red; }
 
 .nodes circle {
-  cursor: default; }
+  cursor: crosshair; }
   .nodes circle.not-selected {
     fill: #353b44; }
 

@@ -23,7 +23,7 @@ export function clicked(d, nodes, links) {
   // if(d && d.type === 'person') dispatch(clickPerson(d))
   // else if(d && d.type === 'skill') dispatch(clickSkill(d))
 
-  if(d) {
+  if(d) { // saves a reference to node thats clicked
     var thisNode = d3.select(`[data-node='${d.id}']`)
   }
 
@@ -41,7 +41,7 @@ export function clicked(d, nodes, links) {
 
     // dispatch(closeFullDetails())
   }
-  else { // first time click on a node
+  else { // first time clicked on a node
     firstTimeClickOnNode(d, links, thisNode)
   }
 }
@@ -108,9 +108,8 @@ export function linkColor(type) {
 }
 
 export function mouseover(d, width) {
-  d3.select(this)
-    .attr("stroke-width", 2)
-    .attr("stroke", '#f2f2f2')
+  d3.select(`[data-node='${d.id}']`)
+    .attr("stroke-width", '2px')
   const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
 	d3.select("#tooltip")
 		.style("right", (width - fullDetailsXPosition.x + 260) + 15 + "px")
