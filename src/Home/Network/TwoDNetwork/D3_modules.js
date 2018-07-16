@@ -37,13 +37,11 @@ export function clicked(d, nodes, links) {
   } else if(thisNode.classed("selected")) { // if the node thats clicked on is reclicked
     thisNode.classed("selected", false)
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
-    // d3.selectAll("line").classed("not-selected", false).classed("connected", false)
     draw(d, false)
     // dispatch(closeFullDetails())
   }
   else { // first time clicked on a node
-    // 'rgba(113, 118, 127, 0.8)'
-    // draw(d)
+    draw(d, true)
     firstTimeClickOnNode(d, links, thisNode)
   }
 }
@@ -52,22 +50,17 @@ export function clicked(d, nodes, links) {
 function firstTimeClickOnNode(d, links, thisNode) {
   const selectNode = node => d3.select(`[data-node='${node}']`).classed("not-selected", false)
   d3.selectAll("circle").classed("selected", false).classed("not-selected", true).classed("connected", false)
-  // d3.selectAll("line").classed("not-selected", true).classed("connected", false)
   thisNode.classed("not-selected", false).classed("selected", true)
   const showCurrentSkills =  store.getState().data.connections.filters[0].active // true if current skills are active
   const showDesiredSkills =  store.getState().data.connections.filters[1].active // true if desired skills are active
 
   if(d.type === 'person') { // if node clicked on is person node
-    // d3.selectAll(`[data-source='${d.id}']`).classed("not-selected", false)
     // turn skills nodes on that are connected to the people node
-    draw(d, true)
     if(showCurrentSkills) d.currentSkills.forEach(skill => selectNode(skill))
     if(showDesiredSkills) d.desiredSkills.forEach(skill => selectNode(skill))
 
   } else if (d.type === 'skill') { // if node clicked on is skill node
-    // d3.selectAll(`[data-target='${d.id}']`).classed("not-selected", false) // make all links connected to the skill node active
     // turn people nodes on that are connected to the skill node
-    draw(d, true)
     if(showCurrentSkills) d.hadBy.forEach(person => selectNode(person))
     if(showDesiredSkills) d.wantedBy.forEach(person => selectNode(person))
   }

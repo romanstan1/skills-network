@@ -42,13 +42,13 @@ function zoomed() {
  else draw()
 }
 
-
 let currentConnectedLinks = []
 let desiredConnectedLinks = []
 let partitionedCurrentLinks = []
 let partitionedDesiredLinks = []
 
 export function draw(d, bool) {
+  // Urggh...
   context.clearRect(0,0, width, height)
   if(d && bool) dClick = d
   else if (d && !bool) dClick = null
@@ -131,13 +131,6 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
-    // .on("click",clicked)
-    // .on("mouseover", mouseover)
-    // .on("mouseout", mouseout)
-    // .call(d3.drag()
-    // .on("start", dragstarted)
-    // .on("drag", dragged)
-    // .on("end", dragended));
 
   simulation
     .nodes(nodes)
@@ -171,7 +164,6 @@ export function update2(incomingnodes, incominglinks, incomingwidth, incominghei
       .on("end",d => dragended(d, simulation))
     )
 
-  // console.log('links', links)
   simulation.nodes(nodes);
   simulation.force("link").links(links);
   simulation.alpha(1).restart();
