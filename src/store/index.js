@@ -9,9 +9,12 @@ export const history = createHistory()
 const enhancers = []
 const logger = store => next => action => {
   let result = next(action)
-  // console.log("store: ",store.getState().data)
-
-  if(action.type === 'CLOSE_FULL_DETAILS') {}
+  console.log('action.type:', action.type)
+  console.log("store: ",store.getState().data)
+  if(action.type === 'CLOSE_FULL_DETAILS' ||
+     action.type === 'OPEN_SKILL' ||
+     action.type === 'OPEN_PERSON' ||
+     action.type === 'TOGGLE_FULL_DETAILS') null
   else if(action.type !== 'CHECK_CONNECTION_FILTER' && action.type !== 'UPDATE_NODES_AND_LINKS'){
     store.dispatch({type: 'CHECK_CONNECTION_FILTER'})
     store.dispatch({type: 'UPDATE_NODES_AND_LINKS'})

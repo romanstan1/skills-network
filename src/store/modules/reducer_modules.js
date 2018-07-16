@@ -11,6 +11,12 @@ export function cleanPeopleData(peopleData) {
   ))
 }
 
+export function lookUp(id, filters) {
+  const filter = filters.find(filter => filter.id === id)
+  if(filter) return filter.name
+  else return ''
+}
+
 export function getParentState(parentName, state) {
   switch(parentName) {
     case 'people': return state.people

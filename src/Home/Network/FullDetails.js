@@ -35,21 +35,27 @@ const UserProfile = ({fullDetails}) =>
     <p>{fullDetails.desiredSkills}</p>
     <h3>Contact</h3>
     <p>
-      LinkedIn <br/>
-      fullname@theuniprogroup.com
+      {fullDetails.email} <br/>
+      {fullDetails.linkedin}
     </p>
     <h3>Location</h3>
     <p>{fullDetails.location}</p>
+    <h3>Client</h3>
+    <p>{fullDetails.client}</p>
+    <h3>Start Date</h3>
+    <p>{fullDetails.startDate}</p>
     <h3>About</h3>
-    <p>Lorem ipsum dolor sit amet, Perspiciatis iusto voluptates fugit qui accusamus! Tenetur qui obcaecati deserunt, ratione unde eius! Aperiam!</p>
+    <p>{fullDetails.about}</p>
   </div>
 
 const SkillDetails = ({fullDetails}) =>
   <div>
     <h3>People</h3>
-    <p>{fullDetails.peopleCurrent}</p>
+    <p>{fullDetails.hadBy}</p>
     <h3>Desired By</h3>
-    <p>{fullDetails.peopleDesired}</p>
+    <p>{fullDetails.wantedBy}</p>
+    <h3>Description</h3>
+    <p>Lorem ipsum dolor sit amet, iusto voluptates fugit qui accusamus! enetur qui obcaecati deserunt. </p>
   </div>
 
 export default connect(state => ({

@@ -5,7 +5,8 @@ import {
   noOfOccurences,
   mapNewFiltersSubGroup,
   getParentState,
-  constructForceNetwork } from './reducer_modules.js'
+  constructForceNetwork,
+  lookUp } from './reducer_modules.js'
 
 const initialState = {
   connections: {
@@ -45,10 +46,6 @@ const initialState = {
   nodes: []
 }
 
-export function lookUpSkill(id) {
-  return initialState.skills.filter(skill => skill.id === id)[0]
-}
-
 export default (state=initialState, action)=>{
   switch(action.type){
     case 'OPEN_PERSON': return {
@@ -58,11 +55,14 @@ export default (state=initialState, action)=>{
         open: true,
         type:'person',
         name: action.payload.name,
-        currentSkills: action.payload.currentSkills.map(skillId =>
-          lookUpSkill(skillId).name).join(', '),
-        desiredSkills: action.payload.desiredSkills.map(skillId =>
-          lookUpSkill(skillId).name).join(', '),
-        location: action.payload.location
+        currentSkills:action.payload.currentSkills.map(id => lookUp(id, state.skills.filters)).join(', '),
+        desiredSkills:action.payload.desiredSkills.map(id => lookUp(id, state.skills.filters)).join(', '),
+        location: action.payload.location,
+        client: action.payload.client,
+        startDate: action.payload.startDate,
+        about: action.payload.about,
+        linkedin: action.payload.linkedin,
+        email: action.payload.email
       }
     }
     case 'OPEN_SKILL': return {
@@ -71,9 +71,9 @@ export default (state=initialState, action)=>{
         ...state.fullDetails,
         open: true,
         type:'skill',
-        peopleCurrent: action.payload.peopleCurrent.join(', '),
-        peopleDesired: action.payload.peopleDesired.join(', '),
         name: action.payload.name,
+        hadBy: action.payload.hadBy.map(id => lookUp(id, state.people.filters)).join(', '),
+        wantedBy: action.payload.wantedBy.map(id => lookUp(id, state.people.filters)).join(', ')
       }
     }
     case 'CLOSE_FULL_DETAILS': return {
@@ -196,7 +196,6 @@ export default (state=initialState, action)=>{
       return {
         ...state,
         nodes,
-        // threednodes,
         links
       }
     }

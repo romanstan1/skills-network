@@ -1,7 +1,7 @@
 import * as d3 from "d3";
-import store from '../../../store'
-import {peopleColour, skillsColour, connectionsColour} from '../../../styles/theme'
-import {clickPerson, clickSkill,closeFullDetails} from '../../../store/modules/actions'
+import store from 'store'
+import {peopleColour, skillsColour, connectionsColour} from 'styles/theme'
+import {clickPerson, clickSkill,closeFullDetails} from 'store/modules/actions'
 import './network_modules'
 
 let width, height, svg, simulation, link, node

@@ -19,13 +19,13 @@ export function nodeSize(d) {
 }
 
 export function clicked(d, nodes, links) {
-
-  // if(d && d.type === 'person') dispatch(clickPerson(d))
-  // else if(d && d.type === 'skill') dispatch(clickSkill(d))
-
+  // Urggh ...
   if(d) { // saves a reference to node thats clicked
     var thisNode = d3.select(`[data-node='${d.id}']`)
   }
+  
+  if(d && d.type === 'person' && !thisNode.classed("selected")) dispatch(clickPerson(d))
+  else if(d && d.type === 'skill' && !thisNode.classed("selected")) dispatch(clickSkill(d))
 
   if(!d) { // if clicked is called from a filter
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
@@ -35,7 +35,7 @@ export function clicked(d, nodes, links) {
     thisNode.classed("selected", false)
     d3.selectAll("circle").classed("not-selected", false).classed("connected", false)
     draw(d, false)
-    // dispatch(closeFullDetails())
+    dispatch(closeFullDetails())
   }
   else { // first time clicked on a node
     draw(d, true)
