@@ -103,11 +103,11 @@ canvas {
     #full-details.open div.details-inner {
       transform: translateX(0px) !important; }
   #full-details.hidden {
-    transform: translateX(calc(100% - 50px)); }
+    transform: translateX(calc(100% - 35px)); }
     #full-details.hidden div.details-inner {
-      transform: translateX(50px) !important; }
+      transform: translateX(35px) !important; }
     #full-details.hidden div.chevron {
-      left: 20px !important; }
+      left: 14px !important; }
       #full-details.hidden div.chevron::before {
         transform: rotate(-135deg) !important;
         opacity: 1;
@@ -142,7 +142,8 @@ canvas {
   #full-details div.details-inner {
     padding: 5px 20px;
     transition: 0.2s ease;
-    transform: translateX(50px); }
+    transform: translateX(50px);
+    border-top: 1px solid #262626; }
     #full-details div.details-inner h2 {
       text-transform: uppercase;
       font-weight: 400;
@@ -233,3 +234,18 @@ div.loader {
     transform: scale(1); }
   25% {
     transform: scale(1.55); } }
+
+::selection {
+  background: transparent; }
+
+::-moz-selection {
+  background: transparent; }
+
+@media only screen and (max-width: 600px) {
+  #full-details {
+    width: calc(100% - 35px);
+    z-index: 10; }
+  div.full-screen-icon {
+    position: absolute;
+    top: 30px;
+    left: 66px; } }

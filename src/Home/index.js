@@ -8,22 +8,34 @@ import Loader from './Loader'
 
 class Main extends Component {
   componentDidMount() {
-    // initializeDom()
     this.fetchData()
+  }
+  state = {
+    open: false
   }
   fetchData = () => {
     this.props.dispatch(fetchSkillNetworkData())
+  }
+  hideSideNavigation = () => {
+    this.setState({open: !this.state.open})
   }
   render() {
     const {people, skills, failedData} = this.props
     return (
       <div id='main'>
-        <SideNavigation key='sidenavigation'/>
+        <SideNavigation
+          open={this.state.open}
+          hideSideNavigation={this.hideSideNavigation}
+        />
         {!people.length && !skills.length?
            <Loader
              failedData={failedData}
              fetchData={this.fetchData}
-           /> : <Network/>}
+           /> :
+           <Network
+             sideNavOpen={this.state.open}
+           />
+         }
       </div>
     )
   }

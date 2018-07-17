@@ -5,6 +5,7 @@ div.side-navigation {
   left: 0px;
   background: #121214;
   width: 260px;
+  z-index: 100;
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 1;
@@ -12,6 +13,7 @@ div.side-navigation {
   height: 100%; }
   div.side-navigation div.openNavTab {
     position: relative;
+    transition: 0.2s ease;
     width: 100%;
     height: 55px; }
     div.side-navigation div.openNavTab div.chevron {
@@ -30,6 +32,11 @@ div.side-navigation {
         transform: rotate(45deg);
         width: 16px;
         transition: 0.2s ease; }
+    div.side-navigation div.openNavTab:hover {
+      background: #19191c; }
+      div.side-navigation div.openNavTab:hover div.chevron::before {
+        opacity: 1;
+        border-color: white; }
   div.side-navigation.open {
     transform: translateX(0%); }
     div.side-navigation.open div.openNavTab div.chevron {
@@ -42,7 +49,7 @@ div.side-navigation {
     transform: translate(-40px, 0); }
 
 div.side-navigation-inner {
-  padding: 5px 0;
+  padding: 0px 0;
   font-size: 13px;
   height: calc(100% - 120px); }
   div.side-navigation-inner nav {
@@ -363,3 +370,14 @@ div.dimension {
   transition: 0.1s ease; }
   div.dimension:hover {
     color: #ffffff; }
+
+@media only screen and (max-width: 600px) {
+  div.side-navigation {
+    width: 100%;
+    min-width: 260px; }
+  input.search-box {
+    width: calc(100% - 30px); } }
+
+@media only screen and (max-width: 450px) {
+  div.side-navigation {
+    width: 100%; } }

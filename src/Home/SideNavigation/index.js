@@ -30,9 +30,12 @@ export default class SideNavigation extends Component {
   }
   render() {
     const {selectedNav} = this.state
+    const {open,hideSideNavigation} = this.props
     return [
-      <div key='sidenavigation' className='side-navigation open'>
-        <div className='openNavTab'/>
+      <div key='sidenavigation' className={open? 'side-navigation': 'side-navigation open'}>
+        <div className='openNavTab' onClick={hideSideNavigation}>
+          <div className='chevron'/>
+        </div>
         <div className='side-navigation-inner'>
           {/* <Nav
             selectedNav={selectedNav}

@@ -145,12 +145,12 @@ canvas {
 
   }
   &.hidden {
-    transform: translateX(calc(100% - 50px));
+    transform: translateX(calc(100% - 35px));
     div.details-inner {
-      transform: translateX(50px) !important;
+      transform: translateX(35px) !important;
     }
     div.chevron {
-      left: 20px !important;
+      left: 14px !important;
       &::before {
         transform: rotate(-135deg) !important;
         opacity: 1;
@@ -196,6 +196,7 @@ canvas {
     padding: 5px 20px;
     transition: 0.2s ease;
     transform: translateX(50px);
+    border-top: 1px solid $grey01;
     h2 {
       text-transform: uppercase;
       font-weight: 400;
@@ -311,5 +312,25 @@ div.loader {
   }
   25% {
     transform: scale(1.55);
+  }
+}
+
+
+::selection {
+  background: transparent;
+}
+::-moz-selection {
+  background: transparent;
+}
+
+@media only screen and (max-width: 600px) {
+  #full-details {
+    width: calc(100% - 35px);
+    z-index: 10;
+  }
+  div.full-screen-icon {
+    position: absolute;
+    top: 30px;
+    left: 66px;
   }
 }

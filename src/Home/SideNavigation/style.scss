@@ -26,6 +26,7 @@ div.side-navigation {
   left: 0px;
   background: $darkestBlack;
   width: 260px;
+  z-index: 100;
   height: 100%;
   transition: 0.2s ease-out;
   opacity: 1;
@@ -33,7 +34,7 @@ div.side-navigation {
   height: 100%;
   div.openNavTab {
     position: relative;
-    // background: red;
+    transition: 0.2s ease;
     width: 100%;
     height: 55px;
     div.chevron {
@@ -54,15 +55,15 @@ div.side-navigation {
         transition: 0.2s ease;
       }
     }
-    // &:hover {
-    //   background: $hoverDarkBlack;
-    //   div.chevron {
-    //     &::before {
-    //       border-color:white;
-    //       opacity: 1;
-    //     }
-    //   }
-    // }
+    &:hover {
+      background: $hoverDarkBlack;
+      div.chevron {
+        &::before {
+          opacity: 1;
+          border-color:white;
+        }
+      }
+    }
   }
   &.open {
     transform: translateX(0%);
@@ -84,7 +85,7 @@ div.side-navigation {
 }
 
 div.side-navigation-inner {
-  padding: 5px 0;
+  padding: 0px 0;
   font-size: 13px;
   height: calc(100% - 120px);
   nav {
@@ -481,10 +482,6 @@ div.dd-menu {
   }
 }
 
-
-
-
-
 div.dimension {
   font-family: sans-serif;
   position: absolute;
@@ -499,5 +496,22 @@ div.dimension {
   transition: 0.1s ease;
   &:hover {
     color: $white;
+  }
+}
+
+
+@media only screen and (max-width: 600px) {
+  div.side-navigation {
+    width: 100%;
+    min-width: 260px;
+  }
+  input.search-box {
+    width: calc(100% - 30px);
+  }
+}
+
+@media only screen and (max-width: 450px) {
+  div.side-navigation {
+    width: 100%;
   }
 }

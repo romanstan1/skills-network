@@ -12,6 +12,7 @@ export async function getData() {
   }
   catch(error) {
     console.log(error)
+    return seededSkillsData
     return 'Error'
   }
 }

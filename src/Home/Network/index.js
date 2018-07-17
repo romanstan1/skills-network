@@ -12,20 +12,28 @@ import TwoDNetwork from './TwoDNetwork'
 class Network extends Component {
 
   state = {
-    width: window.innerWidth - 260,
+    width:  window.innerWidth > 600? window.innerWidth - 260 : window.innerWidth - 35,
     height: window.innerHeight
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.updateScreenDimensions(nextProps)
   }
 
   componentDidMount() {
     window.addEventListener("resize", this.updateScreenDimensions)
   }
 
-  updateScreenDimensions = () => {
-    this.setState({width: window.innerWidth - 260, height: window.innerHeight})
+  updateScreenDimensions = (props) => {
+    this.setState({
+      width:  window.innerWidth > 600? window.innerWidth - 260 : window.innerWidth - 35,
+      height: window.innerHeight
+    })
   }
 
   render() {
     const {width, height} = this.state
+    console.log('height', height)
     return [
       <Tooltip key='tooltip'/>,
       <FullDetails key='fulldetails'/>,

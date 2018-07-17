@@ -9,12 +9,10 @@ class FullDetails extends Component {
   render() {
     const {fullDetails} = this.props
     const {open, name, type, hidden} = fullDetails
-    // console.log('fullDetails', fullDetails)
     return (
       <div id="full-details"
         className={open? hidden? "open hidden" : "open": ""}>
         <div onClick={this.hideFullDetails} className='hide-details-tab'>
-          {/* <div className="close-button"/> */}
           <div className='chevron'/>
         </div>
         <div className='details-inner'>
