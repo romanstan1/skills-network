@@ -23,7 +23,7 @@ export function clicked(d, nodes, links) {
   if(d) { // saves a reference to node thats clicked
     var thisNode = d3.select(`[data-node='${d.id}']`)
   }
-  
+
   if(d && d.type === 'person' && !thisNode.classed("selected")) dispatch(clickPerson(d))
   else if(d && d.type === 'skill' && !thisNode.classed("selected")) dispatch(clickSkill(d))
 
@@ -106,7 +106,10 @@ export function mouseover(d, width) {
     .attr("stroke-width", '2px')
   const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
 	d3.select("#tooltip")
-		.style("right", (width - fullDetailsXPosition.x + 260) + 15 + "px")
+		.style("right", () => {
+      if(window.visualViewport.width > 600) return (width - fullDetailsXPosition.x + 260) + 15 + "px"
+      return "50%"
+    })
 		.style("top", "15px")
 		.select("#value")
 		.text(d.name);

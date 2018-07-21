@@ -334,4 +334,13 @@ div.loader {
     top: 30px;
     left: 66px;
   }
+  div.loader {
+    transform: translate(-50%, 0);
+  }
+
+  #tooltip {
+    text-align: right;
+    padding: 4px 20px;
+    transform: translate(60%, 0);
+  }
 }

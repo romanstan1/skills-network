@@ -1,8 +1,5 @@
-import {seededSkillsData} from './seed.js'
 
 const URL = `https://serene-ocean-70888.herokuapp.com/skillsMatrix`
-
-// return seededSkillsData
 export async function getData() {
   const delay = time => new Promise(res=>setTimeout(()=>res(),time));
   await delay(2000);
@@ -14,7 +11,6 @@ export async function getData() {
   }
   catch(error) {
     console.log(error)
-    return seededSkillsData
     return 'Error'
   }
 }
