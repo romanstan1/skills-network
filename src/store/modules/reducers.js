@@ -43,7 +43,9 @@ const initialState = {
   dimension: '2D',
   failedData: false,
   links:[],
-  nodes: []
+  nodes: [],
+  width:  window.visualViewport.width > 600? window.visualViewport.width - 260 : window.visualViewport.width - 35,
+  height: window.visualViewport.height
 }
 
 export default (state=initialState, action)=>{
@@ -82,6 +84,11 @@ export default (state=initialState, action)=>{
         ...state.fullDetails,
         open:false
       }
+    }
+    case 'UPDATE_SCREEN_DIMENSIONS': return {
+      ...state,
+      width:  window.visualViewport.width > 600? window.visualViewport.width - 260 : window.visualViewport.width - 35,
+      height: window.visualViewport.height
     }
     case 'TOGGLE_FULL_DETAILS': return {
       ...state,

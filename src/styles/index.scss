@@ -47,6 +47,7 @@ div#main {
   position: relative;
   height: 100%;
   color: white;
+  overflow: hidden;
   background: -webkit-linear-gradient($lighterBlack, $darkestBlack);
   background: -o-linear-gradient($lighterBlack, $darkestBlack);
   background: linear-gradient($lighterBlack, $darkestBlack);
@@ -137,6 +138,7 @@ canvas {
   transform: translateX(100%);
   transition: 0.2s ease-out;
   z-index: 100;
+  border-left: 1px solid $lighterBlack;
   &.open {
     transform: translateX(0%);
     div.details-inner {
@@ -314,7 +316,6 @@ div.loader {
     transform: scale(1.55);
   }
 }
-
 
 ::selection {
   background: transparent;

@@ -1,6 +1,12 @@
 import {clicked} from 'Home/Network/TwoDNetwork/D3_modules'
 import {getData} from './api.js'
 
+export const updateScreenDimensions = () => {
+  return dispatch => dispatch({
+    type: 'UPDATE_SCREEN_DIMENSIONS'
+  })
+}
+
 export const clickPerson = (node) => {
   return dispatch => dispatch({
     type: 'OPEN_PERSON',
@@ -58,6 +64,7 @@ export const subGroupSelect = (subGroup) => {
     payload: subGroup
   })
 }
+
 export const changeDimension = () => {
   return dispatch => dispatch({
     type: 'CHANGE_DIMENSION'

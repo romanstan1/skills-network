@@ -97,7 +97,7 @@ function ticked() {
     .attr('cy', d => d.y)
 }
 
-export function render2(incomingnodes, incominglinks, incomingwidth, incomingheight) {
+export function render(incomingnodes, incominglinks, incomingwidth, incomingheight) {
 
   nodes = incomingnodes
   links = incominglinks
@@ -144,7 +144,7 @@ export function render2(incomingnodes, incominglinks, incomingwidth, incominghei
     .links(links)
 }
 
-export function update2(incomingnodes, incominglinks, incomingwidth, incomingheight) {
+export function update(incomingnodes, incominglinks, incomingwidth, incomingheight) {
 
   nodes = incomingnodes
   links = incominglinks

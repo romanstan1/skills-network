@@ -32,12 +32,14 @@ div.side-navigation {
   opacity: 1;
   transform: translateX(calc(-100% + 35px));
   height: 100%;
+  border-right: 1px solid $lighterBlack;
   div.openNavTab {
     position: relative;
     transition: 0.2s ease;
     width: 100%;
     height: 55px;
     div.chevron {
+      display: none;
       position: absolute;
       top: 18px;
       right: 11px;
@@ -56,7 +58,7 @@ div.side-navigation {
       }
     }
     &:hover {
-      background: $hoverDarkBlack;
+      background: inherit;
       div.chevron {
         &::before {
           opacity: 1;
@@ -504,6 +506,14 @@ div.dimension {
   div.side-navigation {
     width: 100%;
     min-width: 260px;
+    div.chevron {
+      display: block !important;
+    }
+    div.openNavTab {
+      &:hover {
+        background: $hoverDarkBlack !important;
+      }
+    }
   }
   input.search-box {
     width: calc(100% - 30px);
