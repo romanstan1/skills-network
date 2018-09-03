@@ -4,7 +4,9 @@
   "private": true,
   "dependencies": {
     "d3": "^4.13.0",
-    "d3-zoom": "^1.7.1",
+    "d3-drag": "^1.2.3",
+    "d3-selection": "^1.3.2",
+    "d3-zoom": "^1.7.3",
     "firebase": "^5.2.0",
     "lodash.throttle": "^4.1.1",
     "npm-run-all": "^4.1.2",
@@ -31,11 +33,16 @@
     "eject": "react-scripts eject",
     "start-js": "react-scripts start",
     "start": "npm-run-all -p watch-css start-js",
-    "build": "npm run build-css && react-scripts build",
+    "build": "npm run remove-line && npm run build-css && react-scripts build && npm run add-line",
+    "remove-line": "sed -i '' '$d' .gitignore",
+    "add-line": "echo 'firebase-config.js' >> .gitignore",
     "build-js": "react-scripts build"
   },
   "devDependencies": {
+    "enzyme": "^3.5.0",
+    "enzyme-adapter-react-16": "^1.3.0",
     "node-sass-chokidar": "^1.3.0",
-    "prop-types": "^15.6.1"
+    "prop-types": "^15.6.1",
+    "react-test-renderer": "^16.4.2"
   }
 }

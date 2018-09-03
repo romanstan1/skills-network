@@ -1,4 +1,8 @@
 import * as d3 from "d3"
+import {event as d3Event} from 'd3-selection';
+import {zoom as d3Zoom} from 'd3-zoom';
+import {drag as d3Drag} from 'd3-drag';
+import {select as d3Select} from 'd3-selection';
 import {peopleColour, skillsColour, connectionsColour} from 'styles/theme'
 import {
   nodeSize,
@@ -27,10 +31,9 @@ let node,
 
 
 function zoomed() {
-  if(d3.event) { // last zoom event saved to variable
-    lastD3Event = d3.event.transform
+  if(d3Event) { // last zoom event saved to variable
+    lastD3Event = d3Event.transform
   }
- // console.log('lastD3Event', lastD3Event)
  if(lastD3Event) {
    context.save();
    context.clearRect(0, 0, width, height);
@@ -38,7 +41,6 @@ function zoomed() {
    context.scale(lastD3Event.k, lastD3Event.k);
    draw();
    context.restore();
-
    if(node) node.attr("transform", lastD3Event);
   }
   else draw()
@@ -104,20 +106,17 @@ export function render(incomingnodes, incominglinks, incomingwidth, incomingheig
   width = incomingwidth
   height = incomingheight
 
-  context = d3.select('canvas')
-  .node()
-  .getContext('2d')
+  context = d3Select('canvas')
+    .node()
+    .getContext('2d')
 
-  const zoom = d3.zoom().scaleExtent([0.2 , 20.0]).on("zoom", zoomed);
+  const zoom = d3Zoom().scaleExtent([0.2 , 20.0]).on("zoom", zoomed);
   const transform = d3.zoomIdentity.translate((width / 2.8), (height / 2.8)).scale(0.3);
-  // const transform = d3.zoomIdentity.translate(width / 2, height / 2).scale(0.2);
-
-  const svg = d3.select("svg")
+  const svg = d3Select("svg")
     .attr("width", width)
     .attr("height", height)
     .call(zoom)
     .call(zoom.transform, transform)
-
   const forceX = d3.forceX(width / 2).strength(0.030)
   const forceY = d3.forceY(height / 2).strength(0.030)
 
@@ -163,7 +162,7 @@ export function update(incomingnodes, incominglinks, incomingwidth, incomingheig
     .on("click",(d) => clicked(d, nodes, links))
     .on("mouseover", (d) => mouseover(d, width))
     .on("mouseout", mouseout)
-    .call(d3.drag()
+    .call(d3Drag()
       .on("start", d => dragstarted(d, simulation))
       .on("drag", dragged)
       .on("end",d => dragended(d, simulation))

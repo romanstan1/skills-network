@@ -6,6 +6,7 @@ import {
   mapNewFiltersSubGroup,
   getParentState,
   constructForceNetwork,
+  windowDimensions,
   lookUp } from './reducer_modules.js'
 
 const initialState = {
@@ -44,8 +45,8 @@ const initialState = {
   failedData: false,
   links:[],
   nodes: [],
-  width:  window.visualViewport.width > 600? window.visualViewport.width - 260 : window.visualViewport.width - 35,
-  height: window.visualViewport.height
+  width:  windowDimensions().width,
+  height: windowDimensions().height
 }
 
 export default (state=initialState, action)=>{
@@ -85,10 +86,13 @@ export default (state=initialState, action)=>{
         open:false
       }
     }
-    case 'UPDATE_SCREEN_DIMENSIONS': return {
-      ...state,
-      width:  window.visualViewport.width > 600? window.visualViewport.width - 260 : window.visualViewport.width - 35,
-      height: window.visualViewport.height
+    case 'UPDATE_SCREEN_DIMENSIONS': {
+      const dimensions = windowDimensions()
+      return {
+        ...state,
+        width:  dimensions.width,
+        height: dimensions.height
+      }
     }
     case 'TOGGLE_FULL_DETAILS': return {
       ...state,

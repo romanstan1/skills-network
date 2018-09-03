@@ -1,8 +1,10 @@
 import * as d3 from "d3"
 import {peopleColour, skillsColour, connectionsColour} from 'styles/theme'
 import {clickPerson, clickSkill,closeFullDetails} from 'store/modules/actions'
+import {windowDimensions} from 'store/modules/reducer_modules'
 import store from 'store'
 import {draw} from './D3_core'
+import {event as d3Event} from 'd3-selection';
 const {dispatch} = store
 
 export function dashLine(type) {
@@ -63,21 +65,19 @@ function firstTimeClickOnNode(d, links, thisNode) {
   }
 }
 
-
-
 export function dragstarted(d, simulation) {
-  if (!d3.event.active) simulation.alphaTarget(0.3).restart();
+  if (!d3Event.active) simulation.alphaTarget(0.3).restart();
   d.fx = d.x;
   d.fy = d.y;
 }
 
 export function dragged(d) {
-  d.fx = d3.event.x;
-  d.fy = d3.event.y;
+  d.fx = d3Event.x;
+  d.fy = d3Event.y;
 }
 
 export function dragended(d, simulation) {
-  if (!d3.event.active) simulation.alphaTarget(0);
+  if (!d3Event.active) simulation.alphaTarget(0);
   d.fx = null;
   d.fy = null;
 }
@@ -107,7 +107,7 @@ export function mouseover(d, width) {
   const fullDetailsXPosition = document.getElementById('full-details').getBoundingClientRect();
 	d3.select("#tooltip")
 		.style("right", () => {
-      if(window.visualViewport.width > 600) return (width - fullDetailsXPosition.x + 260) + 15 + "px"
+      if(windowDimensions().width > 600) return (width - fullDetailsXPosition.x + 260) + 15 + "px"
       return "50%"
     })
 		.style("top", "15px")

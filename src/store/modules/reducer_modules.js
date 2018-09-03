@@ -11,6 +11,18 @@ export function cleanPeopleData(peopleData) {
   ))
 }
 
+export function windowDimensions() {
+  let width, height
+  if(!!window.visualViewport) {
+    width =  window.visualViewport.width > 600? window.visualViewport.width - 260 : window.visualViewport.width - 35,
+    height = window.visualViewport.height
+  } else {
+    width = window.innerWidth
+    height = window.innerHeight
+  }
+  return {width, height}
+}
+
 export function lookUp(id, filters) {
   const filter = filters.find(filter => filter.id === id)
   if(filter) return filter.name

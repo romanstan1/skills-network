@@ -3,6 +3,7 @@ import './style.css'
 import Filters from './Filters'
 import {connect} from 'react-redux'
 import {updateScreenDimensions} from 'store/modules/actions'
+import {windowDimensions} from 'store/modules/reducer_modules'
 
 const Nav = ({selectedNav, handleSelectNav}) =>
 <nav>
@@ -47,8 +48,8 @@ class SideNavigation extends Component {
     const {selectedNav} = this.state
     const {open,hideSideNavigation, width} = this.props
     return [
-      <div key='sidenavigation' className={window.visualViewport.width > 600? 'side-navigation open': open? 'side-navigation': 'side-navigation open'}>
-        <div className='openNavTab' onClick={window.visualViewport.width > 600? null : hideSideNavigation }>
+      <div key='sidenavigation' className={windowDimensions().width > 600? 'side-navigation open': open? 'side-navigation': 'side-navigation open'}>
+        <div className='openNavTab' onClick={windowDimensions().width > 600? null : hideSideNavigation }>
           <div className='chevron'/>
         </div>
         <div className='side-navigation-inner'>
