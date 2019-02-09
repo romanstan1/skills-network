@@ -3,21 +3,24 @@ import { routerMiddleware } from 'react-router-redux'
 import thunk from 'redux-thunk'
 import createHistory from 'history/createBrowserHistory'
 import rootReducer from './modules'
+import { MISC } from "./modules/constants"
 
 export const history = createHistory()
+
+console.log("MISC", MISC)
 
 const enhancers = []
 const logger = store => next => action => {
   let result = next(action)
   // console.log('action.type:', action.type)
   // console.log("store: ",store.getState().data)
-  if(action.type === 'CLOSE_FULL_DETAILS' ||
-     action.type === 'OPEN_SKILL' ||
-     action.type === 'OPEN_PERSON' ||
-     action.type === 'TOGGLE_FULL_DETAILS') null
-  else if(action.type !== 'CHECK_CONNECTION_FILTER' && action.type !== 'UPDATE_NODES_AND_LINKS'){
-    store.dispatch({type: 'CHECK_CONNECTION_FILTER'})
-    store.dispatch({type: 'UPDATE_NODES_AND_LINKS'})
+  if (action.type === MISC.CLOSE_FULL_DETAILS ||
+    action.type === MISC.OPEN_SKILL ||
+    action.type === MISC.OPEN_PERSON ||
+    action.type === MISC.TOGGLE_FULL_DETAILS) null
+  else if (action.type !== MISC.CHECK_CONNECTION_FILTER && action.type !== MISC.UPDATE_NODES_AND_LINKS){
+    store.dispatch({ type: MISC.CHECK_CONNECTION_FILTER })
+    store.dispatch({ type: MISC.UPDATE_NODES_AND_LINKS })
   }
 
   return result

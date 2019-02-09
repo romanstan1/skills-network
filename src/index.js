@@ -6,7 +6,7 @@ import { ConnectedRouter } from 'react-router-redux'
 import store from './store'
 import {Provider} from 'react-redux'
 import createBrowserHistory from 'history/createBrowserHistory'
-import './firebase-config.js'
+// import './firebase-config.js'
 
 const history = createBrowserHistory()
 render(
