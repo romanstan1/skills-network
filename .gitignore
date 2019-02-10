@@ -5,12 +5,14 @@
 
 # testing
 /coverage
-*.css
 
 # production
 /build
 
 # misc
+*.css
+*/.css
+.css
 .DS_Store
 .env.local
 .env.development.local

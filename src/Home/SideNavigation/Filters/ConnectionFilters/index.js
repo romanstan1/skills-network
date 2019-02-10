@@ -1,22 +1,25 @@
-import React from 'react';
-import SliderWrap from './SliderWrap'
-import SingleFilter from '../SingleFilter'
-import { connect } from 'react-redux'
-import collapsibleHOC from '../collapsibleHOC'
+import React from "react"
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
+import SliderWrap from "./SliderWrap"
+import SingleFilter from "../SingleFilter"
+import collapsibleHOC from "../collapsibleHOC"
 
 const ConnectionFilters = ({connections}) =>
   <span>
     <SingleFilter
       filter={connections.filters[0]}
-      parentName='connections'
-    />
-    <SliderWrap/>
+      parentName="connections" />
+    <SliderWrap />
     <SingleFilter
       filter={connections.filters[1]}
-      parentName='connections'
-    />
+      parentName="connections" />
   </span>
 
-export default connect(state => ({
+ConnectionFilters.propTypes = {
+  connections: PropTypes.object.isRequired
+}
+
+export default connect((state) => ({
   connections: state.data.connections
 }))(collapsibleHOC(ConnectionFilters))

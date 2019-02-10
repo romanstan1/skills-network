@@ -1,49 +1,43 @@
 import * as d3 from "d3"
-import {event as d3Event} from 'd3-selection';
-import {zoom as d3Zoom} from 'd3-zoom';
-import {drag as d3Drag} from 'd3-drag';
-import {select as d3Select} from 'd3-selection';
-import {peopleColour, skillsColour, connectionsColour} from 'styles/theme'
+import {event as d3Event, select as d3Select} from "d3-selection"
+import {zoom as d3Zoom} from "d3-zoom"
+import {drag as d3Drag} from "d3-drag"
+// eslint-disable-next-line import/no-cycle
 import {
   nodeSize,
-  dashLine,
   clicked,
   dragstarted,
   dragged,
   dragended,
   chargeStrength,
   nodeColor,
-  linkColor,
   mouseout,
   mouseover
-} from './D3_modules'
+} from "./D3_modules"
 
-let node,
-  lastD3Event,
-  simulation,
-  context,
-  globallinks,
-  links,
-  nodes,
-  width,
-  height,
-  dClick
-
+let node
+let lastD3Event
+let simulation
+let context
+let links
+let nodes
+let width
+let height
+let dClick
 
 function zoomed() {
-  if(d3Event) { // last zoom event saved to variable
+  if (d3Event) { // last zoom event saved to variable
     lastD3Event = d3Event.transform
   }
- if(lastD3Event) {
-   context.save();
-   context.clearRect(0, 0, width, height);
-   context.translate(lastD3Event.x, lastD3Event.y);
-   context.scale(lastD3Event.k, lastD3Event.k);
-   draw();
-   context.restore();
-   if(node) node.attr("transform", lastD3Event);
-  }
-  else draw()
+  if (lastD3Event) {
+    context.save()
+    context.clearRect(0, 0, width, height)
+    context.translate(lastD3Event.x, lastD3Event.y)
+    context.scale(lastD3Event.k, lastD3Event.k)
+    draw()
+    context.restore()
+    if (node) node.attr("transform", lastD3Event)
+  } else draw()
 }
 
 let currentConnectedLinks = []
@@ -53,17 +47,17 @@ let partitionedDesiredLinks = []
 
 export function draw(d, bool) {
   // Urggh...
-  context.clearRect(0,0, width, height)
-  if(d && bool) dClick = d
+  context.clearRect(0, 0, width, height)
+  if (d && bool) dClick = d
   else if (d && !bool) dClick = null
-  const currentLinks = links.filter(link => link.type === 'currentSkills' )
-  const desiredLinks = links.filter(link => link.type === 'desiredSkills')
+  const currentLinks = links.filter((link) => link.type === "currentSkills")
+  const desiredLinks = links.filter((link) => link.type === "desiredSkills")
 
-  if(d) { // set new links arrays
-    currentConnectedLinks = links.filter(link => link.type === 'currentSkills' && (d.id === link.source.id || d.id === link.target.id))
-    desiredConnectedLinks = links.filter(link => link.type === 'desiredSkills' && (d.id === link.source.id || d.id === link.target.id))
-    partitionedCurrentLinks = currentLinks.filter(link => !currentConnectedLinks.includes(link))
-    partitionedDesiredLinks = desiredLinks.filter(link => !desiredConnectedLinks.includes(link))
+  if (d) { // set new links arrays
+    currentConnectedLinks = links.filter((link) => link.type === "currentSkills" && (d.id === link.source.id || d.id === link.target.id))
+    desiredConnectedLinks = links.filter((link) => link.type === "desiredSkills" && (d.id === link.source.id || d.id === link.target.id))
+    partitionedCurrentLinks = currentLinks.filter((link) => !currentConnectedLinks.includes(link))
+    partitionedDesiredLinks = desiredLinks.filter((link) => !desiredConnectedLinks.includes(link))
   }
 
   const drawLink = (link) => {
@@ -73,15 +67,15 @@ export function draw(d, bool) {
 
   const configureContext = (linkCategory, gapSize, connected) => {
     context.lineWidth = 1
-    if(connected) context.strokeStyle = 'rgba(211, 171, 158, 0.8)'
-    else context.strokeStyle = 'rgba(53, 58, 68,1)'
+    if (connected) context.strokeStyle = "rgba(211, 171, 158, 0.8)"
+    else context.strokeStyle = "rgba(53, 58, 68,1)"
     context.beginPath()
     context.setLineDash([10, gapSize])
-    linkCategory.forEach(link => drawLink(link))
+    linkCategory.forEach((link) => drawLink(link))
     context.stroke()
   }
 
-  if(dClick) {
+  if (dClick) {
     configureContext(partitionedCurrentLinks, 0, false)
     configureContext(partitionedDesiredLinks, 6, false)
     configureContext(currentConnectedLinks, 0, true)
@@ -95,23 +89,22 @@ export function draw(d, bool) {
 function ticked() {
   zoomed()
   node
-    .attr('cx', d => d.x)
-    .attr('cy', d => d.y)
+    .attr("cx", (d) => d.x)
+    .attr("cy", (d) => d.y)
 }
 
 export function render(incomingnodes, incominglinks, incomingwidth, incomingheight) {
-
   nodes = incomingnodes
   links = incominglinks
   width = incomingwidth
   height = incomingheight
 
-  context = d3Select('canvas')
+  context = d3Select("canvas")
     .node()
-    .getContext('2d')
+    .getContext("2d")
 
-  const zoom = d3Zoom().scaleExtent([0.2 , 20.0]).on("zoom", zoomed);
-  const transform = d3.zoomIdentity.translate((width / 2.8), (height / 2.8)).scale(0.3);
+  const zoom = d3Zoom().scaleExtent([0.2, 20.0]).on("zoom", zoomed)
+  const transform = d3.zoomIdentity.translate((width / 2.8), (height / 2.8)).scale(0.3)
   const svg = d3Select("svg")
     .attr("width", width)
     .attr("height", height)
@@ -124,14 +117,15 @@ export function render(incomingnodes, incominglinks, incomingwidth, incomingheig
     .force("link", d3.forceLink().id((d) => d.id).strength(0.01))
     .force("charge", d3.forceManyBody().strength(chargeStrength))
     .force("center", d3.forceCenter(width / 2, height / 2))
-    .force('x', forceX)
-    .force('y',  forceY)
+    .force("x", forceX)
+    .force("y", forceY)
 
   node = svg.append("g")
     .attr("class", "nodes")
     .selectAll("circle")
     .data(nodes)
-    .enter().append("circle")
+    .enter()
+    .append("circle")
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
@@ -144,7 +138,6 @@ export function render(incomingnodes, incominglinks, incomingwidth, incomingheig
 }
 
 export function update(incomingnodes, incominglinks, incomingwidth, incomingheight) {
-
   nodes = incomingnodes
   links = incominglinks
   width = incomingwidth
@@ -157,19 +150,19 @@ export function update(incomingnodes, incominglinks, incomingwidth, incomingheig
     .attr("r", (d) => nodeSize(d))
     .attr("fill", (d) => nodeColor(d.type))
     .attr("data-node", (d) => d.id)
-    .attr("stroke-width", '0px')
-    .attr("stroke", '#fff')
-    .on("click",(d) => clicked(d, nodes, links))
+    .attr("stroke-width", "0px")
+    .attr("stroke", "#fff")
+    .on("click", (d) => clicked(d, nodes, links))
     .on("mouseover", (d) => mouseover(d, width))
     .on("mouseout", mouseout)
     .call(d3Drag()
-      .on("start", d => dragstarted(d, simulation))
+      .on("start", (d) => dragstarted(d, simulation))
       .on("drag", dragged)
-      .on("end",d => dragended(d, simulation))
+      .on("end", (d) => dragended(d, simulation))
     )
 
-  simulation.nodes(nodes);
-  simulation.force("link").links(links);
-  simulation.alpha(1).restart();
+  simulation.nodes(nodes)
+  simulation.force("link").links(links)
+  simulation.alpha(1).restart()
   zoomed()
 }

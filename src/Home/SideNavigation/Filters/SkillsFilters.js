@@ -1,28 +1,27 @@
-import React from 'react';
-import SingleFilter from './SingleFilter';
-import collapsibleHOC from './collapsibleHOC'
-import {connect} from 'react-redux'
-import searchHOC from './searchHOC'
+import React from "react"
+import {connect} from "react-redux"
+import PropTypes from "prop-types"
+import SingleFilter from "./SingleFilter"
+import collapsibleHOC from "./collapsibleHOC"
+import searchHOC from "./searchHOC"
 
 const SkillsFilters = ({filters}) =>
   <span>
-    { filters.map(filter =>
-      <SingleFilter key={filter.name} filter={filter} parentName='skills'/>)
+    {
+      filters.map((filter) =>
+        <SingleFilter
+          key={filter.name}
+          filter={filter}
+          parentName="skills" />)
     }
   </span>
 
-export default connect(state => ({
+SkillsFilters.propTypes = {
+  filters: PropTypes.array.isRequired
+}
+
+const mapState = (state) => ({
   filters: state.data.skills.filters
-}))(collapsibleHOC(searchHOC(SkillsFilters)))
+})
 
-
-
-
-
-// <div
-//   key={skill.name}
-//   className={skill.active ? 'single-filter active skills':'single-filter skills'}
-//   onClick={()=>handleFilterClick(skill.name, 'skills')} >
-//   <h4>{skill.name}</h4>
-//   <span></span>
-// </div>
+export default connect(mapState)(collapsibleHOC(searchHOC(SkillsFilters)))
