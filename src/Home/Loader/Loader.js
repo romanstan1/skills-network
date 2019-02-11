@@ -14,6 +14,7 @@ const Loader = ({failedData, fetchData}) =>
     }
   </div>
 
+
 Loader.propTypes = {
   failedData: PropTypes.bool.isRequired,
   fetchData: PropTypes.func.isRequired

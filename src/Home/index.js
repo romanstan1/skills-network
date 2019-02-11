@@ -6,14 +6,13 @@ import Network from "./Network"
 import SideNavigation from "./SideNavigation"
 import Loader from "./Loader"
 
-class Main extends Component {
+class Home extends Component {
   static propTypes = {
     people: PropTypes.array.isRequired,
     skills: PropTypes.array.isRequired,
     failedData: PropTypes.bool.isRequired,
     dispatch: PropTypes.func.isRequired
   }
-
   componentDidMount() {
     this.fetchData()
   }
@@ -51,4 +50,4 @@ const mapState = (state) => ({
   failedData: state.data.failedData
 })
 
-export default connect(mapState)(Main)
+export default connect(mapState)(Home)
