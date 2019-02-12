@@ -2,7 +2,8 @@ import React from "react"
 import {mount} from "enzyme"
 import Loader from "./Loader"
 
-test("Renders correct ui elements", () => {
+
+describe("Test Loader Component", () => {
   const failedData = true
   const fetchData = jest.fn()
   const component = mount(
@@ -12,17 +13,24 @@ test("Renders correct ui elements", () => {
   )
 
   const loaderElement = component.find(".loader")
-  expect(loaderElement).toHaveLength(1)
+  test("Renders Loader element", () => {
+    expect(loaderElement).toHaveLength(1)
+  })
 
   const bubbleElements = loaderElement.find(".bubble")
-  expect(bubbleElements).toHaveLength(4)
+  test("Renders all 4 bubble elements", () => {
+    expect(bubbleElements).toHaveLength(4)
+  })
 
   const failedDataProp = component.prop("failedData")
-  expect(failedDataProp).toEqual(true)
-
   const retryButton = loaderElement.find(".retry-button")
-  expect(retryButton).toHaveLength(1)
+  test("Passes through failedData prop and renders retryButton element", () => {
+    expect(failedDataProp).toEqual(true)
+    expect(retryButton).toHaveLength(1)
+  })
 
-  retryButton.simulate("click")
-  expect(fetchData).toHaveBeenCalled()
+  test("retryButton can be clicked and calls fetchData function", () => {
+    retryButton.simulate("click")
+    expect(fetchData).toHaveBeenCalled()
+  })
 })
