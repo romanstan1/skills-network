@@ -2,7 +2,6 @@ import React from "react"
 import {mount} from "enzyme"
 import Loader from "./Loader"
 
-
 describe("Test Loader Component", () => {
   const failedData = true
   const fetchData = jest.fn()
@@ -23,9 +22,12 @@ describe("Test Loader Component", () => {
   })
 
   const failedDataProp = component.prop("failedData")
-  const retryButton = loaderElement.find(".retry-button")
-  test("Passes through failedData prop and renders retryButton element", () => {
+  test("Passes through failedData prop", () => {
     expect(failedDataProp).toEqual(true)
+  })
+
+  const retryButton = loaderElement.find(".retry-button")
+  test("Renders retryButton element", () => {
     expect(retryButton).toHaveLength(1)
   })
 
