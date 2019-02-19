@@ -12,6 +12,7 @@
 # misc
 *.css
 */.css
+*.css
 .css
 .DS_Store
 .env.local
