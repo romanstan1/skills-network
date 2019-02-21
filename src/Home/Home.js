@@ -17,7 +17,7 @@ class Home extends Component {
       open: false
     }
     componentDidMount() {
-      this.fetchData()
+      // this.fetchData()
     }
     fetchData = () => this.props.dispatch(fetchSkillNetworkData())
     hideSideNavigation = () => this.setState({open: !this.state.open})
