@@ -6,6 +6,7 @@ import {connect} from "react-redux"
 class Nav extends Component {
     static propTypes = {
     }
+    console.log("something: ", something)
     render() {
       return (
         <div />
