@@ -3,7 +3,7 @@ import {connect} from "react-redux"
 import PropTypes from "prop-types"
 import {render, update} from "./D3_core"
 
-class ForceNetwork extends Component {
+class D3ForceNetwork extends Component {
   static propTypes = {
     nodes: PropTypes.array.isRequired,
     links: PropTypes.array.isRequired,
@@ -38,4 +38,4 @@ class ForceNetwork extends Component {
 export default connect((state) => ({
   links: state.data.links,
   nodes: state.data.nodes
-}))(ForceNetwork)
+}))(D3ForceNetwork)

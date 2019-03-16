@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
-import ForceNetwork from "components/ForceNetwork"
+import D3ForceNetwork from "components/D3ForceNetwork"
 import Tooltip from "./Tooltip"
 import FullDetails from "./FullDetails"
 import FullScreenIcon from "./FullScreenIcon"
@@ -13,7 +13,7 @@ class Network extends Component {
       <Tooltip key="tooltip" />,
       <FullDetails key="fulldetails" />,
       <div id="graph-wrapper" key="graph-wrapper">
-        <ForceNetwork
+        <D3ForceNetwork
           width={width}
           height={height} />
       </div>,
@@ -28,8 +28,8 @@ Network.propTypes = {
 }
 
 const mapState = (state) => ({
-  connections: state.data.connections,
-  dimension: state.data.dimension,
+  // connections: state.data.connections,
+  // dimension: state.data.dimension,
   width: state.data.width,
   height: state.data.height
 })
