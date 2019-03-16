@@ -1,24 +1,36 @@
-import React, { Component } from 'react';
-import {connect} from 'react-redux'
-import {toggleFullDetails} from 'store/modules/actions'
+import React, {Component} from "react"
+import {connect} from "react-redux"
+import {toggleFullDetails} from "store/modules/actions"
+import PropTypes from "prop-types"
 
 class FullDetails extends Component {
+  static propTypes = {
+    dispatch: PropTypes.func.isRequired,
+    fullDetails: PropTypes.object.isRequired
+  }
   hideFullDetails = () => {
     this.props.dispatch(toggleFullDetails())
   }
+  className = () => {
+    const {open, hidden} = this.props.fullDetails
+    if (!open) return ""
+    if (hidden) return "open hidden"
+    return "open"
+  }
   render() {
     const {fullDetails} = this.props
-    const {open, name, type, hidden} = fullDetails
+    const {name, type} = fullDetails
     return (
-      <div id="full-details"
-        className={open? hidden? "open hidden" : "open": ""}>
-        <div onClick={this.hideFullDetails} className='hide-details-tab'>
-          <div className='chevron'/>
+      <div
+        id="full-details"
+        className={this.className()}>
+        <div onClick={this.hideFullDetails} className="hide-details-tab">
+          <div className="chevron" />
         </div>
-        <div className='details-inner'>
+        <div className="details-inner">
           <h2 id="name">{name}</h2>
-          {type === 'person'? <UserProfile fullDetails={fullDetails}/> : null }
-          {type === 'skill'? <SkillDetails fullDetails={fullDetails}/> : null }
+          {type === "person" ? <UserProfile fullDetails={fullDetails} /> : null }
+          {type === "skill" ? <SkillDetails fullDetails={fullDetails} /> : null }
         </div>
       </div>
     )
@@ -33,7 +45,7 @@ const UserProfile = ({fullDetails}) =>
     <p>{fullDetails.desiredSkills}</p>
     <h3>Contact</h3>
     <p>
-      {fullDetails.email} <br/>
+      {fullDetails.email} <br />
       {fullDetails.linkedin}
     </p>
     <h3>Location</h3>
@@ -46,6 +58,10 @@ const UserProfile = ({fullDetails}) =>
     <p>{fullDetails.about}</p>
   </div>
 
+UserProfile.propTypes = {
+  fullDetails: PropTypes.object.isRequired
+}
+
 const SkillDetails = ({fullDetails}) =>
   <div>
     <h3>People</h3>
@@ -56,6 +72,10 @@ const SkillDetails = ({fullDetails}) =>
     <p>Lorem ipsum dolor sit amet, iusto voluptates fugit qui accusamus! enetur qui obcaecati deserunt. </p>
   </div>
 
-export default connect(state => ({
+SkillDetails.propTypes = {
+  fullDetails: PropTypes.object.isRequired
+}
+
+export default connect((state) => ({
   fullDetails: state.data.fullDetails
 }))(FullDetails)

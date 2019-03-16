@@ -1,4 +1,4 @@
-import {clicked} from "Home/Network/TwoDNetwork/D3_modules"
+import {clicked} from "components/ForceNetwork/D3_modules"
 import {getData} from "./api.js"
 import {MISC} from "./constants"
 

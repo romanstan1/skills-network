@@ -1,10 +1,10 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
+import ForceNetwork from "components/ForceNetwork"
 import Tooltip from "./Tooltip"
 import FullDetails from "./FullDetails"
 import FullScreenIcon from "./FullScreenIcon"
-import TwoDNetwork from "./TwoDNetwork"
 
 class Network extends Component {
   render() {
@@ -13,7 +13,7 @@ class Network extends Component {
       <Tooltip key="tooltip" />,
       <FullDetails key="fulldetails" />,
       <div id="graph-wrapper" key="graph-wrapper">
-        <TwoDNetwork
+        <ForceNetwork
           width={width}
           height={height} />
       </div>,
