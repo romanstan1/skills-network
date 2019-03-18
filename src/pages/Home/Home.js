@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {fetchSkillNetworkData} from "store/modules/actions"
+import {fetchSkillNetworkData} from "store/actions/visualise"
 import PropTypes from "prop-types"
 import Network from "components/Network"
 import Loader from "components/Loader"

@@ -2,8 +2,8 @@ import {createStore, applyMiddleware, compose} from "redux"
 import {routerMiddleware} from "react-router-redux"
 import thunk from "redux-thunk"
 import createHistory from "history/createBrowserHistory"
-import rootReducer from "./modules"
-import {MISC} from "./modules/constants"
+import rootReducer from "./reducers"
+import {VISUALISE} from "./constants/visualise"
 
 export const history = createHistory()
 
@@ -21,16 +21,16 @@ const listener = (store) => (next) => (action) => {
   const result = next(action)
 
   switch (action.type) {
-    case MISC.CLOSE_FULL_DETAILS:
-    case MISC.OPEN_SKILL:
-    case MISC.OPEN_PERSON:
-    case MISC.TOGGLE_FULL_DETAILS:
+    case VISUALISE.CLOSE_FULL_DETAILS:
+    case VISUALISE.OPEN_SKILL:
+    case VISUALISE.OPEN_PERSON:
+    case VISUALISE.TOGGLE_FULL_DETAILS:
       break
     default:
       if (
-        action.type !== MISC.CHECK_CONNECTION_FILTER && action.type !== MISC.UPDATE_NODES_AND_LINKS) {
-        store.dispatch({type: MISC.CHECK_CONNECTION_FILTER})
-        store.dispatch({type: MISC.UPDATE_NODES_AND_LINKS})
+        action.type !== VISUALISE.CHECK_CONNECTION_FILTER && action.type !== VISUALISE.UPDATE_NODES_AND_LINKS) {
+        store.dispatch({type: VISUALISE.CHECK_CONNECTION_FILTER})
+        store.dispatch({type: VISUALISE.UPDATE_NODES_AND_LINKS})
       }
   }
 

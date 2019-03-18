@@ -1,6 +1,6 @@
 import React from "react"
 import {connect} from "react-redux"
-import {changeDimension} from "store/modules/actions"
+import {changeDimension} from "store/actions/visualise"
 import PropTypes from "prop-types"
 
 const SelectDimension = ({dimension, dispatch}) => {

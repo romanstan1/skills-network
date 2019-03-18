@@ -1,6 +1,6 @@
 import {
   windowDimensions
-} from "./reducer_modules.js"
+} from "./modules"
 
 const initialState = {
   connections: {

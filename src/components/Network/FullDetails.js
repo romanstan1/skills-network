@@ -1,6 +1,6 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {toggleFullDetails} from "store/modules/actions"
+import {toggleFullDetails} from "store/actions/visualise"
 import PropTypes from "prop-types"
 
 class FullDetails extends Component {

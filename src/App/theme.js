@@ -8,7 +8,7 @@ export const theme = {
 
 export const muiTheme = createMuiTheme({
   typography: {
-    fontFamily: "Montserrat",
+    fontFamily: "Montserrat, sans-serif",
     color: "coral"
   },
   overrides: {

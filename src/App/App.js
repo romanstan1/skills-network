@@ -1,9 +1,8 @@
 import React, {Component, Fragment} from "react"
-import {Route, Switch} from "react-router-dom"
-import Home from "pages/Home"
 import Nav from "components/Nav"
 import {ThemeProvider} from "styled-components"
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
+import Routes from "./Routes"
 import {muiTheme, theme} from "./theme"
 
 export default class App extends Component {
@@ -13,10 +12,7 @@ export default class App extends Component {
         <ThemeProvider theme={theme}>
           <Fragment>
             <Nav />
-            <Switch>
-              <Route exact path="/" component={Home} />
-              <Route component={Home} />
-            </Switch>
+            <Routes />
           </Fragment>
         </ThemeProvider>
       </MuiThemeProvider>

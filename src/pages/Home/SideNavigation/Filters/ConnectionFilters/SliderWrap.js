@@ -2,7 +2,7 @@ import React from "react"
 import {connect} from "react-redux"
 import Slider from "rc-slider"
 import "rc-slider/assets/index.css"
-import {changeMinConnections} from "store/modules/actions"
+import {changeMinConnections} from "store/actions/visualise"
 import PropTypes from "prop-types"
 
 const SliderWrap = ({minConnections, dispatch}) => {

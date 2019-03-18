@@ -1,31 +1,31 @@
-import React, { Component } from 'react';
-import './style.css'
-import Filters from './Filters'
-import {connect} from 'react-redux'
-import {updateScreenDimensions} from 'store/modules/actions'
-import {windowDimensions} from 'store/modules/reducer_modules'
+import React, {Component} from "react"
+import "./style.css"
+import {connect} from "react-redux"
+import {updateScreenDimensions} from "store/actions/visualise"
+import {windowDimensions} from "store/reducers/modules"
+import Filters from "./Filters"
 
 const Nav = ({selectedNav, handleSelectNav}) =>
-<nav>
-  <span
-    className={selectedNav === "Filter"? "selected": null}
-    onClick={handleSelectNav}>Filter
-  </span>
-  <span
-    className={selectedNav === "Edit Profile"? "selected": null}
-    onClick={handleSelectNav}>Edit Profile
-  </span>
-</nav>
+  <nav>
+    <span
+      className={selectedNav === "Filter" ? "selected" : null}
+      onClick={handleSelectNav}>Filter
+    </span>
+    <span
+      className={selectedNav === "Edit Profile" ? "selected" : null}
+      onClick={handleSelectNav}>Edit Profile
+    </span>
+  </nav>
 
 const EditUserProfile = () =>
-<section>
-  <br/>
-  <p>[ Edit profile here ]</p>
-</section>
+  <section>
+    <br />
+    <p>[ Edit profile here ]</p>
+  </section>
 
 class SideNavigation extends Component {
   state = {
-    selectedNav: 'Filter'
+    selectedNav: "Filter"
   }
   handleSelectNav = (e) => {
     e.stopPropagation()
@@ -46,20 +46,20 @@ class SideNavigation extends Component {
 
   render() {
     const {selectedNav} = this.state
-    const {open,hideSideNavigation, width} = this.props
+    const {open, hideSideNavigation, width} = this.props
     return [
-      <div key='sidenavigation' className={windowDimensions().width > 600? 'side-navigation open': open? 'side-navigation': 'side-navigation open'}>
-        <div className='openNavTab' onClick={windowDimensions().width > 600? null : hideSideNavigation }>
-          <div className='chevron'/>
+      <div key="sidenavigation" className={windowDimensions().width > 600 ? "side-navigation open" : open ? "side-navigation" : "side-navigation open"}>
+        <div className="openNavTab" onClick={windowDimensions().width > 600 ? null : hideSideNavigation}>
+          <div className="chevron" />
         </div>
-        <div className='side-navigation-inner'>
-          { selectedNav === "Filter"? <Filters/> : <EditUserProfile/> }
+        <div className="side-navigation-inner">
+          { selectedNav === "Filter" ? <Filters /> : <EditUserProfile /> }
         </div>
       </div>
     ]
   }
 }
 
-export default connect(state => ({
+export default connect((state) => ({
   width: state.data.width
 }))(SideNavigation)

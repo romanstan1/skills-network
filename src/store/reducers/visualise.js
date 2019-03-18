@@ -1,5 +1,5 @@
-import {MISC} from "./constants"
-import initialState from "./initialState"
+import {VISUALISE} from "store/constants"
+import initialState from "./visualiseData"
 
 import {
   cleanPeopleData,
@@ -10,11 +10,11 @@ import {
   getParentState,
   constructForceNetwork,
   windowDimensions,
-  lookUp} from "./reducer_modules.js"
+  lookUp} from "./modules"
 
 export default (state = initialState, action) => {
   switch (action.type) {
-    case MISC.OPEN_PERSON: return {
+    case VISUALISE.OPEN_PERSON: return {
       ...state,
       fullDetails: {
         ...state.fullDetails,
@@ -31,7 +31,7 @@ export default (state = initialState, action) => {
         email: action.payload.email
       }
     }
-    case MISC.OPEN_SKILL: return {
+    case VISUALISE.OPEN_SKILL: return {
       ...state,
       fullDetails: {
         ...state.fullDetails,
@@ -42,14 +42,14 @@ export default (state = initialState, action) => {
         wantedBy: action.payload.wantedBy.map((id) => lookUp(id, state.people.filters)).join(", ")
       }
     }
-    case MISC.CLOSE_FULL_DETAILS: return {
+    case VISUALISE.CLOSE_FULL_DETAILS: return {
       ...state,
       fullDetails: {
         ...state.fullDetails,
         open: false
       }
     }
-    case MISC.UPDATE_SCREEN_DIMENSIONS: {
+    case VISUALISE.UPDATE_SCREEN_DIMENSIONS: {
       const dimensions = windowDimensions()
       return {
         ...state,
@@ -57,18 +57,18 @@ export default (state = initialState, action) => {
         height: dimensions.height
       }
     }
-    case MISC.TOGGLE_FULL_DETAILS: return {
+    case VISUALISE.TOGGLE_FULL_DETAILS: return {
       ...state,
       fullDetails: {
         ...state.fullDetails,
         hidden: !state.fullDetails.hidden
       }
     }
-    case MISC.FETCH_SKILL_NETWORK_DATA_FAILURE: return {
+    case VISUALISE.FETCH_SKILL_NETWORK_DATA_FAILURE: return {
       ...state,
       failedData: true
     }
-    case MISC.TOGGLE_SELECT_ALL_FILTER: {
+    case VISUALISE.TOGGLE_SELECT_ALL_FILTER: {
       const parentState = getParentState(action.payload, state)
       return {
         ...state,
@@ -83,7 +83,7 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case MISC.TOGGLE_FILTER: {
+    case VISUALISE.TOGGLE_FILTER: {
       const {parentName, filterName} = action.payload
       const parentState = getParentState(parentName, state)
       const mappedNewFilters = mapNewFilters(parentState.filters, filterName)
@@ -97,18 +97,18 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case MISC.CHANGE_MIN_CONNECTIONS: return {
+    case VISUALISE.CHANGE_MIN_CONNECTIONS: return {
       ...state,
       people: {
         ...state.people,
         minConnections: action.payload
       }
     }
-    case MISC.CHANGE_DIMENSION: return {
+    case VISUALISE.CHANGE_DIMENSION: return {
       ...state,
       dimension: state.dimension !== "2D" ? "2D" : "3D"
     }
-    case MISC.CHECK_CONNECTION_FILTER: {
+    case VISUALISE.CHECK_CONNECTION_FILTER: {
       const activeSkillIds = state.skills.filters
         .filter((skill) => skill.active)
         .map((skill) => skill.id)
@@ -126,7 +126,7 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case MISC.SUB_GROUP_SELECT: {
+    case VISUALISE.SUB_GROUP_SELECT: {
       const mappedNewFiltersSubGroup = mapNewFiltersSubGroup(state.people.filters, action.payload)
       return {
         ...state,
@@ -138,7 +138,7 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case MISC.FETCH_SKILL_NETWORK_DATA: {
+    case VISUALISE.FETCH_SKILL_NETWORK_DATA: {
       const peopleData = cleanPeopleData(action.payload.people)
       const skillsData = cleanSkillData(action.payload.skills, peopleData)
       return {
@@ -165,7 +165,7 @@ export default (state = initialState, action) => {
         }
       }
     }
-    case MISC.UPDATE_NODES_AND_LINKS: {
+    case VISUALISE.UPDATE_NODES_AND_LINKS: {
       const {nodes, links} = constructForceNetwork(state)
       return {
         ...state,
