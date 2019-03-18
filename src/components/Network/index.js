@@ -28,8 +28,6 @@ Network.propTypes = {
 }
 
 const mapState = (state) => ({
-  // connections: state.data.connections,
-  // dimension: state.data.dimension,
   width: state.data.width,
   height: state.data.height
 })
