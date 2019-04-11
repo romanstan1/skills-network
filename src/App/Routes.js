@@ -2,12 +2,13 @@ import React, {Component, Fragment} from "react"
 import {Route, Router, Redirect, Switch} from "react-router-dom"
 import {connect} from "react-redux"
 import Home from "pages/Home"
-import history from "store"
+// import history from "store/index"
 import PropTypes from "prop-types"
 
 
 const Authenticated = () =>
   <Fragment>
+    Authenticated
     <Switch>
       {/* <Route exact path="/sign-in" render={() => <Redirect to="/" />} />
       <Route path="/update-location" component={Inputs} />
@@ -24,6 +25,7 @@ const Authenticated = () =>
 
 const NonAuthenticated = () =>
   <Fragment>
+    Not Authenticated
     <Switch>
       {/* <Route exact path="/send-email" component={SendEmail} />
       <Route exact path="/sign-in" component={SignIn} /> */}
@@ -39,7 +41,7 @@ const Loading = () =>
 class Routes extends Component {
   static propTypes = {
     isAuthenticated: PropTypes.bool.isRequired,
-    logInPending: PropTypes.bool.isRequired
+    authPending: PropTypes.bool.isRequired
   }
 
   componentDidMount() {
@@ -48,40 +50,19 @@ class Routes extends Component {
     // registerDeviceForNotifications()
   }
 
-  renderLoginPending = () => {
-    if (this.props.logInPending) {
-      return (
-        <div className="loading-screen">
-          log in pending
-        </div>)
-    }
-    return null
-  }
-
   render() {
-    return (
-      <Router history={history}>
-        <Fragment>
-          {
-            this.props.logInPending ?
-              <Fragment>
-                <Authenticated />
-                <NonAuthenticated />
-              </Fragment> :
-              <Loading />
-          }
-        </Fragment>
-      </Router>
-    )
+    const {authPending, isAuthenticated} = this.props
+    if (authPending) return <Loading />
+    if (isAuthenticated) return <Authenticated />
+    return <NonAuthenticated />
   }
 }
 
 const mapProps = (state) => ({
   isAuthenticated: state.auth.isAuthenticated,
-  logInPending: state.auth.logInPending
+  authPending: state.auth.authPending
 })
 
-const mapDispatch = {
-}
+const mapDispatch = {}
 
 export default connect(mapProps, mapDispatch)(Routes)

@@ -1,7 +1,7 @@
 import * as d3 from "d3"
 import {peopleColour, skillsColour, connectionsColour} from "styles/theme"
 import {clickPerson, clickSkill, closeFullDetails} from "store/actions/visualise"
-import {windowDimensions} from "store/reducers/modules"
+import {windowDimensions} from "store/reducers/visualise/modules"
 import store from "store"
 import {event as d3Event} from "d3-selection"
 // eslint-disable-next-line import/no-cycle

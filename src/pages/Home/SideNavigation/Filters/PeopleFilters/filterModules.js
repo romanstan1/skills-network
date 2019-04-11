@@ -1,50 +1,50 @@
-import React from 'react';
-import humanize from 'string-humanize'
-import Collapsible from 'react-collapsible';
-import {TextFilter} from 'react-text-filter';
+import React from "react"
+import humanize from "string-humanize"
+import Collapsible from "react-collapsible"
+import {TextFilter} from "react-text-filter"
 // import Filters from '../index'
-import SingleFilter from '../SingleFilter'
-import searchHOC from '../searchHOC'
+import SingleFilter from "../SingleFilter"
+import searchHOC from "../searchHOC"
 
 export const AllFilters = searchHOC(({filters}) =>
-  <span> { filters.map(filter =>
-    <SingleFilter key={filter.name} filter={filter} parentName='people'/> )
+  <span> { filters.map((filter) =>
+    <SingleFilter key={filter.name} filter={filter} parentName="people" />)
   } </span>)
 
 export const PeopleTriggerSibling = ({groupFilter, subGroup, handleSubGroupSelect}) =>
   <div
-    onClick={()=>handleSubGroupSelect(subGroup)}
+    onClick={() => handleSubGroupSelect(subGroup)}
     className={
-      !groupFilter.people.map(filter => filter.active).includes(false)?
-      'select-all sub-group active people':'select-all sub-group people'}>
-    <span></span>
+      !groupFilter.people.map((filter) => filter.active).includes(false) ?
+        "select-all sub-group active people" : "select-all sub-group people"}>
+    <span />
   </div>
 
 export const GroupFilters = ({filters, uniques, handleSubGroupSelect, groupBy}) => {
-  const groups = uniques.map(unique => (
-     {
-       unique, people: filters.filter(person =>
-       groupBy === 'clients'? person.client === unique :
-       person.location === unique
-     )}
+  const groups = uniques.map((unique) => (
+    {
+      unique,
+      people: filters.filter((person) =>
+        (groupBy === "clients" ? person.client === unique :
+          person.location === unique)
+      )}
   ))
-  return groups.map(group =>
+  return groups.map((group) =>
     <span key={group.unique}>
       <Collapsible
-        className='sub-group' openedClassName='sub-group'
+        className="sub-group"
+        openedClassName="sub-group"
         triggerSibling={() =>
           <PeopleTriggerSibling
             groupFilter={group}
             subGroup={group.unique}
-            handleSubGroupSelect={handleSubGroupSelect}
-          />
+            handleSubGroupSelect={handleSubGroupSelect} />
         }
         transitionTime={100}
-        trigger={humanize(group.unique)}
-      >
+        trigger={humanize(group.unique)}>
         {
-          group.people.map(filter =>
-            <SingleFilter key={filter.name} filter={filter} parentName='people'/>)
+          group.people.map((filter) =>
+            <SingleFilter key={filter.name} filter={filter} parentName="people" />)
         }
       </Collapsible>
     </span>

@@ -1,5 +1,5 @@
 import {VISUALISE} from "store/constants"
-import initialState from "./visualiseData"
+import initialState from "./initialState"
 
 import {
   cleanPeopleData,

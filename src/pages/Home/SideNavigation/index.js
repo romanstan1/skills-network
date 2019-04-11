@@ -2,7 +2,7 @@ import React, {Component} from "react"
 import "./style.css"
 import {connect} from "react-redux"
 import {updateScreenDimensions} from "store/actions/visualise"
-import {windowDimensions} from "store/reducers/modules"
+import {windowDimensions} from "store/reducers/visualise/modules"
 import Filters from "./Filters"
 
 const Nav = ({selectedNav, handleSelectNav}) =>
