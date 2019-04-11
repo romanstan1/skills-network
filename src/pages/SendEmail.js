@@ -1,10 +1,10 @@
 import React, {Component} from "react"
 
-export default class SignIn extends Component {
+export default class SendEmail extends Component {
   render() {
     return (
       <div>
-        Sign in page
+        Send Email Page
       </div>
     )
   }
