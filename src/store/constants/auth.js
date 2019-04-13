@@ -1,0 +1,7 @@
+const AUTH = {
+  LOG_IN_SUCCESSFUL: "LOG_IN_SUCCESSFUL",
+  NOT_LOGGED_IN: "NOT_LOGGED_IN",
+  LOG_OUT: "LOG_OUT"
+}
+
+export default AUTH

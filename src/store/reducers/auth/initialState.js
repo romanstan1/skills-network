@@ -1,6 +1,6 @@
 const initialState = {
   isAuthenticated: false,
-  authPending: false
+  authPending: true
 }
 
 export default initialState

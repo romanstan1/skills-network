@@ -1,13 +1,16 @@
 import React, {Component} from "react"
-// import PropTypes from "prop-types"
+import PropTypes from "prop-types"
 // import {withStyles} from "@material-ui/core/styles"
 import styled from "styled-components"
 import {List, ListItem, ListItemText, MenuItem, Menu} from "@material-ui/core"
+import {push} from "react-router-redux"
+import {connect} from "react-redux"
+import {history} from "App"
 
 const options = [
-  "Project 1",
-  "Project 2",
-  "Project 3"
+  "first-project",
+  "random-project",
+  "another-project"
 ]
 
 const StyledList = styled(List)`
@@ -20,6 +23,7 @@ const Wrapper = styled.div`
 
 class SimpleListMenu extends Component {
   static propTypes = {
+    push: PropTypes.func.isRequired
   }
 
   state = {
@@ -31,7 +35,10 @@ class SimpleListMenu extends Component {
     this.setState({anchorEl: event.currentTarget})
   }
 
-  handleMenuItemClick = (event, index) => {
+  handleMenuItemClick = (event, index, value) => {
+    // this.props.history.push(`/project/${index}/view`)
+    history.push(`/project/${value}/view`)
+    // this.props.push("/projects/2/view")
     this.setState({selectedIndex: index, anchorEl: null})
   }
 
@@ -40,7 +47,7 @@ class SimpleListMenu extends Component {
   }
 
   render() {
-    const {anchorEl} = this.state
+    const {anchorEl, selectedIndex} = this.state
     return (
       <Wrapper>
         <StyledList>
@@ -48,7 +55,7 @@ class SimpleListMenu extends Component {
             button
             onClick={this.handleClickListItem}>
             <ListItemText
-              primary={options[this.state.selectedIndex]} />
+              primary={options[selectedIndex]} />
           </ListItem>
         </StyledList>
         <Menu
@@ -59,9 +66,10 @@ class SimpleListMenu extends Component {
           {options.map((option, i) => (
             <MenuItem
               key={option}
-              disabled={i === 0}
-              selected={i === this.state.selectedIndex}
-              onClick={(event) => this.handleMenuItemClick(event, i)}>
+              // disabled={i === 0}
+              selected={i === selectedIndex}
+              onClick={(event) =>
+                this.handleMenuItemClick(event, i, options[selectedIndex])}>
               {option}
             </MenuItem>
           ))}
@@ -71,5 +79,8 @@ class SimpleListMenu extends Component {
   }
 }
 
+const mapDispatch = {
+  push
+}
 
-export default SimpleListMenu
+export default connect(null, mapDispatch)(SimpleListMenu)
