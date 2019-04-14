@@ -3,9 +3,8 @@ import PropTypes from "prop-types"
 // import {withStyles} from "@material-ui/core/styles"
 import styled from "styled-components"
 import {List, ListItem, ListItemText, MenuItem, Menu} from "@material-ui/core"
-import {push} from "react-router-redux"
+import {push} from "connected-react-router"
 import {connect} from "react-redux"
-import {history} from "App"
 
 const options = [
   "first-project",
@@ -35,11 +34,10 @@ class SimpleListMenu extends Component {
     this.setState({anchorEl: event.currentTarget})
   }
 
-  handleMenuItemClick = (event, index, value) => {
-    // this.props.history.push(`/project/${index}/view`)
-    history.push(`/project/${value}/view`)
-    // this.props.push("/projects/2/view")
-    this.setState({selectedIndex: index, anchorEl: null})
+  handleMenuItemClick = (value) => {
+    this.props.push(`/project/${value}/view`)
+    this.handleClose()
+    console.log("this: ", this)
   }
 
   handleClose = () => {
@@ -68,8 +66,7 @@ class SimpleListMenu extends Component {
               key={option}
               // disabled={i === 0}
               selected={i === selectedIndex}
-              onClick={(event) =>
-                this.handleMenuItemClick(event, i, options[selectedIndex])}>
+              onClick={() => this.handleMenuItemClick(option)}>
               {option}
             </MenuItem>
           ))}

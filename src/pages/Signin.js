@@ -2,13 +2,15 @@ import React, {Component} from "react"
 import {auth, persistence} from "firebase/initialize"
 import {CtaButton, Card} from "ui"
 import styled from "styled-components"
-import {Link} from "react-router-dom"
+// import {Link} from "react-router-dom"
+import {push} from "connected-react-router"
+import {connect} from "react-redux"
 
 const Wrapper = styled.div`
   
 `
 
-export default class SignIn extends Component {
+class SignIn extends Component {
   state = {
     email: "",
     password: ""
@@ -44,12 +46,19 @@ export default class SignIn extends Component {
           <CtaButton
             onClick={this.handleSignIn}
             text="sign in" />
-          <Link to="/sign-up">
+          <div onClick={() => this.props.push("/sign-up")}>
               Sign up
-          </Link>
+          </div>
 
         </Card>
       </Wrapper>
     )
   }
 }
+
+
+const mapDispatch = {
+  push
+}
+
+export default connect(null, mapDispatch)(SignIn)

@@ -1,10 +1,8 @@
-import React, {Component, Fragment} from "react"
+import React, {Component} from "react"
 import {connect} from "react-redux"
 import {auth} from "firebase/initialize"
 import PropTypes from "prop-types"
 import {logInSuccessful, notLoggedIn} from "store/actions/auth"
-import {Router} from "react-router-dom"
-import {history} from "App"
 import {Authenticated, NonAuthenticated, Loading} from "./routes"
 
 class Container extends Component {
@@ -14,7 +12,6 @@ class Container extends Component {
     logInSuccessful: PropTypes.func.isRequired,
     notLoggedIn: PropTypes.func.isRequired
   }
-
   componentDidMount() {
     auth.onAuthStateChanged((user) => {
       if (user) {
@@ -26,16 +23,16 @@ class Container extends Component {
       }
     })
   }
-
   render() {
-    const {authPending, isAuthenticated} = this.props
+    const {isAuthenticated, authPending} = this.props
     if (authPending) return <Loading />
     return (
-      <Router history={history}>
-        { isAuthenticated ?
-          <Authenticated /> : <NonAuthenticated />
+      <div>
+        {
+          isAuthenticated ?
+            <Authenticated /> : <NonAuthenticated />
         }
-      </Router>
+      </div>
     )
   }
 }

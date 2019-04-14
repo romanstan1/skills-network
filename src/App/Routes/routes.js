@@ -1,5 +1,5 @@
 import React, {Fragment} from "react"
-import {Route, Redirect, Switch} from "react-router-dom"
+import {Route, Switch, Redirect} from "react-router"
 import {Home, SendEmail, SignIn, SignUp, Demo} from "pages"
 // import PropTypes from "prop-types"
 
@@ -11,10 +11,11 @@ export const Authenticated = () =>
     <Switch>
       <Route exact path="/" component={Home} />
       <Route exact path="/project/:project/input" component={Home} />
-      <Route
+      <Route exact path="/project/:project/view" component={Home} />
+      {/* <Route
         exact
         path="/project/:project/view"
-        render={(props) => <Home {...props} />} />
+        render={(props) => <Home {...props} />} /> */}
       <Redirect from="/project/:project" to="/project/:project/view" />
       <Redirect to="/" />
     </Switch>

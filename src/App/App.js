@@ -1,18 +1,25 @@
-import React, {Component} from "react"
-// import Nav from "components/Nav"
+import React from "react"
 import {ThemeProvider} from "styled-components"
 import MuiThemeProvider from "@material-ui/core/styles/MuiThemeProvider"
-import Routes from "./Routes"
+import PropTypes from "prop-types"
+import {ConnectedRouter} from "connected-react-router"
 import {muiTheme, theme} from "./theme"
+import Routes from "./Routes"
 
-export default class App extends Component {
-  render() {
-    return (
-      // <MuiThemeProvider theme={muiTheme}>
-      //   <ThemeProvider theme={theme}>
-      <Routes />
-      //   </ThemeProvider>
-      // </MuiThemeProvider>
-    )
-  }
+const App = ({history}) => {
+  return (
+    <MuiThemeProvider theme={muiTheme}>
+      <ThemeProvider theme={theme}>
+        <ConnectedRouter history={history}>
+          <Routes />
+        </ConnectedRouter>
+      </ThemeProvider>
+    </MuiThemeProvider>
+  )
 }
+
+App.propTypes = {
+  history: PropTypes.object
+}
+
+export default App

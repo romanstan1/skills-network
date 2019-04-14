@@ -1,48 +1,30 @@
+import "styles/index.css"
 // import React from "react"
 // import {render} from "react-dom"
-import "styles/index.css"
-// // import {ConnectedRouter} from "react-router-redux"
 // import {Provider} from "react-redux"
-// import store, {history} from "store"
-// import {Router} from "react-router-dom"
-
-// // import './firebase-config.js'
-
-// import App from "./App/App"
-
+// // import {ConnectedRouter} from "react-router-redux"
+// import {ConnectedRouter} from "connected-react-router"
+// import App, {history} from "./App"
+// import store from "./store"
 
 // render(
 //   <Provider store={store}>
-//     <Router history={history}>
+//     <ConnectedRouter history={history}>
 //       <App />
-//     </Router>
+//     </ConnectedRouter>
 //   </Provider>,
-//   document.getElementById("root"),
-// )
+//   document.getElementById("root"))
+import {Provider} from "react-redux"
+import React from "react"
+import {render} from "react-dom"
+import App from "./App"
+import configureStore, {history} from "./store"
 
-
-import React from 'react';
-import { render } from 'react-dom'
-import App, { history } from './App';
-import { ConnectedRouter } from 'react-router-redux'
-import store from './store'
-import { Provider } from 'react-redux'
+const store = configureStore()
 
 render(
   <Provider store={store}>
-    <ConnectedRouter history={history}>
-      <App />
-    </ConnectedRouter>
+    <App history={history} />
   </Provider>,
-  document.getElementById('root'));
-
-// render(
-//   <Provider store={store}>
-//     <Router history={history}>
-//       <App />
-//     </Router>
-//   </Provider>,
-//   document.getElementById('root'),
-// );
-// {/* <ConnectedRouter history={history}> */}
-// {/* </ConnectedRouter> */}
+  document.getElementById("root")
+)

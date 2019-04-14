@@ -17,7 +17,7 @@ class Home extends Component {
     open: false
   }
   callFunc = () => {
-    return null
+    return <div>Home</div>
   }
   componentDidMount() {
     this.fetchData()
@@ -25,6 +25,7 @@ class Home extends Component {
   fetchData = () => this.props.dispatch(fetchSkillNetworkData())
   hideSideNavigation = () => this.setState({open: !this.state.open})
   render() {
+    console.log("home this: ", this)
     if (true) return this.callFunc()
     const {people, skills, failedData} = this.props
     const {open} = this.state

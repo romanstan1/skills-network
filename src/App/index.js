@@ -1,6 +1,7 @@
 
-import {createBrowserHistory} from "history"
+// import {createBrowserHistory} from "history"
 
-export const history = createBrowserHistory()
+// export const history = createBrowserHistory()
+// import Routes from "./Routes"
 
 export {default} from "./App"
