@@ -76,8 +76,12 @@ class SimpleListMenu extends Component {
   }
 }
 
+const mapState = (state) => ({
+  path: state.router.location.pathname
+})
+
 const mapDispatch = {
   push
 }
 
-export default connect(null, mapDispatch)(SimpleListMenu)
+export default connect(mapState, mapDispatch)(SimpleListMenu)
