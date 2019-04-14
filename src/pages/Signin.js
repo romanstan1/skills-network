@@ -1,14 +1,9 @@
 import React, {Component} from "react"
-import {auth, persistence} from "firebase/initialize"
-import {CtaButton, Card} from "ui"
+import {auth, persistence, firestore} from "firebase/initialize"
+import {CtaButton, Card, Link, Input} from "ui"
 import styled from "styled-components"
-// import {Link} from "react-router-dom"
-import {push} from "connected-react-router"
-import {connect} from "react-redux"
 
-const Wrapper = styled.div`
-  
-`
+const Wrapper = styled.div``
 
 class SignIn extends Component {
   state = {
@@ -23,42 +18,38 @@ class SignIn extends Component {
       .then(() =>
         auth.signInWithEmailAndPassword(email, password))
       .then((firebaseUser) => {
-        console.log("firebaseUser: ", auth.currentUser, persistence.SESSION)
+        this.uploadUserData(email, firebaseUser)
       })
       .catch((error) => {
-        console.log("error: ", error)
-        // this.props.errorMessage(error))
+        console.log("Error siging in: ", error)
       })
   }
 
   render() {
-    console.log("------------- sign in component!!!")
-
     return (
       <Wrapper>
         <Card>
-          <label htmlFor="">Email</label>
-          <input data-type="email" type="text" onChange={this.handleChange} />
-          <br />
-          <br />
-          <label htmlFor="">Password</label>
-          <input data-type="password" type="password" onChange={this.handleChange} />
+          <Input
+            label="Email"
+            dataType="email"
+            type="text"
+            onChange={this.handleChange} />
+          <Input
+            label="Password"
+            dataType="password"
+            type="password"
+            onChange={this.handleChange} />
           <CtaButton
             onClick={this.handleSignIn}
             text="sign in" />
-          <div onClick={() => this.props.push("/sign-up")}>
-              Sign up
-          </div>
-
+          <br />
+          <Link to="/sign-up">
+            Create an account
+          </Link>
         </Card>
       </Wrapper>
     )
   }
 }
 
-
-const mapDispatch = {
-  push
-}
-
-export default connect(null, mapDispatch)(SignIn)
+export default SignIn

@@ -8,8 +8,8 @@ const Wrapper = styled.div`
   background: ghostwhite;
   display: flex;
   flex-direction: column;
-  padding: 15px 0px;
-  align-items: center;
+  padding: 15px 20px;
+  align-content: center;
   width: ${({width}) => `${width}px`};
 `
 
