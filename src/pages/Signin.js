@@ -14,11 +14,13 @@ class SignIn extends Component {
 
   handleSignIn = () => {
     const {email, password} = this.state
+    console.log("email, password: ", email, password)
     auth.setPersistence(persistence.LOCAL)
       .then(() =>
         auth.signInWithEmailAndPassword(email, password))
       .then((firebaseUser) => {
-        this.uploadUserData(email, firebaseUser)
+        console.log("signing in success: ", firebaseUser)
+        // this.uploadUserData(email, firebaseUser)
       })
       .catch((error) => {
         console.log("Error siging in: ", error)

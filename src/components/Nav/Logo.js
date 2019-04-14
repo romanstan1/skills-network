@@ -10,7 +10,7 @@ const Wrapper = styled.div`
 export default class Logo extends Component {
   render() {
     return (
-      <Wrapper>Network</Wrapper>
+      <Wrapper>Sensery</Wrapper>
     )
   }
 }
