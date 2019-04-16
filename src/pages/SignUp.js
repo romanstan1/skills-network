@@ -17,24 +17,26 @@ export default class SignUp extends Component {
   handleChange = (e) => this.setState({[e.target.dataset.type]: e.target.value})
 
   handleSignUp = () => {
-    // this.props.push("/sign-up")
+    const {email, password} = this.state
+    auth.createUserWithEmailAndPassword(email, password)
+      .then((user) => {
+        console.log("successful signup: ", user)
+        this.uploadUserData(user)
+      })
+      .catch((error) => {
+        console.log("error signup: ", error)
+      })
   }
 
   uploadUserData = (firebaseUser) => {
     const {email, firstName, lastName} = this.state
     const docRef = firestore.collection("users").doc(firebaseUser.user.uid)
-    docRef.get().then((doc) => {
-      if (!doc.exists) {
-        docRef.set({
-          email,
-          firstName,
-          lastName
-        })
-          .catch((error) => console.log("Error on user upload::", error))
-      }
-    }).catch((error) => {
-      console.log("Error getting document:", error)
+    docRef.set({
+      email,
+      firstName,
+      lastName
     })
+      .catch((error) => console.log("Error on user upload::", error))
   }
 
   render() {
@@ -66,6 +68,7 @@ export default class SignUp extends Component {
             dataType="confirmPassword"
             type="password"
             onChange={this.handleChange} />
+          <br />
           <CtaButton
             onClick={this.handleSignUp}
             text="Sign Up" />

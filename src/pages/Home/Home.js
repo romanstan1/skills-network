@@ -5,6 +5,7 @@ import PropTypes from "prop-types"
 import Network from "components/Network"
 import Loader from "components/Loader"
 import SideNavigation from "./SideNavigation"
+import FakeHome from "./FakeHome"
 
 class Home extends Component {
   static propTypes = {
@@ -16,33 +17,29 @@ class Home extends Component {
   state = {
     open: false
   }
-  callFunc = () => {
-    return <div>Home</div>
-  }
   componentDidMount() {
-    this.fetchData()
+    // this.fetchData()
   }
   fetchData = () => this.props.dispatch(fetchSkillNetworkData())
   hideSideNavigation = () => this.setState({open: !this.state.open})
   render() {
-    console.log("home this: ", this)
-    if (true) return this.callFunc()
-    const {people, skills, failedData} = this.props
-    const {open} = this.state
-    return (
-      <div id="Home">
-        <SideNavigation
-          open={open}
-          hideSideNavigation={this.hideSideNavigation} />
-        {!people.length && !skills.length ?
-          <Loader
-            failedData={failedData}
-            fetchData={this.fetchData} /> :
-          <Network
-            sideNavOpen={open} />
-        }
-      </div>
-    )
+    return <FakeHome />
+    // const {people, skills, failedData} = this.props
+    // const {open} = this.state
+    // return (
+    //   <div id="Home">
+    //     <SideNavigation
+    //       open={open}
+    //       hideSideNavigation={this.hideSideNavigation} />
+    //     {!people.length && !skills.length ?
+    //       <Loader
+    //         failedData={failedData}
+    //         fetchData={this.fetchData} /> :
+    //       <Network
+    //         sideNavOpen={open} />
+    //     }
+    //   </div>
+    // )
   }
 }
 
