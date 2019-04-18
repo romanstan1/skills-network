@@ -1,8 +1,9 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
-import {auth} from "firebase/initialize"
 import PropTypes from "prop-types"
-import {logInSuccessful, notLoggedIn} from "store/actions/auth"
+import {logInSuccessful, notLoggedIn, updateUserData} from "store/actions/auth"
+import {authStateChange} from "firebase/modules"
+
 import {Authenticated, NonAuthenticated, Loading} from "./routes"
 
 class Container extends Component {
@@ -13,16 +14,9 @@ class Container extends Component {
     notLoggedIn: PropTypes.func.isRequired
   }
   componentDidMount() {
-    auth.onAuthStateChanged((user) => {
-      if (user) {
-        this.props.logInSuccessful(user)
-        console.log("Logged in, email", user.email)
-      } else {
-        this.props.notLoggedIn()
-        console.log("Logged out")
-      }
-    })
+    authStateChange(this.props)
   }
+
   render() {
     const {isAuthenticated, authPending} = this.props
     if (authPending) return <Loading />
@@ -44,7 +38,8 @@ const mapProps = (state) => ({
 
 const mapDispatch = {
   logInSuccessful,
-  notLoggedIn
+  notLoggedIn,
+  updateUserData
 }
 
 export default connect(mapProps, mapDispatch)(Container)

@@ -1,5 +1,4 @@
 import React, {Component} from "react"
-// import {auth} from "firebase/initialize"
 import {createUser} from "firebase/modules"
 import {CtaButton, Card, Link, Input} from "ui"
 import styled from "styled-components"

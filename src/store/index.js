@@ -14,7 +14,7 @@ const middleware = [
   logger
 ]
 
-export default function configureStore(preloadedState) {
+function configureStore(preloadedState) {
   const store = createStore(
     createRootReducer(history),
     preloadedState,
@@ -24,3 +24,9 @@ export default function configureStore(preloadedState) {
   )
   return store
 }
+
+const store = configureStore()
+const {dispatch} = store
+
+export default store
+export {dispatch}

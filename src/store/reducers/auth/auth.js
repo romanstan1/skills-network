@@ -28,6 +28,12 @@ export default (state = initialState, action) => {
         authPending: false
       }
     }
+    case AUTH.UPDATE_USER_DATA: {
+      return {
+        ...state,
+        userData: action.payload
+      }
+    }
 
     default: return state
   }

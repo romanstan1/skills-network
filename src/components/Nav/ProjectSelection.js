@@ -4,6 +4,7 @@ import styled from "styled-components"
 import {List, ListItem, ListItemText, MenuItem, Menu} from "@material-ui/core"
 import {push} from "connected-react-router"
 import {connect} from "react-redux"
+import CreateProjectModal from "components/CreateProjectModal"
 
 const options = [
   {
@@ -28,6 +29,7 @@ const StyledList = styled(List)`
   padding: 0px !important;
 `
 
+
 const Wrapper = styled.div`
   background: #ddd;
   grid-column: 2 / 3;
@@ -39,10 +41,10 @@ const StyledAddProject = styled.div`
   margin-bottom: 5px;
 `
 
-const AddProject = ({option, handleAddNewProject}) =>
+const AddProject = ({option, openProjectModal}) =>
   <StyledAddProject>
     <MenuItem
-      onClick={() => handleAddNewProject()}>
+      onClick={() => openProjectModal()}>
       {option.value}
     </MenuItem>
   </StyledAddProject>
@@ -50,7 +52,7 @@ const AddProject = ({option, handleAddNewProject}) =>
 
 AddProject.propTypes = {
   option: PropTypes.object.isRequired,
-  handleAddNewProject: PropTypes.func.isRequired
+  openProjectModal: PropTypes.func.isRequired
 }
 
 const SelectProject = ({option, handleSelectProject}) =>
@@ -72,35 +74,40 @@ class SimpleListMenu extends Component {
 
   state = {
     anchorEl: null,
-    selectedIndex: 1
+    selectedIndex: 1,
+    addProjectOpen: false
   }
 
-  handleOpenMenu = (event) => {
+  handleOpenDropdown = (event) => {
     this.setState({anchorEl: event.currentTarget})
   }
 
-  handleSelectProject = (option) => {
-    this.props.push(`/project/${option.key}/view`)
-    this.handleClose()
-  }
-
-  handleAddNewProject = () => {
-    this.props.push("/create-project")
-    this.handleClose()
-  }
-
-  handleClose = () => {
+  handleCloseDropdown = () => {
     this.setState({anchorEl: null})
   }
 
+  closeProjectModal = () => {
+    this.setState({addProjectOpen: false})
+  }
+
+  openProjectModal = () => {
+    this.handleCloseDropdown()
+    this.setState({addProjectOpen: true})
+  }
+
+  handleSelectProject = (option) => {
+    this.handleClose()
+    this.props.push(`/project/${option.key}/view`)
+  }
+
   render() {
-    const {anchorEl, selectedIndex} = this.state
+    const {anchorEl, selectedIndex, addProjectOpen} = this.state
     return (
       <Wrapper>
         <StyledList>
           <ListItem
             button
-            onClick={this.handleOpenMenu}>
+            onClick={this.handleOpenDropdown}>
             <ListItemText
               primary={options[selectedIndex].value} />
           </ListItem>
@@ -109,26 +116,30 @@ class SimpleListMenu extends Component {
           id="select-project-menu"
           anchorEl={anchorEl}
           open={!!anchorEl}
-          onClose={this.handleClose}>
+          onClose={this.handleCloseDropdown}>
           {options.map((option) => (
             option.key === "add-new-project" ?
               <AddProject
                 key={option.key}
                 option={option}
-                handleAddNewProject={this.handleAddNewProject} /> :
+                openProjectModal={this.openProjectModal} /> :
               <SelectProject
                 key={option.key}
                 option={option}
                 handleSelectProject={this.handleSelectProject} />
           ))}
         </Menu>
+        <CreateProjectModal
+          open={addProjectOpen}
+          onClose={this.closeProjectModal} />
       </Wrapper>
     )
   }
 }
 
 const mapState = (state) => ({
-  path: state.router.location.pathname
+  path: state.router.location.pathname,
+  user: state.auth.user
 })
 
 const mapDispatch = {

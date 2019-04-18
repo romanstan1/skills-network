@@ -16,7 +16,6 @@ function uploadUserData(user, {email, firstName, lastName}) {
     })
 }
 
-
 export function createUser(state) {
   const {email, password} = state
   return auth.createUserWithEmailAndPassword(email, password)
@@ -44,23 +43,85 @@ export function signIn({email, password}) {
     })
 }
 
+export function authStateChange({logInSuccessful, notLoggedIn, updateUserData}) {
+  auth.onAuthStateChanged((user) => {
+    if (user) {
+      logInSuccessful(user)
+      getUserData(user, updateUserData)
+    } else {
+      notLoggedIn()
+    }
+  })
+}
 
-// export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
-//   auth.onAuthStateChanged((user) => {
-//     if (user) {
-//       firestore.collection("users").doc(user.uid).onSnapshot((userData) => {
-//         const thisUser = userData.data()
-//         logInSuccessful({
-//           ...thisUser,
-//           email: user.email,
-//           refreshToken: user.refreshToken,
-//           uid: user.uid
-//         })
-//       })
-//     } else {
-//       notLoggedIn()
-//     }
+export function getUserData(user, updateUserData) {
+  const userRef = firestore.collection("users").doc(user.uid)
+  userRef.onSnapshot((userData) => {
+    const data = userData.data()
+    updateUserData(data)
+  })
+
+  userRef.collection("projects").get().then((querySnapshot) => {
+    querySnapshot.forEach((doc) => {
+      const data = doc.data()
+      console.log("Project data:", data)
+    })
+  })
+}
+
+
+export function addAProject(user, projectKey, name) {
+  const docRef = firestore
+    .collection("users")
+    .doc(user.uid)
+    .collection("projects")
+    .doc(projectKey)
+
+  // todo check if id is unique, throw error if it is not
+
+  docRef
+    .set({
+      name,
+      projectKey
+    })
+    .then((res) => {
+      console.log("success res:", res)
+    })
+    .catch((error) => {
+      console.log("error:", error)
+    })
+    // todo throw error and success feedback
+
+  // todo add arrays of entity data
+
+
+  // docRef.scollection("first")
+  // docRef.collection("second")
+}
+
+
+// logInSuccessful({
+//   ...thisUser,
+//   email: user.email,
+//   refreshToken: user.refreshToken,
+//   uid: user.uid
+
+// return auth.onAuthStateChanged((user) => {
+//   return Promise.resolve(user)
+// })
+// if (user) {
+//   // return firestore.collection("users").doc(user.uid).onSnapshot((userData) => {
+//   //   return userData.data()
+//   //   // logInSuccessful({
+//   //   //   ...thisUser,
+//   //   //   email: user.email,
+//   //   //   refreshToken: user.refreshToken,
+//   //   //   uid: user.uid
+//   //   // })
 //   })
+// } else {
+//   return "not logged in"
+//   // notLoggedIn()
 // }
 
 // export const handleBooking = (guest, addGuestBoolean, props) => {
