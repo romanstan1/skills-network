@@ -1,5 +1,6 @@
 import React, {Component} from "react"
-import {auth, persistence, firestore} from "firebase/initialize"
+import {signIn} from "firebase/modules"
+
 import {CtaButton, Card, Link, Input} from "ui"
 import styled from "styled-components"
 
@@ -13,17 +14,12 @@ class SignIn extends Component {
   handleChange = (e) => this.setState({[e.target.dataset.type]: e.target.value})
 
   handleSignIn = () => {
-    const {email, password} = this.state
-    console.log("email, password: ", email, password)
-    auth.setPersistence(persistence.LOCAL)
-      .then(() =>
-        auth.signInWithEmailAndPassword(email, password))
-      .then((firebaseUser) => {
-        console.log("signing in success: ", firebaseUser)
-        // this.uploadUserData(email, firebaseUser)
+    signIn(this.state)
+      .then((res) => {
+        console.log("handleSignIn success:", res)
       })
       .catch((error) => {
-        console.log("Error siging in: ", error)
+        console.log("handleSignIn error:", error)
       })
   }
 

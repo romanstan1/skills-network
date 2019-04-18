@@ -1,5 +1,6 @@
 import React, {Component} from "react"
-import {auth, persistence, firestore} from "firebase/initialize"
+// import {auth} from "firebase/initialize"
+import {createUser} from "firebase/modules"
 import {CtaButton, Card, Link, Input} from "ui"
 import styled from "styled-components"
 
@@ -14,29 +15,17 @@ export default class SignUp extends Component {
     firstName: "",
     lastName: ""
   }
+
   handleChange = (e) => this.setState({[e.target.dataset.type]: e.target.value})
 
   handleSignUp = () => {
-    const {email, password} = this.state
-    auth.createUserWithEmailAndPassword(email, password)
-      .then((user) => {
-        console.log("successful signup: ", user)
-        this.uploadUserData(user)
+    createUser(this.state)
+      .then((res) => {
+        console.log("SUCCESS!!!", res)
       })
       .catch((error) => {
-        console.log("error signup: ", error)
+        console.log("error in create user logged here:: ", error)
       })
-  }
-
-  uploadUserData = (firebaseUser) => {
-    const {email, firstName, lastName} = this.state
-    const docRef = firestore.collection("users").doc(firebaseUser.user.uid)
-    docRef.set({
-      email,
-      firstName,
-      lastName
-    })
-      .catch((error) => console.log("Error on user upload::", error))
   }
 
   render() {

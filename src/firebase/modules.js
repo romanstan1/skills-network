@@ -1,4 +1,49 @@
-import {auth, firestore, arrayUnion, arrayRemove} from "./initialize"
+import {auth, firestore, persistence, arrayUnion, arrayRemove} from "./initialize"
+
+function uploadUserData(user, {email, firstName, lastName}) {
+  const docRef = firestore.collection("users").doc(user.user.uid)
+  return docRef.set({
+    email,
+    firstName,
+    lastName,
+    pro: false
+  })
+    .then((upload) => {
+      return {upload, createUser: user}
+    })
+    .catch((error) => {
+      throw error
+    })
+}
+
+
+export function createUser(state) {
+  const {email, password} = state
+  return auth.createUserWithEmailAndPassword(email, password)
+    .then((user) => {
+      return uploadUserData(user, state)
+    })
+    .catch((error) => {
+      throw error
+    })
+}
+
+export function signIn({email, password}) {
+  return auth.setPersistence(persistence.LOCAL)
+    .then(() => {
+      return auth.signInWithEmailAndPassword(email, password)
+        .then((user) => {
+          return user
+        })
+        .catch((error) => {
+          throw error
+        })
+    })
+    .catch((error) => {
+      throw error
+    })
+}
+
 
 // export const onAuthStateChanged = (logInSuccessful, notLoggedIn) => {
 //   auth.onAuthStateChanged((user) => {
