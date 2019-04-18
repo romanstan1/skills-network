@@ -10,9 +10,6 @@ class FakeHome extends Component {
   getUserData = () => {
     const {user} = this.props
     const docRef = firestore.collection("users").doc(user.uid)
-    // const docRef = firestore.collection("users").doc(user.uid)
-    console.log("dob: tz4jFziMTKZqDojsWoeQJR8rJzl2")
-    console.log("user: ", user.uid)
 
     docRef.get().then((userData) => {
       console.log("userData: ", userData.data())
@@ -31,6 +28,18 @@ class FakeHome extends Component {
         Fake home
       </div>
     )
+  }
+}
+
+
+const userid = {
+  projectId: {
+    skills: {
+
+    },
+    people: {
+
+    }
   }
 }
 

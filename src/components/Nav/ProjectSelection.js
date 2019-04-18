@@ -7,9 +7,22 @@ import {push} from "connected-react-router"
 import {connect} from "react-redux"
 
 const options = [
-  "first-project",
-  "random-project",
-  "another-project"
+  {
+    key: "add-new-project",
+    value: "Add new project"
+  },
+  {
+    key: "first-project",
+    value: "First Project"
+  },
+  {
+    key: "random-project",
+    value: "Random Project"
+  },
+  {
+    key: "another-project",
+    value: "Another Project"
+  }
 ]
 
 const StyledList = styled(List)`
@@ -30,14 +43,23 @@ class SimpleListMenu extends Component {
     selectedIndex: 1
   }
 
-  handleClickListItem = (event) => {
+  handleOpenMenu = (event) => {
     this.setState({anchorEl: event.currentTarget})
   }
 
-  handleMenuItemClick = (value) => {
+  handleSelectProject = (value) => {
     this.props.push(`/project/${value}/view`)
     this.handleClose()
-    console.log("this: ", this)
+  }
+
+  handleAddNewProject = () => {
+    this.props.push("/create-project")
+    this.handleClose()
+  }
+
+  handleSelectItem = (option) => {
+    if (option.key === "add-new-project") this.handleAddNewProject()
+    else this.handleSelectProject(option)
   }
 
   handleClose = () => {
@@ -51,7 +73,7 @@ class SimpleListMenu extends Component {
         <StyledList>
           <ListItem
             button
-            onClick={this.handleClickListItem}>
+            onClick={this.handleOpenMenu}>
             <ListItemText
               primary={options[selectedIndex]} />
           </ListItem>
@@ -66,7 +88,7 @@ class SimpleListMenu extends Component {
               key={option}
               // disabled={i === 0}
               selected={i === selectedIndex}
-              onClick={() => this.handleMenuItemClick(option)}>
+              onClick={() => this.handleSelectItem(option)}>
               {option}
             </MenuItem>
           ))}
