@@ -41,17 +41,16 @@ const StyledAddProject = styled.div`
   margin-bottom: 5px;
 `
 
-const AddProject = ({option, openProjectModal}) =>
+const AddProject = ({openProjectModal}) =>
   <StyledAddProject>
     <MenuItem
       onClick={() => openProjectModal()}>
-      {option.value}
+      Add a project
     </MenuItem>
   </StyledAddProject>
 
 
 AddProject.propTypes = {
-  option: PropTypes.object.isRequired,
   openProjectModal: PropTypes.func.isRequired
 }
 
@@ -59,7 +58,7 @@ const SelectProject = ({option, handleSelectProject}) =>
   <MenuItem
     // selected={i === selectedIndex}
     onClick={() => handleSelectProject(option)}>
-    {option.value}
+    {option.name}
   </MenuItem>
 
 SelectProject.propTypes = {
@@ -69,7 +68,8 @@ SelectProject.propTypes = {
 
 class SimpleListMenu extends Component {
   static propTypes = {
-    push: PropTypes.func.isRequired
+    push: PropTypes.func.isRequired,
+    projects: PropTypes.array.isRequired
   }
 
   state = {
@@ -96,12 +96,14 @@ class SimpleListMenu extends Component {
   }
 
   handleSelectProject = (option) => {
-    this.handleClose()
+    this.handleCloseDropdown()
     this.props.push(`/project/${option.key}/view`)
   }
 
   render() {
+    const {projects} = this.props
     const {anchorEl, selectedIndex, addProjectOpen} = this.state
+    console.log("projects:", projects)
     return (
       <Wrapper>
         <StyledList>
@@ -117,17 +119,17 @@ class SimpleListMenu extends Component {
           anchorEl={anchorEl}
           open={!!anchorEl}
           onClose={this.handleCloseDropdown}>
-          {options.map((option) => (
-            option.key === "add-new-project" ?
-              <AddProject
-                key={option.key}
-                option={option}
-                openProjectModal={this.openProjectModal} /> :
+          <AddProject
+            key="add-project-key"
+            openProjectModal={this.openProjectModal} />
+          {
+            projects.map((project) => (
               <SelectProject
-                key={option.key}
-                option={option}
+                key={project.key}
+                option={project}
                 handleSelectProject={this.handleSelectProject} />
-          ))}
+            ))
+          }
         </Menu>
         <CreateProjectModal
           open={addProjectOpen}
@@ -139,7 +141,7 @@ class SimpleListMenu extends Component {
 
 const mapState = (state) => ({
   path: state.router.location.pathname,
-  user: state.auth.user
+  projects: state.auth.projects
 })
 
 const mapDispatch = {

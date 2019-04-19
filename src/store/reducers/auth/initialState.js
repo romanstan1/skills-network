@@ -3,7 +3,8 @@ const initialState = {
   authPending: true,
   user: null,
   userData: null,
-  error: false
+  error: false,
+  projects: []
 }
 
 export default initialState

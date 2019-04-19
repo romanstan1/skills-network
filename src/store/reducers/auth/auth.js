@@ -34,6 +34,12 @@ export default (state = initialState, action) => {
         userData: action.payload
       }
     }
+    case AUTH.UPDATE_PROJECT_NAMES: {
+      return {
+        ...state,
+        projects: action.payload
+      }
+    }
 
     default: return state
   }

@@ -19,3 +19,9 @@ export const updateUserData = (data) => (dispatch) =>
     type: AUTH.UPDATE_USER_DATA,
     payload: data
   })
+
+export const updateProjectNames = (data) => (dispatch) =>
+  dispatch({
+    type: AUTH.UPDATE_PROJECT_NAMES,
+    payload: data
+  })

@@ -43,46 +43,76 @@ export function signIn({email, password}) {
     })
 }
 
-export function authStateChange({logInSuccessful, notLoggedIn, updateUserData}) {
+export function authStateChange({
+  logInSuccessful,
+  notLoggedIn,
+  updateUserData,
+  updateProjectNames}) {
   auth.onAuthStateChanged((user) => {
     if (user) {
       logInSuccessful(user)
-      getUserData(user, updateUserData)
+      getUserData(user, updateUserData, updateProjectNames)
     } else {
       notLoggedIn()
     }
   })
 }
 
-export function getUserData(user, updateUserData) {
+export function getUserData(user, updateUserData, updateProjectNames) {
   const userRef = firestore.collection("users").doc(user.uid)
   userRef.onSnapshot((userData) => {
     const data = userData.data()
     updateUserData(data)
   })
 
-  userRef.collection("projects").get().then((querySnapshot) => {
-    querySnapshot.forEach((doc) => {
-      const data = doc.data()
-      console.log("Project data:", data)
+  userRef.collection("projects").get()
+    .then((querySnapshot) => {
+      const projects = []
+      querySnapshot.forEach((doc) => projects.push(doc.data()))
+      return projects
     })
-  })
+    .then((projects) => {
+      updateProjectNames(projects)
+    })
 }
 
+// return firestore.collection("users").doc(user.uid).onSnapshot((userData) => {
+//   //   return userData.data()
+//   //   // logInSuccessful({
+//   //   //   ...thisUser,
+//   //   //   email: user.email,
+//   //   //   refreshToken: user.refreshToken,
+//   //   //   uid: user.uid
+//   //   // })
 
-export function addAProject(user, projectKey, name) {
+// .then((querySnapshot) => {
+// //       const locations = []
+// //       querySnapshot.forEach((doc) => locations.push(doc.data()))
+// //       return locations
+// //     })
+// //     .then(async(locations) => {
+// //       const data = await Promise.all(locations.map((location) => getLocation(location)))
+// //       return data
+// //     })
+
+// .then(async (locations) => {
+//       const data = await Promise.all(locations.map((location) => getLocation(location)))
+//       return data
+//     })
+
+export function addAProject(user, key, name) {
   const docRef = firestore
     .collection("users")
     .doc(user.uid)
     .collection("projects")
-    .doc(projectKey)
+    .doc(key)
 
   // todo check if id is unique, throw error if it is not
 
   docRef
     .set({
       name,
-      projectKey
+      key
     })
     .then((res) => {
       console.log("success res:", res)
@@ -93,10 +123,6 @@ export function addAProject(user, projectKey, name) {
     // todo throw error and success feedback
 
   // todo add arrays of entity data
-
-
-  // docRef.scollection("first")
-  // docRef.collection("second")
 }
 
 

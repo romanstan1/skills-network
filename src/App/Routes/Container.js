@@ -1,7 +1,7 @@
 import React, {Component} from "react"
 import {connect} from "react-redux"
 import PropTypes from "prop-types"
-import {logInSuccessful, notLoggedIn, updateUserData} from "store/actions/auth"
+import {logInSuccessful, notLoggedIn, updateUserData, updateProjectNames} from "store/actions/auth"
 import {authStateChange} from "firebase/modules"
 
 import {Authenticated, NonAuthenticated, Loading} from "./routes"
@@ -39,7 +39,8 @@ const mapProps = (state) => ({
 const mapDispatch = {
   logInSuccessful,
   notLoggedIn,
-  updateUserData
+  updateUserData,
+  updateProjectNames
 }
 
 export default connect(mapProps, mapDispatch)(Container)
